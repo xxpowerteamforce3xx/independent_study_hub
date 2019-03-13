@@ -10,6 +10,7 @@ package edu.ycp.cs320.independent_study_hub.model;
 public class Numbers {
 	private Double first, second, third, result;
 	
+	//this is  atest comment
 	public Numbers() {
 	}
 	
