@@ -1,4 +1,4 @@
-package edu.ycp.cs320.independent_study_hub.model;
+package edu.ycp.c320.independent_study_hub.db_user_models;
 
 public class Faculty extends User {
 	private String password, name, email;

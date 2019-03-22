@@ -1,18 +1,18 @@
-package edu.ycp.cs320.independent_study_hub.model;
+package edu.ycp.c320.independent_study_hub.db_user_models;
 
-public class Guest extends User {
+public class Student extends User {
 	private String password, name, email;
-	// type is set to 0 because this is a guest account
-	private int type = 0;
+	// type is set to 1 because this is a student type account
+	private int type = 1;
 	
 	/**
-	 * constructor for the first time creation of a guest type of user **NOTE: type is not allowed to be changed,
-	 * will always be 0 for a guest type user
+	 * constructor for the first time creation of a student type of user **NOTE: type is not allowed to be changed,
+	 * will always be 1 for a student type account
 	 * @param name = the name of the account being created
 	 * @param password = the password of the account being created
 	 * @param email = the email of the account being created
 	 */
-	public Guest(String name, String password, String email) {
+	public Student(String name, String password, String email) {
 		this.name = name;
 		this.password = password;
 		this.email = email;
