@@ -21,28 +21,28 @@ public class Student extends User {
 	// methods below are from the abstract user class, documentation is there
 	
 	@Override
-	String get_password() {
+	public String get_password() {
 		return password;
 	}
 
 	@Override
-	void change_password(String pass) {
+	public void change_password(String pass) {
 		password = pass;
 		
 	}
 
 	@Override
-	String get_name() {
+	public String get_name() {
 		return name;
 	}
 	
 	@Override
-	String get_email() {
+	public String get_email() {
 		return email;
 	}
 
 	@Override
-	int get_type() {
+	public int get_type() {
 		return type;
 	}
 }
