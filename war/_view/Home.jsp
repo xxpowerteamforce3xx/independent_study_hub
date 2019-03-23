@@ -39,11 +39,13 @@
         </div>
         <p>
             See examples of previous student work, as well as, uploading you own work.  Students will <br />
-            need to upload their files to the archive by the end of the semster.  A picture of your   <br />
+            need to upload their files to the archive by the end of the semester.  A picture of your   <br />
             poster and your final study report are required at a minimum.  Additional pictures of lab <br />
             work or documentation is also welcomed. <br />
         </p>
-        <a href="Upload.html"><button type="button">Upload!</button></a>
+        <form action="${pageContext.servletContext.contextPath}/Upload" method="doGet">
+        <button type="submit">Upload!</button>
+        </form>
         	<div class="pictures">
 	            <!-- This creates the 4-square of images that will link to the Previous work page is you click on any of the pictures (due to wraping in <a>) -->
 	            <a href="http://localhost:8081/independent_study_hub/Research" id="img1">
@@ -63,12 +65,8 @@
             </h2>
         </div>
 		<form action="${pageContext.servletContext.contextPath}/Resources" method="doGet">
-        <p>Details and examples on what is required for independent research can be found here</p>
-        	<table>
-	        	<tr>
-	        	<td> <input type="Submit" name="submit" value="Click Here!"></td>
-	        	</tr>
-        	</table>
+        	<p>Details and examples on what is required for independent research can be found here</p>
+        	<button type="submit">Click Here!</button>
         </form>
         
     </section>
@@ -79,8 +77,10 @@
                 <strong class="ribbon-content">Inventory</strong>
             </h2>
         </div>
-        <p>A list of all available chemicals within the chemistry department's storage</p>
-        <a href="./Inventory.html"><button type="button">Click Here!</button></a>
+        <form action="${pageContext.servletContext.contextPath}/Inventory" method="doGet">
+        	<p>A list of all available chemicals within the chemistry department's storage</p>
+        	<button type="submit">Click Here!</button>
+        </form>
     </section>
 
 </body>

@@ -1,4 +1,4 @@
-﻿/* ---------- tag selectors ---------- */
+/* ---------- tag selectors ---------- */
 
 body
 {
@@ -140,7 +140,7 @@ body.login { /*Sets background color of login screen and general text font*/
     font-size: 32px;
 }
 
-.box input[type="text"], .box input[type="password"] { /*Sets style of input feilds when nothing is being done*/
+.box input[type="text"], .box input[type="password"] { /*Sets style of input fields when nothing is being done*/
     border: 0;
     background: none;
     display: block;

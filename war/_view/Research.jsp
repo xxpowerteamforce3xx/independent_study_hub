@@ -17,8 +17,8 @@
 
     <div class="navbar">
         <a href="http://localhost:8081/independent_study_hub/Home">Home</a>
-        <a href="#" class="active">Resources</a>
-        <a href="http://localhost:8081/independent_study_hub/Research">Previous Work</a>
+        <a href="http://localhost:8081/independent_study_hub/Resources">Resources</a>
+        <a href="#" class="active">Previous Work</a>
         <a href="http://localhost:8081/independent_study_hub/Inventory" class="right">Inventory</a>
         <a href="http://localhost:8081/independent_study_hub/Upload" class="right">Upload</a>
     </div>    
@@ -31,7 +31,7 @@
                     <th scope="col">Name</th>
                     <th scope="col">Title</th>
                     <th scope="col">Description</th>
-                    <td scope="col">Graduating Year</td>
+                    <th scope="col">Graduating Year</th>
                 </tr>
             </thead>
             <tr>

@@ -11,7 +11,7 @@
 	</style>
 </head>
 <body class="login">
-    <form action="${pageContext.servletContext.contextPath}/Home" method="doGet">
+    <form class="box" action="${pageContext.servletContext.contextPath}/Home" method="doGet">
         <h1 class="log_header">Login</h1>
         <input type="text" name="" placeholder="Username" />
         <input type="password" name="" placeholder="Password" />
