@@ -27,6 +27,14 @@
     <servlet-class>edu.ycp.cs320.independent_study_hub.servlet.ResourcesServlet</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>UploadServlet</servlet-name>
+    <servlet-class>edu.ycp.cs320.independent_study_hub.servlet.UploadServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>InventoryServlet</servlet-name>
+    <servlet-class>edu.ycp.cs320.independent_study_hub.servlet.InventoryServlet</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>AddNumbersServlet</servlet-name>
     <servlet-class>edu.ycp.cs320.independent_study_hub.servlet.AddNumbersServlet</servlet-class>
   </servlet>
@@ -70,9 +78,17 @@
     <servlet-name>ResearchServlet</servlet-name>
     <url-pattern>/Research</url-pattern>
   </servlet-mapping>
-    <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>ResourcesServlet</servlet-name>
     <url-pattern>/Resources</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UploadServlet</servlet-name>
+    <url-pattern>/Upload</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>InventoryServlet</servlet-name>
+    <url-pattern>/Inventory</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>AddNumbersServlet</servlet-name>
