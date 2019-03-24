@@ -22,5 +22,97 @@
         <a href="#" class="right active">Inventory</a>
         <a href="http://localhost:8081/independent_study_hub/Upload" class="right">Upload</a>
     </div>    
+    
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">Chemical</th>
+                    <th scope="col">Chemical Use</th>
+                    <th scope="col">Date Purchased</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>Stearic Acid</td>
+                <td>Research</td>
+                <td>2019</td>
+            </tr>
+            <tr>
+                <td>Triglyceride Mix</td>
+                <td>Research</td>
+                <td>2019</td>
+            </tr>
+            <tr>
+                <td>Methanol</td>
+                <td>Class</td>
+                <td>2019</td>
+            </tr>
+            <tr>
+                <td>---</td>
+                <td>---</td>
+                <td>---</td>
+            </tr>
+            <tr>
+                <td>---</td>
+                <td>---</td>
+                <td>---</td>
+            </tr>
+            <tr>
+                <td>---</td>
+                <td>---</td>
+                <td>---</td>
+            </tr>
+            <tr>
+                <td>---</td>
+                <td>---</td>
+                <td>---</td>
+            </tr>
+           <tr>
+                <td>---</td>
+                <td>---</td>
+                <td>---</td>
+            </tr>
+            <tr>
+                <td>---</td>
+                <td>---</td>
+                <td>---</td>
+            </tr>
+            <tr>
+                <td>---</td>
+                <td>---</td>
+                <td>---</td>
+            </tr>
+            <tr>
+                <td>---</td>
+                <td>---</td>
+                <td>---</td>
+            </tr>
+            <tr>
+                <td>---</td>
+                <td>---</td>
+                <td>---</td>
+            </tr>
+            <tr>
+                <td>---</td>
+                <td>---</td>
+                <td>---</td>
+            </tr>
+            <tr>
+                <td>---</td>
+                <td>---</td>
+                <td>---</td>
+            </tr>
+            <tr>
+                <td>---</td>
+                <td>---</td>
+                <td>---</td>
+            </tr>
+            <tr>
+                <td>---</td>
+                <td>---</td>
+                <td>---</td>
+            </tr>
+        </table>
+    </div>
 </body>
 </html>

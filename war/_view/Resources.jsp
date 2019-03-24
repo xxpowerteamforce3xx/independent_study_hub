@@ -22,5 +22,8 @@
         <a href="http://localhost:8081/independent_study_hub/Inventory" class="right">Inventory</a>
         <a href="http://localhost:8081/independent_study_hub/Upload" class="right">Upload</a>
     </div>    
+    <div>
+    	<a href="roughdraft_graded_CR.pdf">Example of a Research Proposal</a></td>
+    </div>
 </body>
 </html>
