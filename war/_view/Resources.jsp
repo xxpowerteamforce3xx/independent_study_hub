@@ -8,6 +8,7 @@
     <title>Resources</title>
 	<style type="text/css">
 		<%@ include file="style.css" %>
+		
 	</style>
 </head>
 <body>
@@ -23,7 +24,8 @@
         <a href="http://localhost:8081/independent_study_hub/Upload" class="right">Upload</a>
     </div>    
     <div>
-    	<a href="roughdraft_graded_CR.pdf">Example of a Research Proposal</a></td>
+    	<!--  <a href="war/_view/roughdraft_CR_Graded.pdf">Example of a Research Proposal</a> -->
+    	<embed src="style/roughdraft_CR_Graded.pdf" type="application/pdf" width="100%" height ="600px" />
     </div>
 </body>
 </html>
