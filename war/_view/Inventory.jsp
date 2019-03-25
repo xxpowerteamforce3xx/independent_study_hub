@@ -22,7 +22,13 @@
         <a href="#" class="right active">Inventory</a>
         <a href="http://localhost:8081/independent_study_hub/Upload" class="right">Upload</a>
     </div>    
-    
+    <form class="upload-box">
+        <input type="text" name="" placeholder="Chemical Name" />
+        <input type="text" name="" placeholder="For Research or Class" />
+        <input type="text" name="" placeholder="Year Purchased" />
+        <button type="reset">Reset</button>
+        <button type="submit">Submit</button>
+    </form>   
     <div class="table">
         <table>
             <thead>
