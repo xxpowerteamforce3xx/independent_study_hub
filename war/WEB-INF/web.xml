@@ -31,6 +31,10 @@
     <servlet-class>edu.ycp.cs320.independent_study_hub.servlet.UploadServlet</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>FacultyServlet</servlet-name>
+    <servlet-class>edu.ycp.cs320.independent_study_hub.servlet.FacultyServlet</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>InventoryServlet</servlet-name>
     <servlet-class>edu.ycp.cs320.independent_study_hub.servlet.InventoryServlet</servlet-class>
   </servlet>
@@ -89,6 +93,10 @@
   <servlet-mapping>
     <servlet-name>InventoryServlet</servlet-name>
     <url-pattern>/Inventory</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>FacultyServlet</servlet-name>
+    <url-pattern>/Faculty</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>AddNumbersServlet</servlet-name>

@@ -21,6 +21,7 @@
         <a href="http://localhost:8081/independent_study_hub/Research">Previous Work</a>
         <a href="#" class="right active">Inventory</a>
         <a href="http://localhost:8081/independent_study_hub/Upload" class="right">Upload</a>
+        <a href="http://localhost:8081/independent_study_hub/Faculty" class="right">Faculty</a>
     </div>    
     <form class="upload-box">
         <input type="text" name="" placeholder="Chemical Name" />

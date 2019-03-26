@@ -5,50 +5,56 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title>Previous Work</title>
+    <title>Inventory</title>
 	<style type="text/css">
 		<%@ include file="./../style/style.css" %>
 	</style>
 </head>
 <body>
     <header>
-        <h1>Previous Work</h1>
+        <h1>Faculty</h1>
     </header>
-
+    
     <div class="navbar">
         <a href="http://localhost:8081/independent_study_hub/Home">Home</a>
         <a href="http://localhost:8081/independent_study_hub/Resources">Resources</a>
-        <a href="#" class="active">Previous Work</a>
+        <a href="http://localhost:8081/independent_study_hub/Research">Previous Work</a>
         <a href="http://localhost:8081/independent_study_hub/Inventory" class="right">Inventory</a>
         <a href="http://localhost:8081/independent_study_hub/Upload" class="right">Upload</a>
-        <a href="http://localhost:8081/independent_study_hub/Faculty" class="right">Faculty</a>
+        <a href="#" class="right active">Faculty</a>
     </div>    
-
-
+    <form class="upload-box">
+        <input type="text" name="" placeholder="Faculty Member" />
+        <input type="text" name="" placeholder="Research Students" />
+        <input type="text" name="" placeholder="Research Interests" />
+        <button type="reset">Reset</button>
+        <button type="submit">Submit</button>
+    </form>   
     <div class="table">
         <table>
             <thead>
                 <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Graduating Year</th>
+                    <th scope="col">Faculty Member</th>
+                    <th scope="col">Research Students</th>
+                    <th scope="col">Research Interest</th>
                 </tr>
             </thead>
             <tr>
+                <td>Dr. Foy</td>
+                <td>Cole Rohrbaugh, Christina Hall</td>
+                <td>Analytical Chemistry</td>
+            </tr>
+            <tr>
+                <td>Dr. Steel</td>
                 <td>Ben Yanick</td>
-                <td><a href="./Home.html">Synthesizing Qunatum Dots</a></td>
-                <td>Synthesizing cadmium-free quantum dots using water based chemistry</td>
-                <td>2019</td>
+                <td>Inorganic Chemistry</td>
             </tr>
             <tr>
-                <td>Cole Rohrbaugh</td>
-                <td>Lipid Extraction from Bee Pollen</td>
-                <td>Extraction of lipids from bee pollen.  Characterization of lipids using HPLC</td>
-                <td>2019</td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
             <tr>
-                <td>---</td>
                 <td>---</td>
                 <td>---</td>
                 <td>---</td>
@@ -57,16 +63,8 @@
                 <td>---</td>
                 <td>---</td>
                 <td>---</td>
-                <td>---</td>
             </tr>
             <tr>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-            </tr>
-            <tr>
-                <td>---</td>
                 <td>---</td>
                 <td>---</td>
                 <td>---</td>
@@ -75,16 +73,8 @@
                 <td>---</td>
                 <td>---</td>
                 <td>---</td>
-                <td>---</td>
             </tr>
-            <tr>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-            </tr>
-            <tr>
-                <td>---</td>
+           <tr>
                 <td>---</td>
                 <td>---</td>
                 <td>---</td>
@@ -93,16 +83,8 @@
                 <td>---</td>
                 <td>---</td>
                 <td>---</td>
-                <td>---</td>
             </tr>
             <tr>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-            </tr>
-            <tr>
-                <td>---</td>
                 <td>---</td>
                 <td>---</td>
                 <td>---</td>
@@ -111,22 +93,28 @@
                 <td>---</td>
                 <td>---</td>
                 <td>---</td>
+            </tr>
+            <tr>
+                <td>---</td>
+                <td>---</td>
                 <td>---</td>
             </tr>
             <tr>
                 <td>---</td>
                 <td>---</td>
                 <td>---</td>
+            </tr>
+            <tr>
+                <td>---</td>
+                <td>---</td>
                 <td>---</td>
             </tr>
             <tr>
                 <td>---</td>
                 <td>---</td>
                 <td>---</td>
-                <td>---</td>
             </tr>
             <tr>
-                <td>---</td>
                 <td>---</td>
                 <td>---</td>
                 <td>---</td>
