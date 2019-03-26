@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <title>Inventory</title>
 	<style type="text/css">
-		<%@ include file="style.css" %>
+		<%@ include file="./../style/style.css" %>
 	</style>
 </head>
 <body>
