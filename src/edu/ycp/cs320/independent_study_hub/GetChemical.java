@@ -19,7 +19,7 @@ public class GetChemical {
 		// Create the default IDatabase instance
 		InitDatabase.init(keyboard);
 
-		System.out.print("Enter the name of the chemcial wanted: ");
+		System.out.print("Enter the year of the chemcial wanted: ");
 		int dom = keyboard.nextInt();
 		// get the DB instance and execute transaction
 		IDatabase db = DatabaseProvider.getInstance();

@@ -32,7 +32,7 @@ public class InsertPreviousWork {
 		}
 		else {
 			for (PreviousWork previous: previousList) {
-				System.out.println(previous.getName() + "," + previous.getTitle() + "," + previous.getDescription() + "," + previous.getYear() + "," );
+				System.out.println(previous.getWorkID() + " , " + previous.getName() + "," + previous.getTitle() + "," + previous.getDescription() + "," + previous.getYear() + "," );
 			}
 		}
 	}

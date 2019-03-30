@@ -10,7 +10,7 @@ import edu.ycp.cs320.independent_study_hub.user_models.Student;
 import edu.ycp.cs320.independent_study_hub.user_models.User;
 import edu.ycp.cs320.independent_study_hub.user_models.ChemicalInventory;
 public class FakeDatabase implements IDatabase {
-	
+
 	private List<Guest> guest_list;
 	private List<Student> student_list;
 	private List<Faculty> faculty_list;
@@ -24,7 +24,7 @@ public class FakeDatabase implements IDatabase {
 		previousList = new ArrayList<PreviousWork>();
 		// Add initial data from all of our lists
 		readInitialData();
-		
+
 		// print out init sizes to see if init data class worked (hopefully)
 		System.out.println("init size of guest_list: " + guest_list.size());
 		System.out.println("init size of student_list: " + student_list.size());
@@ -32,38 +32,38 @@ public class FakeDatabase implements IDatabase {
 		System.out.println("init size of chemical_list: " + chemicalList.size());
 		System.out.println("init size of previous_list: " + previousList.size());
 	}
-	
+
 	/**
 	 * gets the init data from our hard coded user list
 	 */
 	public void readInitialData() {
-		guest_list.addAll(InitialData.get_guest_users());
-		student_list.addAll(InitialData.get_student_users());
-		faculty_list.addAll(InitialData.get_faculty_users());
-		chemicalList.addAll(InitialData.getChemicals());
-		previousList.addAll(InitialData.getPreviousWork());
-		/*try {
+		try {
+			guest_list.addAll(InitialData.get_guest_users());
+			student_list.addAll(InitialData.get_student_users());
+			faculty_list.addAll(InitialData.get_faculty_users());
+			previousList.addAll(InitialData.getPreviousWork());
+			chemicalList.addAll(InitialData.getChemicals());
 		}
 		catch (IOException e) {
 			throw new IllegalStateException("Couldn't read initial data", e);
-		}*/
+		}
 	}
-	
-// #########################################################################################################
-// 								now for all of our fake database methods
-// #########################################################################################################
+
+	// #########################################################################################################
+	// 								now for all of our fake database methods
+	// #########################################################################################################
 	@Override
 	/**
 	 * returns a chemical use based on the name
 	 */
-	public ArrayList<ChemicalInventory> insertChemical(int chemicalID, String Chemical, String use, int dom) {
+	public ArrayList<ChemicalInventory> insertChemical(String Chemical, String use, int dom) {
 		ArrayList<ChemicalInventory> result = new ArrayList<ChemicalInventory>();
-		ChemicalInventory chemical = new ChemicalInventory(chemicalID, Chemical, use, dom);
-		chemical.setChemical(Chemical);
-		chemical.setDom(dom);
-		chemical.setChemicalID(chemicalID);
-		chemical.setUseOfChemcial(use);
-		result.add(chemical);
+		ChemicalInventory chemicals = new ChemicalInventory();
+		chemicals.setChemicalID(chemicalList.size() + 1);
+		chemicals.setChemical(Chemical);
+		chemicals.setDom(dom);
+		chemicals.setUseOfChemcial(use);
+		result.add(chemicals);
 		return result;
 	}
 	@Override
@@ -98,7 +98,8 @@ public class FakeDatabase implements IDatabase {
 	 */
 	public ArrayList<PreviousWork> insertPreviousWork(String name, String title, String description, int year) {
 		ArrayList<PreviousWork> result = new ArrayList<PreviousWork>();
-		PreviousWork previous = new PreviousWork(name, title, description, year);
+		PreviousWork previous = new PreviousWork();
+		previous.setWorkID(previousList.size() + 1);
 		previous.setName(name);
 		previous.setTitle(title);
 		previous.setDescription(description);
@@ -113,9 +114,9 @@ public class FakeDatabase implements IDatabase {
 	public ArrayList<User> get_user(String acc_name, int acc_type) {
 		ArrayList<User> result = new ArrayList<User>();
 		// basic fields we will populate if they should be returned
-	
+
 		System.out.println(acc_type);
-		
+
 		// first we need to figure out the type of acc we want
 		if (acc_type == 0) {	// it is a guest acc
 			for (Guest guest : guest_list) {
@@ -136,10 +137,10 @@ public class FakeDatabase implements IDatabase {
 				}
 			}
 		}
-		
+
 		// if none of those hit, then something went wrong (oops)
 		//System.out.println("yeet my guy, nothing came up. just WHO are you lookin for?");
 		return result;
 	}
-	
+
 }

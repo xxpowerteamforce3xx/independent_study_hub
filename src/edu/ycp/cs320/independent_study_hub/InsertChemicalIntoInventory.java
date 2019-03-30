@@ -17,13 +17,11 @@ public class InsertChemicalIntoInventory {
 		String Chemical = keyboard.nextLine();
 		System.out.print("Enter the use of the chemical (class or research): ");
 		String use = keyboard.nextLine();
-		System.out.print("Enter the chemicalID: ");
-		int chemicalID = keyboard.nextInt();
 		System.out.print("Enter the year the chemical was purhcased: ");
 		int dom = keyboard.nextInt();
 		// get the DB instance and execute transaction
 		IDatabase db = DatabaseProvider.getInstance();
-		List<ChemicalInventory> chemicalList = db.insertChemical(chemicalID, Chemical, use, dom);
+		List<ChemicalInventory> chemicalList = db.insertChemical(Chemical, use, dom);
 		
 		// check if anything was returned and output the list
 		if (chemicalList.isEmpty()) {
@@ -31,7 +29,7 @@ public class InsertChemicalIntoInventory {
 		}
 		else {
 			for (ChemicalInventory chemicals: chemicalList) {
-				System.out.println(chemicals.getChemicalID() + "," + chemicals.getChemical() + "," + chemicals.getUseOfChemical() + "," + chemicals.getDom() + "," );
+				System.out.println(chemicals.getChemicalID() + "," + chemicals.getChemical() + "," + chemicals.getUseOfChemical() + "," + chemicals.getDom() );
 			}
 		}
 	}

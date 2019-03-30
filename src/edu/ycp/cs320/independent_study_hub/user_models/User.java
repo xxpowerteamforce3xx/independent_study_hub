@@ -32,6 +32,19 @@ public abstract class User {
 	 * @return the int associated with the type of account
 	 */
 	public abstract int get_type();
+
+	public abstract int getID();
+
+	public abstract void setID(int ID);
+
+	public abstract void setPassword(String password);
+
+	public abstract void setName(String name);
+	
+	public abstract void setEmail(String email);
+
+	public abstract void setType(int type);
+
 	
 	
 }

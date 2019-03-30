@@ -18,68 +18,147 @@ public class InitialData {
 	/**
 	 * returns the single guest usuer
 	 * @return a list of all guest users (only 1 right now)
+	 * @throws IOException 
 	 */
-	public static ArrayList<Guest> get_guest_users() {
-		// list to put our other lists in		
-		ArrayList<Guest> guest_list = new ArrayList<Guest>();
-	
-		// now to create a guest acc
-		// guest fields do not matter, we only need 1 guest acc
-		Guest guest = new Guest("guest", "password", "email");
-		
-		guest_list.add(guest);	//	guest will be our inital field 
-		
-		return guest_list;
+	public static ArrayList<Guest> get_guest_users() throws IOException {
+		ArrayList<Guest> guestList = new ArrayList<Guest>();
+		ReadCSV readGuestList = new ReadCSV("guests.csv");
+		System.out.println("Test 1");
+		try {
+			// auto-generated primary key for authors table
+			Integer guestID = 1;
+			
+			System.out.println("Test 2");
+			while (true) {
+				List<String> tuple = readGuestList.next();
+				System.out.println("Test 3");
+				if (tuple == null) {
+					break;
+				}
+				Iterator<String> i = tuple.iterator();
+				Guest guests = new Guest();
+				guests.setID(guestID++);
+				guests.setName(i.next());
+				guests.setPassword(i.next());
+				guests.setEmail(i.next());
+				guests.setType(Integer.parseInt(i.next()));
+				guestList.add(guests);
+				System.out.println("Test 5");
+			}
+			return guestList;
+		} finally {
+			readGuestList.close();
+		}
 	}
 	
 	/**
 	 * populates our list of student users with init data
 	 * @return the list of students
+	 * @throws IOException 
 	 */
-	public static ArrayList<Student> get_student_users() {
-		ArrayList<Student> student_list = new ArrayList<Student>();
-		
-		// now to create some student acc
-		Student student_ben = new Student("ben", "pinkpowerrangerXD", "ben@ycp.edu");
-		Student student_cole = new Student("cole", "flowers69420", "cole@ycp.edu");
-		Student student_lucas = new Student("lucas", "lucasisawesome420", "lgartrell@ycp.edu");
-		
-		student_list.add(student_ben);
-		student_list.add(student_cole);	//	our initial student fields
-		student_list.add(student_lucas);
-		
-		return student_list;
+	public static ArrayList<Student> get_student_users() throws IOException {
+		ArrayList<Student> studentList = new ArrayList<Student>();
+		ReadCSV readStudentlist = new ReadCSV("students.csv");
+		System.out.println("Test 1");
+		try {
+			// auto-generated primary key for authors table
+			Integer studentID = 1;
+			
+			System.out.println("Test 2");
+			while (true) {
+				List<String> tuple = readStudentlist.next();
+				System.out.println("Test 3");
+				if (tuple == null) {
+					break;
+				}
+				Iterator<String> i = tuple.iterator();
+				Student students = new Student();
+				students.setID(studentID++);
+				students.setName(i.next());
+				students.setPassword(i.next());
+				students.setEmail(i.next());
+				students.setType(Integer.parseInt(i.next()));
+				studentList.add(students);
+				System.out.println("Test 5");
+			}
+			return studentList;
+		} finally {
+			readStudentlist.close();
+		}
 	}
 	
-	public static ArrayList<Faculty> get_faculty_users() {
-		ArrayList<Faculty> faculty_list = new ArrayList<Faculty>();
-		
-		// now to create the faculty acc
-		Faculty old_man = new Faculty("grandpa", "WW2", "old_man@ycp.edu");	
-		faculty_list.add(old_man);		//	inital faculty fields (only one to be able to change the chem index)
-		
-		return faculty_list;
-		
+	public static ArrayList<Faculty> get_faculty_users() throws IOException {
+		ArrayList<Faculty> facultyList = new ArrayList<Faculty>();
+		ReadCSV readFacultyList = new ReadCSV("faculty.csv");
+		System.out.println("Test 1");
+		try {
+			// auto-generated primary key for authors table
+			Integer facultyID = 1;
+			
+			System.out.println("Test 2");
+			while (true) {
+				List<String> tuple = readFacultyList.next();
+				System.out.println("Test 3");
+				if (tuple == null) {
+					break;
+				}
+				Iterator<String> i = tuple.iterator();
+				Faculty faculty = new Faculty();
+				faculty.setID(facultyID++);
+				faculty.setName(i.next());
+				faculty.setPassword(i.next());
+				faculty.setEmail(i.next());
+				faculty.setType(Integer.parseInt(i.next()));
+				facultyList.add(faculty);
+				System.out.println("Test 5");
+			}
+			return facultyList;
+		} finally {
+			readFacultyList.close();
+		}
 	}
-	public static List<PreviousWork> getPreviousWork() {
-		ArrayList<PreviousWork> previousWorkList = new ArrayList<PreviousWork>();
-		PreviousWork previous = new PreviousWork("Cole Rohrbaugh", "Lipid Extraction from Bee Pollen", "Extraction of lipids from bee pollen. Characterization of lipids using HPLC", 2019);
-		previousWorkList.add(previous);
-		return previousWorkList;
+	public static List<PreviousWork> getPreviousWork() throws IOException {
+		List<PreviousWork> previousWorkList = new ArrayList<PreviousWork>();
+		ReadCSV readPreviousWork = new ReadCSV("previousWork.csv");
+		System.out.println("Test 1");
+		try {
+			// auto-generated primary key for authors table
+			Integer workID = 1;
+			
+			System.out.println("Test 2");
+			while (true) {
+				List<String> tuple = readPreviousWork.next();
+				System.out.println("Test 3");
+				if (tuple == null) {
+					break;
+				}
+				Iterator<String> i = tuple.iterator();
+				PreviousWork oldWork = new PreviousWork();
+				oldWork.setWorkID(workID++);
+				oldWork.setName(i.next());
+				oldWork.setTitle(i.next());
+				oldWork.setDescription(i.next());
+				oldWork.setYear(Integer.parseInt(i.next()));
+				previousWorkList.add(oldWork);
+				System.out.println("Test 5");
+			}
+			return previousWorkList;
+		} finally {
+			readPreviousWork.close();
+		}
 	}
-	public static List<ChemicalInventory> getChemicals() {
-		ArrayList<ChemicalInventory> chemicalList = new ArrayList<ChemicalInventory>();
-		ChemicalInventory chemical = new ChemicalInventory(1, "Stearic Acid", "Research", 2019);
-		chemicalList.add(chemical);
-		return chemicalList;
-		/*List<ChemicalInventory> chemicalList = new ArrayList<ChemicalInventory>();
+	public static List<ChemicalInventory> getChemicals() throws IOException {
+		List<ChemicalInventory> chemicalList = new ArrayList<ChemicalInventory>();
 		ReadCSV readChemcials = new ReadCSV("chemicals.csv");
+		System.out.println("Test 1");
 		try {
 			// auto-generated primary key for authors table
 			Integer chemicalID = 1;
-			Integer dom = 2019;
+			
+			System.out.println("Test 2");
 			while (true) {
 				List<String> tuple = readChemcials.next();
+				System.out.println("Test 3");
 				if (tuple == null) {
 					break;
 				}
@@ -87,13 +166,14 @@ public class InitialData {
 				ChemicalInventory chemical = new ChemicalInventory();
 				chemical.setChemicalID(chemicalID++);				
 				chemical.setChemical(i.next());
-				chemical.setUseOfChemcial(Integer.parseInt(i.next()));
+				chemical.setUseOfChemcial(i.next());
 				chemical.setDom(Integer.parseInt(i.next()));
 				chemicalList.add(chemical);
+				System.out.println("Test 5");
 			}
 			return chemicalList;
 		} finally {
 			readChemcials.close();
-		}*/
+		}
 	}
 }

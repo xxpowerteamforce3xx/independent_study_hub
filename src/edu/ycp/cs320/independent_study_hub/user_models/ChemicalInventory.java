@@ -10,11 +10,8 @@ public class ChemicalInventory {
 	 * getter for the chemical
 	 * @return a string chemical
 	 */
-	public ChemicalInventory(int chemicalID, String chemical, String use, int dom) {
-		this.chemicalID = chemicalID;
-		this.chemical = chemical;
-		this.use = use;
-		this.dom = dom;
+	public ChemicalInventory() {
+		
 	}
 	public int getChemicalID() {
 		return chemicalID;

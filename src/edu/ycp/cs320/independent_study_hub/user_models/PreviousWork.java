@@ -1,7 +1,7 @@
 package edu.ycp.cs320.independent_study_hub.user_models;
 
 public class PreviousWork {
-	
+	private int workID;
 	private String name;
 	private String title;
 	private String description;
@@ -10,11 +10,14 @@ public class PreviousWork {
 	 * getter for the chemical
 	 * @return a string chemical
 	 */
-	public PreviousWork(String name, String title, String description, int year) {
-		this.name = name;
-		this.title = title;
-		this.description = description;
-		this.year = year;
+	public PreviousWork() {
+
+	}
+	public int getWorkID() {
+		return workID;
+	}
+	public void setWorkID(int workID) {
+		this.workID = workID;
 	}
 	public String getName() {
 		return name;
