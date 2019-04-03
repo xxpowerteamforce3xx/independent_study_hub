@@ -3,25 +3,26 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sun.imageio.plugins.jpeg.JPEG;
+
+import edu.ycp.cs320.independent_study_hub.model.ChemicalInventory;
+import edu.ycp.cs320.independent_study_hub.model.Project;
 import edu.ycp.cs320.independent_study_hub.user_models.Faculty;
 import edu.ycp.cs320.independent_study_hub.user_models.Guest;
-import edu.ycp.cs320.independent_study_hub.user_models.PreviousWork;
 import edu.ycp.cs320.independent_study_hub.user_models.Student;
-import edu.ycp.cs320.independent_study_hub.user_models.User;
-import edu.ycp.cs320.independent_study_hub.user_models.ChemicalInventory;
 public class FakeDatabase implements IDatabase {
 
 	private List<Guest> guest_list;
 	private List<Student> student_list;
 	private List<Faculty> faculty_list;
 	private List<ChemicalInventory> chemicalList;
-	private List<PreviousWork> previousList;
+	private List<Project> previousList;
 	public FakeDatabase() {
 		guest_list = new ArrayList<Guest>();
 		student_list = new ArrayList<Student>();
 		faculty_list = new ArrayList<Faculty>();
 		chemicalList = new ArrayList<ChemicalInventory>();
-		previousList = new ArrayList<PreviousWork>();
+		previousList = new ArrayList<Project>();
 		// Add initial data from all of our lists
 		readInitialData();
 
@@ -38,10 +39,10 @@ public class FakeDatabase implements IDatabase {
 	 */
 	public void readInitialData() {
 		try {
-			guest_list.addAll(InitialData.get_guest_users());
+			//guest_list.addAll(InitialData.get_guest_users());
 			student_list.addAll(InitialData.get_student_users());
 			faculty_list.addAll(InitialData.get_faculty_users());
-			previousList.addAll(InitialData.getPreviousWork());
+			previousList.addAll(InitialData.getProjects());
 			chemicalList.addAll(InitialData.getChemicals());
 		}
 		catch (IOException e) {
@@ -83,64 +84,71 @@ public class FakeDatabase implements IDatabase {
 	/**
 	 * returns a previous years work use based on the year
 	 */
-	public ArrayList<PreviousWork> getWorkFromYear(int year) {
-		ArrayList<PreviousWork> result = new ArrayList<PreviousWork>();
-		for (PreviousWork previous: previousList) {
-			if (previous.getYear() == year) {
+	public ArrayList<Project> getWorkFromYear(int year) {
+		ArrayList<Project> result = new ArrayList<Project>();
+		for (Project previous: previousList) {
+			if (previous.get_year() == year) {
 				result.add(previous);
 			}
 		}
 		return result;
 	}
+	
 	@Override
 	/**
-	 * returns a previous years work use based on the year
+	 * inserts a project 
 	 */
-	public ArrayList<PreviousWork> insertPreviousWork(String name, String title, String description, int year) {
-		ArrayList<PreviousWork> result = new ArrayList<PreviousWork>();
-		PreviousWork previous = new PreviousWork();
-		previous.setWorkID(previousList.size() + 1);
-		previous.setName(name);
-		previous.setTitle(title);
-		previous.setDescription(description);
-		previous.setYear(year);
+	public ArrayList<Project> insertProject(String title, Student student, int year, String description, JPEG image, int workID) {
+		ArrayList<Project> result = new ArrayList<Project>();
+
+		//constructor for projects
+		Project previous = new Project(description, student, workID, description, image, workID);
+		
 		result.add(previous);
 		return result;
 	}
-	@Override
+	
 	/**
-	 * returns a single acc based on the name, and the type of acc we want
+	 * just returns a guest element
 	 */
-	public ArrayList<User> get_user(String acc_name, int acc_type) {
-		ArrayList<User> result = new ArrayList<User>();
+	public Guest get_guest(String acc_name) {
+		Guest result = new Guest();
+		return result;
+	}
+	
+	/**
+	 * returns a single student reference, otherwise null
+	 */
+	public Student get_student(String acc_name) {
+		Student result = null;
 		// basic fields we will populate if they should be returned
-
-		System.out.println(acc_type);
-
-		// first we need to figure out the type of acc we want
-		if (acc_type == 0) {	// it is a guest acc
-			for (Guest guest : guest_list) {
-				if (guest.get_name() == acc_name) {
-					result.add(guest);
-				}
-			}
-		} else if (acc_type == 1) {		// it is a student acc
-			for (Student student : student_list) {
-				if (student.get_name() == acc_name) {
-					result.add(student);
-				}
-			}
-		} else if (acc_type == 2) {		// it is a fac acc
-			for (Faculty faculty: faculty_list) {
-				if (faculty.get_name() == acc_name) {
-					result.add(faculty);
-				}
+		System.out.println(student_list.size());
+		String name = student_list.get(student_list.size() - 2).get_name();
+		System.out.println(name);
+		for (Student student : student_list) {
+			if (student.get_name() == acc_name) {
+				result = student;
 			}
 		}
-
-		// if none of those hit, then something went wrong (oops)
-		//System.out.println("yeet my guy, nothing came up. just WHO are you lookin for?");
 		return result;
 	}
 
+	/**
+	 * returns a single faculty reference, otherwise null
+	 */
+	public Faculty get_faculty(String acc_name) {
+		Faculty result = null;
+		// basic fields we will populate if they should be returned
+		System.out.println(faculty_list.size());
+		String name = faculty_list.get(faculty_list.size()).get_name();
+		System.out.println(name);
+		for (Faculty faculty: faculty_list) {
+			System.out.println(faculty.get_name());
+			if (faculty.get_name() == acc_name) {
+				result= faculty;
+			}
+		}
+	
+		return result;
+	}
 }

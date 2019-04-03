@@ -11,9 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.sun.imageio.plugins.jpeg.JPEG;
+
+import edu.ycp.cs320.independent_study_hub.model.ChemicalInventory;
+import edu.ycp.cs320.independent_study_hub.model.Project;
 import edu.ycp.cs320.independent_study_hub.persist.IDatabase;
-import edu.ycp.cs320.independent_study_hub.user_models.ChemicalInventory;
+import edu.ycp.cs320.independent_study_hub.user_models.Faculty;
+import edu.ycp.cs320.independent_study_hub.user_models.Guest;
 import edu.ycp.cs320.independent_study_hub.user_models.PreviousWork;
+import edu.ycp.cs320.independent_study_hub.user_models.Student;
 import edu.ycp.cs320.independent_study_hub.user_models.User;
 
 
@@ -158,13 +164,44 @@ public ArrayList<ChemicalInventory> getChemicals(int dom) {
 }
 
 @Override
-public ArrayList<PreviousWork> getWorkFromYear(int year) {
+public ArrayList<Project> getWorkFromYear(int year) {
 	// TODO Auto-generated method stub
 	return null;
 }
 
 @Override
-public ArrayList<PreviousWork> insertPreviousWork(String name, String title, String description, int year) {
+public ArrayList<Project> insertPreviousWork(String name, String title, String description, int year) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public ArrayList<ChemicalInventory> insertChemical(String chemical, String use, int dom) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public ArrayList<Project> insertProject(String title, Student student, int year, String description, JPEG image,
+		int workID) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public Guest get_guest(String acc_name) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public Student get_student(String acc_name) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public Faculty get_faculty(String acc_name) {
 	// TODO Auto-generated method stub
 	return null;
 }

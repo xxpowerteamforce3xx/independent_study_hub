@@ -3,12 +3,15 @@ package edu.ycp.cs320.independent_study_hub;
 import java.util.List;
 import java.util.Scanner;
 
-import edu.ycp.cs320.independent_study_hub.user_models.ChemicalInventory;
-import edu.ycp.cs320.independent_study_hub.user_models.PreviousWork;
+import com.sun.imageio.plugins.jpeg.JPEG;
+
+import edu.ycp.cs320.independent_study_hub.user_models.Student;
+import edu.ycp.cs320.independent_study_hub.model.ChemicalInventory;
+import edu.ycp.cs320.independent_study_hub.model.Project;
 import edu.ycp.cs320.independent_study_hub.persist.DatabaseProvider;
 import edu.ycp.cs320.independent_study_hub.persist.IDatabase;
 
-public class InsertPreviousWork {
+public class InsertProject {
 	public static void main(String[] args) throws Exception {
 		Scanner keyboard = new Scanner(System.in);
 
@@ -24,16 +27,15 @@ public class InsertPreviousWork {
 		int year = keyboard.nextInt();
 		// get the DB instance and execute transaction
 		IDatabase db = DatabaseProvider.getInstance();
-		List<PreviousWork> previousList = db.insertPreviousWork(name, title, description, year);
-		
-		// check if anything was returned and output the list
-		if (previousList.isEmpty()) {
+		Student student = db.get_student(name);
+		if (student != null) {
+			List<Project> previousList = db.insertProject(title, student, year, description, null, 1);
+			for (Project previous: previousList) {
+				System.out.println(previous.get_id() + " , " + previous.get_student().get_name() + "," + previous.get_title() + "," + previous.get_description() + "," + previous.get_year() + "," );
+			}
+		} else {
 			System.out.println("No research found with name <" + name + ">");
 		}
-		else {
-			for (PreviousWork previous: previousList) {
-				System.out.println(previous.getWorkID() + " , " + previous.getName() + "," + previous.getTitle() + "," + previous.getDescription() + "," + previous.getYear() + "," );
-			}
-		}
+		
 	}
 }

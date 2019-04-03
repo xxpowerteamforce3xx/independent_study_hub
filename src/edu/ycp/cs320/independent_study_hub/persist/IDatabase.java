@@ -2,14 +2,20 @@ package edu.ycp.cs320.independent_study_hub.persist;
 
 import java.util.ArrayList;
 
-import edu.ycp.cs320.independent_study_hub.user_models.ChemicalInventory;
-import edu.ycp.cs320.independent_study_hub.user_models.PreviousWork;
-import edu.ycp.cs320.independent_study_hub.user_models.User;
+import com.sun.imageio.plugins.jpeg.JPEG;
+
+import edu.ycp.cs320.independent_study_hub.model.ChemicalInventory;
+import edu.ycp.cs320.independent_study_hub.model.Project;
+import edu.ycp.cs320.independent_study_hub.user_models.Faculty;
+import edu.ycp.cs320.independent_study_hub.user_models.Guest;
+import edu.ycp.cs320.independent_study_hub.user_models.Student;
 
 public interface IDatabase {
-	public ArrayList<User> get_user(String acc_name, int acc_type);
 	public ArrayList<ChemicalInventory> insertChemical(String chemical, String use, int dom);
 	public ArrayList<ChemicalInventory> getChemicals(int dom);
-	public ArrayList<PreviousWork> getWorkFromYear(int year);
-	public ArrayList<PreviousWork> insertPreviousWork(String name, String title, String description, int year);
+	public ArrayList<Project> getWorkFromYear(int year);
+	public ArrayList<Project> insertProject(String title, Student student, int year, String description, JPEG image, int workID);
+	public Guest get_guest(String acc_name);
+	public Student get_student(String acc_name);
+	public Faculty get_faculty(String acc_name);
 }

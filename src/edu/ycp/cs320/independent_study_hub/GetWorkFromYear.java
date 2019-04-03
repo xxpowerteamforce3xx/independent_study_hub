@@ -3,12 +3,12 @@ package edu.ycp.cs320.independent_study_hub;
 import java.util.List;
 import java.util.Scanner;
 
-import edu.ycp.cs320.independent_study_hub.user_models.ChemicalInventory;
 import edu.ycp.cs320.independent_study_hub.user_models.Faculty;
 import edu.ycp.cs320.independent_study_hub.user_models.Guest;
-import edu.ycp.cs320.independent_study_hub.user_models.PreviousWork;
 import edu.ycp.cs320.independent_study_hub.user_models.Student;
 import edu.ycp.cs320.independent_study_hub.user_models.User;
+import edu.ycp.cs320.independent_study_hub.model.ChemicalInventory;
+import edu.ycp.cs320.independent_study_hub.model.Project;
 import edu.ycp.cs320.independent_study_hub.persist.DatabaseProvider;
 import edu.ycp.cs320.independent_study_hub.persist.IDatabase;
 
@@ -23,15 +23,16 @@ public class GetWorkFromYear {
 		int year = keyboard.nextInt();
 		// get the DB instance and execute transaction
 		IDatabase db = DatabaseProvider.getInstance();
-		List<PreviousWork> previousList = db.getWorkFromYear(year);
+		List<Project> previousList = db.getWorkFromYear(year);
 		
 		// check if anything was returned and output the list
 		if (previousList.isEmpty()) {
 			System.out.println("No research found with in <" + year + ">");
 		}
 		else {
-			for (PreviousWork previous: previousList) {
-				System.out.println(previous.getWorkID() + " , " + previous.getName() + ", " + previous.getTitle() + ", " + previous.getDescription() + ", " + previous.getYear());
+			for (Project previous: previousList) {
+				Student s = previous.get_student();
+				System.out.println(previous.get_id() + " , " + s.get_name() + ", " + previous.get_title() + ", " + previous.get_description() + ", " + previous.get_year());
 			}
 		}
 	}

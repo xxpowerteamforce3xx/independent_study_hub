@@ -6,14 +6,17 @@ import java.util.Scanner;
 import edu.ycp.cs320.independent_study_hub.user_models.Faculty;
 import edu.ycp.cs320.independent_study_hub.user_models.Guest;
 import edu.ycp.cs320.independent_study_hub.user_models.Student;
-import edu.ycp.cs320.independent_study_hub.user_models.User;
 import edu.ycp.cs320.independent_study_hub.persist.DatabaseProvider;
 import edu.ycp.cs320.independent_study_hub.persist.IDatabase;
 
 public class GetUserByNameAndType {
 	public static void main(String[] args) throws Exception {
 		Scanner keyboard = new Scanner(System.in);
-
+		// possible fields
+		Guest guest;
+		Student student;
+		Faculty faculty;
+		
 		// Create the default IDatabase instance
 		InitDatabase.init(keyboard);
 
@@ -24,28 +27,23 @@ public class GetUserByNameAndType {
 		
 		// get the DB instance and execute transaction
 		IDatabase db = DatabaseProvider.getInstance();
-		List<User> user_list = db.get_user(acc_name, acc_type);
 		
-		// check if anything was returned and output the list
-		if (user_list.isEmpty()) {
-			System.out.println("No users found with account type <" + acc_type + "> and account name <" + acc_name + ">");
+		if (acc_type == 0) {	
+			guest = db.get_guest(acc_name);
+			System.out.println(guest.get_name() + ", " + guest.get_password());
+
+		} else if (acc_type == 1) {
+			student = db.get_student(acc_name);
+			System.out.println(student.get_name() + ", " + student.get_password() + ", " + student.get_email());
+
+		} else if (acc_type == 2) {
+			faculty = db.get_faculty(acc_name);
+			System.out.println(faculty.get_name() + ", " + faculty.get_password() + ", " + faculty.get_email());
+
+		} else {
+			System.out.println("No user was found with the name " + acc_name + " and type "+ acc_type);
 		}
-		else {
-			// should only return 1 thing
-			
-			if (user_list.get(0).get_type() == 0) {		// it is a guest acc
-				Guest guest = (Guest) user_list.get(0);
-				System.out.println(guest.get_name() + ", " + guest.get_password() + ", " + guest.get_email());
-			
-			} else if (user_list.get(0).get_type() == 1) {		// student acc
-				Student student = (Student) user_list.get(0);
-				System.out.println(student.get_name() + ", " + student.get_password() + ", " + student.get_email());
-			
-			} else if (user_list.get(0).get_type() == 2) {		// facul acc
-				Faculty faculty = (Faculty) user_list.get(0);
-				System.out.println(faculty.get_name() + ", " + faculty.get_password() + ", " + faculty.get_email());
-			}
-			
-		}
+
+		
 	}
 }

@@ -3,12 +3,7 @@ package edu.ycp.cs320.independent_study_hub;
 import java.util.List;
 import java.util.Scanner;
 
-import edu.ycp.cs320.independent_study_hub.user_models.ChemicalInventory;
-import edu.ycp.cs320.independent_study_hub.user_models.Faculty;
-import edu.ycp.cs320.independent_study_hub.user_models.Guest;
-import edu.ycp.cs320.independent_study_hub.user_models.PreviousWork;
-import edu.ycp.cs320.independent_study_hub.user_models.Student;
-import edu.ycp.cs320.independent_study_hub.user_models.User;
+import edu.ycp.cs320.independent_study_hub.model.ChemicalInventory;
 import edu.ycp.cs320.independent_study_hub.persist.DatabaseProvider;
 import edu.ycp.cs320.independent_study_hub.persist.IDatabase;
 
