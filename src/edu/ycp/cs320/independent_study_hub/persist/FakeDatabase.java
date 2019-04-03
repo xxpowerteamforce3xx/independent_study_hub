@@ -122,11 +122,11 @@ public class FakeDatabase implements IDatabase {
 	public Student get_student(String acc_name) {
 		Student result = null;
 		// basic fields we will populate if they should be returned
-		System.out.println(student_list.size());
-		String name = student_list.get(student_list.size() - 2).get_name();
-		System.out.println(name);
+	
 		for (Student student : student_list) {
+			System.out.println(student.get_name() + " = " + acc_name);
 			if (student.get_name() == acc_name) {
+				System.out.println("here2");
 				result = student;
 			}
 		}
