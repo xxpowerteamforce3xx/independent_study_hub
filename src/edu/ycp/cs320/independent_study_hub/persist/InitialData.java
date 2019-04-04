@@ -6,9 +6,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import edu.ycp.cs320.independent_study_hub.model.ChemicalInventory;
+import edu.ycp.cs320.independent_study_hub.model.Faculty;
 import edu.ycp.cs320.independent_study_hub.model.Project;
-import edu.ycp.cs320.independent_study_hub.user_models.Faculty;
-import edu.ycp.cs320.independent_study_hub.user_models.Student;
+import edu.ycp.cs320.independent_study_hub.model.Student;
 
 public class InitialData {
 	

@@ -4,8 +4,6 @@ package edu.ycp.cs320.independent_study_hub.model;
 
 import com.sun.imageio.plugins.jpeg.JPEG;
 
-import edu.ycp.cs320.independent_study_hub.user_models.Student;
-
 /**
  * general class to be the model for students projects
  * previous work lists will consist of type project

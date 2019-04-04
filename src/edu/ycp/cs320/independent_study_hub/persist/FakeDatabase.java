@@ -6,10 +6,10 @@ import java.util.List;
 import com.sun.imageio.plugins.jpeg.JPEG;
 
 import edu.ycp.cs320.independent_study_hub.model.ChemicalInventory;
+import edu.ycp.cs320.independent_study_hub.model.Faculty;
+import edu.ycp.cs320.independent_study_hub.model.Guest;
 import edu.ycp.cs320.independent_study_hub.model.Project;
-import edu.ycp.cs320.independent_study_hub.user_models.Faculty;
-import edu.ycp.cs320.independent_study_hub.user_models.Guest;
-import edu.ycp.cs320.independent_study_hub.user_models.Student;
+import edu.ycp.cs320.independent_study_hub.model.Student;
 public class FakeDatabase implements IDatabase {
 
 	private List<Guest> guest_list;

@@ -1,4 +1,4 @@
-package edu.ycp.cs320.independent_study_hub.user_models;
+package edu.ycp.cs320.independent_study_hub.model;
 
 public class Faculty extends User {
 	private int facultyID;

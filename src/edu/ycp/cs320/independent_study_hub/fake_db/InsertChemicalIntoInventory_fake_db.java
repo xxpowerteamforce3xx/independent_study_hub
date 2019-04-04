@@ -1,4 +1,4 @@
-package edu.ycp.cs320.independent_study_hub;
+package edu.ycp.cs320.independent_study_hub.fake_db;
 
 import java.util.List;
 import java.util.Scanner;
@@ -7,12 +7,12 @@ import edu.ycp.cs320.independent_study_hub.model.ChemicalInventory;
 import edu.ycp.cs320.independent_study_hub.persist.DatabaseProvider;
 import edu.ycp.cs320.independent_study_hub.persist.IDatabase;
 
-public class InsertChemicalIntoInventory {
+public class InsertChemicalIntoInventory_fake_db {
 	public static void main(String[] args) throws Exception {
 		Scanner keyboard = new Scanner(System.in);
 
 		// Create the default IDatabase instance
-		InitDatabase.init(keyboard);
+		InitDatabase_fake_db.init(keyboard);
 		System.out.print("Enter the chemical name: ");
 		String Chemical = keyboard.nextLine();
 		System.out.print("Enter the use of the chemical (class or research): ");

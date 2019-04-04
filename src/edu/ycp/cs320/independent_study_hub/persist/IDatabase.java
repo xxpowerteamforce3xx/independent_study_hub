@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import com.sun.imageio.plugins.jpeg.JPEG;
 
 import edu.ycp.cs320.independent_study_hub.model.ChemicalInventory;
+import edu.ycp.cs320.independent_study_hub.model.Faculty;
+import edu.ycp.cs320.independent_study_hub.model.Guest;
 import edu.ycp.cs320.independent_study_hub.model.Project;
-import edu.ycp.cs320.independent_study_hub.user_models.Faculty;
-import edu.ycp.cs320.independent_study_hub.user_models.Guest;
-import edu.ycp.cs320.independent_study_hub.user_models.Student;
+import edu.ycp.cs320.independent_study_hub.model.Student;
 
 public interface IDatabase {
 	public ArrayList<ChemicalInventory> insertChemical(String chemical, String use, int dom);

@@ -1,22 +1,21 @@
-package edu.ycp.cs320.independent_study_hub;
+package edu.ycp.cs320.independent_study_hub.fake_db;
 
 import java.util.List;
 import java.util.Scanner;
 
 import com.sun.imageio.plugins.jpeg.JPEG;
 
-import edu.ycp.cs320.independent_study_hub.user_models.Student;
-import edu.ycp.cs320.independent_study_hub.model.ChemicalInventory;
 import edu.ycp.cs320.independent_study_hub.model.Project;
+import edu.ycp.cs320.independent_study_hub.model.Student;
 import edu.ycp.cs320.independent_study_hub.persist.DatabaseProvider;
 import edu.ycp.cs320.independent_study_hub.persist.IDatabase;
 
-public class InsertProject {
+public class InsertProject_fake_db {
 	public static void main(String[] args) throws Exception {
 		Scanner keyboard = new Scanner(System.in);
 
 		// Create the default IDatabase instance
-		InitDatabase.init(keyboard);
+		InitDatabase_fake_db.init(keyboard);
 		System.out.print("Enter the name: ");
 		String name = keyboard.nextLine();
 		System.out.print("Enter the title of the research: ");
