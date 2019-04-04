@@ -124,9 +124,7 @@ public class FakeDatabase implements IDatabase {
 		// basic fields we will populate if they should be returned
 	
 		for (Student student : student_list) {
-			System.out.println(student.get_name() + " = " + acc_name);
-			if (student.get_name() == acc_name) {
-				System.out.println("here2");
+			if (student.get_name().equals(acc_name)) {
 				result = student;
 			}
 		}
@@ -139,16 +137,11 @@ public class FakeDatabase implements IDatabase {
 	public Faculty get_faculty(String acc_name) {
 		Faculty result = null;
 		// basic fields we will populate if they should be returned
-		System.out.println(faculty_list.size());
-		String name = faculty_list.get(faculty_list.size()).get_name();
-		System.out.println(name);
 		for (Faculty faculty: faculty_list) {
-			System.out.println(faculty.get_name());
-			if (faculty.get_name() == acc_name) {
+			if (faculty.get_name().equals(acc_name)) {
 				result= faculty;
 			}
 		}
-	
 		return result;
 	}
 }
