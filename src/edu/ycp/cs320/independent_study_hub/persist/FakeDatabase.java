@@ -112,15 +112,21 @@ public class FakeDatabase implements IDatabase {
 	 * just returns a guest element
 	 */
 	public Guest get_guest(String acc_name) {
-		Guest result = new Guest();
-		return result;
+		Guest guest = new Guest();
+		if (acc_name.equals("guest")) {
+			guest.setName("guest");
+			guest.setPassword("password");
+			return guest;
+		} else {
+			return guest;
+		}
 	}
 	
 	/**
 	 * returns a single student reference, otherwise null
 	 */
 	public Student get_student(String acc_name) {
-		Student result = null;
+		Student result = new Student();
 		// basic fields we will populate if they should be returned
 	
 		for (Student student : student_list) {
@@ -135,7 +141,7 @@ public class FakeDatabase implements IDatabase {
 	 * returns a single faculty reference, otherwise null
 	 */
 	public Faculty get_faculty(String acc_name) {
-		Faculty result = null;
+		Faculty result = new Faculty();
 		// basic fields we will populate if they should be returned
 		for (Faculty faculty: faculty_list) {
 			if (faculty.get_name().equals(acc_name)) {

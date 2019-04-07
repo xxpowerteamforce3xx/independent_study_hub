@@ -37,7 +37,67 @@ public class DerbyDatabase implements IDatabase {
 	}
 
 	private static final int MAX_ATTEMPTS = 10;
+	
+	@Override
+	public ArrayList<User> get_user(String acc_name, int acc_type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
+	@Override
+	public ArrayList<ChemicalInventory> insertChemical(int chemicalID, String chemical, String use, int dom) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<ChemicalInventory> getChemicals(int dom) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Project> getWorkFromYear(int year) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Project> insertPreviousWork(String name, String title, String description, int year) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<ChemicalInventory> insertChemical(String chemical, String use, int dom) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Project> insertProject(String title, Student student, int year, String description, JPEG image,
+			int workID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Guest get_guest(String acc_name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Student get_student(String acc_name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Faculty get_faculty(String acc_name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	/*public List<Pair<Author, Book>> findAuthorAndBookByTitle(final String title) {
 		return executeTransaction(new Transaction<List<Pair<Author,Book>>>() {
@@ -145,69 +205,8 @@ private Connection connect() throws SQLException {
 	return conn;
 }
 
-@Override
-public ArrayList<User> get_user(String acc_name, int acc_type) {
-	// TODO Auto-generated method stub
-	return null;
-}
 
-@Override
-public ArrayList<ChemicalInventory> insertChemical(int chemicalID, String chemical, String use, int dom) {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-@Override
-public ArrayList<ChemicalInventory> getChemicals(int dom) {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-@Override
-public ArrayList<Project> getWorkFromYear(int year) {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-@Override
-public ArrayList<Project> insertPreviousWork(String name, String title, String description, int year) {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-@Override
-public ArrayList<ChemicalInventory> insertChemical(String chemical, String use, int dom) {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-@Override
-public ArrayList<Project> insertProject(String title, Student student, int year, String description, JPEG image,
-		int workID) {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-@Override
-public Guest get_guest(String acc_name) {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-@Override
-public Student get_student(String acc_name) {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-@Override
-public Faculty get_faculty(String acc_name) {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-
-
+// TODO: figure out how to create tables 
 }
 
 
