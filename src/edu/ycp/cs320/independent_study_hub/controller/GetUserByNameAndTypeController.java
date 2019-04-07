@@ -37,21 +37,21 @@ public class GetUserByNameAndTypeController {
 		
 		if (acc_type == 0) {	
 			Guest guest = db.get_guest(acc_name);
-			System.out.println(guest.get_name() + ", " + guest.get_password());
+			//System.out.println(guest.get_name() + ", " + guest.get_password());
 			return guest;
 
 		} else if (acc_type == 1) {
 			Student student = db.get_student(acc_name);
-			System.out.println(student.get_name() + ", " + student.get_password() + ", " + student.get_email());
+			//System.out.println(student.get_name() + ", " + student.get_password() + ", " + student.get_email());
 			return student;
 			
 		} else if (acc_type == 2) {
 			Faculty faculty = db.get_faculty(acc_name);
-			System.out.println(faculty.get_name() + ", " + faculty.get_password() + ", " + faculty.get_email());
+			//System.out.println(faculty.get_name() + ", " + faculty.get_password() + ", " + faculty.get_email());
 			return faculty;
 				
 		} else {
-			System.out.println("No user was found with the name " + acc_name + " and type "+ acc_type);
+			//System.out.println("No user was found with the name " + acc_name + " and type "+ acc_type);
 			return null;
 		}
 	}
