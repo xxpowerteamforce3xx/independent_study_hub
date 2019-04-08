@@ -225,7 +225,7 @@ public void createTables() {
 								"	students_id integer primary key " +
 								"		generated always as identity (start with 1, increment by 1), " +									
 								"	name varchar(40)," +
-								"	password varchar(40)" +
+								"	password varchar(40)," +
 								"   email varchar(40) " +
 								")"
 						);	
@@ -235,11 +235,11 @@ public void createTables() {
 						"create table projects (" +
 								"	projects_id integer primary key " +
 								"		generated always as identity (start with 1, increment by 1), " +
-								"	projects_id integer constraint students_id references students, " +
+								"	students_id integer constraint students_id references students, " +
 								"	student_name varchar(40)," +
-								"	title varchar(40)" +
-								"   date varchar(40) " +
-								"   description(40)  " +
+								"	title varchar(40)," +
+								"   date varchar(40), " +
+								"   description(40),  " +
 								"   image_url varchar(40)" +
 								")"
 						);
@@ -247,10 +247,21 @@ public void createTables() {
 				
 				stmt3 = conn.prepareStatement(
 						"create table faculty (" +
-						""	
+						"	projects_id integer primary key " +
+						"		generated always as identity (start with 1, increment by 1), " +
+						" 	name varchar(40)," +
+						" 	password varchar(40)," +
+						" 	email varchar(40)"
 						);
-						
-
+				stmt3.executeUpdate();
+				
+				stmt4 = conn.prepareStatement(
+						"create table chemicals (" +
+						" 	chemicals_id integer primary key " +
+						" 	name varchar(40)," +
+						" 	quantity integer"
+						);
+				stmt4.executeUpdate();
 				return true;
 			} finally {
 				DBUtil.closeQuietly(stmt1);
@@ -264,51 +275,78 @@ public void loadInitialData() {
 	executeTransaction(new Transaction<Boolean>() {
 		@Override
 		public Boolean execute(Connection conn) throws SQLException {
-			List<Author> authorList;
-			List<Book> bookList;
+			List<Faculty> facultyList;
+			List<Student> studentList;
+			List<Project> projectList;
+			List<ChemicalInventory> chemicalList;
 
 			try {
-				authorList = InitialData.getAuthors();
-				bookList = InitialData.getBooks();
+				facultyList = InitialData.get_faculty_users();
+				studentList = InitialData.get_student_users();
+				projectList = InitialData.getProjects();
+				chemicalList = InitialData.getChemicals();
 			} catch (IOException e) {
 				throw new SQLException("Couldn't read initial data", e);
 			}
 
-			PreparedStatement insertAuthor = null;
-			PreparedStatement insertBook   = null;
-
+			PreparedStatement insertStudents  = null;
+			PreparedStatement insertProjects  = null;
+			PreparedStatement insertFaculty   = null;
+			PreparedStatement insertChemicals = null;
+			
 			try {
-				// populate authors table (do authors first, since author_id is foreign key in books table)
-				insertAuthor = conn.prepareStatement("insert into authors (lastname, firstname) values (?, ?)");
-				for (Author author : authorList) {
+				// populate student table first since it is foreign key in projects table
+				insertStudents = conn.prepareStatement("insert into students (name, password, email) values (?, ?, ?)");
+				for (Student student : studentList) {
 					//						insertAuthor.setInt(1, author.getAuthorId());	// auto-generated primary key, don't insert this
-					insertAuthor.setString(1, author.getLastname());
-					insertAuthor.setString(2, author.getFirstname());
-					insertAuthor.addBatch();
+					insertStudents.setString(1, student.get_name());
+					insertStudents.setString(2, student.get_password());
+					insertStudents.setString(3, student.get_email());
+					insertStudents.addBatch();
 				}
-				insertAuthor.executeBatch();
+				insertStudents.executeBatch();
 
-				// populate books table (do this after authors table,
-				// since author_id must exist in authors table before inserting book)
-				insertBook = conn.prepareStatement("insert into books (author_id, title, isbn, published) values (?, ?, ?, ?)");
-				for (Book book : bookList) {
+				// populate projects table
+				insertProjects = conn.prepareStatement("insert into projects (students_id, name, title, date, description) values (?, ?, ?, ?)");
+				for (Project project : projectList) {
 					//						insertBook.setInt(1, book.getBookId());		// auto-generated primary key, don't insert this
-					insertBook.setInt(1, book.getAuthorId());
-					insertBook.setString(2, book.getTitle());
-					insertBook.setString(3, book.getIsbn());
-					insertBook.setInt(4,  book.getPublished());
-					insertBook.addBatch();
+					insertProjects.setInt(1, project.get_id());
+					insertProjects.setString(2, project.get_student().get_name());
+					insertProjects.setString(3, project.get_title());
+					insertProjects.setInt(4, project.get_year());
+					insertProjects.addBatch();
 				}
-				insertBook.executeBatch();
-
+				insertProjects.executeBatch();
+				
+				// populate faculty table
+				insertFaculty = conn.prepareStatement("insert into faculty (name, password, email) values (?, ?, ?)");
+				for (Faculty faculty : facultyList) {
+					insertFaculty.setString(1, faculty.get_name());
+					insertFaculty.setString(2, faculty.get_email());
+					insertFaculty.setString(3, faculty.get_email());
+					insertFaculty.addBatch();
+				}
+				insertFaculty.executeBatch();
+				
+				// populate the chemical table
+				insertChemicals = conn.prepareStatement("insert into chemicals (name, quantity) values (?, ?)");
+				for (ChemicalInventory chemical : chemicalList) {
+					insertChemicals.setString(1, chemical.getChemical());
+					insertChemicals.setInt(2, chemical.getDom());
+					insertChemicals.addBatch();
+				}
+				insertChemicals.executeBatch();
 				return true;
 			} finally {
-				DBUtil.closeQuietly(insertBook);
-				DBUtil.closeQuietly(insertAuthor);
+				DBUtil.closeQuietly(insertProjects);
+				DBUtil.closeQuietly(insertStudents);
+				DBUtil.closeQuietly(insertFaculty);
+				DBUtil.closeQuietly(insertChemicals);
 			}
 		}
 	});
 }
+
 
 // The main method creates the database tables and loads the initial data.
 public static void main(String[] args) throws IOException {
@@ -321,4 +359,4 @@ public static void main(String[] args) throws IOException {
 
 	System.out.println("Success!");
 }
-}*/
+}

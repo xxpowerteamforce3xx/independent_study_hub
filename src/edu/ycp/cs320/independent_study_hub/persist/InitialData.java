@@ -22,7 +22,6 @@ public class InitialData {
 		ReadCSV readStudentlist = new ReadCSV("students.csv");
 		try {
 			// auto-generated primary key for authors table
-			Integer studentID = 1;
 			
 			while (true) {
 				List<String> tuple = readStudentlist.next();
@@ -31,7 +30,6 @@ public class InitialData {
 				}
 				Iterator<String> i = tuple.iterator();
 				Student students = new Student();
-				students.setID(studentID++);
 				students.setName(i.next());
 				students.setPassword(i.next());
 				students.setEmail(i.next());
@@ -49,7 +47,6 @@ public class InitialData {
 		ReadCSV readFacultyList = new ReadCSV("faculty.csv");
 		try {
 			// auto-generated primary key for authors table
-			Integer facultyID = 1;
 			
 			while (true) {
 				List<String> tuple = readFacultyList.next();
@@ -58,7 +55,6 @@ public class InitialData {
 				}
 				Iterator<String> i = tuple.iterator();
 				Faculty faculty = new Faculty();
-				faculty.setID(facultyID++);
 				faculty.setName(i.next());
 				faculty.setPassword(i.next());
 				faculty.setEmail(i.next());
@@ -83,9 +79,7 @@ public class InitialData {
 					break;
 				}
 				Iterator<String> i = tuple.iterator();
-				
-				workID++;										// increment id
-				
+								
 				Student student = new Student();
 				student.setName(i.next());	// student
 				String title = i.next();						// title
@@ -94,7 +88,7 @@ public class InitialData {
 				
 				// constructor to create the new object
 				Project oldWork = new Project(title, student, year, desc, null, workID);	// jpeg field is null
-				
+				workID++;										// increment id
 				previousWorkList.add(oldWork);
 			}
 			return previousWorkList;
