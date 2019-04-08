@@ -13,42 +13,6 @@ import edu.ycp.cs320.independent_study_hub.model.Student;
 public class InitialData {
 	
 	/**
-	 * returns the single guest usuer
-	 * @return a list of all guest users (only 1 right now)
-	 * @throws IOException 
-	 */
-	/*public static ArrayList<Guest> get_guest_users() throws IOException {
-		ArrayList<Guest> guestList = new ArrayList<Guest>();
-		ReadCSV readGuestList = new ReadCSV("guests.csv");
-		.out.println("Test 1");
-		try {
-			// auto-generated primary key for authors table
-			Integer guestID = 1;
-			
-			.out.println("Test 2");
-			while (true) {
-				List<String> tuple = readGuestList.next();
-				.out.println("Test 3");
-				if (tuple == null) {
-					break;
-				}
-				Iterator<String> i = tuple.iterator();
-				Guest guests = new Guest();
-				guests.setID(guestID++);
-				guests.setName(i.next());
-				guests.setPassword(i.next());
-				guests.setEmail(i.next());
-				guests.setType(Integer.parseInt(i.next()));
-				guestList.add(guests);
-				.out.println("Test 5");
-			}
-			return guestList;
-		} finally {
-			readGuestList.close();
-		}
-	}*/
-	
-	/**
 	 * populates our list of student users with init data
 	 * @return the list of students
 	 * @throws IOException 

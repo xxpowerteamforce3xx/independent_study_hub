@@ -210,35 +210,46 @@ private Connection connect() throws SQLException {
 }
 
 
-/*public void createTables() {
+public void createTables() {
 	executeTransaction(new Transaction<Boolean>() {
 		@Override
 		public Boolean execute(Connection conn) throws SQLException {
 			PreparedStatement stmt1 = null;
 			PreparedStatement stmt2 = null;
+			PreparedStatement stmt3 = null;
+			PreparedStatement stmt4 = null;
 
 			try {
 				stmt1 = conn.prepareStatement(
-						"create table authors (" +
-								"	author_id integer primary key " +
+						"create table students (" +
+								"	students_id integer primary key " +
 								"		generated always as identity (start with 1, increment by 1), " +									
-								"	lastname varchar(40)," +
-								"	firstname varchar(40)" +
+								"	name varchar(40)," +
+								"	password varchar(40)" +
+								"   email varchar(40) " +
 								")"
 						);	
 				stmt1.executeUpdate();
 
 				stmt2 = conn.prepareStatement(
-						"create table books (" +
-								"	book_id integer primary key " +
+						"create table projects (" +
+								"	projects_id integer primary key " +
 								"		generated always as identity (start with 1, increment by 1), " +
-								"	author_id integer constraint author_id references authors, " +
-								"	title varchar(70)," +
-								"	isbn varchar(15)," +
-								"   published integer " +
+								"	projects_id integer constraint students_id references students, " +
+								"	student_name varchar(40)," +
+								"	title varchar(40)" +
+								"   date varchar(40) " +
+								"   description(40)  " +
+								"   image_url varchar(40)" +
 								")"
 						);
 				stmt2.executeUpdate();
+				
+				stmt3 = conn.prepareStatement(
+						"create table faculty (" +
+						""	
+						);
+						
 
 				return true;
 			} finally {
