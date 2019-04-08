@@ -71,14 +71,16 @@ public class FakeDatabase implements IDatabase {
 	/**
 	 * returns a chemical use based on the name
 	 */
-	public ArrayList<ChemicalInventory> getChemicals(int dom) {
-		ArrayList<ChemicalInventory> result = new ArrayList<ChemicalInventory>();
-		for (ChemicalInventory chemical: chemicalList) {
-			if (chemical.getDom() == dom) {
-				result.add(chemical);
+	public ChemicalInventory getChemicals(String Chemical) {
+		ChemicalInventory chemical = null;
+		// basic fields we will populate if they should be returned
+	
+		for (ChemicalInventory chemicals : chemicalList) {
+			if (chemicals.getChemical().equals(Chemical)) {
+				chemical = chemicals;
 			}
 		}
-		return result;
+		return chemical;
 	}
 	@Override
 	/**

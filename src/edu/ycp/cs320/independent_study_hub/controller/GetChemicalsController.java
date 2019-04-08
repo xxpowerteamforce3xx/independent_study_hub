@@ -27,16 +27,8 @@ public class GetChemicalsController {
 	 * @param dom --> the year looking for
 	 * @return true if found, false for not found
 	 */
-	public ArrayList<ChemicalInventory> GetChemicals (int dom) {
-		ArrayList<ChemicalInventory> chemical_list = db.getChemicals(dom);
-		if (chemical_list.isEmpty()) {
-			System.out.println("No chemicals were found with this year <" + dom + ">" );
-			return null;
-		} else {
-			for (ChemicalInventory Chemical: chemical_list) {
-				System.out.println(Chemical.getChemicalID() + ", " + Chemical.getChemical() + ", " + Chemical.getUseOfChemical() + "," + Chemical.getDom());
-			}
-		return chemical_list;
-		}
+	public ChemicalInventory GetChemicals (String name) {
+		ChemicalInventory Chemical = db.getChemicals(name);
+		return Chemical;
 	}
 }

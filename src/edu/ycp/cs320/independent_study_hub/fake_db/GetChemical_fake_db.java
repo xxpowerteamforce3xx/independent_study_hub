@@ -15,19 +15,11 @@ public class GetChemical_fake_db {
 		InitDatabase_fake_db.init(keyboard);
 
 		System.out.print("Enter the year of the chemcial wanted: ");
-		int dom = keyboard.nextInt();
+		String name = keyboard.nextLine();
 		// get the DB instance and execute transaction
 		IDatabase db = DatabaseProvider.getInstance();
-		List<ChemicalInventory> chemicalList = db.getChemicals(dom);
+		ChemicalInventory chemical = db.getChemicals(name);
+		System.out.println(chemical.getChemicalID() + ", " + chemical.getChemical() + ", " + chemical.getUseOfChemical() + "," + chemical.getDom());
 		
-		// check if anything was returned and output the list
-		if (chemicalList.isEmpty()) {
-			System.out.println("No chemicals found with this year: <" + dom + ">");
-		}
-		else {
-			for (ChemicalInventory Chemical: chemicalList) {
-				System.out.println(Chemical.getChemicalID() + ", " + Chemical.getChemical() + ", " + Chemical.getUseOfChemical() + "," + Chemical.getDom());
-			}
-		}
 	}
 }

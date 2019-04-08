@@ -12,7 +12,7 @@ import edu.ycp.cs320.independent_study_hub.model.Student;
 
 public interface IDatabase {
 	public ArrayList<ChemicalInventory> insertChemical(String chemical, String use, int dom);
-	public ArrayList<ChemicalInventory> getChemicals(int dom);
+	public ChemicalInventory getChemicals(String chemcial);
 	public ArrayList<Project> getWorkFromYear(int year);
 	public ArrayList<Project> insertProject(String title, Student student, int year, String description, JPEG image, int workID);
 	public Guest get_guest(String acc_name);
