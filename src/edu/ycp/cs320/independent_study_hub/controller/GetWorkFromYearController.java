@@ -39,7 +39,7 @@ public class GetWorkFromYearController {
 		
 		// check if anything was returned and output the list
 		if (previousList.isEmpty()) {
-			System.out.println("No research found with in <" + year + ">");
+			//System.out.println("No research found with in <" + year + ">");
 			return null;
 		} else {
 			for (Project previous: previousList) {
