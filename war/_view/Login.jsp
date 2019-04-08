@@ -9,17 +9,20 @@
 	<style type="text/css">
 		<%@ include file="./../style/style.css" %>
 	</style>
-	<script src="http://localhost:8081/independent_study_hub/main.js"></script>
+	
+	<script type="text/javascript">
+		<%@ include file="./../Javascript/main.js" %>
+	</script>
+
 </head>
+
 <body class="login">
     <form class="box" action="${pageContext.servletContext.contextPath}/Home" method="doGet">
         <h1 class="log_header">Login</h1>
-        <input type="text" name="" placeholder="Username" />
-        <input type="password" name="" placeholder="Password" />
-        <input type="submit" name="" value="Login"/>
+        <input type="text" name="uname" placeholder="Username" id="name"/>
+        <input type="password" name="pass" placeholder="Password" id="password"/>
+        <input type="submit" name="" value="Login" id="log"/>
     </form>
     
-    <!--  <button type="button" id="login" onclick="hello()">Click Me</button> -->
-
 </body>
 </html>
