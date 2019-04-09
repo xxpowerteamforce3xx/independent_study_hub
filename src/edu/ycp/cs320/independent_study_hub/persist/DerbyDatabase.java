@@ -13,7 +13,6 @@ import java.util.Scanner;
 
 import com.sun.imageio.plugins.jpeg.JPEG;
 
-import edu.ycp.cs320.independent_study_hub.fake_db.user_models.PreviousWork;
 import edu.ycp.cs320.independent_study_hub.model.ChemicalInventory;
 import edu.ycp.cs320.independent_study_hub.model.Faculty;
 import edu.ycp.cs320.independent_study_hub.model.Guest;
@@ -38,32 +37,9 @@ public class DerbyDatabase implements IDatabase {
 
 	private static final int MAX_ATTEMPTS = 10;
 	
-	@Override
-	public ArrayList<User> get_user(String acc_name, int acc_type) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<ChemicalInventory> insertChemical(int chemicalID, String chemical, String use, int dom) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<ChemicalInventory> getChemicals(int dom) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public ArrayList<Project> getWorkFromYear(int year) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<Project> insertPreviousWork(String name, String title, String description, int year) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -95,6 +71,12 @@ public class DerbyDatabase implements IDatabase {
 
 	@Override
 	public Faculty get_faculty(String acc_name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public ChemicalInventory getChemicals(String chemcial) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -152,211 +134,216 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});
 	}*/
-public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
-	try {
-		return doExecuteTransaction(txn);
-	} catch (SQLException e) {
-		throw new PersistenceException("Transaction failed", e);
+	public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
+		try {
+			return doExecuteTransaction(txn);
+		} catch (SQLException e) {
+			throw new PersistenceException("Transaction failed", e);
+		}
 	}
-}
-
-public<ResultType> ResultType doExecuteTransaction(Transaction<ResultType> txn) throws SQLException {
-	Connection conn = connect();
-
-	try {
-		int numAttempts = 0;
-		boolean success = false;
-		ResultType result = null;
-
-		while (!success && numAttempts < MAX_ATTEMPTS) {
-			try {
-				result = txn.execute(conn);
-				conn.commit();
-				success = true;
-			} catch (SQLException e) {
-				if (e.getSQLState() != null && e.getSQLState().equals("41000")) {
-					// Deadlock: retry (unless max retry count has been reached)
-					numAttempts++;
-				} else {
-					// Some other kind of SQLException
-					throw e;
+	
+	public<ResultType> ResultType doExecuteTransaction(Transaction<ResultType> txn) throws SQLException {
+		Connection conn = connect();
+	
+		try {
+			int numAttempts = 0;
+			boolean success = false;
+			ResultType result = null;
+	
+			while (!success && numAttempts < MAX_ATTEMPTS) {
+				try {
+					result = txn.execute(conn);
+					conn.commit();
+					success = true;
+				} catch (SQLException e) {
+					if (e.getSQLState() != null && e.getSQLState().equals("41000")) {
+						// Deadlock: retry (unless max retry count has been reached)
+						numAttempts++;
+					} else {
+						// Some other kind of SQLException
+						throw e;
+					}
 				}
 			}
+	
+			if (!success) {
+				throw new SQLException("Transaction failed (too many retries)");
+			}
+	
+			// Success!
+			return result;
+		} finally {
+			DBUtil.closeQuietly(conn);
 		}
-
-		if (!success) {
-			throw new SQLException("Transaction failed (too many retries)");
-		}
-
-		// Success!
-		return result;
-	} finally {
-		DBUtil.closeQuietly(conn);
 	}
-}
-
-private Connection connect() throws SQLException {
-	Connection conn = DriverManager.getConnection("jdbc:derby:test.db;create=true");
-
-	// Set autocommit to false to allow execution of
-	// multiple queries/statements as part of the same transaction.
-	conn.setAutoCommit(false);
-
-	return conn;
-}
-
-
-// TODO: figure out how to create tables 
-}
-
-
-public void createTables() {
-	executeTransaction(new Transaction<Boolean>() {
-		@Override
-		public Boolean execute(Connection conn) throws SQLException {
-			PreparedStatement stmt1 = null;
-			PreparedStatement stmt2 = null;
-			PreparedStatement stmt3 = null;
-			PreparedStatement stmt4 = null;
-
-			try {
-				stmt1 = conn.prepareStatement(
-						"create table students (" +
-								"	students_id integer primary key " +
-								"		generated always as identity (start with 1, increment by 1), " +									
-								"	name varchar(40)," +
-								"	password varchar(40)," +
-								"   email varchar(40) " +
-								")"
-						);	
-				stmt1.executeUpdate();
-
-				stmt2 = conn.prepareStatement(
-						"create table projects (" +
-								"	projects_id integer primary key " +
-								"		generated always as identity (start with 1, increment by 1), " +
-								"	students_id integer constraint students_id references students, " +
-								"	student_name varchar(40)," +
-								"	title varchar(40)," +
-								"   date varchar(40), " +
-								"   description(40),  " +
-								"   image_url varchar(40)" +
-								")"
-						);
-				stmt2.executeUpdate();
-				
-				stmt3 = conn.prepareStatement(
-						"create table faculty (" +
-						"	projects_id integer primary key " +
-						"		generated always as identity (start with 1, increment by 1), " +
-						" 	name varchar(40)," +
-						" 	password varchar(40)," +
-						" 	email varchar(40)"
-						);
-				stmt3.executeUpdate();
-				
-				stmt4 = conn.prepareStatement(
-						"create table chemicals (" +
-						" 	chemicals_id integer primary key " +
-						" 	name varchar(40)," +
-						" 	quantity integer"
-						);
-				stmt4.executeUpdate();
-				return true;
-			} finally {
-				DBUtil.closeQuietly(stmt1);
-				DBUtil.closeQuietly(stmt2);
+	
+	private Connection connect() throws SQLException {
+		Connection conn = DriverManager.getConnection("jdbc:derby:test.db;create=true");
+	
+		// Set autocommit to false to allow execution of
+		// multiple queries/statements as part of the same transaction.
+		conn.setAutoCommit(false);
+	
+		return conn;
+	}
+	
+	
+	public void createTables() {
+		executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt1 = null;
+				PreparedStatement stmt2 = null;
+				PreparedStatement stmt3 = null;
+				PreparedStatement stmt4 = null;
+	
+				try {
+					stmt1 = conn.prepareStatement(
+							"create table students (" +
+									"	students_id integer primary key " +
+									"		generated always as identity (start with 1, increment by 1), " +									
+									"	name varchar(40), " +
+									"	password varchar(40), " +
+									"   email varchar(40) " +
+									")"
+							);	
+					stmt1.executeUpdate();
+					System.out.println("students table created");
+	
+					stmt2 = conn.prepareStatement(
+							"create table projects (" +
+									"	projects_id integer primary key " +
+									"		generated always as identity (start with 1, increment by 1), " +
+									"	students_id integer constraint students_id references students, " +
+									"	student_name varchar(40), " +
+									"	title varchar(40), " +
+									"   date varchar(40), " +
+									"   description varchar(40), " +
+									"   image_url varchar(40)" +
+									")"
+							);
+					stmt2.executeUpdate();
+					System.out.println("projects table created");
+					
+					stmt3 = conn.prepareStatement(
+							"create table faculty (" +
+									"	faculty_id integer primary key " +
+									"		generated always as identity (start with 1, increment by 1), " +
+									" 	name varchar(40)," +
+									" 	password varchar(40)," +
+									" 	email varchar(40)" +
+									")"
+							);
+					stmt3.executeUpdate();
+					System.out.println("faculty table completed");
+					
+					stmt4 = conn.prepareStatement(
+							"create table chemicals (" +
+									" 	chemicals_id integer primary key " +
+									"		generated always as identity (start with 1, increment by 1), " +
+									" 	name varchar(40)," +
+									" 	quantity integer" +
+									")"
+							);
+					stmt4.executeUpdate();
+					System.out.println("chemicals table completed");
+					
+					return true;
+				} finally {
+					DBUtil.closeQuietly(stmt1);
+					DBUtil.closeQuietly(stmt2);
+				}
 			}
-		}
-	});
-}
-
-public void loadInitialData() {
-	executeTransaction(new Transaction<Boolean>() {
-		@Override
-		public Boolean execute(Connection conn) throws SQLException {
-			List<Faculty> facultyList;
-			List<Student> studentList;
-			List<Project> projectList;
-			List<ChemicalInventory> chemicalList;
-
-			try {
-				facultyList = InitialData.get_faculty_users();
-				studentList = InitialData.get_student_users();
-				projectList = InitialData.getProjects();
-				chemicalList = InitialData.getChemicals();
-			} catch (IOException e) {
-				throw new SQLException("Couldn't read initial data", e);
-			}
-
-			PreparedStatement insertStudents  = null;
-			PreparedStatement insertProjects  = null;
-			PreparedStatement insertFaculty   = null;
-			PreparedStatement insertChemicals = null;
-			
-			try {
-				// populate student table first since it is foreign key in projects table
-				insertStudents = conn.prepareStatement("insert into students (name, password, email) values (?, ?, ?)");
-				for (Student student : studentList) {
-					//						insertAuthor.setInt(1, author.getAuthorId());	// auto-generated primary key, don't insert this
-					insertStudents.setString(1, student.get_name());
-					insertStudents.setString(2, student.get_password());
-					insertStudents.setString(3, student.get_email());
-					insertStudents.addBatch();
+		});
+	}
+	
+	public void loadInitialData() {
+		executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				List<Faculty> facultyList;
+				List<Student> studentList;
+				List<Project> projectList;
+				List<ChemicalInventory> chemicalList;
+	
+				try {
+					facultyList = InitialData.get_faculty_users();
+					studentList = InitialData.get_student_users();
+					projectList = InitialData.getProjects();
+					chemicalList = InitialData.getChemicals();
+				} catch (IOException e) {
+					throw new SQLException("Couldn't read initial data", e);
 				}
-				insertStudents.executeBatch();
-
-				// populate projects table
-				insertProjects = conn.prepareStatement("insert into projects (students_id, name, title, date, description) values (?, ?, ?, ?)");
-				for (Project project : projectList) {
-					//						insertBook.setInt(1, book.getBookId());		// auto-generated primary key, don't insert this
-					insertProjects.setInt(1, project.get_id());
-					insertProjects.setString(2, project.get_student().get_name());
-					insertProjects.setString(3, project.get_title());
-					insertProjects.setInt(4, project.get_year());
-					insertProjects.addBatch();
-				}
-				insertProjects.executeBatch();
+	
+				PreparedStatement insertStudents  = null;
+				PreparedStatement insertProjects  = null;
+				PreparedStatement insertFaculty   = null;
+				PreparedStatement insertChemicals = null;
 				
-				// populate faculty table
-				insertFaculty = conn.prepareStatement("insert into faculty (name, password, email) values (?, ?, ?)");
-				for (Faculty faculty : facultyList) {
-					insertFaculty.setString(1, faculty.get_name());
-					insertFaculty.setString(2, faculty.get_email());
-					insertFaculty.setString(3, faculty.get_email());
-					insertFaculty.addBatch();
+				try {
+					// populate student table first since it is foreign key in projects table
+					insertStudents = conn.prepareStatement("insert into students (name, password, email) values (?, ?, ?)");
+					for (Student student : studentList) {
+						//						insertAuthor.setInt(1, author.getAuthorId());	// auto-generated primary key, don't insert this
+						insertStudents.setString(1, student.get_name());
+						insertStudents.setString(2, student.get_password());
+						insertStudents.setString(3, student.get_email());
+						insertStudents.addBatch();
+					}
+					insertStudents.executeBatch();
+	
+					// populate projects table
+					insertProjects = conn.prepareStatement("insert into projects (students_id, student_name, title, date, description) values (?, ?, ?, ?, ?)");
+					for (Project project : projectList) {
+						//						insertBook.setInt(1, book.getBookId());		// auto-generated primary key, don't insert this
+						insertProjects.setInt(1, project.get_id());
+						insertProjects.setString(2, project.get_student().get_name());
+						insertProjects.setString(3, project.get_title());
+						insertProjects.setInt(4, project.get_year());
+						insertProjects.setString(5, project.get_description());
+						insertProjects.addBatch();
+					}
+					insertProjects.executeBatch();
+					
+					// populate faculty table
+					insertFaculty = conn.prepareStatement("insert into faculty (name, password, email) values (?, ?, ?)");
+					for (Faculty faculty : facultyList) {
+						insertFaculty.setString(1, faculty.get_name());
+						insertFaculty.setString(2, faculty.get_email());
+						insertFaculty.setString(3, faculty.get_email());
+						insertFaculty.addBatch();
+					}
+					insertFaculty.executeBatch();
+					
+					// populate the chemical table
+					insertChemicals = conn.prepareStatement("insert into chemicals (name, quantity) values (?, ?)");
+					for (ChemicalInventory chemical : chemicalList) {
+						insertChemicals.setString(1, chemical.getChemical());
+						insertChemicals.setInt(2, chemical.getDom());
+						insertChemicals.addBatch();
+					}
+					insertChemicals.executeBatch();
+					return true;
+				} finally {
+					DBUtil.closeQuietly(insertProjects);
+					DBUtil.closeQuietly(insertStudents);
+					DBUtil.closeQuietly(insertFaculty);
+					DBUtil.closeQuietly(insertChemicals);
 				}
-				insertFaculty.executeBatch();
-				
-				// populate the chemical table
-				insertChemicals = conn.prepareStatement("insert into chemicals (name, quantity) values (?, ?)");
-				for (ChemicalInventory chemical : chemicalList) {
-					insertChemicals.setString(1, chemical.getChemical());
-					insertChemicals.setInt(2, chemical.getDom());
-					insertChemicals.addBatch();
-				}
-				insertChemicals.executeBatch();
-				return true;
-			} finally {
-				DBUtil.closeQuietly(insertProjects);
-				DBUtil.closeQuietly(insertStudents);
-				DBUtil.closeQuietly(insertFaculty);
-				DBUtil.closeQuietly(insertChemicals);
 			}
-		}
-	});
-}
+		});
+	}
 
+	// The main method creates the database tables and loads the initial data.
+	public static void main(String[] args) throws IOException {
+		System.out.println("Creating tables...");
+		DerbyDatabase db = new DerbyDatabase();
+		db.createTables();
+	
+		System.out.println("Loading initial data...");
+		db.loadInitialData();
+	
+		System.out.println("Success!");
+	}
 
-// The main method creates the database tables and loads the initial data.
-public static void main(String[] args) throws IOException {
-	System.out.println("Creating tables...");
-	DerbyDatabase db = new DerbyDatabase();
-	db.createTables();
-
-	System.out.println("Loading initial data...");
-	db.loadInitialData();
-
-	System.out.println("Success!");
-}
 }
