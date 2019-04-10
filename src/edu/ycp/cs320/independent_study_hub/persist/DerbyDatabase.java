@@ -9,7 +9,6 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import com.sun.imageio.plugins.jpeg.JPEG;
 
@@ -18,7 +17,6 @@ import edu.ycp.cs320.independent_study_hub.model.Faculty;
 import edu.ycp.cs320.independent_study_hub.model.Guest;
 import edu.ycp.cs320.independent_study_hub.model.Project;
 import edu.ycp.cs320.independent_study_hub.model.Student;
-import edu.ycp.cs320.independent_study_hub.model.User;
 import edu.ycp.cs320.independent_study_hub.persist.IDatabase;
 
 
@@ -37,7 +35,73 @@ public class DerbyDatabase implements IDatabase {
 
 	private static final int MAX_ATTEMPTS = 10;
 	
+	
+	@Override
+	public ArrayList<Student> get_all_students() {
+		return executeTransaction(new Transaction<ArrayList<Student>>() {
+			@Override
+			public ArrayList<Student> execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
 
+				try {
+					// retreive all attributes from both Books and Authors tables
+					stmt = conn.prepareStatement(
+							"select students.* " +
+									"  from students " 
+							);
+
+
+					ArrayList<Student> result = new ArrayList<Student>();
+
+					resultSet = stmt.executeQuery();
+
+					// for testing that a result was returned
+					Boolean found = false;
+
+					while (resultSet.next()) {
+						found = true;
+
+						// creates a student object, and starts the index at 1
+						Student student = new Student();
+						loadStudent(student, resultSet, 1);
+
+
+						result.add(student);
+					}
+
+					// check if the title was found
+					if (!found) {
+						System.out.println("Nothing was found");
+					}
+
+					return result;
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+	}
+
+	@Override
+	public ArrayList<Faculty> get_all_faculty() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Project> get_all_projects() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<ChemicalInventory> get_all_chemicals() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	@Override
 	public ArrayList<Project> getWorkFromYear(int year) {
 		// TODO Auto-generated method stub
@@ -45,16 +109,16 @@ public class DerbyDatabase implements IDatabase {
 	}
 
 	@Override
-	public ArrayList<ChemicalInventory> insertChemical(String chemical, String use, int dom) {
+	public boolean insertChemical(String chemical, String use, int dom) {
+		return false;
 		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
-	public ArrayList<Project> insertProject(String title, Student student, int year, String description, JPEG image,
+	public boolean insertProject(String title, Student student, int year, String description, JPEG image,
 			int workID) {
+				return false;
 		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -76,9 +140,15 @@ public class DerbyDatabase implements IDatabase {
 	}
 	
 	@Override
-	public ChemicalInventory getChemicals(String chemcial) {
+	public ChemicalInventory getChemical(String chemcial) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	private void loadStudent(Student student, ResultSet resultSet, int i) throws SQLException {
+		student.setName(resultSet.getString(i++));
+		student.setPassword(resultSet.getString(i++));
+		student.setEmail(resultSet.getString(i++));
 	}
 	
 	/*public List<Pair<Author, Book>> findAuthorAndBookByTitle(final String title) {

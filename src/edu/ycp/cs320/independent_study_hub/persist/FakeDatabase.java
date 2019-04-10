@@ -57,7 +57,7 @@ public class FakeDatabase implements IDatabase {
 	/**
 	 * returns a chemical use based on the name
 	 */
-	public ArrayList<ChemicalInventory> insertChemical(String Chemical, String use, int dom) {
+	public boolean insertChemical(String Chemical, String use, int dom) {
 		ArrayList<ChemicalInventory> result = new ArrayList<ChemicalInventory>();
 		ChemicalInventory chemicals = new ChemicalInventory();
 		chemicals.setChemicalID(chemicalList.size() + 1);
@@ -65,13 +65,13 @@ public class FakeDatabase implements IDatabase {
 		chemicals.setDom(dom);
 		chemicals.setUseOfChemcial(use);
 		result.add(chemicals);
-		return result;
+		return true;
 	}
 	@Override
 	/**
 	 * returns a chemical use based on the name
 	 */
-	public ChemicalInventory getChemicals(String Chemical) {
+	public ChemicalInventory getChemical(String Chemical) {
 		ChemicalInventory chemical = null;
 		// basic fields we will populate if they should be returned
 	
@@ -100,7 +100,7 @@ public class FakeDatabase implements IDatabase {
 	/**
 	 * inserts a project 
 	 */
-	public ArrayList<Project> insertProject(String title, Student student, int year, String description, JPEG image, int workID) {
+	public boolean insertProject(String title, Student student, int year, String description, JPEG image, int workID) {
 		ArrayList<Project> result = new ArrayList<Project>();
 
 		//constructor for projects
@@ -152,5 +152,25 @@ public class FakeDatabase implements IDatabase {
 			}
 		}
 		return result;
+	}
+
+	@Override
+	public ArrayList<Student> get_all_students() {
+		throw new UnsupportedOperationException("Not yet implemnted (and probably will never be)");
+	}
+
+	@Override
+	public ArrayList<Faculty> get_all_faculty() {
+		throw new UnsupportedOperationException("Not yet implemnted (and probably will never be)");
+	}
+
+	@Override
+	public ArrayList<Project> get_all_projects() {
+		throw new UnsupportedOperationException("Not yet implemnted (and probably will never be)");
+	}
+
+	@Override
+	public ArrayList<ChemicalInventory> get_all_chemicals() {
+		throw new UnsupportedOperationException("Not yet implemnted (and probably will never be)");
 	}
 }
