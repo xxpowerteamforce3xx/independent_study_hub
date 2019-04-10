@@ -41,17 +41,19 @@ public class InsertProjectController {
 	 * @return true if succesfull, false if not
 	 */
 	public boolean insertProject (String username, String title, int year, String description, JPEG image, int workID) {
-		
 		Student student = db.get_student(username);
 		if (student != null) {
-			List<Project> previousList = db.insertProject(title, student, year, description, null, 1);
-			for (Project previous: previousList) {
-				System.out.println(previous.get_id() + " , " + previous.get_student().get_name() + "," + previous.get_title() + "," + previous.get_description() + "," + previous.get_year() + "," );
+			Boolean b = db.insertProject(title, student, year, description, null, 1);
+			
+			if (b) {
+				return b;
+			} else {
+				System.out.println("Something went wrong, could not insert project with exisitng student");
 			}
-			return true;
 		} else {
 			System.out.println("<" + username + "> was not found as an existing students username. Please create an account.");
 			return false;
 		}
+		return false;
 	}
 }

@@ -39,16 +39,14 @@ public class InsertChemicalIntoInventoryController {
 	 */
 	public boolean insertChemical(String chemical, String use, int dom) {
 		
-		List<ChemicalInventory> chemicalList = db.insertChemical(chemical, use, dom);
+		Boolean b = db.insertChemical(chemical, use, dom);
 		// check if anything was returned and output the list
-		if (chemicalList.isEmpty()) {
+		if (!b) {
 			System.out.println("No chemical found with chemical name <" + chemical + ">");
 			return false;
 		}
 		else {
-			for (ChemicalInventory chemicals: chemicalList) {
-				System.out.println(chemicals.getChemicalID() + "," + chemicals.getChemical() + "," + chemicals.getUseOfChemical() + "," + chemicals.getDom() );
-			}
+			System.out.println("Chemical was inserted!");
 			return true;
 		}
 	}
