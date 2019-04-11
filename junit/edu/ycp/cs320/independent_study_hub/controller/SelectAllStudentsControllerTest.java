@@ -21,11 +21,12 @@ public class SelectAllStudentsControllerTest {
 	@Test
 	public void test_sql_query_select_all() {
 		student_list = controller.get_all_students();
-		System.out.println("Printing current student list: ");
+		System.out.println("Printing....\n ");
+		System.out.println("Students:");
 		for (Student s : student_list) {
-			System.out.println(s.get_name() + ", " + s.get_password() + ", " + s.get_email());
+			System.out.println(s.getID() + "| " + s.get_name() + ", " + s.get_password() + ", " + s.get_email());
 		}
-		System.out.println("Print Complete");
+		System.out.println("\nPrint Complete");
 	}
 
 }

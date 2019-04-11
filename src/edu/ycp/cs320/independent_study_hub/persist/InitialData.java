@@ -87,7 +87,7 @@ public class InitialData {
 				int year = Integer.parseInt(i.next());			// year
 				
 				// constructor to create the new object
-				Project oldWork = new Project(title, student, year, desc, null, workID);	// jpeg field is null
+				Project oldWork = new Project(student, title, year, desc, null);	// jpeg field is null
 				workID++;										// increment id
 				previousWorkList.add(oldWork);
 			}

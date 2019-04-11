@@ -22,7 +22,7 @@ public class GetUserByNameAndTypeController {
 	 */
 	public GetUserByNameAndTypeController() {
 		// this will change to new DerbyDatabase when we get that goin
-		DatabaseProvider.setInstance(new FakeDatabase()); 
+		DatabaseProvider.setInstance(new DerbyDatabase()); 
 		db = DatabaseProvider.getInstance();
 	}
 	

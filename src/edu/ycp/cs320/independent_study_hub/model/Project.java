@@ -20,24 +20,16 @@ public class Project {
 	private int year;		
 	private String description;	
 	private JPEG image;			
-	private int workID;
-	
-	/**
-	 * 
-	 * @param title	--> title of proj
-	 * @param student --> student associated with project
-	 * @param date -->  date added into inventory
-	 * @param desc --> general description, can be a paragraph, 
-	 * @param image --> not sure about this one, java has this as a data type so lets roll with it
-	 * @param workID --> type of work
-	 */
-	public Project(String title, Student student, int year, String desc, JPEG image, int workID) {
+	private int p_id;
+	private int s_id;
+
+	public Project(Student student, String title, int year, String desc, JPEG image) {
+		this.p_id = p_id;
 		this.title = title;
 		this.student = student;
 		this.year = year;
 		this.description = desc;
 		this.image = image;
-		this.workID = workID;
 	}
 	
 	// getters for private fields 
@@ -62,8 +54,12 @@ public class Project {
 		return image;
 	}
 	
-	public int get_id() {
-		return workID;
+	public int get_p_id() {
+		return p_id;
+	}
+	
+	public int get_s_id() {
+		return s_id;
 	}
 	
 	// setters if the user wants to edit their projects
@@ -72,7 +68,9 @@ public class Project {
 		this.title = title;
 	}
 	
-	// we are skipping set student since that can never change
+	public void set_student(Student s) {
+		student = s;
+	}
 	
 	public void set_year(int year) {
 		this.year = year;
@@ -86,8 +84,12 @@ public class Project {
 		this.image = image;
 	}
 	
-	public void set_id(int id) {
-		workID = id;
+	public void set_p_id(int id) {
+		p_id = id;
+	}
+	
+	public void set_s_id(int id) {
+		s_id = id;
 	}
 	
 }

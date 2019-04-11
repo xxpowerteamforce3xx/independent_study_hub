@@ -41,12 +41,12 @@ public class DerbyDatabase implements IDatabase {
 		return executeTransaction(new Transaction<ArrayList<Student>>() {
 			@Override
 			public ArrayList<Student> execute(Connection conn) throws SQLException {
-				PreparedStatement stmt = null;
-				ResultSet resultSet = null;
+				PreparedStatement stmt_student = null;
+				ResultSet resultSet_student = null;
 
 				try {
 					// retreive all attributes from both Books and Authors tables
-					stmt = conn.prepareStatement(
+					stmt_student = conn.prepareStatement(
 							"select students.* " +
 									"  from students " 
 							);
@@ -54,17 +54,17 @@ public class DerbyDatabase implements IDatabase {
 
 					ArrayList<Student> result = new ArrayList<Student>();
 
-					resultSet = stmt.executeQuery();
+					resultSet_student = stmt_student.executeQuery();
 
 					// for testing that a result was returned
 					Boolean found = false;
 
-					while (resultSet.next()) {
+					while (resultSet_student.next()) {
 						found = true;
 
 						// creates a student object, and starts the index at 1
 						Student student = new Student();
-						loadStudent(student, resultSet, 1);
+						loadStudent(student, resultSet_student, 1);
 
 
 						result.add(student);
@@ -77,8 +77,8 @@ public class DerbyDatabase implements IDatabase {
 
 					return result;
 				} finally {
-					DBUtil.closeQuietly(resultSet);
-					DBUtil.closeQuietly(stmt);
+					DBUtil.closeQuietly(resultSet_student);
+					DBUtil.closeQuietly(stmt_student);
 				}
 			}
 		});
@@ -86,14 +86,99 @@ public class DerbyDatabase implements IDatabase {
 
 	@Override
 	public ArrayList<Faculty> get_all_faculty() {
-		// TODO Auto-generated method stub
-		return null;
+		return executeTransaction(new Transaction<ArrayList<Faculty>>() {
+			@Override
+			public ArrayList<Faculty> execute(Connection conn) throws SQLException {
+				PreparedStatement stmt_fac = null;
+				ResultSet resultSet_fac = null;
+
+				try {
+					// retreive all attributes from both Books and Authors tables
+					stmt_fac = conn.prepareStatement(
+							"select faculty.* " +
+									"  from faculty " 
+							);
+
+
+					ArrayList<Faculty> result = new ArrayList<Faculty>();
+
+					resultSet_fac = stmt_fac.executeQuery();
+
+					// for testing that a result was returned
+					Boolean found = false;
+
+					while (resultSet_fac.next()) {
+						found = true;
+
+						// creates a student object, and starts the index at 1
+						Faculty faculty = new Faculty();
+						loadFaculty(faculty, resultSet_fac, 1);
+
+
+						result.add(faculty);
+					}
+
+					// check if anything was found
+					if (!found) {
+						System.out.println("Nothing was found");
+					}
+
+					return result;
+				} finally {
+					DBUtil.closeQuietly(resultSet_fac);
+					DBUtil.closeQuietly(stmt_fac);
+				}
+			}
+		});
 	}
 
 	@Override
 	public ArrayList<Project> get_all_projects() {
-		// TODO Auto-generated method stub
-		return null;
+		return executeTransaction(new Transaction<ArrayList<Project>>() {
+			@Override
+			public ArrayList<Project> execute(Connection conn) throws SQLException {
+				PreparedStatement stmt_prj = null;
+				ResultSet resultSet_prj = null;
+
+				try {
+					// retreive all attributes from both Books and Authors tables
+					stmt_prj = conn.prepareStatement(
+							"select projects.* " +
+									"  from projects " 
+							);
+
+
+					ArrayList<Project> result = new ArrayList<Project>();
+
+					resultSet_prj = stmt_prj.executeQuery();
+
+					// for testing that a result was returned
+					Boolean found = false;
+					
+					while (resultSet_prj.next()) {
+						found = true;
+						
+						// project : student__id, tudent, title, year, desc
+						//jpeg is not in table creation as of now
+						Project project = new Project(null, null, 0, null, null);
+						loadProject(project, resultSet_prj, 1);
+
+
+						result.add(project);
+					}
+
+					// check if anything was found
+					if (!found) {
+						System.out.println("Nothing was found");
+					}
+
+					return result;
+				} finally {
+					DBUtil.closeQuietly(resultSet_prj);
+					DBUtil.closeQuietly(stmt_prj);
+				}
+			}
+		});
 	}
 
 	@Override
@@ -128,9 +213,48 @@ public class DerbyDatabase implements IDatabase {
 	}
 
 	@Override
-	public Student get_student(String acc_name) {
-		// TODO Auto-generated method stub
-		return null;
+	public Student get_student(final String acc_name) {
+		return executeTransaction(new Transaction<Student>() {
+			@Override
+			public Student execute(Connection conn) throws SQLException {
+				PreparedStatement stmt_1_student = null;
+				ResultSet resultSet_1_student = null;
+
+				try {
+					// retreive all attributes from both Books and Authors tables
+					stmt_1_student = conn.prepareStatement(
+							"select students.* " +
+									"  from students " +
+									" where students.name = ?"
+							);
+					stmt_1_student.setString(1, acc_name);
+
+					Student student = new Student();
+
+					resultSet_1_student = stmt_1_student.executeQuery();
+
+					// for testing that a result was returned
+					Boolean found = false;
+
+					while (resultSet_1_student.next()) {
+						found = true;
+						
+						// loads our student object with what was found in the table
+						loadStudent(student, resultSet_1_student, 1);
+					}
+
+					// check if anything was found
+					if (!found) {
+						System.out.println("No Student was found");
+					}
+
+					return student;
+				} finally {
+					DBUtil.closeQuietly(resultSet_1_student);
+					DBUtil.closeQuietly(stmt_1_student);
+				}
+			}
+		});
 	}
 
 	@Override
@@ -146,9 +270,26 @@ public class DerbyDatabase implements IDatabase {
 	}
 	
 	private void loadStudent(Student student, ResultSet resultSet, int i) throws SQLException {
+		student.setID(resultSet.getInt(i++));
 		student.setName(resultSet.getString(i++));
 		student.setPassword(resultSet.getString(i++));
 		student.setEmail(resultSet.getString(i++));
+	}
+	
+	private void loadFaculty(Faculty faculty, ResultSet resultSet, int i) throws SQLException {
+		faculty.setID(resultSet.getInt(i++));
+		faculty.setName(resultSet.getString(i++));
+		faculty.setPassword(resultSet.getString(i++));
+		faculty.setEmail(resultSet.getString(i++));
+	}
+	
+	private void loadProject(Project p, ResultSet r, int i) throws SQLException {
+		p.set_p_id(r.getInt(i++));
+		p.set_s_id(r.getInt(i++));
+		p.set_student(get_student(r.getString(i++)));
+		p.set_title(r.getString(i++));
+		p.set_year(r.getInt(i++));
+		p.set_description(r.getString(i++));
 	}
 	
 	/*public List<Pair<Author, Book>> findAuthorAndBookByTitle(final String title) {
@@ -287,7 +428,7 @@ public class DerbyDatabase implements IDatabase {
 									"	students_id integer constraint students_id references students, " +
 									"	student_name varchar(40), " +
 									"	title varchar(40), " +
-									"   date varchar(40), " +
+									"   date integer, " +
 									"   description varchar(40), " +
 									"   image_url varchar(40)" +
 									")"
@@ -365,8 +506,7 @@ public class DerbyDatabase implements IDatabase {
 					// populate projects table
 					insertProjects = conn.prepareStatement("insert into projects (students_id, student_name, title, date, description) values (?, ?, ?, ?, ?)");
 					for (Project project : projectList) {
-						//						insertBook.setInt(1, book.getBookId());		// auto-generated primary key, don't insert this
-						insertProjects.setInt(1, project.get_id());
+						//insertProjects.setInt(1, project.get_student().getID());
 						insertProjects.setString(2, project.get_student().get_name());
 						insertProjects.setString(3, project.get_title());
 						insertProjects.setInt(4, project.get_year());
