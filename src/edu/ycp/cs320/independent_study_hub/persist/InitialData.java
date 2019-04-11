@@ -70,8 +70,6 @@ public class InitialData {
 		List<Project> previousWorkList = new ArrayList<Project>();
 		ReadCSV readPreviousWork = new ReadCSV("previousWork.csv");
 		try {
-			// auto-generated primary key for authors table
-			Integer workID = 1;
 			
 			while (true) {
 				List<String> tuple = readPreviousWork.next();
@@ -85,10 +83,11 @@ public class InitialData {
 				String title = i.next();						// title
 				String desc = i.next();							// descr	
 				int year = Integer.parseInt(i.next());			// year
+				int s_id = Integer.parseInt(i.next());
 				
 				// constructor to create the new object
-				Project oldWork = new Project(student, title, year, desc, null);	// jpeg field is null
-				workID++;										// increment id
+				Project oldWork = new Project(student, title, year, desc, null); // jpeg field is null
+				oldWork.set_s_id(s_id);
 				previousWorkList.add(oldWork);
 			}
 			return previousWorkList;

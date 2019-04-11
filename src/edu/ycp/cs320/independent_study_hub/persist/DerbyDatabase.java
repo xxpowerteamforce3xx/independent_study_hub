@@ -48,7 +48,8 @@ public class DerbyDatabase implements IDatabase {
 					// retreive all attributes from both Books and Authors tables
 					stmt_student = conn.prepareStatement(
 							"select students.* " +
-									"  from students " 
+									"  from students " + 
+									" order by students.name asc"
 							);
 
 
@@ -96,7 +97,8 @@ public class DerbyDatabase implements IDatabase {
 					// retreive all attributes from both Books and Authors tables
 					stmt_fac = conn.prepareStatement(
 							"select faculty.* " +
-									"  from faculty " 
+									"  from faculty " +
+									" order by faculty.name asc"
 							);
 
 
@@ -144,7 +146,8 @@ public class DerbyDatabase implements IDatabase {
 					// retreive all attributes from both Books and Authors tables
 					stmt_prj = conn.prepareStatement(
 							"select projects.* " +
-									"  from projects " 
+									"  from projects " +
+									" order by projects.student_name asc"
 							);
 
 
@@ -238,7 +241,6 @@ public class DerbyDatabase implements IDatabase {
 
 					while (resultSet_1_student.next()) {
 						found = true;
-						
 						// loads our student object with what was found in the table
 						loadStudent(student, resultSet_1_student, 1);
 					}
@@ -506,7 +508,7 @@ public class DerbyDatabase implements IDatabase {
 					// populate projects table
 					insertProjects = conn.prepareStatement("insert into projects (students_id, student_name, title, date, description) values (?, ?, ?, ?, ?)");
 					for (Project project : projectList) {
-						//insertProjects.setInt(1, project.get_student().getID());
+						insertProjects.setInt(1, project.get_s_id());
 						insertProjects.setString(2, project.get_student().get_name());
 						insertProjects.setString(3, project.get_title());
 						insertProjects.setInt(4, project.get_year());
