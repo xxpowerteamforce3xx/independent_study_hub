@@ -28,7 +28,7 @@ public class GetChemicalController {
 	 * @return true if found, false for not found
 	 */
 	public ChemicalInventory GetChemical (String name) {
-		ChemicalInventory Chemical = db.getChemicals(name);
+		ChemicalInventory Chemical = db.getChemical(name);
 		return Chemical;
 	}
 }
