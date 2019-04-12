@@ -186,8 +186,51 @@ public class DerbyDatabase implements IDatabase {
 
 	@Override
 	public ArrayList<ChemicalInventory> get_all_chemicals() {
-		// TODO Auto-generated method stub
-		return null;
+		return executeTransaction(new Transaction<ArrayList<ChemicalInventory>>() {
+			@Override
+			public ArrayList<ChemicalInventory> execute(Connection conn) throws SQLException {
+				PreparedStatement stmt_chem = null;
+				ResultSet resultSet_chem = null;
+
+				try {
+					// retreive all attributes from both Books and Authors tables
+					stmt_chem = conn.prepareStatement(
+							"select chemicals.* " +
+									"  from chemicals " +
+									" order by chemicals.name asc"
+							);
+
+
+					ArrayList<ChemicalInventory> result = new ArrayList<ChemicalInventory>();
+
+					resultSet_chem = stmt_chem.executeQuery();
+
+					// for testing that a result was returned
+					Boolean found = false;
+
+					while (resultSet_chem.next()) {
+						found = true;
+						int i = 1;
+						// creates a student object, and starts the index at 1
+						ChemicalInventory chem = new ChemicalInventory();
+						loadChemical(chem, resultSet_chem, i);
+
+
+						result.add(chem);
+					}
+
+					// check if anything was found
+					if (!found) {
+						System.out.println("Nothing was found");
+					}
+
+					return result;
+				} finally {
+					DBUtil.closeQuietly(resultSet_chem);
+					DBUtil.closeQuietly(stmt_chem);
+				}
+			}
+		});
 	}
 	
 	@Override
@@ -292,6 +335,13 @@ public class DerbyDatabase implements IDatabase {
 		p.set_title(r.getString(i++));
 		p.set_year(r.getInt(i++));
 		p.set_description(r.getString(i++));
+	}
+	
+	private void loadChemical(ChemicalInventory c, ResultSet r, int i) throws SQLException {
+		c.setChemicalID(r.getInt(i++));
+		c.setChemical(r.getString(i++));
+		c.setUseOfChemcial(r.getString(i++));
+		c.setDom(r.getInt(i++));
 	}
 	
 	/*public List<Pair<Author, Book>> findAuthorAndBookByTitle(final String title) {
@@ -455,6 +505,7 @@ public class DerbyDatabase implements IDatabase {
 									" 	chemicals_id integer primary key " +
 									"		generated always as identity (start with 1, increment by 1), " +
 									" 	name varchar(40)," +
+									"   use  varchar(40)," +
 									" 	quantity integer" +
 									")"
 							);
@@ -528,10 +579,11 @@ public class DerbyDatabase implements IDatabase {
 					insertFaculty.executeBatch();
 					
 					// populate the chemical table
-					insertChemicals = conn.prepareStatement("insert into chemicals (name, quantity) values (?, ?)");
+					insertChemicals = conn.prepareStatement("insert into chemicals (name, use, quantity) values (?, ?, ?)");
 					for (ChemicalInventory chemical : chemicalList) {
 						insertChemicals.setString(1, chemical.getChemical());
-						insertChemicals.setInt(2, chemical.getDom());
+						insertChemicals.setString(2, chemical.getUseOfChemical());
+						insertChemicals.setInt(3, chemical.getDom());
 						insertChemicals.addBatch();
 					}
 					insertChemicals.executeBatch();
