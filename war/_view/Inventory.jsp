@@ -49,6 +49,7 @@
 	                </tr>
 	            </thead>
 	            
+	            <!-- Test statement -->
 	            <tr>
 	                <td>Acetone</td>
 	                <td>Class</td>
