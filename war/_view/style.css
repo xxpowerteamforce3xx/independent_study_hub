@@ -1,4 +1,4 @@
-/* ---------- tag selectors ---------- */
+﻿/* ---------- tag selectors ---------- */
 
 body
 {
@@ -101,6 +101,38 @@ body.login { /*Sets background color of login screen and general text font*/
     text-align: center;
 }
 
+/*Navigation bar CSS*/
+
+.navbar { /*Creates the main body of navbar.  Sticky allows the navbar to scrolldown along with the page*/
+    overflow: hidden;
+    background-color: #333;
+    position: sticky;
+    top: 0;
+}
+
+.navbar a{ /*Aligns the items in the navbar properly and specifies text color and size*/
+    float:left;
+    display:block;
+    color:#fff;
+    text-align:center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+.navbar a.right{ /*Specially labeled items in navbar are aligned to the right*/
+    float:right;
+}
+
+.navbar a:hover{ /*Gives "highlighting" effect when mouse hovers over navbar item*/
+    background-color:#ddd;
+    color: black;
+}
+
+.navbar a.active{ /*Makes item in navbar be different color to signify link connects to current page*/
+    background-color: #666;
+    color: #fff;
+}
+
 .box h1{ /*Modifies login header from typical header styling of webpages*/
     background: none;
     text-transform:uppercase;
@@ -145,38 +177,6 @@ body.login { /*Sets background color of login screen and general text font*/
 
 .box input[type="submit"]:hover{ /*When login button is hovered over, button background fills in*/
     background: #2ecc71;
-}
-
-/*Navigation bar CSS*/
-
-.navbar { /*Creates the main body of navbar.  Sticky allows the navbar to scrolldown along with the page*/
-    overflow: hidden;
-    background-color: #333;
-    position: sticky;
-    top: 0;
-}
-
-.navbar a{ /*Aligns the items in the navbar properly and specifies text color and size*/
-    float:left;
-    display:block;
-    color:#fff;
-    text-align:center;
-    padding: 14px 20px;
-    text-decoration: none;
-}
-
-.navbar a.right{ /*Specially labeled items in navbar are aligned to the right*/
-    float:right;
-}
-
-.navbar a:hover{ /*Gives "highlighting" effect when mouse hovers over navbar item*/
-    background-color:#ddd;
-    color: black;
-}
-
-.navbar a.active{ /*Makes item in navbar be different color to signify link connects to current page*/
-    background-color: #666;
-    color: #fff;
 }
 
 /* Ribbon CSS */
@@ -246,18 +246,7 @@ z-index: 1;
     border-width: 1rem 1rem 0 0;
 }
 
-/* The CSS for our search bar */
-.user_input {
-    margin: auto;
-    width: 50%;
-    font-size: 16px;
-    padding: 12px 20px 12px 40px;
-    border: 1px solid #ddd;
-}
-
-.inventory_table td {
-    display: inherit;
-}
+/* Upload form*/
 
 /* ---------- Id selectors ---------- */
 

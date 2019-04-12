@@ -9,6 +9,9 @@
 	<style type="text/css">
 		<%@ include file="./../style/style.css" %>
 	</style>
+	<script type="text/javascript">
+		<%@ include file="./../Javascript/main.js" %>
+	</script>
 </head>
 <body>
     <header>
@@ -34,96 +37,65 @@
         <button type="submit">Submit</button>
     </form>
     
-    <div class="table">
-        <table>
-            <thead>
-                <tr>
-                    <th scope="col">Chemical</th>
-                    <th scope="col">Chemical Use</th>
-                    <th scope="col">Date Purchased</th>
-                </tr>
-            </thead>
-            <tr>
-                <td>Stearic Acid</td>
-                <td>Research</td>
-                <td>2019</td>
-            </tr>
-            <tr>
-                <td>Triglyceride Mix</td>
-                <td>Research</td>
-                <td>2019</td>
-            </tr>
-            <tr>
-                <td>Methanol</td>
-                <td>Class</td>
-                <td>2019</td>
-            </tr>
-            <tr>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-            </tr>
-            <tr>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-            </tr>
-            <tr>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-            </tr>
-            <tr>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-            </tr>
-           <tr>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-            </tr>
-            <tr>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-            </tr>
-            <tr>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-            </tr>
-            <tr>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-            </tr>
-            <tr>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-            </tr>
-            <tr>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-            </tr>
-            <tr>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-            </tr>
-            <tr>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-            </tr>
-            <tr>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-            </tr>
-        </table>
-    </div>
+    <section>
+    	<div class="table">
+    		<input type="text" id="user_input" onkeyup="inventory_search()" placeholder="Search for chemical">
+	        <table id="inventory_table">
+	            <thead>
+	                <tr>
+	                    <th scope="col">Chemical</th>
+	                    <th scope="col">Chemical Use</th>
+	                    <th scope="col">Date Purchased</th>
+	                </tr>
+	            </thead>
+	            
+	            <tr>
+	                <td>Acetone</td>
+	                <td>Class</td>
+	                <td>2019</td>
+	            </tr>
+	            <tr>
+	                <td>Ethanol</td>
+	                <td>Class</td>
+	                <td>2019</td>
+	            </tr>
+	            <tr>
+	                <td>Indium chloride</td>
+	                <td>Research</td>
+	                <td>2019</td>
+	            </tr>
+	            <tr>
+	                <td>Methanol</td>
+	                <td>Class</td>
+	                <td>2019</td>
+	            </tr>
+	            <tr>
+	                <td>Nitric acid</td>
+	                <td>Class</td>
+	                <td>2019</td>
+	            </tr>
+	            <tr>
+	                <td>Sodium hydroxide</td>
+	                <td>Class</td>
+	                <td>2019</td>
+	            </tr>
+	            <tr>
+	                <td>Sodium sulfide</td>
+	                <td>Research</td>
+	                <td>2019</td>
+	            </tr>
+	            <tr>
+	                <td>Stearic Acid</td>
+	                <td>Research</td>
+	                <td>2019</td>
+	            </tr>
+	            <tr>
+	                <td>Triglyceride Mix</td>
+	                <td>Research</td>
+	                <td>2019</td>
+	            </tr>
+	        </table>
+        </div>
+    </section>
 </body>
 </html>
