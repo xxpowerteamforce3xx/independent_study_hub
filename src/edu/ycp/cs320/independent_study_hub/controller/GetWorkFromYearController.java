@@ -21,7 +21,7 @@ public class GetWorkFromYearController {
 	 * creates the db instance, for now setting it to only the fake db
 	 * since we dont hvae a real one
 	 * i spelled have wrong but im leaving it
-	 * sue me
+	 * sue me, im going to for 10,000,000
 	 */
 	public GetWorkFromYearController() {
 		// this will change to new DerbyDatabase when we get that goin

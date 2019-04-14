@@ -14,8 +14,7 @@ public class InitDatabase_fake_db {
 		if (which == 0) {
 			DatabaseProvider.setInstance(new FakeDatabase());
 		} else if (which == 1) {
-			throw new UnsupportedOperationException();
-			//DatabaseProvider.setInstance(new DerbyDatabase());
+			DatabaseProvider.setInstance(new DerbyDatabase());
 		} else {
 			throw new IllegalArgumentException("Invalid choice: " + which);
 		}

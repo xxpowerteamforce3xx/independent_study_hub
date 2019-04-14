@@ -23,13 +23,8 @@ public class Project {
 	private int p_id;
 	private int s_id;
 
-	public Project(Student student, String title, int year, String desc, JPEG image) {
-		this.p_id = p_id;
-		this.title = title;
-		this.student = student;
-		this.year = year;
-		this.description = desc;
-		this.image = image;
+	public Project() {
+		
 	}
 	
 	// getters for private fields 

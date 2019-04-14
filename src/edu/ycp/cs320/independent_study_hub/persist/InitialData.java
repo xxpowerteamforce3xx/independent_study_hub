@@ -70,7 +70,7 @@ public class InitialData {
 		List<Project> previousWorkList = new ArrayList<Project>();
 		ReadCSV readPreviousWork = new ReadCSV("previousWork.csv");
 		try {
-			
+			Integer projectID = 1;
 			while (true) {
 				List<String> tuple = readPreviousWork.next();
 				if (tuple == null) {
@@ -80,14 +80,15 @@ public class InitialData {
 								
 				Student student = new Student();
 				student.setName(i.next());	// student
-				String title = i.next();						// title
-				String desc = i.next();							// descr	
-				int year = Integer.parseInt(i.next());			// year
-				int s_id = Integer.parseInt(i.next());
 				
 				// constructor to create the new object
-				Project oldWork = new Project(student, title, year, desc, null); // jpeg field is null
-				oldWork.set_s_id(s_id);
+				Project oldWork = new Project(); // jpeg field is null
+				oldWork.set_p_id(projectID++);
+				oldWork.set_student(student);
+				oldWork.set_title(i.next());
+				oldWork.set_description(i.next());
+				oldWork.set_year(Integer.parseInt(i.next()));
+				oldWork.set_jpeg(null);
 				previousWorkList.add(oldWork);
 			}
 			return previousWorkList;

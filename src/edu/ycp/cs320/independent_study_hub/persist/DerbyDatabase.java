@@ -163,7 +163,7 @@ public class DerbyDatabase implements IDatabase {
 						
 						// project : student__id, tudent, title, year, desc
 						//jpeg is not in table creation as of now
-						Project project = new Project(null, null, 0, null, null);
+						Project project = new Project();
 						loadProject(project, resultSet_prj, 1);
 
 
@@ -246,8 +246,7 @@ public class DerbyDatabase implements IDatabase {
 					stmt_getWork = conn.prepareStatement(
 							"select projects.* " +
 									"  from projects " +
-									" where projects.s_id = students.studentID"
-									+ "and projects.year = ?"
+									" where projects.date = ?"
 							);
 					stmt_getWork.setInt(year, 1);
 					ArrayList<Project> result = new ArrayList<Project>();
@@ -262,7 +261,7 @@ public class DerbyDatabase implements IDatabase {
 						
 						// project : student__id, tudent, title, year, desc
 						//jpeg is not in table creation as of now
-						Project project = new Project(null, null, 0, null, null);
+						Project project = new Project();
 						loadProject(project, resultSet_getWork, 1);
 						result.add(project);
 					}
