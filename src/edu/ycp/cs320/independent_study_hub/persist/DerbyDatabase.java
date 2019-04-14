@@ -234,9 +234,51 @@ public class DerbyDatabase implements IDatabase {
 	}
 	
 	@Override
-	public ArrayList<Project> getWorkFromYear(int year) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Project> getWorkFromYear(final int year) {
+		return executeTransaction(new Transaction<ArrayList<Project>>() {
+			@Override
+			public ArrayList<Project> execute(Connection conn) throws SQLException {
+				PreparedStatement stmt_getWork = null;
+				ResultSet resultSet_getWork = null;
+
+				try {
+					// retreive all attributes from both Books and Authors tables
+					stmt_getWork = conn.prepareStatement(
+							"select projects.* " +
+									"  from projects " +
+									" where projects.s_id = students.studentID"
+									+ "and projects.year = ?"
+							);
+					stmt_getWork.setInt(year, 1);
+					ArrayList<Project> result = new ArrayList<Project>();
+
+					resultSet_getWork = stmt_getWork.executeQuery();
+
+					// for testing that a result was returned
+					Boolean found = false;
+					
+					while (resultSet_getWork.next()) {
+						found = true;
+						
+						// project : student__id, tudent, title, year, desc
+						//jpeg is not in table creation as of now
+						Project project = new Project(null, null, 0, null, null);
+						loadProject(project, resultSet_getWork, 1);
+						result.add(project);
+					}
+
+					// check if anything was found
+					if (!found) {
+						System.out.println("Nothing was found");
+					}
+
+					return result;
+				} finally {
+					DBUtil.closeQuietly(resultSet_getWork);
+					DBUtil.closeQuietly(stmt_getWork);
+				}
+			}
+		});
 	}
 
 	@Override

@@ -12,6 +12,7 @@ import edu.ycp.cs320.independent_study_hub.model.Project;
 import edu.ycp.cs320.independent_study_hub.model.Student;
 import edu.ycp.cs320.independent_study_hub.model.User;
 import edu.ycp.cs320.independent_study_hub.persist.DatabaseProvider;
+import edu.ycp.cs320.independent_study_hub.persist.DerbyDatabase;
 import edu.ycp.cs320.independent_study_hub.persist.FakeDatabase;
 public class GetWorkFromYearController {
 	private IDatabase db = null;
@@ -24,7 +25,7 @@ public class GetWorkFromYearController {
 	 */
 	public GetWorkFromYearController() {
 		// this will change to new DerbyDatabase when we get that goin
-		DatabaseProvider.setInstance(new FakeDatabase()); 
+		DatabaseProvider.setInstance(new DerbyDatabase()); 
 		db = DatabaseProvider.getInstance();
 	}
 	
@@ -44,7 +45,7 @@ public class GetWorkFromYearController {
 		} else {
 			for (Project previous: previousList) {
 				Student s = previous.get_student();
-				System.out.println(previous.get_id() + " , " + s.get_name() + ", " + previous.get_title() + ", " + previous.get_description() + ", " + previous.get_year());
+				System.out.println(previous.get_s_id() + " , " + s.get_name() + ", " + previous.get_title() + ", " + previous.get_description() + ", " + previous.get_year());
 			}
 			return previousList;
 		}

@@ -35,7 +35,7 @@ public class GetWorkFromYearControllerTest {
 	
 	@Test
 	public void test_wrong_year() {
-		previousList = controller.GetWorkFromYear(2020);
+		previousList = controller.GetWorkFromYear(2021);
 		assertNull(previousList);
 	}
 }
