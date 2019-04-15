@@ -29,7 +29,7 @@ public class GetWorkFromYear_fake_db {
 		else {
 			for (Project previous: previousList) {
 				Student s = previous.get_student();
-				System.out.println(previous.get_p_id() + " , " + s.get_name() + ", " + previous.get_title() + ", " + previous.get_description() + ", " + previous.get_year());
+				System.out.println(previous.get_s_id() + " , " + s.get_name() + ", " + previous.get_title() + ", " + previous.get_description() + ", " + previous.get_year());
 			}
 		}
 	}

@@ -248,7 +248,7 @@ public class DerbyDatabase implements IDatabase {
 									"  from projects " +
 									" where projects.date = ?"
 							);
-					stmt_getWork.setInt(year, 1);
+					stmt_getWork.setInt(1, year);
 					ArrayList<Project> result = new ArrayList<Project>();
 
 					resultSet_getWork = stmt_getWork.executeQuery();

@@ -88,6 +88,7 @@ public class InitialData {
 				oldWork.set_title(i.next());
 				oldWork.set_description(i.next());
 				oldWork.set_year(Integer.parseInt(i.next()));
+				oldWork.set_s_id(Integer.parseInt(i.next()));
 				oldWork.set_jpeg(null);
 				previousWorkList.add(oldWork);
 			}
