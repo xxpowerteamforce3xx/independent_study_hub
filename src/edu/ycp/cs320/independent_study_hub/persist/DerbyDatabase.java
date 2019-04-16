@@ -344,9 +344,47 @@ public class DerbyDatabase implements IDatabase {
 	}
 
 	@Override
-	public Faculty get_faculty(String acc_name) {
-		// TODO Auto-generated method stub
-		return null;
+	public Faculty get_faculty(final String acc_name) {
+		return executeTransaction(new Transaction<Faculty>() {
+			@Override
+			public Faculty execute(Connection conn) throws SQLException {
+				PreparedStatement stmt_1_fac = null;
+				ResultSet resultSet_1_fac = null;
+
+				try {
+					// retreive all attributes from both Books and Authors tables
+					stmt_1_fac = conn.prepareStatement(
+							"select faculty.* " +
+									"  from faculty " +
+									" where faculty.name = ?"
+							);
+					stmt_1_fac.setString(1, acc_name);
+
+					Faculty faculty = new Faculty();
+
+					resultSet_1_fac = stmt_1_fac.executeQuery();
+
+					// for testing that a result was returned
+					Boolean found = false;
+
+					while (resultSet_1_fac.next()) {
+						found = true;
+						// loads our student object with what was found in the table
+						loadFaculty(faculty, resultSet_1_fac, 1);
+					}
+
+					// check if anything was found
+					if (!found) {
+						System.out.println("No Faculty was found with name: <" + acc_name + ">");
+					}
+
+					return faculty;
+				} finally {
+					DBUtil.closeQuietly(resultSet_1_fac);
+					DBUtil.closeQuietly(stmt_1_fac);
+				}
+			}
+		});
 	}
 	
 	@Override
