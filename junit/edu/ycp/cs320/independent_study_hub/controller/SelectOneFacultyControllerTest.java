@@ -7,14 +7,14 @@ import edu.ycp.cs320.independent_study_hub.model.Faculty;
 import edu.ycp.cs320.independent_study_hub.model.Student;
 
 public class SelectOneFacultyControllerTest {
-	private SelectOneFacultyController2 controller;
+	private SelectOneFacultyController controller;
 	private Faculty f;
 	private Faculty f1;
 	private Faculty f2;
 
 	@Before
 	public void setUp() throws Exception {
-		controller = new SelectOneFacultyController2();
+		controller = new SelectOneFacultyController();
 		f = new Faculty();
 		f1 = new Faculty();
 		f2 = new Faculty();

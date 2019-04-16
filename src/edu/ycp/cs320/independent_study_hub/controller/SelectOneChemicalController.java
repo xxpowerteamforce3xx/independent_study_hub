@@ -5,12 +5,11 @@ import edu.ycp.cs320.independent_study_hub.persist.IDatabase;
 import java.util.ArrayList;
 
 import edu.ycp.cs320.independent_study_hub.model.ChemicalInventory;
-import edu.ycp.cs320.independent_study_hub.model.Faculty;
 import edu.ycp.cs320.independent_study_hub.model.Student;
 import edu.ycp.cs320.independent_study_hub.persist.DatabaseProvider;
 import edu.ycp.cs320.independent_study_hub.persist.DerbyDatabase;
 import edu.ycp.cs320.independent_study_hub.persist.FakeDatabase;
-public class SelectOneFacultyController2 {
+public class SelectOneChemicalController {
 	private IDatabase db = null;
 	
 	/**
@@ -19,7 +18,7 @@ public class SelectOneFacultyController2 {
 	 * i spelled have wrong but im leaving it
 	 * sue me
 	 */
-	public SelectOneFacultyController2() {
+	public SelectOneChemicalController() {
 		// this will change to new DerbyDatabase when we get that goin
 		DatabaseProvider.setInstance(new DerbyDatabase()); 
 		db = DatabaseProvider.getInstance();
@@ -30,9 +29,9 @@ public class SelectOneFacultyController2 {
 	 * @acc_name is the name of the acc we are looking for
 	 * @return returns a single student object
 	 */
-	public Faculty get_faculty(String acc_name) {
-		Faculty f = new Faculty();
-		f = db.get_faculty(acc_name);
-		return f;	
+	public ChemicalInventory get_chemical(String chemical_name) {
+		ChemicalInventory chem = new ChemicalInventory();
+		chem = db.get_chemical(chemical_name);
+		return chem;	
 	}
 }

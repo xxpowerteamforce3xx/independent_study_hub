@@ -388,9 +388,47 @@ public class DerbyDatabase implements IDatabase {
 	}
 	
 	@Override
-	public ChemicalInventory getChemical(String chemcial) {
-		// TODO Auto-generated method stub
-		return null;
+	public ChemicalInventory get_chemical(final String chemical) {
+		return executeTransaction(new Transaction<ChemicalInventory>() {
+			@Override
+			public ChemicalInventory execute(Connection conn) throws SQLException {
+				PreparedStatement stmt_1_chem = null;
+				ResultSet resultSet_1_chem = null;
+
+				try {
+					// retreive all attributes from both Books and Authors tables
+					stmt_1_chem = conn.prepareStatement(
+							"select chemicals.* " +
+									"  from chemicals " +
+									" where chemicals.name = ?"
+							);
+					stmt_1_chem.setString(1, chemical);
+
+					ChemicalInventory chem = new ChemicalInventory();
+
+					resultSet_1_chem = stmt_1_chem.executeQuery();
+
+					// for testing that a result was returned
+					Boolean found = false;
+
+					while (resultSet_1_chem.next()) {
+						found = true;
+						// loads our student object with what was found in the table
+						loadChemical(chem, resultSet_1_chem, 1);
+					}
+
+					// check if anything was found
+					if (!found) {
+						System.out.println("No Faculty was found with name: <" + chemical + ">");
+					}
+
+					return chem;
+				} finally {
+					DBUtil.closeQuietly(resultSet_1_chem);
+					DBUtil.closeQuietly(stmt_1_chem);
+				}
+			}
+		});
 	}
 	
 	private void loadStudent(Student student, ResultSet resultSet, int i) throws SQLException {
@@ -423,59 +461,6 @@ public class DerbyDatabase implements IDatabase {
 		c.setDom(r.getInt(i++));
 	}
 	
-	/*public List<Pair<Author, Book>> findAuthorAndBookByTitle(final String title) {
-		return executeTransaction(new Transaction<List<Pair<Author,Book>>>() {
-			@Override
-			public List<Pair<Author, Book>> execute(Connection conn) throws SQLException {
-				PreparedStatement stmt = null;
-				ResultSet resultSet = null;
-
-				try {
-					// retreive all attributes from both Books and Authors tables
-					stmt = conn.prepareStatement(
-							"select authors.*, books.* " +
-									"  from authors, books " +
-									" where authors.author_id = books.author_id " +
-									"   and books.title = ?"
-							);
-					stmt.setString(1, title);
-
-					List<Pair<Author, Book>> result = new ArrayList<Pair<Author,Book>>();
-
-					resultSet = stmt.executeQuery();
-
-					// for testing that a result was returned
-					Boolean found = false;
-
-					while (resultSet.next()) {
-						found = true;
-
-						// create new Author object
-						// retrieve attributes from resultSet starting with index 1
-						Author author = new Author();
-						loadAuthor(author, resultSet, 1);
-
-						// create new Book object
-						// retrieve attributes from resultSet starting at index 4
-						Book book = new Book();
-						loadBook(book, resultSet, 4);
-
-						result.add(new Pair<Author, Book>(author, book));
-					}
-
-					// check if the title was found
-					if (!found) {
-						System.out.println("<" + title + "> was not found in the books table");
-					}
-
-					return result;
-				} finally {
-					DBUtil.closeQuietly(resultSet);
-					DBUtil.closeQuietly(stmt);
-				}
-			}
-		});
-	}*/
 	public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
 		try {
 			return doExecuteTransaction(txn);
