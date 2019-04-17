@@ -17,12 +17,29 @@
 </head>
 
 <body class="login">
-    <form class="box" action="${pageContext.servletContext.contextPath}/Home" method="doGet">
+    
+    <form action="${pageContext.servletContext.contextPath}/Login" method="post">
+			<table>
+				<tr>
+					<td class="label">User Name:</td>
+					<td><input type="text" name="username" size="12" value="${username}" /></td>
+				</tr>
+				<tr>
+					<td class="label">Password:</td>
+					<td><input type="text" name="password" size="12" value="${password}" /></td>
+				</tr>
+			</table>
+			<input type="Submit" name="submit" value="Login">
+		</form>
+    
+    <!-- 
+    <form class="box" action="${pageContext.servletContext.contextPath}/Login" method="post">
         <h1 class="log_header">Login</h1>
-        <input type="text" name="uname" placeholder="Username" id="name"/>
-        <input type="password" name="pass" placeholder="Password" id="password"/>
+        <input type="text" name="uname" placeholder="Username" id="name" value="${username}"/>
+        <input type="password" name="pass" placeholder="Password" id="password" value="${password}"/>
         <input type="submit" name="" value="Login" id="log"/>
     </form>
+     -->
     
 </body>
 </html>

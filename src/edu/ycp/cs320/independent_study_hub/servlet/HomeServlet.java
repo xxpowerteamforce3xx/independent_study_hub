@@ -20,5 +20,15 @@ public class HomeServlet extends HttpServlet {
 		req.getRequestDispatcher("/_view/Home.jsp").forward(req, resp);
 	}
 	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		
+		System.out.println("\nHomeServlet: doPost");		
+		
+		// Forward to view to render the result HTML document
+		req.getRequestDispatcher("/_view/Home.jsp").forward(req, resp);
+	}	
+	
 	
 }

@@ -54,7 +54,6 @@
 	                <img src="style/FurBall.jpg" />
 	                <img src="style/FurBall.jpg" />
 	            </a>
-         
         	</div>
     </section>
 
