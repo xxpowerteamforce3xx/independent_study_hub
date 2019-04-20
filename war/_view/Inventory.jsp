@@ -14,7 +14,9 @@
 		<%@ include file="./../Javascript/main.js" %>
 	</script>
 </head>
-<body>
+
+<!-- When our Inventory JSP finished loading, we call generate_table() -->
+<body onload="generate_table()">
     <header>
         <h1>Inventory</h1>
     </header>
@@ -63,52 +65,9 @@
                         <th scope="col">Date Purchased</th>
                     </tr>
                 </thead>
-
-                <tr>
-                    <td>Acetone</td>
-                    <td>Class</td>
-                    <td>12/27/18</td>
-                </tr>
-                <tr>
-                    <td>Ethanol</td>
-                    <td>Class</td>
-                    <td>01/01/19</td>
-                </tr>
-                <tr>
-                    <td>Indium chloride</td>
-                    <td>Research</td>
-                    <td>01/23/19</td>
-                </tr>
-                <tr>
-                    <td>Methanol</td>
-                    <td>Class</td>
-                    <td>11/20/18</td>
-                </tr>
-                <tr>
-                    <td>Nitric acid</td>
-                    <td>Class</td>
-                    <td>02/06/19</td>
-                </tr>
-                <tr>
-                    <td>Sodium hydroxide</td>
-                    <td>Class</td>
-                    <td>01/08/19</td>
-                </tr>
-                <tr>
-                    <td>Sodium sulfide</td>
-                    <td>Research</td>
-                    <td>03/11/19</td>
-                </tr>
-                <tr>
-                    <td>Stearic Acid</td>
-                    <td>Research</td>
-                    <td>09/18/18</td>
-                </tr>
-                <tr>
-                    <td>Triglyceride Mix</td>
-                    <td>Research</td>
-                    <td>12/14/18</td>
-                </tr>
+                <tbody id="inventory_body">
+                
+                </tbody>
             </table>
         </div>
     </section>
