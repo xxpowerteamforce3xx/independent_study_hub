@@ -4,7 +4,7 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8" content="width=device-width, initial-scale=1"/>
     <title>Faculty</title>
 	<style type="text/css">
 		<%@ include file="./../style/style.css" %>
@@ -30,96 +30,63 @@
         <button type="reset">Reset</button>
         <button type="submit">Submit</button>
     </form>   
-    <div class="table">
-        <table>
-            <thead>
-                <tr>
-                    <th scope="col">Faculty Member</th>
-                    <th scope="col">Research Students</th>
-                    <th scope="col">Research Interest</th>
-                </tr>
-            </thead>
-            <tr>
-                <td>Dr. Foy</td>
-                <td>Cole Rohrbaugh, Christina Hall</td>
-                <td>Analytical Chemistry</td>
-            </tr>
-            <tr>
-                <td>Dr. Steel</td>
-                <td>Ben Yanick</td>
-                <td>Inorganic Chemistry</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-            </tr>
-            <tr>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-            </tr>
-            <tr>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-            </tr>
-            <tr>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-            </tr>
-           <tr>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-            </tr>
-            <tr>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-            </tr>
-            <tr>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-            </tr>
-            <tr>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-            </tr>
-            <tr>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-            </tr>
-            <tr>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-            </tr>
-            <tr>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-            </tr>
-            <tr>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-            </tr>
-            <tr>
-                <td>---</td>
-                <td>---</td>
-                <td>---</td>
-            </tr>
-        </table>
-    </div>
+    
+    <section id="dub_col">
+	    <div class="row">
+			<div class="column">
+		  		<img class="faculty" src="style/ring.png"/>
+		  		<h2>Benjamin T. Yanick</h2>
+		  		
+		  		<p class="description"><strong>Interests:</strong> Material science and computational chemistry. <br><br>
+		  		The focus of my research has been around altering material properties such as, conductivity
+		  		and elasticity, to allow for sophisticated components to be manufactured.  I am also fascinated with incorporating 
+		  		computers into the study of chemistry, whether it be simulations of an experiment 
+		  		or using AI to support work being done.</p>
+		  	</div>
+		 	<div class="column">
+		    	<img class="faculty" src="style/ring.png"/>
+		  		<h2>Benjamin T. Yanick</h2>
+		  		
+		  		<p class="description"><strong>Interests:</strong> Material science and computational chemistry. <br><br>
+		  		The focus of my research has been around altering material properties such as, conductivity
+		  		and elasticity, to allow for sophisticated components to be manufactured.  I am also fascinated with incorporating 
+		  		computers into the study of chemistry, whether it be simulations of an experiment 
+		  		or using AI to support work being done.</p>
+		  	</div>
+		</div>
+		
+		<div class="row">
+			<div class="column">
+			    <img class="faculty" src="style/ring.png"/>
+		  		<h2>Benjamin T. Yanick</h2>
+		  		
+		  		<p class="description"><strong>Interests:</strong> Material science and computational chemistry. <br><br>
+		  		The focus of my research has been around altering material properties such as, conductivity
+		  		and elasticity, to allow for sophisticated components to be manufactured.  I am also fascinated with incorporating 
+		  		computers into the study of chemistry, whether it be simulations of an experiment 
+		  		or using AI to support work being done.</p>
+		  	</div>
+		  	<div class="column" >
+		    	<img class="faculty" src="style/ring.png"/>
+		  		<h2>Benjamin T. Yanick</h2>
+		  		
+		  		<p class="description"><strong>Interests:</strong> Material science and computational chemistry. <br><br>
+		  		The focus of my research has been around altering material properties such as, conductivity
+		  		and elasticity, to allow for sophisticated components to be manufactured.  I am also fascinated with incorporating 
+		  		computers into the study of chemistry, whether it be simulations of an experiment 
+		  		or using AI to support work being done.</p>
+		  	</div>
+		</div>
+		<div class="row">
+			<div class="column" >
+			    <h2>Column 5</h2>
+			    <p>Some text..</p>
+			 </div>
+			 <div class="column" >
+			    <h2>Column 5</h2>
+			    <p>Some text..</p>
+			 </div>
+		 </div>
+    </section>
 </body>
 </html>
