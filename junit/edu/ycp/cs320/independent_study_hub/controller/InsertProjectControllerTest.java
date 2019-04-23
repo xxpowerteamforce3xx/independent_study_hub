@@ -17,7 +17,7 @@ public class InsertProjectControllerTest {
 
 	@Test
 	public void test_insert_existing_student() {
-		assertTrue(controller.insertProject("cole", "how to become blind", 2019, "im now blind and heres how", null, 1));
+		assertTrue(controller.insertProject("Cole Rohrbaugh", "how to become blind", 2019, "im now blind and heres how", null, 1));
 	}
 	
 	@Test

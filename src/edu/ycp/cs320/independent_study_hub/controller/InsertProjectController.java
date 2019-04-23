@@ -14,6 +14,7 @@ import edu.ycp.cs320.independent_study_hub.model.Project;
 import edu.ycp.cs320.independent_study_hub.model.Student;
 import edu.ycp.cs320.independent_study_hub.model.User;
 import edu.ycp.cs320.independent_study_hub.persist.DatabaseProvider;
+import edu.ycp.cs320.independent_study_hub.persist.DerbyDatabase;
 import edu.ycp.cs320.independent_study_hub.persist.FakeDatabase;
 public class InsertProjectController {
 	private IDatabase db = null;
@@ -26,7 +27,7 @@ public class InsertProjectController {
 	 */
 	public InsertProjectController() {
 		// this will change to new DerbyDatabase when we get that goin
-		DatabaseProvider.setInstance(new FakeDatabase()); 
+		DatabaseProvider.setInstance(new DerbyDatabase()); 
 		db = DatabaseProvider.getInstance();
 	}
 	
@@ -52,7 +53,6 @@ public class InsertProjectController {
 			}
 		} else {
 			System.out.println("<" + username + "> was not found as an existing students username. Please create an account.");
-			return false;
 		}
 		return false;
 	}

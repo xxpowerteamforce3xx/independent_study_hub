@@ -12,6 +12,8 @@ import java.util.List;
 
 import com.sun.imageio.plugins.jpeg.JPEG;
 
+import edu.ycp.cs320.booksdb.persist.DBUtil;
+import edu.ycp.cs320.booksdb.persist.DerbyDatabase.Transaction;
 import edu.ycp.cs320.independent_study_hub.model.ChemicalInventory;
 import edu.ycp.cs320.independent_study_hub.model.Faculty;
 import edu.ycp.cs320.independent_study_hub.model.Guest;
@@ -287,10 +289,146 @@ public class DerbyDatabase implements IDatabase {
 	}
 
 	@Override
-	public boolean insertProject(String title, Student student, int year, String description, JPEG image,
-			int workID) {
-				return false;
-		// TODO Auto-generated method stub
+	public boolean insertProject(final String title, final Student student, final int year, final String description, final JPEG image,
+			final int workID) {
+		return executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt1 = null;
+				PreparedStatement stmt2 = null;
+				PreparedStatement stmt3 = null;
+				PreparedStatement stmt4 = null;
+				PreparedStatement stmt5 = null;				
+				ResultSet resultSet1 = null;
+				ResultSet resultSet3 = null;
+				ResultSet resultSet5 = null;				
+				
+				// for saving author ID and book ID
+				Integer student_id = -1;
+				Integer project_id   = -1;
+
+				// try to retrieve author_id (if it exists) from DB, for Author's full name, passed into query
+				try {
+					stmt1 = conn.prepareStatement(
+							"select students_id from students" +
+							"  where students.name = ? "
+					);
+					stmt1.setString(1, student.get_name());
+					
+					
+					// execute the query, get the result
+					resultSet1 = stmt1.executeQuery();
+
+					
+					// if Author was found then save author_id					
+					if (resultSet1.next())
+					{
+						student_id = resultSet1.getInt(1);
+						System.out.println("Student <" + student.get_name() + "> found with ID: " + student_id);						
+					}
+					else
+					{
+						System.out.println("Student <" + student.get_name() + "> found with ID: " + student_id);
+				
+						// if the Author is new, insert new Author into Authors table
+						if (student_id <= 0) {
+							// prepare SQL insert statement to add Author to Authors table
+							stmt2 = conn.prepareStatement(
+									"insert into students (name, password, email) " +
+									"  values(?, ?, ?) "
+							);
+							stmt2.setString(1, student.get_name());
+							stmt2.setString(2, student.get_password());
+							stmt2.setString(3, student.get_email());
+							
+							// execute the update
+							stmt2.executeUpdate();
+							
+							System.out.println("New student <" + student.get_name() + ", " + student.get_password() + "," + student.get_email() + "> inserted into students table");						
+						
+							// try to retrieve author_id for new Author - DB auto-generates author_id
+							stmt3 = conn.prepareStatement(
+									"select student_id from students " +
+									"  where students.name = ?"
+							);
+							stmt3.setString(1, student.get_name());
+							
+							// execute the query							
+							resultSet3 = stmt3.executeQuery();
+							
+							// get the result - there had better be one							
+							if (resultSet3.next())
+							{
+								student_id = resultSet3.getInt(1);
+								System.out.println("New Student <" + student.get_name() + "> ID: " + student_id);						
+							}
+							else	// really should throw an exception here - the new author should have been inserted, but we didn't find them
+							{
+								System.out.println("New student <" + student.get_name() +  "> not found in Authors table (ID: " + student_id);
+								return false;
+							}
+						}
+					}
+					
+					// now insert new Book into Books table
+					// prepare SQL insert statement to add new Book to Books table
+					stmt4 = conn.prepareStatement(
+							"insert into projects (students_id, student_name, title, date, description) " +
+							"  values(?, ?, ?, ?, ?) "
+					);
+					stmt4.setInt(1, student_id);
+					stmt4.setString(2, student.get_name());
+					stmt4.setString(3, title);
+					stmt4.setInt(4, year);
+					stmt4.setString(5, description);
+					
+					// execute the update
+					stmt4.executeUpdate();
+					
+					System.out.println("New project <" + title + "> inserted into projects table");					
+
+					// now retrieve book_id for new Book, so that we can set up BookAuthor entry
+					// and return the book_id, which the DB auto-generates
+					// prepare SQL statement to retrieve book_id for new Book
+					stmt5 = conn.prepareStatement(
+							"select projects_id from projects " +
+							"  where title = ? and date = ? and student_name = ? "
+									
+					);
+					stmt5.setString(1, title);
+					stmt5.setInt(2, year);
+					stmt5.setString(3, student.get_name());
+
+					// execute the query
+					resultSet5 = stmt5.executeQuery();
+					
+					// get the result - there had better be one
+					if (resultSet5.next())
+					{
+						project_id = resultSet5.getInt(1);
+						System.out.println("New project <" + title + "> ID: " + project_id);						
+					}
+					else	// really should throw an exception here - the new book should have been inserted, but we didn't find it
+					{
+						System.out.println("New project <" + title + "> not found in projects table (ID: " + project_id);
+						return false;
+					}
+					
+					// if we got down here, everything worked! so =return true
+					return true;
+					
+				} finally {
+					DBUtil.closeQuietly(resultSet1);
+					DBUtil.closeQuietly(stmt1);
+					DBUtil.closeQuietly(stmt2);					
+					DBUtil.closeQuietly(resultSet3);
+					DBUtil.closeQuietly(stmt3);					
+					DBUtil.closeQuietly(stmt4);
+					DBUtil.closeQuietly(resultSet5);
+					DBUtil.closeQuietly(stmt5);
+				}
+			}
+		});
 	}
 
 	@Override
@@ -332,6 +470,7 @@ public class DerbyDatabase implements IDatabase {
 					// check if anything was found
 					if (!found) {
 						System.out.println("No Student was found");
+						return null;
 					}
 
 					return student;
