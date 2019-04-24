@@ -12,8 +12,7 @@ import java.util.List;
 
 import com.sun.imageio.plugins.jpeg.JPEG;
 
-import edu.ycp.cs320.booksdb.persist.DBUtil;
-import edu.ycp.cs320.booksdb.persist.DerbyDatabase.Transaction;
+
 import edu.ycp.cs320.independent_study_hub.model.ChemicalInventory;
 import edu.ycp.cs320.independent_study_hub.model.Faculty;
 import edu.ycp.cs320.independent_study_hub.model.Guest;
@@ -283,11 +282,81 @@ public class DerbyDatabase implements IDatabase {
 	}
 
 	@Override
-	public boolean insertChemical(String chemical, String use, int dom) {
-		return false;
-		// TODO Auto-generated method stub
+	public boolean insertChemical(final String chemical, final String use, final int dom) {
+		return executeTransaction(new Transaction<Boolean>()  {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				try {
+					stmt = conn.prepareStatement(
+							"insert into chemicals (name, use, quantity) " +
+							"  values(?, ?, ?) "
+					);
+					stmt.setString(1, chemical);
+					stmt.setString(2, use);
+					stmt.setInt(3, dom);
+					
+					// execute the update
+					stmt.executeUpdate();
+					return true;
+				} finally {
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});	
 	}
-
+	
+	@Override
+	public boolean insertStudent(final String name, final String password, final String email) {
+		return executeTransaction(new Transaction<Boolean>()  {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				try {
+					stmt = conn.prepareStatement(
+							"insert into students (name, password, email) " +
+							"  values(?, ?, ?) "
+					);
+					stmt.setString(1, name);
+					stmt.setString(2, password);
+					stmt.setString(3, email);
+					
+					// execute the update
+					stmt.executeUpdate();
+					return true;
+				} finally {
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});	
+	}
+	
+	
+	@Override
+	public boolean insertFaculty(final String name, final String password, final String email) {
+		return executeTransaction(new Transaction<Boolean>()  {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				try {
+					stmt = conn.prepareStatement(
+							"insert into faculty (name, password, email) " +
+							"  values(?, ?, ?) "
+					);
+					stmt.setString(1, name);
+					stmt.setString(2, password);
+					stmt.setString(3, email);
+					
+					// execute the update
+					stmt.executeUpdate();
+					return true;
+				} finally {
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});	
+	}
+			
 	@Override
 	public boolean insertProject(final String title, final Student student, final int year, final String description, final JPEG image,
 			final int workID) {
@@ -812,5 +881,4 @@ public class DerbyDatabase implements IDatabase {
 	
 		System.out.println("Success!");
 	}
-
 }
