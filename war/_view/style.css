@@ -1,8 +1,15 @@
-﻿/* ---------- tag selectors ---------- */
+/* ---------- tag selectors ---------- */
 
 body
 {
     text-align: center;
+}
+
+error {
+	text-align: center;
+	padding: 10px;
+	font-size: 5px;
+	color: Tomato;
 }
 
 h1 {
