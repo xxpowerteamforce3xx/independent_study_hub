@@ -83,7 +83,7 @@ header.home {
 
 
 
-/* ***** Login CSS ***** */
+/* ***** Login Page CSS ***** */
 
 body.login { /*Sets background color of login screen and general text font*/
     margin: 0;
@@ -264,16 +264,19 @@ z-index: 1;
     cursor: pointer;
 }
 
-    .dropbtn:hover, .drobtn:focus {
-        color: white;
-        background-color: #4CAF50;
-    }
+/* Search button changes color when hovered or when drop down menu is active */
+.dropbtn:hover, .drobtn:focus {
+    color: white;
+    background-color: #4CAF50;
+}
 
+/* positioning of where drop down menu will appear when drop down button is clicked */
 .dropdown {
     position: relative;
     display: block;
 }
 
+/* CSS for items inside drop down menu */
 .dropdown-content {
     display: none;
     position: relative;
@@ -286,20 +289,21 @@ z-index: 1;
     z-index: 1;
 }
 
-    .dropdown-content button {
-        color: black;
-        padding: 12px 16px;
-        min-width: 80px;
-        text-decoration: none;
-        display: block;
-        border: none;
-        border-radius: 0px;
-    }
+/* CSS for drop down search option button */
+.dropdown-content button {
+    color: black;
+    padding: 12px 16px;
+    min-width: 80px;
+    text-decoration: none;
+    display: block;
+    border: none;
+    border-radius: 0px;
+}
 
-        .dropdown-content button:hover {
-            background-color: #ddd;
-        }
-
+.dropdown-content button:hover {
+    background-color: #ddd;
+}
+/* When active, HTML elements will be displayed on their own lines (this gives "list" look for drop down menu) */
 .show {
     display: block;
 }
@@ -326,32 +330,40 @@ z-index: 1;
 	box-sizing: border-box;
 }
 
-
+/* Organizes col <divs> into a straight row*/
 .row {
   display: flex;
 }
 
 /* Create two equal columns that sits next to each other */
 .column {
-  flex: 50%;
+  flex: 50%; /* Each col in a row will be spaced out to take up half the web page's width */
   padding: 10px;
   font-size: 18px;
   border: 2px solid green;
-   /* Should be removed. Only for demonstration */
 }
 
 /* CSS for faculty image */
 .faculty {
 	width: 200px;
 	height: 200px;
-	border-radius: 100px;
+	border-radius: 100px;  /* gives circular border to image */
 }
 
-/*  */
+/* Spacing for faculty's interest */
 .description {
 	padding: 0px 20px 0px 20px;
 }
 
+/* ***** Log Out Box CSS ***** */
+.fixed {
+		  position: fixed;
+		  bottom: 0;
+		  right: 0;
+		  width: 200px;
+		  background-color: forestgreen;
+		  border: 3px solid #73AD21;
+		}
 
 
 /* ---------- Id selectors ---------- */

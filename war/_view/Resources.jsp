@@ -8,14 +8,7 @@
     <title>Resources</title>
 	<style type="text/css">
 		<%@ include file="./../style/style.css" %>
-		div.fixed {
-		  position: fixed;
-		  bottom: 0;
-		  right: 0;
-		  width: 200px;
-		  background-color: forestgreen;
-		  border: 3px solid #73AD21;
-		}		
+				
 	</style>
 </head>
 <body>
@@ -23,6 +16,7 @@
         <h1>Resources</h1>
     </header>
     
+    <!-- Log out box for user to sign out -->
     <div class="fixed">
 		Logged in as "${user}"
 		<form action="${pageContext.servletContext.contextPath}/Login" method="post">
@@ -30,6 +24,7 @@
     </form>
 	</div>
     
+    <!-- Nav bar to jump to other pages on website -->
     <div class="navbar">
         <a href="http://localhost:8081/independent_study_hub/Home">Home</a>
         <a href="#" class="active">Resources</a>
@@ -37,7 +32,9 @@
         <a href="http://localhost:8081/independent_study_hub/Inventory" class="right">Inventory</a>
         <a href="http://localhost:8081/independent_study_hub/Upload" class="right">Upload</a>
         <a href="http://localhost:8081/independent_study_hub/Faculty" class="right">Faculty</a>
-    </div>    
+    </div> 
+    
+    <!-- Main section of web page's body -->   
     <div>
     	<!--  <a href="/style/roughdraft_CR_Graded.pdf">Example of a Research Proposal</a> -->
     	<embed src="style/roughdraft_CR_Graded.pdf" type="application/pdf" width="100%" height ="600px" />

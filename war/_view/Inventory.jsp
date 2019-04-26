@@ -8,14 +8,7 @@
     <title>Inventory</title>
     <style type="text/css">
 		<%@ include file="./../style/style.css" %>
-		div.fixed {
-		  position: fixed;
-		  bottom: 0;
-		  right: 0;
-		  width: 200px;
-		  background-color: forestgreen;
-		  border: 3px solid #73AD21;
-		}		
+				
 	</style>
 	
 	<script type="text/javascript">
