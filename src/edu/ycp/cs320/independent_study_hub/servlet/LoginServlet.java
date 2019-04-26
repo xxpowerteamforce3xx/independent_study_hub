@@ -36,6 +36,9 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException {
+		resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+		resp.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+		resp.setHeader("Expires", "0"); // Proxies.
 		 Random random = new Random();
 	    int x = random.nextInt((7 - 1) + 1) + 1;
 		System.out.println("Login Servlet: doPost");
@@ -51,7 +54,7 @@ public class LoginServlet extends HttpServlet {
 		check= req.getParameter("check");
 		
 		System.out.println(check);
-		if (check.equals("1")) {
+		if (check != null && check.equals("1")) {
 			req.getSession().setAttribute("user", "guest");
 			resp.sendRedirect(req.getContextPath() + "/Home");
 

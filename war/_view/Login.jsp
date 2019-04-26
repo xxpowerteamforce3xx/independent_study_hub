@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%
+response.setHeader("Cache-Control","no-store"); //HTTP 1.1
+response.setHeader("Pragma","no-cache"); //HTTP 1.0
+response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
+%>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
+	<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
     <meta charset="utf-8" />
     <title>Login</title>
 	<style type="text/css">
 		<%@ include file="./../style/style.css" %>
 		#cb_span{color:Gray;}
-<
 	</style>
 	
 	<script type="text/javascript">

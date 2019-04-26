@@ -25,7 +25,8 @@ public class InventoryServlet extends HttpServlet {
 			System.out.println("guest user, not allowed to see this");
 			resp.sendRedirect(req.getContextPath() + "/Home");
 		}
-
+		
+		req.setAttribute("user", user);
 		// now we have the user's User object,
 		// proceed to handle request...
 		System.out.println("   User: <" + user + "> logged in");
