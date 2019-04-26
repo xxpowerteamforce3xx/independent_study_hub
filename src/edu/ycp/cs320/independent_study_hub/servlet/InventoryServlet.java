@@ -15,14 +15,18 @@ public class InventoryServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		String user = (String) req.getSession().getAttribute("user");
-		if (user == null) {
+		if (user == null){
 			System.out.println("   User: <" + user + "> not logged in or session timed out");
 			
 			// user is not logged in, or the session expired
 			resp.sendRedirect(req.getContextPath() + "/Login");
 			return;
+		} else if (user == "guest") {
+			System.out.println("guest user, not allowed to see this");
+			resp.sendRedirect(req.getContextPath() + "/Home");
 		}
-
+		
+		req.setAttribute("user", user);
 		// now we have the user's User object,
 		// proceed to handle request...
 		System.out.println("   User: <" + user + "> logged in");

@@ -1,13 +1,28 @@
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%
+response.setHeader("Cache-Control","no-store"); //HTTP 1.1
+response.setHeader("Pragma","no-cache"); //HTTP 1.0
+response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
+%>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
+	<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
     <meta charset="utf-8" />
     <title>Independent Study Hub</title>
 	<style type="text/css">
 		<%@ include file="./../style/style.css" %>
+		div.fixed {
+		  position: fixed;
+		  bottom: 0;
+		  right: 0;
+		  width: 300px;
+		  background-color: forestgreen;
+		  border: 3px solid #73AD21;
+		}		
+		#cb_span{color:Gray;}
 	</style>
 </head>
 <body>
@@ -16,6 +31,13 @@
 
         <p class="quote">Nothing in life is to be feared, it is only to be understood.  Now is the time to understand more, so that we may fear less. <span class="italic">-Marie Curie</span></p>
     </header>
+    <div class="fixed">
+		Logged in as "${user}"
+		<form action="${pageContext.servletContext.contextPath}/Login" method="post">
+        <input type='submit' name ='leave' value = 'Log out'>
+    </form>
+		
+	</div>
 
     <section class="Description">
         <div class="protector">

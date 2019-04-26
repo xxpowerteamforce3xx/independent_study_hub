@@ -21,6 +21,9 @@ public class UploadServlet extends HttpServlet {
 			// user is not logged in, or the session expired
 			resp.sendRedirect(req.getContextPath() + "/Login");
 			return;
+		} else if (user == "guest") {
+			System.out.println("guest user, not allowed to see this");
+			resp.sendRedirect(req.getContextPath() + "/Home");
 		}
 
 		// now we have the user's User object,

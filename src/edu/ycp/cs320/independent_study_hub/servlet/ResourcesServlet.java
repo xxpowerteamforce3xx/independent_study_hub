@@ -22,7 +22,8 @@ public class ResourcesServlet extends HttpServlet {
 			resp.sendRedirect(req.getContextPath() + "/Login");
 			return;
 		}
-
+		
+		req.setAttribute("user", user);
 		// now we have the user's User object,
 		// proceed to handle request...
 		System.out.println("   User: <" + user + "> logged in");

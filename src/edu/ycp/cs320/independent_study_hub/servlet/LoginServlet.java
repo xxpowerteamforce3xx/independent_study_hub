@@ -36,17 +36,30 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException {
+		resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+		resp.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+		resp.setHeader("Expires", "0"); // Proxies.
 		 Random random = new Random();
-	    int x = random.nextInt((4 - 1) + 1) + 1;
+	    int x = random.nextInt((7 - 1) + 1) + 1;
 		System.out.println("Login Servlet: doPost");
 		String errorMessage = null;
 		String name         = null;
 		String pw           = null;
+		String check        = null;
 		boolean valid  = false;
 
 		// Decode form parameters and dispatch to controller
 		name = req.getParameter("name");
 		pw   = req.getParameter("pass");
+		check= req.getParameter("check");
+		
+		System.out.println(check);
+		if (check != null && check.equals("1")) {
+			req.getSession().setAttribute("user", "guest");
+			resp.sendRedirect(req.getContextPath() + "/Home");
+
+			return;
+		}
 
 		System.out.println("   Name: <" + name + "> PW: <" + pw + ">");			
 
@@ -59,6 +72,12 @@ public class LoginServlet extends HttpServlet {
 				errorMessage = "Is that even english?";
 			if (x == 4)
 				errorMessage = "Wait till I show the guys that try, they'll love that one";
+			if (x == 5)
+				errorMessage = "Just enter as a guest dude this is embarrasing";
+			if (x == 6)
+				errorMessage = "Who even are you?";
+			if (x == 7)
+				errorMessage = "This is getting awkward";
 			
 		} else {
 			s = controller_student.get_student(name);
