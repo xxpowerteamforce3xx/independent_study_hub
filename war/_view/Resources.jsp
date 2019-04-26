@@ -25,7 +25,7 @@
         <a href="http://localhost:8081/independent_study_hub/Faculty" class="right">Faculty</a>
     </div>    
     <div>
-    	<!--  <a href="war/_view/roughdraft_CR_Graded.pdf">Example of a Research Proposal</a> -->
+    	<!--  <a href="/style/roughdraft_CR_Graded.pdf">Example of a Research Proposal</a> -->
     	<embed src="style/roughdraft_CR_Graded.pdf" type="application/pdf" width="100%" height ="600px" />
     </div>
 </body>
