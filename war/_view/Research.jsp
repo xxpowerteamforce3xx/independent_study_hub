@@ -25,6 +25,9 @@
     
     <div class="fixed">
 		Logged in as "${user}"
+		<form action="${pageContext.servletContext.contextPath}/Login" method="post">
+        <input type='submit' name ='leave' value = 'Log out'>
+    </form>
 	</div>
 
     <div class="navbar">
