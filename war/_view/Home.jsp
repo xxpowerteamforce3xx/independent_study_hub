@@ -14,14 +14,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
     <title>Independent Study Hub</title>
 	<style type="text/css">
 		<%@ include file="./../style/style.css" %>
-		div.fixed {
-		  position: fixed;
-		  bottom: 0;
-		  right: 0;
-		  width: 300px;
-		  background-color: forestgreen;
-		  border: 3px solid #73AD21;
-		}		
+				
 		#cb_span{color:Gray;}
 	</style>
 </head>
@@ -31,6 +24,8 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 
         <p class="quote">Nothing in life is to be feared, it is only to be understood.  Now is the time to understand more, so that we may fear less. <span class="italic">-Marie Curie</span></p>
     </header>
+    
+    <!-- Log out box for user to sign out -->
     <div class="fixed">
 		Logged in as "${user}"
 		<form action="${pageContext.servletContext.contextPath}/Login" method="post">
@@ -39,6 +34,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 		
 	</div>
 
+	<!-- Main section of web page's body -->
     <section class="Description">
         <div class="protector">
             <h2 class="ribbon">

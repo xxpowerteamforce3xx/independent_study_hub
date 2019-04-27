@@ -8,14 +8,7 @@
     <title>Previous Work</title>
 	<style type="text/css">
 		<%@ include file="./../style/style.css" %>
-		div.fixed {
-		  position: fixed;
-		  bottom: 0;
-		  right: 0;
-		  width: 200px;
-		  background-color: forestgreen;
-		  border: 3px solid #73AD21;
-		}		
+				
 	</style>
 </head>
 <body>
@@ -23,10 +16,15 @@
         <h1>Previous Work</h1>
     </header>
     
+    <!-- Log out box for user to sign out -->
     <div class="fixed">
 		Logged in as "${user}"
+		<form action="${pageContext.servletContext.contextPath}/Login" method="post">
+        <input type='submit' name ='leave' value = 'Log out'>
+    </form>
 	</div>
 
+	<!-- Nav bar for user to jump to other web pages -->
     <div class="navbar">
         <a href="http://localhost:8081/independent_study_hub/Home">Home</a>
         <a href="http://localhost:8081/independent_study_hub/Resources">Resources</a>
@@ -36,7 +34,7 @@
         <a href="http://localhost:8081/independent_study_hub/Faculty" class="right">Faculty</a>
     </div>    
 
-
+	<!-- Main section of web page's body -->
     <div class="table">
         <table>
             <thead>
