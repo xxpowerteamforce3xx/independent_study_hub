@@ -578,6 +578,7 @@ public class DerbyDatabase implements IDatabase {
 					while (resultSet_1_fac.next()) {
 						found = true;
 						// loads our student object with what was found in the table
+						//loadFaculty(faculty, resultSet_1_fac, 1);
 						loadFaculty(faculty, resultSet_1_fac, 1);
 					}
 
@@ -651,6 +652,10 @@ public class DerbyDatabase implements IDatabase {
 		faculty.setName(resultSet.getString(i++));
 		faculty.setPassword(resultSet.getString(i++));
 		faculty.setEmail(resultSet.getString(i++));
+		faculty.setTitle(resultSet.getString(i++));
+		faculty.setInterest(resultSet.getString(i++));
+		faculty.setDescription(resultSet.getString(i++));
+		faculty.setImg(resultSet.getString(i++));
 	}
 	
 	private void loadProject(Project p, ResultSet r, int i) throws SQLException {
@@ -760,13 +765,19 @@ public class DerbyDatabase implements IDatabase {
 					stmt2.executeUpdate();
 					System.out.println("projects table created");
 					
+					//Creates the faculty table, sets the max value for each column in the
+					//faculty table (i.e. a max of 40 characters can go in a cell under the name column)
 					stmt3 = conn.prepareStatement(
 							"create table faculty (" +
 									"	faculty_id integer primary key " +
 									"		generated always as identity (start with 1, increment by 1), " +
 									" 	name varchar(40)," +
 									" 	password varchar(40)," +
-									" 	email varchar(40)" +
+									" 	email varchar(40)," +
+									"   title varchar(40)," +
+									"   interest varchar(80)," +
+									"   description varchar(150)," +
+									"   img varchar(40)" +
 									")"
 							);
 					stmt3.executeUpdate();
@@ -841,11 +852,15 @@ public class DerbyDatabase implements IDatabase {
 					insertProjects.executeBatch();
 					
 					// populate faculty table
-					insertFaculty = conn.prepareStatement("insert into faculty (name, password, email) values (?, ?, ?)");
+					insertFaculty = conn.prepareStatement("insert into faculty (name, password, email, title, interest, description, img) values (?, ?, ?, ?, ?, ?, ?)");
 					for (Faculty faculty : facultyList) {
 						insertFaculty.setString(1, faculty.get_name());
-						insertFaculty.setString(2, faculty.get_email());
+						insertFaculty.setString(2, faculty.get_password());
 						insertFaculty.setString(3, faculty.get_email());
+						insertFaculty.setString(4, faculty.get_title());
+						insertFaculty.setString(5, faculty.get_interest());
+						insertFaculty.setString(6, faculty.get_description());
+						insertFaculty.setString(7, faculty.get_img());
 						insertFaculty.addBatch();
 					}
 					insertFaculty.executeBatch();

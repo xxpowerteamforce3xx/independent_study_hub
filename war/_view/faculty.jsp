@@ -40,10 +40,12 @@
     </form>   
     
     <section id="dub_col">
+    
+    	<!-- 
 	    <div class="row">
 			<div class="column">
-		  		<img class="faculty" src="style/ring.png"/>
-		  		<h2>Benjamin T. Yanick</h2>
+		  		<img class="faculty" src="style/Steel.jpg"/>
+		  		<h2>William</h2>
 		  		
 		  		<p class="description"><strong>Interests:</strong> Material science and computational chemistry. <br><br>
 		  		The focus of my research has been around altering material properties such as, conductivity
@@ -52,8 +54,8 @@
 		  		or using AI to support work being done.</p>
 		  	</div>
 		 	<div class="column">
-		    	<img class="faculty" src="style/ring.png"/>
-		  		<h2>Benjamin T. Yanick</h2>
+		    	<img class="faculty" src="style/MacPherson.jpg"/>
+		  		<h2>Amanda</h2>
 		  		
 		  		<p class="description"><strong>Interests:</strong> Material science and computational chemistry. <br><br>
 		  		The focus of my research has been around altering material properties such as, conductivity
@@ -65,8 +67,8 @@
 		
 		<div class="row">
 			<div class="column">
-			    <img class="faculty" src="style/ring.png"/>
-		  		<h2>Benjamin T. Yanick</h2>
+			    <img class="faculty" src="style/Howard.jpg"/>
+		  		<h2>Kyle</h2>
 		  		
 		  		<p class="description"><strong>Interests:</strong> Material science and computational chemistry. <br><br>
 		  		The focus of my research has been around altering material properties such as, conductivity
@@ -95,6 +97,7 @@
 			    <p>Some text..</p>
 			 </div>
 		 </div>
+		  -->
     </section>
 </body>
 </html>

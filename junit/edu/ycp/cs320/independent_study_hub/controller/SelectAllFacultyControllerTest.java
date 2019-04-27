@@ -25,7 +25,7 @@ public class SelectAllFacultyControllerTest {
 		System.out.println("Printing...\n ");
 		System.out.println("Faculty:");
 		for (Faculty f : fac_list) {
-			System.out.println(f.getID() + "| " + f.get_name() + ", " + f.get_password() + ", " + f.get_email());
+			System.out.println(f.getID() + "| " + f.get_name() + ", " + f.get_password() + ", " + f.get_email() + ", " + f.get_title() + ", " + f.get_interest() + ", " + f.get_description() + ", " + f.get_img());
 		}
 		System.out.println("\nPrint Complete");
 	}
