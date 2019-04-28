@@ -35,19 +35,6 @@
     <servlet-class>edu.ycp.cs320.independent_study_hub.servlet.InventoryServlet</servlet-class>
   </servlet>
   
-  <!-- AJAX servlets. -->
-  <servlet>
-    <servlet-name>AddNumbersAjaxServlet</servlet-name>
-    <servlet-class>edu.ycp.cs320.independent_study_hub.servlet.ajax.AddNumbersAjaxServlet</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>MultiplyNumbersAjaxServlet</servlet-name>
-    <servlet-class>edu.ycp.cs320.independent_study_hub.servlet.ajax.MultiplyNumbersAjaxServlet</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>NextGuessAjaxServlet</servlet-name>
-    <servlet-class>edu.ycp.cs320.independent_study_hub.servlet.ajax.NextGuessAjaxServlet</servlet-class>
-  </servlet>
 
   <!-- Servlet mappings -->
   <servlet-mapping>
@@ -79,19 +66,6 @@
     <url-pattern>/Faculty</url-pattern>
   </servlet-mapping>
   
-  <!--  AJAX servlet mappings. -->
-  <servlet-mapping>
-    <servlet-name>AddNumbersAjaxServlet</servlet-name>
-    <url-pattern>/ajax/addNumbers</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>MultiplyNumbersAjaxServlet</servlet-name>
-    <url-pattern>/ajax/multiplyNumbers</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>NextGuessAjaxServlet</servlet-name>
-    <url-pattern>/ajax/nextGuess</url-pattern>
-  </servlet-mapping>
 
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

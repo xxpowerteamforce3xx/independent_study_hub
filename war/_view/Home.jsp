@@ -28,10 +28,9 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
     <!-- Log out box for user to sign out -->
     <div class="fixed">
 		Logged in as "${user}"
-		<form action="${pageContext.servletContext.contextPath}/Login" method="post">
-        <input type='submit' name ='leave' value = 'Log out'>
-    </form>
-		
+		<form action="${pageContext.servletContext.contextPath}/Home" method="post">
+        	<input type='submit' name ='leave' value = 'Log out'>
+    	</form>
 	</div>
 
 	<!-- Main section of web page's body -->

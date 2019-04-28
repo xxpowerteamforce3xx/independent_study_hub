@@ -14,7 +14,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
     <title>Login</title>
 	<style type="text/css">
 		<%@ include file="./../style/style.css" %>
-		#cb_span{color:Gray;}
+		cb_span{color:white;}
 	</style>
 	
 	<script type="text/javascript">
@@ -24,15 +24,37 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 </head>
 
 <body class="login">
+	<header>
+        <h1>Independent Study Hub</h1>
+
+        <p class="quote">YCP 2019 - <span class="italic">Login Page</span></p>
+    </header>
 
 
     <form class="box" action="${pageContext.servletContext.contextPath}/Login" method="post">
-        <h1 class="log_header">${errorMessage}</h1>
+        <h1 class="log_header">Login</h1>
         <input type="text" name="name" placeholder="Username" id="name" value="${name}"/>
         <input type="password" name="pass" placeholder="Password" id="password" value="${pass}"/>
         <input id =Mycheckbox type="checkbox" name ="check" value="1"><span id="cb_span"> Login as a Guest</span>
-        <input type="submit" name="" value="Login" id="log"/>
+        <input type="submit" name="button" value="Login" id="log"/>
     </form>
     
+     <form class="box_pretty" action="${pageContext.servletContext.contextPath}/Login" method="post">
+        <h1 class="log_header">York College of Pennsylvania</h1>
+    </form>
+    
+      <form class="box_pretty_new" action="${pageContext.servletContext.contextPath}/Login" method="post">
+        <h1 class="log_header">Create a New Account</h1>
+    	<input id =Mycheckbox type="checkbox" name ="check_new" value="1"><span id="cb_span"> Create a New Account</span>
+        <input type="submit" name="button" value="Create" id="log"/>
+      </form>
+      
+      <c:if test="${! empty errorMessage}">
+			<div class="alert">
+ 		 		<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  		 		<strong>Error!</strong> ${errorMessage}
+	  		</div>
+	  </c:if>
+      
 </body>
 </html>

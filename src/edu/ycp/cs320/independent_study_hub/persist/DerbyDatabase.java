@@ -896,4 +896,10 @@ public class DerbyDatabase implements IDatabase {
 	
 		System.out.println("Success!");
 	}
+
+	@Override
+	public boolean insertChemical(String chemical, String use, Integer amount) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

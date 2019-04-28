@@ -18,7 +18,7 @@
     
     <div class="fixed">
 		Logged in as "${user}"
-		<form action="${pageContext.servletContext.contextPath}/Login" method="post">
+		<form action="${pageContext.servletContext.contextPath}/Faculty" method="post">
         <input type='submit' name ='leave' value = 'Log out'>
     </form>
 	</div>

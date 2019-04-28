@@ -19,7 +19,7 @@
     <!-- Log out box for user to sign out -->
     <div class="fixed">
 		Logged in as "${user}"
-		<form action="${pageContext.servletContext.contextPath}/Login" method="post">
+		<form action="${pageContext.servletContext.contextPath}/Research" method="post">
         <input type='submit' name ='leave' value = 'Log out'>
     </form>
 	</div>

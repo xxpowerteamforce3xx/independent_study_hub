@@ -63,6 +63,7 @@ header.home {
 }
 
 
+
 /* ---------- Class selectors ---------- */
 
 .page-link{
@@ -89,19 +90,57 @@ body.login { /*Sets background color of login screen and general text font*/
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    background: #34495e;
+    background: none;
+    color:white;
 }
 
 .box { /*Creates smaller box that contains actual login fields/buttons*/
-    width: 300px;
-    padding: 40px;
+    width: 400px;
+    padding: 25px;
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 60%;
+    left: 70%;
     transform: translate(-50%, -50%);
-    background: #191919;
+    background: forestgreen;
     text-align: center;
 }
+
+.box_pretty {
+	width: 500px;
+    padding: 25px;
+    position: absolute;
+    top: 45%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+    background: forestgreen;
+    text-align: left;
+}
+
+.box_pretty_new {
+	width: 500px;
+    padding: 25px;
+    position: absolute;
+    top: 67%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+    background: forestgreen;
+    text-align: center;
+}
+
+.box_pretty h1 {
+	background: none;
+    text-transform:uppercase;
+    font-weight: 500;
+    font-size: 24px;
+}
+
+ .box_pretty_new h1 {
+ 	background: none;
+    text-transform:uppercase;
+    font-weight: 500;
+    margin: 10px auto;
+    font-size: 24px;
+ }
 
 .box h1{ /*Modifies login header from typical header styling of webpages*/
     background: none;
@@ -116,18 +155,18 @@ body.login { /*Sets background color of login screen and general text font*/
     display: block;
     margin: 20px auto;
     text-align: center;
-    border: 2px solid #3498db;
+    border: 2px solid white;
     padding: 14px 10px;
     width: 200px;
     outline: none; /*Stops input fields from "lighting up" when clicked on (slightly ruins look of login screen)*/
-    color: #fff;
+    color: white;
     border-radius: 24px;
     transition: 0.25s;
 }
 
 .box input[type="text"]:focus, .box input[type="password"]:focus { /* When input field is selected width and border color change (to signify selection)*/
     width: 280px;
-    border-color: #2ecc71;
+    border-color: white;
 }
 
 .box input[type="submit"]{ /*Sets style of login button when nothing is being done*/
@@ -136,10 +175,10 @@ body.login { /*Sets background color of login screen and general text font*/
     display: block;
     margin: 20px auto;
     text-align: center;
-    border: 2px solid #2ecc71;
+    border: 2px solid white;
     padding: 14px 40px;
     outline: none; /*Stops input fields from "lighting up" when clicked on (slightly ruins look of login screen)*/
-    color: #fff;
+    color: white;
     border-radius: 24px;
     transition: 0.25s; /* Rate at which input bars expand */
     cursor: pointer; /*Changes mouse cursor to pointer style when hovering over login button*/
@@ -149,7 +188,37 @@ body.login { /*Sets background color of login screen and general text font*/
     background: #2ecc71;
 }
 
+.box ::placeholder {
+	color: white;
+	opacity: 1;
+}
 
+
+.box_pretty_new input[type="submit"]{ /*Sets style of login button when nothing is being done*/
+    border: 0;
+    background: none;
+    display: block;
+    margin: 10px auto;
+    text-align: right;
+    border: 2px solid white;
+    padding: 5px 40px;
+    outline: none; /*Stops input fields from "lighting up" when clicked on (slightly ruins look of login screen)*/
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s; /* Rate at which input bars expand */
+    cursor: pointer; /*Changes mouse cursor to pointer style when hovering over login button*/
+}
+
+/* On mouse-over, add a grey background color */
+
+.box_pretty_new input[type="submit"]:hover{ /*When login button is hovered over, button background fills in*/
+    background: #2ecc71;
+}
+
+.box_pretty_new ::placeholder {
+	color: white;
+	opacity: 1;
+}
 
 /* ***** Navigation bar CSS ***** */
 
@@ -357,16 +426,37 @@ z-index: 1;
 
 /* ***** Log Out Box CSS ***** */
 .fixed {
-		  position: fixed;
-		  bottom: 0;
-		  right: 0;
-		  width: 200px;
-		  background-color: forestgreen;
-		  border: 3px solid #73AD21;
-		}
+	 position: fixed;
+	 bottom: 0;
+	 right: 0;
+	 width: 200px;
+	 background-color: forestgreen;
+	 border: 3px solid #73AD21;
+}
 
+.alert {
+  padding: 20px;
+  background-color: #f44336;
+  position: relative;
+  width: 500px;
+  left: 32.5%;
+  color: white;
+}
 
-/* ---------- Id selectors ---------- */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}-- Id selectors ---------- */
 
 
 

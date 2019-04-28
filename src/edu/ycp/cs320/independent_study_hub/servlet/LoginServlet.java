@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import edu.ycp.cs320.independent_study_hub.controller.SelectOneFacultyController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectOneStudentController;
@@ -26,7 +27,6 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		req.setAttribute("errorMessage", "Login");
 		System.out.println("Login Servlet: doGet");
 		System.out.println("Request: " + req + " Response: " + resp);
 		
@@ -36,71 +36,72 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException {
-		resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
-		resp.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-		resp.setHeader("Expires", "0"); // Proxies.
-		 Random random = new Random();
-	    int x = random.nextInt((7 - 1) + 1) + 1;
+
 		System.out.println("Login Servlet: doPost");
 		String errorMessage = null;
 		String name         = null;
 		String pw           = null;
-		String check        = null;
+		String check1       = null;
+		String check2       = null;
+		String button       = null;
 		boolean valid  = false;
 
 		// Decode form parameters and dispatch to controller
+		button = req.getParameter("button");
 		name = req.getParameter("name");
 		pw   = req.getParameter("pass");
-		check= req.getParameter("check");
+		check1 = req.getParameter("check");
+		check2 = req.getParameter("check_new");
 		
-		System.out.println(check);
-		if (check != null && check.equals("1")) {
-			req.getSession().setAttribute("user", "guest");
-			resp.sendRedirect(req.getContextPath() + "/Home");
-
-			return;
-		}
-
+		try {
+			if (button.equals("Create")) {
+				if (check2 != null) { // tried to create a new account
+					System.out.println("tried to create a new account");
+					return;
+				} else {
+					System.out.println("tried to create an account but didnt check the box");
+					errorMessage = "If you want to create an account, check the box! How hard can it be?";
+					req.setAttribute("errorMessage", errorMessage);
+				}
+			}
+		} catch (NullPointerException e) {}
+		
+		try {
+			if (button.equals("Login")) { // tried to login as an existing user
+				if (check1 != null && check1.equals("1")) {
+					req.getSession().setAttribute("user", "guest");
+					resp.sendRedirect(req.getContextPath() + "/Home");
+					return;
+				}
+			}
+		} catch (NullPointerException e) {}
+		
 		System.out.println("   Name: <" + name + "> PW: <" + pw + ">");			
 
-		if (name == null || pw == null || name.equals("") || pw.equals("")) {
-			if (x == 1)
-				errorMessage = "Not even close, try again";
-			if (x == 2)
-				errorMessage = "Do you even go here buddy?";
-			if (x == 3)
-				errorMessage = "Is that even english?";
-			if (x == 4)
-				errorMessage = "Wait till I show the guys that try, they'll love that one";
-			if (x == 5)
-				errorMessage = "Just enter as a guest dude this is embarrasing";
-			if (x == 6)
-				errorMessage = "Who even are you?";
-			if (x == 7)
-				errorMessage = "This is getting awkward";
-			
+		if ((name == null && pw == null) || (name.equals("") && pw.equals(""))) {
+			if (errorMessage == null)
+				errorMessage = "You gotta enter something buddy come on now";
 		} else {
 			s = controller_student.get_student(name);
 			f = controller_fac.get_faculty(name);
-			System.out.println(s.get_name() + ", " + s.get_password());
-			if (s.get_name().equals(name) && s.get_password().equals(pw)) { 
-				valid = true;
-			} else if (f.get_name() == name && f.get_password() == pw) {
-				valid = true;
-			}
-			if (!valid) {
-				errorMessage = "Username and/or password invalid";
+			try {
+				if (s.get_name().equals(name) && s.get_password().equals(pw)) { 
+					valid = true;
+				} else if (f.get_name() == name && f.get_password() == pw) {
+					valid = true;
+				}
+			} catch (NullPointerException e) {
+					errorMessage = "Well, I don't think either your username or password could be more wrong than they were so";
 			}
 		}
-
+		
 		// Add parameters as request attributes
 		req.setAttribute("name", req.getParameter("name"));
 		req.setAttribute("pass", req.getParameter("pass"));
 
 		// Add result objects as request attributes
-		req.setAttribute("errorMessage", errorMessage);
+		
 		req.setAttribute("login",        valid);
-
 		// if login is valid, start a session
 		if (valid) {
 			System.out.println("   Valid login - starting session, redirecting to /Home");
@@ -113,12 +114,13 @@ public class LoginServlet extends HttpServlet {
 
 			return;
 		}
-
+		
 		System.out.println("   Invalid login - returning to /Login");
+		req.setAttribute("errorMessage", errorMessage);
 
 		// Forward to view to render the result HTML document
 		req.getRequestDispatcher("/_view/Login.jsp").forward(req, resp);
-		
+			
 	}
-	
+		
 }
