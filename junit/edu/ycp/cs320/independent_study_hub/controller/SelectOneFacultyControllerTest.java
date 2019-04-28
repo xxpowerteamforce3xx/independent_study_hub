@@ -25,19 +25,19 @@ public class SelectOneFacultyControllerTest {
 		f = controller.get_faculty("Dr.Steel");
 		System.out.println("Printing....\n ");
 		System.out.println("Faculty:");
-		System.out.println(f.getID() + "| " + f.get_name() + ", " + f.get_password() + ", " + f.get_email());
+		System.out.println(f.getID() + "| " + f.get_name() + ", " + f.get_password() + ", " + f.get_email() + ", " + f.get_title() + ", " + f.get_interest() + ", " + f.get_description() + ", " + f.get_img());
 		System.out.println("\nPrint Complete");
 		
-		f1 = controller.get_faculty("Dr.Foy");
-		System.out.println("Printing....\n ");
-		System.out.println("Student:");
-		System.out.println(f1.getID() + "| " + f1.get_name() + ", " + f1.get_password() + ", " + f1.get_email());
-		System.out.println("\nPrint Complete");
-		
-		f2 = controller.get_faculty("Dr.Fautch");
+		f1 = controller.get_faculty("Amanda");
 		System.out.println("Printing....\n ");
 		System.out.println("Faculty:");
-		System.out.println(f2.getID() + "| " + f2.get_name() + ", " + f2.get_password() + ", " + f2.get_email());
+		System.out.println(f1.getID() + "| " + f1.get_name() + ", " + f1.get_password() + ", " + f1.get_email() + ", " + f1.get_title() + ", " + f1.get_interest() + ", " + f1.get_description() + ", " + f1.get_img());
+		System.out.println("\nPrint Complete");
+		
+		f2 = controller.get_faculty("Dr.Howard");
+		System.out.println("Printing....\n ");
+		System.out.println("Faculty:");
+		System.out.println(f2.getID() + "| " + f2.get_name() + ", " + f2.get_password() + ", " + f2.get_email() + ", " + f2.get_title() + ", " + f2.get_interest() + ", " + f2.get_description() + ", " +f2.get_img());
 		System.out.println("\nPrint Complete");
 	}
 

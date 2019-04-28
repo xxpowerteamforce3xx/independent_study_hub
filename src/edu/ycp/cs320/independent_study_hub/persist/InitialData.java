@@ -28,6 +28,7 @@ public class InitialData {
 				if (tuple == null) {
 					break;
 				}
+				//Reads each value in from our string list and inserts them into the appropriate attribute of our student object
 				Iterator<String> i = tuple.iterator();
 				Student students = new Student();
 				students.setName(i.next());
@@ -53,12 +54,16 @@ public class InitialData {
 				if (tuple == null) {
 					break;
 				}
+				//Reads each value in from our string list and inserts them into the appropriate attribute of our faculty object
 				Iterator<String> i = tuple.iterator();
 				Faculty faculty = new Faculty();
 				faculty.setName(i.next());
 				faculty.setPassword(i.next());
 				faculty.setEmail(i.next());
-				faculty.setType(Integer.parseInt(i.next()));
+				faculty.setTitle(i.next());
+				faculty.setInterest(i.next());
+				faculty.setDescription(i.next());
+				faculty.setImg(i.next());
 				facultyList.add(faculty);
 			}
 			return facultyList;
