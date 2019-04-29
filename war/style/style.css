@@ -98,43 +98,91 @@ body.login { /*Sets background color of login screen and general text font*/
     width: 400px;
     padding: 25px;
     position: absolute;
-    top: 60%;
+    top: 62%;
     left: 70%;
     transform: translate(-50%, -50%);
     background: forestgreen;
     text-align: center;
 }
 
-.box_pretty {
+
+.box_ycp_only {
 	width: 500px;
     padding: 25px;
     position: absolute;
-    top: 45%;
+    top: 47%;
     left: 35%;
     transform: translate(-50%, -50%);
     background: forestgreen;
     text-align: left;
 }
 
-.box_pretty_new {
+.box_blank0 {
 	width: 500px;
     padding: 25px;
     position: absolute;
-    top: 67%;
+    top: 60%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+    background: forestgreen;
+}
+
+.box_blank1 {
+	width: 500px;
+    padding: 25px;
+    position: absolute;
+    top: 70%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+    background: forestgreen;
+}
+
+.box_blank2 {
+	width: 500px;
+    padding: 25px;
+    position: absolute;
+    top: 80%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+    background: forestgreen;
+}
+.box_checkbox_new_student {
+	width: 500px;
+    padding: 25px;
+    position: absolute;
+    top: 69%;
     left: 35%;
     transform: translate(-50%, -50%);
     background: forestgreen;
     text-align: center;
 }
 
-.box_pretty h1 {
+.box_new_student_ycp {
+	width: 500px;
+    padding: 25px;
+    position: absolute;
+    top: 46%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+    background: forestgreen;
+    text-align: center;
+}
+.box_ycp_only h1 {
 	background: none;
     text-transform:uppercase;
     font-weight: 500;
     font-size: 24px;
 }
 
- .box_pretty_new h1 {
+.box_checkbox_new_student h1 {
+ 	background: none;
+    text-transform:uppercase;
+    font-weight: 500;
+    margin: 10px auto;
+    font-size: 24px;
+ }
+ 
+ .box_new_student_ycp h1 {
  	background: none;
     text-transform:uppercase;
     font-weight: 500;
@@ -194,7 +242,7 @@ body.login { /*Sets background color of login screen and general text font*/
 }
 
 
-.box_pretty_new input[type="submit"]{ /*Sets style of login button when nothing is being done*/
+.box_checkbox_new_student input[type="submit"]{ /*Sets style of login button when nothing is being done*/
     border: 0;
     background: none;
     display: block;
@@ -211,11 +259,11 @@ body.login { /*Sets background color of login screen and general text font*/
 
 /* On mouse-over, add a grey background color */
 
-.box_pretty_new input[type="submit"]:hover{ /*When login button is hovered over, button background fills in*/
+.box_checkbox_new_student input[type="submit"]:hover{ /*When login button is hovered over, button background fills in*/
     background: #2ecc71;
 }
 
-.box_pretty_new ::placeholder {
+.box_checkbox_new_studentw ::placeholder {
 	color: white;
 	opacity: 1;
 }

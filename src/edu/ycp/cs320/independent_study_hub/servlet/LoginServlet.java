@@ -57,6 +57,7 @@ public class LoginServlet extends HttpServlet {
 			if (button.equals("Create")) {
 				if (check2 != null) { // tried to create a new account
 					System.out.println("tried to create a new account");
+					resp.sendRedirect(req.getContextPath() + "/NewStudent");
 					return;
 				} else {
 					System.out.println("tried to create an account but didnt check the box");
