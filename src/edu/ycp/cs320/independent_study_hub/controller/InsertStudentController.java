@@ -15,7 +15,6 @@ import edu.ycp.cs320.independent_study_hub.model.Student;
 import edu.ycp.cs320.independent_study_hub.model.User;
 import edu.ycp.cs320.independent_study_hub.persist.DatabaseProvider;
 import edu.ycp.cs320.independent_study_hub.persist.DerbyDatabase;
-import edu.ycp.cs320.independent_study_hub.persist.FakeDatabase;
 public class InsertStudentController {
 	private IDatabase db = null;
 	

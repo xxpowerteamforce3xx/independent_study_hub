@@ -25,29 +25,32 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 
 <body class="login">
 	<header>
-        <h1>Independent Study Hub</h1>
+        <h1>Create a New Student Account</h1>
 
-        <p class="quote">YCP 2019 - <span class="italic">Login Page</span></p>
+        <p class="quote">YCP 2019 - <span class="italic">Account Creation Page</span></p>
     </header>
 
 
-    <form class="box" action="${pageContext.servletContext.contextPath}/Login" method="post">
-        <h1 class="log_header">Login</h1>
+    <form class="box" action="${pageContext.servletContext.contextPath}/NewStudent" method="post">
+        <h1 class="log_header">Your information below</h1>
         <input type="text" name="name" placeholder="Username" id="name" value="${name}"/>
-        <input type="password" name="pass" placeholder="Password" id="password" value="${pass}"/>
-        <input id =Mycheckbox type="checkbox" name ="check" value="1"><span id="cb_span"> Login as a Guest</span>
-        <input type="submit" name="button" value="Login" id="log"/>
+        <input type="text" name="pass" placeholder="Password" id="password" value="${pass}"/>
+        <input type="text" name="email" placeholder="Email" id="email" value="${email}"/>
+        <input type="text" name="fac_code" placeholder="Faculty Code" id="fac_code" value="${fac_code}"/>
+        <input type="submit" name="button" value="Create!" id="create"/>
     </form>
     
-     <form class="box_ycp_only" action="${pageContext.servletContext.contextPath}/Login" method="post">
+     <form class="box_new_student_ycp" action="${pageContext.servletContext.contextPath}/Login" method="post">
         <h1 class="log_header">York College of Pennsylvania</h1>
     </form>
     
-      <form class="box_checkbox_new_student" action="${pageContext.servletContext.contextPath}/Login" method="post">
-        <h1 class="log_header">Create a New Account</h1>
-    	<input id =Mycheckbox type="checkbox" name ="check_new" value="1"><span id="cb_span"> Create a New Account</span>
-        <input type="submit" name="button" value="Create" id="log"/>
-      </form>
+    <form class="box_blank0" action="${pageContext.servletContext.contextPath}/Login" method="post">
+    </form>
+    <form class="box_blank1" action="${pageContext.servletContext.contextPath}/Login" method="post">
+    </form>
+    <form class="box_blank2" action="${pageContext.servletContext.contextPath}/Login" method="post">
+    </form>
+  
       
       <c:if test="${! empty errorMessage}">
 			<div class="alert">
