@@ -56,11 +56,20 @@ public class HomeServlet extends HttpServlet {
 		}
 		
 		String logout = null;
+		String myAccount = null;
+		myAccount = req.getParameter("account");
 		logout = req.getParameter("leave");
-		if (logout.equals("Log out")) {
-			req.getSession().invalidate();
-			resp.sendRedirect(req.getContextPath() + "/Login");
-		}
+		try {
+			if (logout.equals("Log out")) {
+				req.getSession().invalidate();
+				resp.sendRedirect(req.getContextPath() + "/Login");
+			}
+		} catch (NullPointerException e) {}
+		try {
+			if (myAccount.equals("myAccount")) {
+			resp.sendRedirect(req.getContextPath() + "/MyAccount");
+			}
+		} catch (NullPointerException e) {}
 	}
 	
 }

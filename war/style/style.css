@@ -5,12 +5,40 @@ body
     text-align: center;
 }
 
+.table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.table td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  color: black;
+}
+
+.table th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  color: white;
+  background: forestgreen;
+}
+
 h1 {
     background: forestgreen;
     color: #fff;
     text-align: center;
     font-size: 64px;
     margin: 0;
+}
+
+h2 {
+	color: black;
+	text-align: left;
+	font-size: 32px;
+	margin: 20px;
 }
 
 p{

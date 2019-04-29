@@ -41,6 +41,7 @@ public class LoginServlet extends HttpServlet {
 		String errorMessage = null;
 		String name         = null;
 		String pw           = null;
+		String email 		= null;
 		String check1       = null;
 		String check2       = null;
 		String button       = null;
@@ -88,8 +89,10 @@ public class LoginServlet extends HttpServlet {
 			try {
 				if (s.get_name().equals(name) && s.get_password().equals(pw)) { 
 					valid = true;
+					email = s.get_email();
 				} else if (f.get_name() == name && f.get_password() == pw) {
 					valid = true;
+					email = f.get_email();
 				}
 			} catch (NullPointerException e) {
 					errorMessage = "Well, I don't think either your username or password could be more wrong than they were so";
@@ -109,6 +112,8 @@ public class LoginServlet extends HttpServlet {
 
 			// store user object in session
 			req.getSession().setAttribute("user", name);
+			req.getSession().setAttribute("pw", pw);
+			req.getSession().setAttribute("email", email);
 
 			// redirect to /home page
 			resp.sendRedirect(req.getContextPath() + "/Home");

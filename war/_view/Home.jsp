@@ -29,6 +29,8 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
     <div class="fixed">
 		Logged in as "${user}"
 		<form action="${pageContext.servletContext.contextPath}/Home" method="post">
+			<br>
+			<input type='submit' name ='account' value = 'myAccount'>
         	<input type='submit' name ='leave' value = 'Log out'>
     	</form>
 	</div>

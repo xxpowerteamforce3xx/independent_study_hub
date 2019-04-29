@@ -134,6 +134,52 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});
 	}
+	
+	@Override
+	public ArrayList<Project> selectProjectsByStudent(final String name) {
+		return executeTransaction(new Transaction<ArrayList<Project>>() {
+		@Override
+			public ArrayList<Project> execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				try {
+					// retreive all attributes from both Books and Authors tables
+					stmt = conn.prepareStatement(
+							"select projects.* " +
+									"  from projects " +
+									" where projects.student_name = ?"
+							);
+					stmt.setString(1, name);
+					ArrayList<Project> result = new ArrayList<Project>();
+	
+					resultSet = stmt.executeQuery();
+	
+					// for testing that a result was returned
+					Boolean found = false;
+					
+					while (resultSet.next()) {
+						found = true;
+						
+						// project : student__id, tudent, title, year, desc
+						//jpeg is not in table creation as of now
+						Project project = new Project();
+						loadProject(project, resultSet, 1);
+						result.add(project);
+					}
+	
+					// check if anything was found
+					if (!found) {
+						System.out.println("Nothing was found");
+					}
+	
+					return result;
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+	}
 
 	@Override
 	public ArrayList<Project> get_all_projects() {
@@ -661,7 +707,9 @@ public class DerbyDatabase implements IDatabase {
 	private void loadProject(Project p, ResultSet r, int i) throws SQLException {
 		p.set_p_id(r.getInt(i++));
 		p.set_s_id(r.getInt(i++));
-		p.set_student(get_student(r.getString(i++)));
+		String s = r.getString(i++);
+		System.out.println(s + " loadproject");
+		p.set_student(get_student(s));
 		p.set_title(r.getString(i++));
 		p.set_year(r.getInt(i++));
 		p.set_description(r.getString(i++));
@@ -902,4 +950,6 @@ public class DerbyDatabase implements IDatabase {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	
 }
