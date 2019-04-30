@@ -16,6 +16,7 @@
         <h1>Upload</h1>
     </header>
     
+    <!-- Log out box for this web page -->
     <div class="fixed">
 		Logged in as "${user}"
 		<br>

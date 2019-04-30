@@ -77,6 +77,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
         	</div>
     </section>
 
+
     <section>
         <div class="protector">
             <h2 class="ribbon">
@@ -89,6 +90,20 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
         </form>
         
     </section>
+    
+    
+    <section>
+        <div class="protector">
+            <h2 class="ribbon">
+                <strong class="ribbon-content">Faculty</strong>
+            </h2>
+        </div>
+		<form action="${pageContext.servletContext.contextPath}/Faculty" method="doGet">
+        	<p>Description of Faculty's research interests and past experience</p>
+        	<button type="submit">Click Here!</button>
+        </form>
+    </section>
+
 
     <section>
         <div class="protector">
