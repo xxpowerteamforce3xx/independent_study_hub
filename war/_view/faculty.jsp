@@ -10,6 +10,9 @@
 		<%@ include file="./../style/style.css" %>
 				
 	</style>
+	<script type="text/javascript">
+		<%@ include file="./../Javascript/main.js" %>
+	</script>
 </head>
 <body>
     <header>
@@ -24,52 +27,74 @@
     </form>
 	</div>
     
-    <!-- Navigation bar for page -->
-    <div class="navbar">
-        <a href="http://localhost:8081/independent_study_hub/Home">Home</a>
+    <nav class="navbar">
+		<!-- Our side bar button that uses JavaScript to show the side bar menu -->
+    	<span class="open-slide">
+    		<a href="#" onclick="openSideMenu()">
+    			<!-- Creates our side bar icon that is 30 by 30 pixels -->
+    			<svg width="30" height="30">
+    				<!-- Draws two white lines (stroke) where d denotes what the left and right side of the lines being
+    					Each line is 5 pixels wide (stroke-width) -->
+    				<path d="M0,5 30,5" stroke="#fff" stroke-width="5"/>
+    				<path d="M0,14 30,14" stroke="#fff" stroke-width="5"/>
+    				<path d="M0,23 30,23" stroke="#fff" stroke-width="5"/>
+    			</svg>
+    		</a>
+    	</span>
+    	
+    	<ul class="navbar-nav">
+    		<li><a href="http://localhost:8081/independent_study_hub/Home">Home</a></li>
+    		<li><a href="http://localhost:8081/independent_study_hub/Resources">Resources</a></li>
+    		<li><a href="http://localhost:8081/independent_study_hub/Research">Previous Work</a></li>
+    		<li><a href="http://localhost:8081/independent_study_hub/Inventory">Inventory</a></li>
+    		<li><a href="http://localhost:8081/independent_study_hub/Upload">Upload</a></li>
+    		<li><a href="#">Faculty</a></li>
+    	</ul>
+	</nav>
+	
+	<!-- The side bar menu that is activated when the "open-slide" <a> is clicked -->
+    <div id="side-menu" class="side-nav">
+    	<h2 class="uName">${user}</h2>
+    	
+    	<!-- <a> that closes the side-bar menu. The &times; is what gives the "X" image for this anchor tag-->
+    	<a href="#" class="btn-close" onclick="closeSideMenu()">&times;</a>
+    	<a href="http://localhost:8081/independent_study_hub/Home">Home</a>
         <a href="http://localhost:8081/independent_study_hub/Resources">Resources</a>
         <a href="http://localhost:8081/independent_study_hub/Research">Previous Work</a>
-        <a href="http://localhost:8081/independent_study_hub/Inventory" class="right">Inventory</a>
-        <a href="http://localhost:8081/independent_study_hub/Upload" class="right">Upload</a>
-        <a href="#" class="right active">Faculty</a>
-    </div>
+        <a href="http://localhost:8081/independent_study_hub/Inventory">Inventory</a>
+        <a href="http://localhost:8081/independent_study_hub/Upload">Upload</a>
+        <a href="#">Faculty</a>
+    </div>   
     
     
-    <form class="upload-box">
-        <input type="text" name="" placeholder="Faculty Member" />
-        <input type="text" name="" placeholder="Research Students" />
-        <input type="text" name="" placeholder="Research Interests" />
-        <button type="reset">Reset</button>
-        <button type="submit">Submit</button>
-    </form>   
+	    <!-- Count variable that will work alongside our for each loop below -->
+	    <c:set var="count" value="0" scope="page" />
+	    
+	    <section id="dub_col">
+	    	<!-- The for each loop where the servlet will store the array list of references to faculty objects -->
+	    	<c:forEach items="${faculty}" var="faculty">
+	    		<!-- Checks if the count variable above is even, if so, then we know to start a new "row" -->
+		 		<c:if test="${count % 2 == 0}">
+		        	<div class="row">
+		        </c:if>
+		        	<!-- In each "column", we insert the faculty member's information by calling methods associated with faculty objects -->
+		        	<div class="column">
+		        		<img class="faculty" src="${faculty.get_img()}">
+		        		<h2 class="title">${faculty.get_title()}</h2>
+		        		<p class="description"><strong>Interests: </strong>${faculty.get_interest()} <br><br>
+		        		${faculty.get_description()}</p>
+		        	</div>
+		        	
+		        <!-- If count variable is odd, then we are finishing a row and close it off -->
+		        <c:if test="${count % 2 != 0}">
+		        	</div>
+		        </c:if>
+		        
+		        <!-- Increment our count variable by one for each iteration of our for each loop -->
+		        <c:set var="count" value="${count + 1}" scope="page"/>
+		    </c:forEach>
+	    	
+	    </section>
     
-    <!-- Count variable that will work alongside our for each loop below -->
-    <c:set var="count" value="0" scope="page" />
-    
-    <section id="dub_col">
-    	<!-- The for each loop where the servlet will store the array list of references to faculty objects -->
-    	<c:forEach items="${faculty}" var="faculty">
-    		<!-- Checks if the count variable above is even, if so, then we know to start a new "row" -->
-	 		<c:if test="${count % 2 == 0}">
-	        	<div class="row">
-	        </c:if>
-	        	<!-- In each "column", we insert the faculty member's information by calling methods associated with faculty objects -->
-	        	<div class="column">
-	        		<img class="faculty" src="${faculty.get_img()}">
-	        		<h2 class="title">${faculty.get_title()}</h2>
-	        		<p class="description"><strong>Interests: </strong>${faculty.get_interest()} <br><br>
-	        		${faculty.get_description()}</p>
-	        	</div>
-	        	
-	        <!-- If count variable is odd, then we are finishing a row and close it off -->
-	        <c:if test="${count % 2 != 0}">
-	        	</div>
-	        </c:if>
-	        
-	        <!-- Increment our count variable by one for each iteration of our for each loop -->
-	        <c:set var="count" value="${count + 1}" scope="page"/>
-	    </c:forEach>
-    	
-    </section>
 </body>
 </html>

@@ -86,9 +86,7 @@ header{
     background-color: forestgreen;
 }
 
-header.home {
-    border-radius: 50px;
-}
+
 
 
 
@@ -364,36 +362,98 @@ body.login { /*Sets background color of login screen and general text font*/
 	opacity: 1;
 }
 
-/* ***** Navigation bar CSS ***** */
+/* ********** Navigation bar CSS ********** */
 
-.navbar { /*Creates the main body of navbar.  Sticky allows the navbar to scrolldown along with the page*/
-    overflow: hidden;
-    background-color: #333;
-    position: sticky;
-    top: 0;
+
+/* ********** Side bar menu CSS ********** */
+
+/* CSS for main navigation bar that runs across web page */
+.navbar{
+	background-color: #333;
+	position:sticky;
+	overflow: hidden;
+	height: 62px;
 }
 
-.navbar a{ /*Aligns the items in the navbar properly and specifies text color and size*/
+.navbar a{ /*Aligns the items in the navbar properly and specifies text color and size */
     float:left;
     display:block;
     color:#fff;
     text-align:center;
-    padding: 14px 20px;
+    padding: 14px 16px;
     text-decoration: none;
 }
 
-.navbar a.right{ /*Specially labeled items in navbar are aligned to the right*/
-    float:right;
+.navbar ul{
+	margin: 8px 0px 0px 0px;
+	list-style: none;
 }
 
-.navbar a:hover{ /*Gives "highlighting" effect when mouse hovers over navbar item*/
+.navbar a:hover{ /*Gives "highlighting" effect when mouse hovers over navbar item */
     background-color:#ddd;
     color: black;
 }
 
-.navbar a.active{ /*Makes item in navbar be different color to signify link connects to current page*/
-    background-color: #666;
-    color: #fff;
+/* CSS for side-bar menu (everything other than links) */
+.side-nav{
+	height: 100%; /* side-bar menu spans whole length of page */
+	width: 0px; /* Initially set side-bar menu to width of 0px.  JavaScript will change this to 250px and make it appear to slide out */
+	position: fixed;
+	z-index: 1; /* Positions side-bar menu so that it always appears on top */
+	top: 0;
+	left: 0;
+	background-color: #111;
+	opacity: 0.9;
+	overflow-x: hidden;
+	padding-top: 60px;
+	transition: 0.5s;
+}
+
+/* Styling for each link in the side-bar menu  */
+.side-nav a{
+	padding: 10px 10px 10px 30px;
+	text-decoration: none;
+	font-size: 22px;
+	color: #fff;
+	display: block;
+	transition: 0.3s;
+	text-align: left;
+}
+
+/* Just changes color of links inside side-bar menu when hovered over */
+.side-nav a:hover{
+	color: #ccc;
+}
+
+/* CSS for the close button (labeled with an X) inside the side-bar menu */
+.side-nav .btn-close{
+	position: absolute;
+	top:0;
+	right: 22px;
+	font-size: 36px;
+	margin-left: 50px;
+}
+
+/* <div> on each web page that are marked with an ID of main to indicate that everything inside the <div> will move over
+   when the side-bar menu opens up */
+/*#main{
+	transition:margin-left 0.5s;
+	padding: 20px;
+	overflow: hidden;
+	width: 100%
+}*/
+
+/* If the width of the web page drops below 568px, then the HTML element with navbar-nav will no longer show.
+   This would be the links in our nav bar  */
+@media(max-width: 568px){
+	.navbar-nav{display: none}
+}
+
+/* CSS for user name to be displayed in side-bar menu */
+.uName{
+	color:#fff;
+	transition: 0.3;
+	boarder-bottom: solid 1px #fff;
 }
 
 
