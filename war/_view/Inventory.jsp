@@ -17,17 +17,19 @@
 </head>
 
 <!-- When our Inventory JSP finished loading, we call generate_table() -->
-<body onload="generate_table()">
+<body>
     <header>
         <h1>Inventory</h1>
     </header>
 	
+	<!-- Log out box for user to sign out -->
 	<div class="fixed">
 		Logged in as "${user}"
 		<form action="${pageContext.servletContext.contextPath}/Inventory" method="post">
         <input type='submit' name ='leave' value = 'Log out'>
     </form>
 	</div>
+	
     <!-- The navigation bar for the web page -->
     <div class="navbar">
         <a href="http://localhost:8081/independent_study_hub/Home">Home</a>
@@ -46,7 +48,8 @@
         <button type="reset">Reset</button>
         <button type="submit">Submit</button>
     </form>
-
+	
+	
     <section>
 
         <!-- Search bar to type in phrase to search for in table below -->
@@ -72,7 +75,18 @@
                         <th scope="col">Date Purchased</th>
                     </tr>
                 </thead>
-                <tbody id="inventory_body">
+                
+                <tbody id="inventory_body">	
+                	<!-- For each loop will have an array list of ChemicalInventory objects in inventory page
+                		It will iterate across each item in the array and insert the appropriate information as seen below -->
+	                <c:forEach items="${inventory}" var="inventory">
+	                	<tr>
+	                		<!-- Directly calling methods associated with ChemicalInventory class -->
+	                		<td>${inventory.getChemical()}</td>
+	                		<td>${inventory.getUseOfChemical()}</td>
+	                		<td>${inventory.getDom()}</td>
+	                	</tr>
+	                </c:forEach>
                 
                 </tbody>
             </table>

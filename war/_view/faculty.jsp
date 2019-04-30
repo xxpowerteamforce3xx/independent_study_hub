@@ -43,82 +43,33 @@
         <button type="submit">Submit</button>
     </form>   
     
+    <!-- Count variable that will work alongside our for each loop below -->
     <c:set var="count" value="0" scope="page" />
     
     <section id="dub_col">
+    	<!-- The for each loop where the servlet will store the array list of references to faculty objects -->
     	<c:forEach items="${faculty}" var="faculty">
+    		<!-- Checks if the count variable above is even, if so, then we know to start a new "row" -->
 	 		<c:if test="${count % 2 == 0}">
 	        	<div class="row">
 	        </c:if>
+	        	<!-- In each "column", we insert the faculty member's information by calling methods associated with faculty objects -->
 	        	<div class="column">
 	        		<img class="faculty" src="${faculty.get_img()}">
 	        		<h2 class="title">${faculty.get_title()}</h2>
 	        		<p class="description"><strong>Interests: </strong>${faculty.get_interest()} <br><br>
 	        		${faculty.get_description()}</p>
 	        	</div>
+	        	
+	        <!-- If count variable is odd, then we are finishing a row and close it off -->
 	        <c:if test="${count % 2 != 0}">
 	        	</div>
 	        </c:if>
 	        
+	        <!-- Increment our count variable by one for each iteration of our for each loop -->
 	        <c:set var="count" value="${count + 1}" scope="page"/>
 	    </c:forEach>
-    	<!-- 
-	    <div class="row">
-			<div class="column">
-		  		<img class="faculty" src="style/Steel.jpg"/>
-		  		<h2>William</h2>
-		  		
-		  		<p class="description"><strong>Interests:</strong> Material science and computational chemistry. <br><br>
-		  		The focus of my research has been around altering material properties such as, conductivity
-		  		and elasticity, to allow for sophisticated components to be manufactured.  I am also fascinated with incorporating 
-		  		computers into the study of chemistry, whether it be simulations of an experiment 
-		  		or using AI to support work being done.</p>
-		  	</div>
-		 	<div class="column">
-		    	<img class="faculty" src="style/MacPherson.jpg"/>
-		  		<h2>Amanda</h2>
-		  		
-		  		<p class="description"><strong>Interests:</strong> Material science and computational chemistry. <br><br>
-		  		The focus of my research has been around altering material properties such as, conductivity
-		  		and elasticity, to allow for sophisticated components to be manufactured.  I am also fascinated with incorporating 
-		  		computers into the study of chemistry, whether it be simulations of an experiment 
-		  		or using AI to support work being done.</p>
-		  	</div>
-		</div>
-		
-		<div class="row">
-			<div class="column">
-			    <img class="faculty" src="style/Howard.jpg"/>
-		  		<h2>Kyle</h2>
-		  		
-		  		<p class="description"><strong>Interests:</strong> Material science and computational chemistry. <br><br>
-		  		The focus of my research has been around altering material properties such as, conductivity
-		  		and elasticity, to allow for sophisticated components to be manufactured.  I am also fascinated with incorporating 
-		  		computers into the study of chemistry, whether it be simulations of an experiment 
-		  		or using AI to support work being done.</p>
-		  	</div>
-		  	<div class="column" >
-		    	<img class="faculty" src="style/ring.png"/>
-		  		<h2>Benjamin T. Yanick</h2>
-		  		
-		  		<p class="description"><strong>Interests:</strong> Material science and computational chemistry. <br><br>
-		  		The focus of my research has been around altering material properties such as, conductivity
-		  		and elasticity, to allow for sophisticated components to be manufactured.  I am also fascinated with incorporating 
-		  		computers into the study of chemistry, whether it be simulations of an experiment 
-		  		or using AI to support work being done.</p>
-		  	</div>
-		</div>
-		<div class="row">
-			<div class="column" >
-			    <h2>Column 5</h2>
-			    <p>Some text..</p>
-			 </div>
-			 <div class="column" >
-			    <h2>Column 5</h2>
-			    <p>Some text..</p>
-			 </div>
-		 </div>
-		  -->
+    	
     </section>
 </body>
 </html>
