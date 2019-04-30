@@ -522,7 +522,8 @@ z-index: 1;
 }
 
 
-/* ***** The CSS for our search bar ***** */
+
+/* ********** The CSS for our search bar ********** */
 
 .user_input {
     margin: auto;
@@ -537,7 +538,8 @@ z-index: 1;
 }
 
 
-/* ***** Faculty JSP 2 column layout CSS ***** */
+
+/* ********** Faculty JSP 2 column layout CSS ********** */
 
 .dub_col{
 	box-sizing: border-box;
@@ -568,7 +570,13 @@ z-index: 1;
 	padding: 0px 20px 0px 20px;
 }
 
-/* ***** Log Out Box CSS ***** */
+.title{
+	text-align: center;
+}
+
+
+
+/* ********** Log Out Box CSS ********** */
 .fixed {
 	 position: fixed;
 	 bottom: 0;

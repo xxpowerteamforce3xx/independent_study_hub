@@ -16,6 +16,7 @@
         <h1>Faculty</h1>
     </header>
     
+    <!-- Logout box for page -->
     <div class="fixed">
 		Logged in as "${user}"
 		<form action="${pageContext.servletContext.contextPath}/Faculty" method="post">
@@ -23,6 +24,7 @@
     </form>
 	</div>
     
+    <!-- Navigation bar for page -->
     <div class="navbar">
         <a href="http://localhost:8081/independent_study_hub/Home">Home</a>
         <a href="http://localhost:8081/independent_study_hub/Resources">Resources</a>
@@ -30,7 +32,9 @@
         <a href="http://localhost:8081/independent_study_hub/Inventory" class="right">Inventory</a>
         <a href="http://localhost:8081/independent_study_hub/Upload" class="right">Upload</a>
         <a href="#" class="right active">Faculty</a>
-    </div>    
+    </div>
+    
+    
     <form class="upload-box">
         <input type="text" name="" placeholder="Faculty Member" />
         <input type="text" name="" placeholder="Research Students" />
@@ -39,8 +43,25 @@
         <button type="submit">Submit</button>
     </form>   
     
-    <section id="dub_col">
+    <c:set var="count" value="0" scope="page" />
     
+    <section id="dub_col">
+    	<c:forEach items="${faculty}" var="faculty">
+	 		<c:if test="${count % 2 == 0}">
+	        	<div class="row">
+	        </c:if>
+	        	<div class="column">
+	        		<img class="faculty" src="${faculty.get_img()}">
+	        		<h2 class="title">${faculty.get_title()}</h2>
+	        		<p class="description"><strong>Interests: </strong>${faculty.get_interest()} <br><br>
+	        		${faculty.get_description()}</p>
+	        	</div>
+	        <c:if test="${count % 2 != 0}">
+	        	</div>
+	        </c:if>
+	        
+	        <c:set var="count" value="${count + 1}" scope="page"/>
+	    </c:forEach>
     	<!-- 
 	    <div class="row">
 			<div class="column">
