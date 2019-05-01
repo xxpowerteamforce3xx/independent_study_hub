@@ -632,7 +632,7 @@ public class DerbyDatabase implements IDatabase {
 					if (!found) {
 						System.out.println("No Faculty was found with name: <" + acc_name + ">");
 					}
-
+					System.out.println(faculty.get_name() + "<-- from derby");
 					return faculty;
 				} finally {
 					DBUtil.closeQuietly(resultSet_1_fac);

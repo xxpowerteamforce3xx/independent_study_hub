@@ -86,13 +86,22 @@ public class LoginServlet extends HttpServlet {
 		} else {
 			s = controller_student.get_student(name);
 			f = controller_fac.get_faculty(name);
+			System.out.println("faculty name: " + f.get_name() + "faculty pw: " + f.get_password() );
 			try {
 				if (s.get_name().equals(name) && s.get_password().equals(pw)) { 
 					valid = true;
 					email = s.get_email();
-				} else if (f.get_name() == name && f.get_password() == pw) {
+					req.getSession().setAttribute("type", "student");
+				} 
+			} catch (NullPointerException e) {
+				errorMessage = "Well, I don't think either your username or password could be more wrong than they were so";
+			}
+			try {
+				if (f.get_name().equals(name) && f.get_password().equals(pw)) {
 					valid = true;
+					System.out.println("made it here");
 					email = f.get_email();
+					req.getSession().setAttribute("type", "faculty");
 				}
 			} catch (NullPointerException e) {
 					errorMessage = "Well, I don't think either your username or password could be more wrong than they were so";
@@ -105,9 +114,10 @@ public class LoginServlet extends HttpServlet {
 
 		// Add result objects as request attributes
 		
-		req.setAttribute("login",        valid);
+		req.setAttribute("login", valid);
 		// if login is valid, start a session
 		if (valid) {
+			errorMessage = null;
 			System.out.println("   Valid login - starting session, redirecting to /Home");
 
 			// store user object in session
