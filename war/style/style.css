@@ -448,11 +448,18 @@ body.login { /*Sets background color of login screen and general text font*/
 	.navbar-nav{display: none}
 }
 
+.uName-div{
+	border-bottom: solid 2px #fff;
+}
 /* CSS for user name to be displayed in side-bar menu */
 .uName{
 	color:#fff;
 	transition: 0.3;
-	boarder-bottom: solid 1px #fff;
+}
+
+.side-bar-form{
+	content-align: center;
+	border-top: solid 2px #fff;
 }
 
 

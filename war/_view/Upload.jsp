@@ -19,15 +19,6 @@
         <h1>Upload</h1>
     </header>
     
-    <!-- Log out box for this web page -->
-    <div class="fixed">
-		Logged in as "${user}"
-		<br>
-		<form action="${pageContext.servletContext.contextPath}/Upload" method="post">
-        <input type='submit' name ='leave' value = 'Log out'>
-    </form>
-	</div>
-    
     <nav class="navbar">
 		<!-- Our side bar button that uses JavaScript to show the side bar menu -->
     	<span class="open-slide">
@@ -55,7 +46,9 @@
 	
 	<!-- The side bar menu that is activated when the "open-slide" <a> is clicked -->
     <div id="side-menu" class="side-nav">
-    	<h2 class="uName">${user}</h2>
+    	<div class="uName-div">
+    		<h2 class="uName">${user}</h2>
+    	</div>
     	
     	<!-- <a> that closes the side-bar menu. The &times; is what gives the "X" image for this anchor tag-->
     	<a href="#" class="btn-close" onclick="closeSideMenu()">&times;</a>
@@ -65,6 +58,12 @@
         <a href="http://localhost:8081/independent_study_hub/Inventory">Inventory</a>
         <a href="#">Upload</a>
         <a href="http://localhost:8081/independent_study_hub/Faculty">Faculty</a>
+        
+        <form class="side-bar-form" action="${pageContext.servletContext.contextPath}/Home" method="post">
+			<br>
+			<button class="side-bar-form-btn" type='submit' name ='account' value = 'myAccount'>My Account</button>
+        	<button class="side-bar-form-btn" type='submit' name ='leave' value = 'Log out'>Log Out</button>
+    	</form>
     </div>
     
     

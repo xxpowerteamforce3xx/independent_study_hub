@@ -28,17 +28,8 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 
         <p class="quote">Nothing in life is to be feared, it is only to be understood.  Now is the time to understand more, so that we may fear less. <span class="italic">-Marie Curie</span></p>
     </header>
-    
-    <!-- Log out box for user to sign out -->
-    <div class="fixed">
-		Logged in as "${user}"
-		<form action="${pageContext.servletContext.contextPath}/Home" method="post">
-			<br>
-			<input type='submit' name ='account' value = 'myAccount'>
-        	<input type='submit' name ='leave' value = 'Log out'>
-    	</form>
-	</div>
 	
+	<!-- Main Nav Bar that runs across top of web page -->
 	<nav class="navbar">
 		<!-- Our side bar button that uses JavaScript to show the side bar menu -->
     	<span class="open-slide">
@@ -66,8 +57,9 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 	
 	<!-- The side bar menu that is activated when the "open-slide" <a> is clicked -->
     <div id="side-menu" class="side-nav">
-    	<h2 class="uName">${user}</h2>
-    	
+    	<div class="uName-div">
+    		<h2 class="uName">${user}</h2>
+    	</div>
     	<!-- <a> that closes the side-bar menu. The &times; is what gives the "X" image for this anchor tag-->
     	<a href="#" class="btn-close" onclick="closeSideMenu()">&times;</a>
     	<a href="#">Home</a>
@@ -76,6 +68,13 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
         <a href="http://localhost:8081/independent_study_hub/Inventory">Inventory</a>
         <a href="http://localhost:8081/independent_study_hub/Upload">Upload</a>
         <a href="http://localhost:8081/independent_study_hub/Faculty">Faculty</a>
+        
+        
+        <form class="side-bar-form" action="${pageContext.servletContext.contextPath}/Home" method="post">
+			<br>
+			<button class="side-bar-form-btn" type='submit' name ='account' value = 'myAccount'>My Account</button>
+        	<button class="side-bar-form-btn" type='submit' name ='leave' value = 'Log out'>Log Out</button>
+    	</form>
     </div>
 	
 	<!-- Main section of web page's body -->
