@@ -6,13 +6,6 @@ public class Faculty extends User {
 	// type is set to 2 because this is a faculty account
 	private int type = 2;
 	
-	/**
-	 * constructor for the first time creation of a faculty type of user **NOTE: type is not allowed to be changed,
-	 * will always be 2 for a faculty type user
-	 * @param name = the name of the account being created
-	 * @param password = the password of the account being created
-	 * @param email = the email of the account being created
-	 */
 	public Faculty() {
 	
 	}

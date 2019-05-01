@@ -180,6 +180,52 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});
 	}
+	
+	@Override
+	public ArrayList<Student> selectStudentsByFacCode(final String code) {
+		return executeTransaction(new Transaction<ArrayList<Student>>() {
+			@Override
+				public ArrayList<Student> execute(Connection conn) throws SQLException {
+					PreparedStatement stmt = null;
+					ResultSet resultSet = null;
+					try {
+						// retreive all attributes from both Books and Authors tables
+						stmt = conn.prepareStatement(
+								"select students.* " +
+										"  from students " +
+										" where students.faculty_code = ?"
+								);
+						stmt.setString(1, code);
+						ArrayList<Student> result = new ArrayList<Student>();
+		
+						resultSet = stmt.executeQuery();
+		
+						// for testing that a result was returned
+						Boolean found = false;
+						
+						while (resultSet.next()) {
+							found = true;
+							
+							// project : student__id, tudent, title, year, desc
+							//jpeg is not in table creation as of now
+							Student s = new Student();
+							loadStudent(s, resultSet, 1);
+							result.add(s);
+						}
+		
+						// check if anything was found
+						if (!found) {
+							System.out.println("Nothing was found");
+						}
+		
+						return result;
+					} finally {
+						DBUtil.closeQuietly(resultSet);
+						DBUtil.closeQuietly(stmt);
+					}
+				}
+			});
+	}
 
 	@Override
 	public ArrayList<Project> get_all_projects() {
@@ -691,6 +737,7 @@ public class DerbyDatabase implements IDatabase {
 		student.setName(resultSet.getString(i++));
 		student.setPassword(resultSet.getString(i++));
 		student.setEmail(resultSet.getString(i++));
+		student.set_faculty_code(resultSet.getString(i++));
 	}
 	
 	private void loadFaculty(Faculty faculty, ResultSet resultSet, int i) throws SQLException {
@@ -701,7 +748,9 @@ public class DerbyDatabase implements IDatabase {
 		faculty.setTitle(resultSet.getString(i++));
 		faculty.setInterest(resultSet.getString(i++));
 		faculty.setDescription(resultSet.getString(i++));
-		faculty.setFacultyCode(resultSet.getString(i++));
+		String code = resultSet.getString(i++);
+		System.out.println(code + "from db");
+		faculty.setFacultyCode(code);
 		faculty.setImg(resultSet.getString(i++));
 	}
 	
@@ -793,7 +842,8 @@ public class DerbyDatabase implements IDatabase {
 									"		generated always as identity (start with 1, increment by 1), " +									
 									"	name varchar(40), " +
 									"	password varchar(40), " +
-									"   email varchar(40) " +
+									"   email varchar(40), " +
+									"   faculty_code varchar(40)" +
 									")"
 							);	
 					stmt1.executeUpdate();
@@ -879,12 +929,13 @@ public class DerbyDatabase implements IDatabase {
 				
 				try {
 					// populate student table first since it is foreign key in projects table
-					insertStudents = conn.prepareStatement("insert into students (name, password, email) values (?, ?, ?)");
+					insertStudents = conn.prepareStatement("insert into students (name, password, email, faculty_code) values (?, ?, ?, ?)");
 					for (Student student : studentList) {
 						//						insertAuthor.setInt(1, author.getAuthorId());	// auto-generated primary key, don't insert this
 						insertStudents.setString(1, student.get_name());
 						insertStudents.setString(2, student.get_password());
 						insertStudents.setString(3, student.get_email());
+						insertStudents.setString(4, student.get_faculty_code());
 						insertStudents.addBatch();
 					}
 					insertStudents.executeBatch();
@@ -902,7 +953,7 @@ public class DerbyDatabase implements IDatabase {
 					insertProjects.executeBatch();
 					
 					// populate faculty table
-					insertFaculty = conn.prepareStatement("insert into faculty (name, password, email, title, interest, description, img) values (?, ?, ?, ?, ?, ?, ?)");
+					insertFaculty = conn.prepareStatement("insert into faculty (name, password, email, title, interest, description, faculty_code, img) values (?, ?, ?, ?, ?, ?, ?, ?)");
 					for (Faculty faculty : facultyList) {
 						insertFaculty.setString(1, faculty.get_name());
 						insertFaculty.setString(2, faculty.get_password());
@@ -910,7 +961,8 @@ public class DerbyDatabase implements IDatabase {
 						insertFaculty.setString(4, faculty.get_title());
 						insertFaculty.setString(5, faculty.get_interest());
 						insertFaculty.setString(6, faculty.get_description());
-						insertFaculty.setString(7, faculty.get_img());
+						insertFaculty.setString(7, faculty.get_fac_code());
+						insertFaculty.setString(8, faculty.get_img());
 						insertFaculty.addBatch();
 					}
 					insertFaculty.executeBatch();
@@ -952,6 +1004,8 @@ public class DerbyDatabase implements IDatabase {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	
 
 	
 }

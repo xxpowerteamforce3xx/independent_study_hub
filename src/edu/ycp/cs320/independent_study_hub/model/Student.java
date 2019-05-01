@@ -2,7 +2,7 @@ package edu.ycp.cs320.independent_study_hub.model;
 
 public class Student extends User {
 	private int studentID;
-	private String password, name, email;
+	private String password, name, email, fac_code;
 	// type is set to 1 because this is a student type account
 	private int type = 1;
 	
@@ -63,5 +63,14 @@ public class Student extends User {
 	@Override 
 	public void setType(int type) {
 		this.type = type;
+	}
+
+	public String get_faculty_code() {
+		// TODO Auto-generated method stub
+		return fac_code;
+	}
+	
+	public void set_faculty_code(String code) {
+		fac_code = code;
 	}
 }
