@@ -701,6 +701,7 @@ public class DerbyDatabase implements IDatabase {
 		faculty.setTitle(resultSet.getString(i++));
 		faculty.setInterest(resultSet.getString(i++));
 		faculty.setDescription(resultSet.getString(i++));
+		faculty.setFacultyCode(resultSet.getString(i++));
 		faculty.setImg(resultSet.getString(i++));
 	}
 	

@@ -25,7 +25,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 
 <body class="login">
 
-<c:if test="${type == 'faculty}">
+<c:if test="${type.equals('faculty')}">
 	<div class="fixed">
 		Logged in as "${user}"
 		<form action="${pageContext.servletContext.contextPath}/MyAccount" method="post">
