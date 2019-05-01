@@ -1,3 +1,5 @@
 /edu/
-/test.db/
+*.db
 /derby.log/
+war/.log
+
