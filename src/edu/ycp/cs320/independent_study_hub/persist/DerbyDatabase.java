@@ -688,6 +688,8 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 	
+	
+	
 	@Override
 	public ChemicalInventory get_chemical(final String chemical) {
 		return executeTransaction(new Transaction<ChemicalInventory>() {
@@ -727,6 +729,33 @@ public class DerbyDatabase implements IDatabase {
 				} finally {
 					DBUtil.closeQuietly(resultSet_1_chem);
 					DBUtil.closeQuietly(stmt_1_chem);
+				}
+			}
+		});
+	}
+	
+	@Override
+	public boolean update_faculty_email(final String email, final String name) {
+		return executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				Faculty f = get_faculty(name);
+				try {
+					// retreive all attributes from both Books and Authors tables
+					stmt = conn.prepareStatement(
+							"update faculty " +
+									"  set faculty.email = ? " +
+									" where faculty.fac_id = ?"
+							);
+					stmt.setString(1, email);
+					stmt.setInt(2, f.getID());
+
+					stmt.executeUpdate();
+
+					return true;
+				} finally {
+					DBUtil.closeQuietly(stmt);
 				}
 			}
 		});

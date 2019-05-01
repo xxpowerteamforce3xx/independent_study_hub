@@ -27,4 +27,6 @@ public interface IDatabase {
 	public ArrayList<Faculty> get_all_faculty();
 	public ArrayList<Project> get_all_projects();
 	public ArrayList<ChemicalInventory> get_all_chemicals();
+	Faculty get_faculty_id(String acc_name);
+	boolean update_faculty_email(String email, String name);
 }
