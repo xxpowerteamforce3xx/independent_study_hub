@@ -43,6 +43,7 @@ public class MyAccountServlet extends HttpServlet {
 		req.setAttribute("name", name);
 		req.setAttribute("pass", pw);
 		req.setAttribute("email", email);
+		req.setAttribute("type", req.getSession().getAttribute("type"));
 		
 
 		req.getRequestDispatcher("/_view/MyAccount.jsp").forward(req, resp);

@@ -2,7 +2,7 @@ package edu.ycp.cs320.independent_study_hub.model;
 
 public class Faculty extends User {
 	private int facultyID;
-	private String password, username, email, img_url, title, interest, description;
+	private String password, username, email, img_url, title, interest, description, faculty_code;
 	// type is set to 2 because this is a faculty account
 	private int type = 2;
 	
@@ -103,6 +103,14 @@ public class Faculty extends User {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public void setFacultyCode(String code) {
+		faculty_code = code;
+	}
+	
+	public String get_fac_code() {
+		return faculty_code;
 	}
 	
 }
