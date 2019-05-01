@@ -335,7 +335,6 @@ body.login { /*Sets background color of login screen and general text font*/
 	opacity: 1;
 }
 
-
 .box_checkbox_new_student input[type="submit"]{ /*Sets style of login button when nothing is being done*/
     border: 0;
     background: none;
