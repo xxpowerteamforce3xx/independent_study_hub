@@ -825,6 +825,7 @@ public class DerbyDatabase implements IDatabase {
 									"   title varchar(40)," +
 									"   interest varchar(1400)," +
 									"   description varchar(1400)," +
+									"   faculty_code varchar(40), " +
 									"   img varchar(40)" +
 									")"
 							);

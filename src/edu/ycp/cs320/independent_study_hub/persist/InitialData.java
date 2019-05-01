@@ -63,6 +63,7 @@ public class InitialData {
 				faculty.setTitle(i.next());
 				faculty.setInterest(i.next());
 				faculty.setDescription(i.next());
+				faculty.setFacultyCode(i.next());
 				faculty.setImg(i.next());
 				facultyList.add(faculty);
 			}
