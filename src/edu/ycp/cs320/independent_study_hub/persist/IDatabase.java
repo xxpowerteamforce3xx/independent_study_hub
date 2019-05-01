@@ -15,6 +15,7 @@ public interface IDatabase {
 	public ChemicalInventory get_chemical(String chemcial);
 	public ArrayList<Project> getWorkFromYear(int year);
 	public ArrayList<Project> selectProjectsByStudent(String name);
+	public ArrayList<Student> selectStudentsByFacCode(String code);
 	public boolean insertProject(String title, Student student, int year, String description, JPEG image, int workID);
 	public boolean insertStudent(String name, String password, String email);
 	public boolean insertChemical(String chemical, String use, Integer amount);
