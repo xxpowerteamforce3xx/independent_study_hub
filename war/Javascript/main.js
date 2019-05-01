@@ -2,30 +2,21 @@
 
 let search_by = 0;
 
-let inventory = [["Acetone", "Class", "12/27/18"], ["Ethanol", "Class", "01/01/19"], ["Indium chloride", "Research", "01/23/19"], 
-	["Sodium hydroxide", "Class", "10/28/18"], ["Sodium sulfide", "Research", "02/12/19"], ["Thioglycolic acid", "Research", "01/01/19"]];
 
-/* ***** Functions ***** */
-
-//Fills in table on Inventory JSP with data about chemicals
-function generate_table(){
-	//Acquiring the table and table body we will be adding data to 
-	let table = document.getElementById("inventory_table");
-	let body = document.getElementById("inventory_body");
+function openSideMenu(){
+	//Changes the side-menu's width to 250px.  Note, the side-menu's width is initially set to 0px in its CSS
+	document.getElementById("side-menu").style.width = "250px";
 	
-	//Iterate for each row we want to create.  Iterate across first dimension of the 2-D array
-	for (let i = 0; i < inventory.length; i++){
-		//Add a <tr> tag to our table
-		let tr = table.insertRow();
-		
-		//Iterate for each column (Chemical, CHemical Use, Date Purchased).  Iterate across second dimension of 2-D array
-		for (let j = 0; j < 3; j++){
-				//Add a <td> tag to our <tr> tag created above
-				let td = tr.insertCell();
-				//Add a text node to the <td> tag
-				td.appendChild(document.createTextNode(inventory[i][j]));
-		}
-	}
+	//Moves the contents of the page over to the right 250px.  This give the illusion that the side-bar menu is moving things over
+	document.getElementById("main").style.marginLeft= "250px";
+}
+
+function closeSideMenu(){
+	//Changes the side-menu's width to 250px.  Note, the side-menu's width is initially set to 0px in its CSS
+	document.getElementById("side-menu").style.width = "0px";
+	
+	//Moves the contents of the page over to the right 250px.  This give the illusion that the side-bar menu is moving things over
+	document.getElementById("main").style.marginLeft= "0px";
 }
 
 

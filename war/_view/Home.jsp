@@ -17,6 +17,10 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 				
 		#cb_span{color:Gray;}
 	</style>
+	
+	<script type="text/javascript">
+		<%@ include file="./../Javascript/main.js" %>
+	</script>
 </head>
 <body>
     <header class="home">
@@ -34,7 +38,46 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
         	<input type='submit' name ='leave' value = 'Log out'>
     	</form>
 	</div>
-
+	
+	<nav class="navbar">
+		<!-- Our side bar button that uses JavaScript to show the side bar menu -->
+    	<span class="open-slide">
+    		<a href="#" onclick="openSideMenu()">
+    			<!-- Creates our side bar icon that is 30 by 30 pixels -->
+    			<svg width="30" height="30">
+    				<!-- Draws two white lines (stroke) where d denotes what the left and right side of the lines being
+    					Each line is 5 pixels wide (stroke-width) -->
+    				<path d="M0,5 30,5" stroke="#fff" stroke-width="5"/>
+    				<path d="M0,14 30,14" stroke="#fff" stroke-width="5"/>
+    				<path d="M0,23 30,23" stroke="#fff" stroke-width="5"/>
+    			</svg>
+    		</a>
+    	</span>
+    	
+    	<ul class="navbar-nav">
+    		<li><a href="#">Home</a></li>
+    		<li><a href="http://localhost:8081/independent_study_hub/Resources">Resources</a></li>
+    		<li><a href="http://localhost:8081/independent_study_hub/Research">Previous Work</a></li>
+    		<li><a href="http://localhost:8081/independent_study_hub/Inventory">Inventory</a></li>
+    		<li><a href="http://localhost:8081/independent_study_hub/Upload">Upload</a></li>
+    		<li><a href="http://localhost:8081/independent_study_hub/Faculty">Faculty</a></li>
+    	</ul>
+	</nav>
+	
+	<!-- The side bar menu that is activated when the "open-slide" <a> is clicked -->
+    <div id="side-menu" class="side-nav">
+    	<h2 class="uName">${user}</h2>
+    	
+    	<!-- <a> that closes the side-bar menu. The &times; is what gives the "X" image for this anchor tag-->
+    	<a href="#" class="btn-close" onclick="closeSideMenu()">&times;</a>
+    	<a href="#">Home</a>
+        <a href="http://localhost:8081/independent_study_hub/Resources">Resources</a>
+        <a href="http://localhost:8081/independent_study_hub/Research">Previous Work</a>
+        <a href="http://localhost:8081/independent_study_hub/Inventory">Inventory</a>
+        <a href="http://localhost:8081/independent_study_hub/Upload">Upload</a>
+        <a href="http://localhost:8081/independent_study_hub/Faculty">Faculty</a>
+    </div>
+	
 	<!-- Main section of web page's body -->
     <section class="Description">
         <div class="protector">
@@ -77,6 +120,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
         	</div>
     </section>
 
+
     <section>
         <div class="protector">
             <h2 class="ribbon">
@@ -89,6 +133,20 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
         </form>
         
     </section>
+    
+    
+    <section>
+        <div class="protector">
+            <h2 class="ribbon">
+                <strong class="ribbon-content">Faculty</strong>
+            </h2>
+        </div>
+		<form action="${pageContext.servletContext.contextPath}/Faculty" method="doGet">
+        	<p>Description of Faculty's research interests and past experience</p>
+        	<button type="submit">Click Here!</button>
+        </form>
+    </section>
+
 
     <section>
         <div class="protector">

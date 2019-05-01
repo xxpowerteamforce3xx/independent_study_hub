@@ -1,11 +1,15 @@
 package edu.ycp.cs320.independent_study_hub.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import edu.ycp.cs320.independent_study_hub.controller.SelectAllChemicalsController;
+import edu.ycp.cs320.independent_study_hub.model.ChemicalInventory;
 
 public class InventoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -17,6 +21,14 @@ public class InventoryServlet extends HttpServlet {
 		resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
 		resp.setHeader("Pragma", "no-cache"); // HTTP 1.0.
 		resp.setHeader("Expires", "0"); // Proxies.
+		
+		
+		//The list that will store all chemicals from the database that our controller returns
+		ArrayList<ChemicalInventory> inventory = null;
+		
+		//Controller that will retrieve all chemical data in the form of an array list of references to ChemicalInventory objects
+		SelectAllChemicalsController controller = new SelectAllChemicalsController();
+		
 		
 		String user = (String) req.getSession().getAttribute("user");
 		if (user == null){
@@ -38,6 +50,12 @@ public class InventoryServlet extends HttpServlet {
 		
 		System.out.println("Inventory Servlet: doGet");
 		System.out.println("Request: " + req + " Response: " + resp);
+		
+		//Call for our array list of ChemicalInventory objects
+		inventory = controller.get_all_chemicals();
+		
+		//Sets "inventory" attribute in HTTP servlet request to our array list
+		req.setAttribute("inventory", inventory);
 		
 		req.getRequestDispatcher("/_view/Inventory.jsp").forward(req, resp);
 	}

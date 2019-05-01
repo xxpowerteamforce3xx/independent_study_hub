@@ -10,12 +10,16 @@
 		<%@ include file="./../style/style.css" %>
 				
 	</style>
+	<script type="text/javascript">
+		<%@ include file="./../Javascript/main.js" %>
+	</script>
 </head>
 <body>
     <header>
         <h1>Upload</h1>
     </header>
     
+    <!-- Log out box for this web page -->
     <div class="fixed">
 		Logged in as "${user}"
 		<br>
@@ -24,38 +28,69 @@
     </form>
 	</div>
     
-    <div class="navbar">
-        <a href="http://localhost:8081/independent_study_hub/Home">Home</a>
+    <nav class="navbar">
+		<!-- Our side bar button that uses JavaScript to show the side bar menu -->
+    	<span class="open-slide">
+    		<a href="#" onclick="openSideMenu()">
+    			<!-- Creates our side bar icon that is 30 by 30 pixels -->
+    			<svg width="30" height="30">
+    				<!-- Draws two white lines (stroke) where d denotes what the left and right side of the lines being
+    					Each line is 5 pixels wide (stroke-width) -->
+    				<path d="M0,5 30,5" stroke="#fff" stroke-width="5"/>
+    				<path d="M0,14 30,14" stroke="#fff" stroke-width="5"/>
+    				<path d="M0,23 30,23" stroke="#fff" stroke-width="5"/>
+    			</svg>
+    		</a>
+    	</span>
+    	
+    	<ul class="navbar-nav">
+    		<li><a href="http://localhost:8081/independent_study_hub/Home">Home</a></li>
+    		<li><a href="http://localhost:8081/independent_study_hub/Resources">Resources</a></li>
+    		<li><a href="http://localhost:8081/independent_study_hub/Research">Previous Work</a></li>
+    		<li><a href="http://localhost:8081/independent_study_hub/Inventory">Inventory</a></li>
+    		<li><a href="#">Upload</a></li>
+    		<li><a href="http://localhost:8081/independent_study_hub/Faculty">Faculty</a></li>
+    	</ul>
+	</nav>
+	
+	<!-- The side bar menu that is activated when the "open-slide" <a> is clicked -->
+    <div id="side-menu" class="side-nav">
+    	<h2 class="uName">${user}</h2>
+    	
+    	<!-- <a> that closes the side-bar menu. The &times; is what gives the "X" image for this anchor tag-->
+    	<a href="#" class="btn-close" onclick="closeSideMenu()">&times;</a>
+    	<a href="http://localhost:8081/independent_study_hub/Home">Home</a>
         <a href="http://localhost:8081/independent_study_hub/Resources">Resources</a>
         <a href="http://localhost:8081/independent_study_hub/Research">Previous Work</a>
-        <a href="http://localhost:8081/independent_study_hub/Inventory" class="right">Inventory</a>
-        <a href="#" class="right active">Upload</a>
-        <a href="http://localhost:8081/independent_study_hub/Faculty" class="right">Faculty</a>
+        <a href="http://localhost:8081/independent_study_hub/Inventory">Inventory</a>
+        <a href="#">Upload</a>
+        <a href="http://localhost:8081/independent_study_hub/Faculty">Faculty</a>
     </div>
     
-    <div class="upload_bg"></div>
     
-    <form class="upload" action="${pageContext.servletContext.contextPath}/Upload" method="post">
-	  <fieldset class="upload">
-	    <legend>Upload a Project!</legend>
-	    Title:<br>
-	    <input type="text" name="tile" placeholder="title" value="${title}">
-	    <br><br>
-	    Description:<br>
-	    <textarea name="desc" placeholder="Write something.." style="height:150px; width:350px;, font-style:arial;" >${desc}</textarea>
-	    <br><br>
-	    Date Completed: <br>
-	    <input type="text" name="date" placeholder="month/day/year" value="${date}">
-	    <br><br><br>
-	    <input type="submit" name="button" value="Login" id="log"/>
-	  </fieldset>
-	</form>
-	<div class="upload_txt">
-		Upload your independent study! When picking a<br><br> 
-		description, don't worry about writing like <br><br>
-		it is your research paper. Be descriptive and<br><br> 
-		general so future students can have an idea of<br><br>
-		where to start! 
-	 </div>
+	    <div class="upload_bg"></div>
+	    
+	    <form class="upload" action="${pageContext.servletContext.contextPath}/Upload" method="post">
+		  <fieldset class="upload">
+		    <legend>Upload a Project!</legend>
+		    Title:<br>
+		    <input type="text" name="tile" placeholder="title" value="${title}">
+		    <br><br>
+		    Description:<br>
+		    <textarea name="desc" placeholder="Write something.." style="height:150px; width:350px;, font-style:arial;" >${desc}</textarea>
+		    <br><br>
+		    Date Completed: <br>
+		    <input type="text" name="date" placeholder="month/day/year" value="${date}">
+		    <br><br><br>
+		    <input type="submit" name="button" value="Login" id="log"/>
+		  </fieldset>
+		</form>
+		<div class="upload_txt">
+			Upload your independent study! When picking a<br><br> 
+			description, don't worry about writing like <br><br>
+			it is your research paper. Be descriptive and<br><br> 
+			general so future students can have an idea of<br><br>
+			where to start! 
+		 </div>
 </body>
 </html>
