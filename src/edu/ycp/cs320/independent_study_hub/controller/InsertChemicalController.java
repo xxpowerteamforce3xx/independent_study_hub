@@ -37,7 +37,7 @@ public class InsertChemicalController {
 	 * @param email -> email provided
 	 * @returns true if succesful insertion
 	 */
-	public boolean insertChemical (String chemical, String use, int dom) {
+	public boolean insertChemical (String chemical, String use, String dom) {
 		boolean b = db.insertChemical(chemical, use, dom);
 		if (b) {
 			System.out.println("chemical inserted successfully!");

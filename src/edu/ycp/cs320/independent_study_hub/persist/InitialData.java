@@ -123,7 +123,7 @@ public class InitialData {
 				chemical.setChemicalID(chemicalID++);				
 				chemical.setChemical(i.next());
 				chemical.setUseOfChemcial(i.next());
-				chemical.setDom(Integer.parseInt(i.next()));
+				chemical.setDom(i.next());
 				chemicalList.add(chemical);
 			}
 			return chemicalList;

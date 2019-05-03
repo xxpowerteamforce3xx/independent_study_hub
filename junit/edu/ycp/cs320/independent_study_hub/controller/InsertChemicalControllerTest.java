@@ -17,8 +17,8 @@ public class InsertChemicalControllerTest {
 
 	@Test
 	public void test_insert_new_student() {
-		assertTrue(controller.insertChemical("meth", "creative thinking", 21));
-		assertTrue(controller.insertChemical("coffee", "recreation", 0));
+		assertTrue(controller.insertChemical("meth", "creative thinking", "01/12/19"));
+		assertTrue(controller.insertChemical("coffee", "recreation", "02/15/19"));
 	}
 	
 }

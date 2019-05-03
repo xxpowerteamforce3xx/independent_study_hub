@@ -5,7 +5,7 @@ public class ChemicalInventory {
 	private int chemicalID;
 	private String chemical;
 	private String use;
-	private int dom;
+	private String dom;
 	/**
 	 * getter for the chemical
 	 * @return a string chemical
@@ -32,10 +32,10 @@ public class ChemicalInventory {
 	public void setUseOfChemcial(String use) {
 		this.use = use;
 	}
-	public int getDom() {
+	public String getDom() {
 		return dom;
 	}
-	public void setDom(int dom) {
+	public void setDom(String dom) {
 		this.dom = dom;
 	}
 	

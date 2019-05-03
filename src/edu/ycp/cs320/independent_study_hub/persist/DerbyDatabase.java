@@ -374,19 +374,19 @@ public class DerbyDatabase implements IDatabase {
 	}
 
 	@Override
-	public boolean insertChemical(final String chemical, final String use, final int dom) {
+	public boolean insertChemical(final String chemical, final String use, final String dom) {
 		return executeTransaction(new Transaction<Boolean>()  {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
 				PreparedStatement stmt = null;
 				try {
 					stmt = conn.prepareStatement(
-							"insert into chemicals (name, use, quantity) " +
+							"insert into chemicals (name, use, dom) " +
 							"  values(?, ?, ?) "
 					);
 					stmt.setString(1, chemical);
 					stmt.setString(2, use);
-					stmt.setInt(3, dom);
+					stmt.setString(3, dom);
 					
 					// execute the update
 					stmt.executeUpdate();
@@ -798,7 +798,7 @@ public class DerbyDatabase implements IDatabase {
 		c.setChemicalID(r.getInt(i++));
 		c.setChemical(r.getString(i++));
 		c.setUseOfChemcial(r.getString(i++));
-		c.setDom(r.getInt(i++));
+		c.setDom(r.getString(i++));
 	}
 	
 	public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
@@ -916,9 +916,10 @@ public class DerbyDatabase implements IDatabase {
 							"create table chemicals (" +
 									" 	chemicals_id integer primary key " +
 									"		generated always as identity (start with 1, increment by 1), " +
-									" 	name varchar(40)," +
-									"   use  varchar(40)," +
-									" 	quantity integer" +
+									" 	name varchar(40)," + //Stores chemical name
+									"   use  varchar(40)," + //Stores chemical use (class or research use)
+									"   dom  varchar(10) " + //Stores date chemical was purchased (in format of MM/DD/YY)
+									//" 	quantity integer" +
 									")"
 							);
 					stmt4.executeUpdate();
@@ -997,11 +998,11 @@ public class DerbyDatabase implements IDatabase {
 					insertFaculty.executeBatch();
 					
 					// populate the chemical table
-					insertChemicals = conn.prepareStatement("insert into chemicals (name, use, quantity) values (?, ?, ?)");
+					insertChemicals = conn.prepareStatement("insert into chemicals (name, use, dom) values (?, ?, ?)");
 					for (ChemicalInventory chemical : chemicalList) {
 						insertChemicals.setString(1, chemical.getChemical());
 						insertChemicals.setString(2, chemical.getUseOfChemical());
-						insertChemicals.setInt(3, chemical.getDom());
+						insertChemicals.setString(3, chemical.getDom());
 						insertChemicals.addBatch();
 					}
 					insertChemicals.executeBatch();
