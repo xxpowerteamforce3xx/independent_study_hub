@@ -77,7 +77,12 @@
 	        <input type="submit" name="button" value="Create!" id="create"/>
 	    </form>
 		
-		
+		<c:if test="${! empty errorMessage}">
+			<div class="alert">
+ 		 		<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  		 		<strong>Error!</strong> ${errorMessage}
+	  		</div>
+	  </c:if>
 	    <section>
 	
 	        <!-- Search bar to type in phrase to search for in table below -->

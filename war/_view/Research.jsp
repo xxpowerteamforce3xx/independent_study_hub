@@ -37,9 +37,9 @@
 		    	</span>
 		    	
 		    	<ul class="navbar-nav">
-		    		<li><a href="#">Home</a></li>
+		    		<li><a href="http://localhost:8081/independent_study_hub/Home">Home</a></li>
 		    		<li><a href="http://localhost:8081/independent_study_hub/Resources">Resources</a></li>
-		    		<li><a href="http://localhost:8081/independent_study_hub/Research">Previous Work</a></li>
+		    		<li><a href="#">Previous Work</a></li>
 		    		<li><a href="http://localhost:8081/independent_study_hub/Faculty">Faculty</a></li>
 		    	</ul>
 			</nav>

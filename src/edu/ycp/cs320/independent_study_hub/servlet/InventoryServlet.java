@@ -112,6 +112,9 @@ public class InventoryServlet extends HttpServlet {
 					errorMessage = "Failed to insert chemical: " + chemical;					
 				}
 			}
+		req.setAttribute("chemical", chemical);
+		req.setAttribute("use", use);
+		req.setAttribute("year_purchased", bought);
 		req.getRequestDispatcher("/_view/Inventory.jsp").forward(req, resp);
 	}
 	
