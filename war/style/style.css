@@ -335,7 +335,6 @@ body.login { /*Sets background color of login screen and general text font*/
 	opacity: 1;
 }
 
-
 .box_checkbox_new_student input[type="submit"]{ /*Sets style of login button when nothing is being done*/
     border: 0;
     background: none;
@@ -449,11 +448,18 @@ body.login { /*Sets background color of login screen and general text font*/
 	.navbar-nav{display: none}
 }
 
+.uName-div{
+	border-bottom: solid 2px #fff;
+}
 /* CSS for user name to be displayed in side-bar menu */
 .uName{
 	color:#fff;
 	transition: 0.3;
-	boarder-bottom: solid 1px #fff;
+}
+
+.side-bar-form{
+	content-align: center;
+	border-top: solid 2px #fff;
 }
 
 
@@ -634,6 +640,27 @@ z-index: 1;
 	text-align: center;
 }
 
+
+
+/* ********** Upload CSS ********** */
+
+/* Main <div> on Upload.JSP that houses the two sections on the page */
+.upload-container{
+	margin-top: 2rem;
+	display: flex; /* Signifies we are using flexbox to layout HTML elements */
+}
+
+.upload-box1{
+	flex: 1; /* Specifies that HTML element with upload-box1 class has a size of 1 */
+} 
+
+.upload-box2{
+	flex: 2; /* Specifies that HTML element with upload-box2 class has a size of 2 (double what upload-box1 is) */
+}
+
+.upload-form{
+	border: none;
+}
 
 
 /* ********** Log Out Box CSS ********** */

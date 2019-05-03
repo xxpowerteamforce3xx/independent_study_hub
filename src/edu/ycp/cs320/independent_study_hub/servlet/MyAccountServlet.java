@@ -13,11 +13,15 @@ import edu.ycp.cs320.independent_study_hub.controller.InsertStudentController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectOneFacultyController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectOneStudentController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectProjectsByStudentController;
+import edu.ycp.cs320.independent_study_hub.controller.SelectStudentsByFacCodeController;
 
 public class MyAccountServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private SelectProjectsByStudentController controller_projects = new SelectProjectsByStudentController();
+	private SelectStudentsByFacCodeController controller_students = new SelectStudentsByFacCodeController();
+	private SelectOneFacultyController controller_one_fac = new SelectOneFacultyController();
 	private List<Project> p_list = new ArrayList<Project>();
+	private ArrayList<Student> s_list = new ArrayList<Student>();
 	
 	
 	@Override
@@ -31,21 +35,32 @@ public class MyAccountServlet extends HttpServlet {
 		String name         = null;
 		String pw           = null;
 		String email        = null;
+		String code 		= null;
+		String type			= null;
 		
 		name = (String) req.getSession().getAttribute("user");
 		pw = (String) req.getSession().getAttribute("pw");
 		email = (String) req.getSession().getAttribute("email");
-		
-		p_list = controller_projects.SelectProjectsByStudent(name);
-		
-		req.setAttribute("projects", p_list);
+		code = (String) req.getSession().getAttribute("fac_code");
+		System.out.println(code + " fac code");
+		type = (String) req.getSession().getAttribute("type");
+		try {
+			if (type.equals("student")) {
+				p_list = controller_projects.SelectProjectsByStudent(name);
+				req.setAttribute("projects", p_list);
+			} else if (type.equals("faculty")) {
+				Faculty f = controller_one_fac.get_faculty(name);
+				s_list = controller_students.SelectStudentByFacCode(f.get_fac_code());
+				req.setAttribute("students", s_list);
+			}
+		} catch(NullPointerException e) {}
 		req.setAttribute("errorMessage", errorMessage);
 		req.setAttribute("name", name);
 		req.setAttribute("pass", pw);
 		req.setAttribute("email", email);
-		req.setAttribute("type", req.getSession().getAttribute("type"));
+		req.setAttribute("code", code);
+		req.setAttribute("type", type);
 		
-
 		req.getRequestDispatcher("/_view/MyAccount.jsp").forward(req, resp);
 	}
 	

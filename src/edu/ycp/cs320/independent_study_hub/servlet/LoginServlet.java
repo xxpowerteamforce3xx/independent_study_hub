@@ -72,6 +72,7 @@ public class LoginServlet extends HttpServlet {
 			if (button.equals("Login")) { // tried to login as an existing user
 				if (check1 != null && check1.equals("1")) {
 					req.getSession().setAttribute("user", "guest");
+					req.getSession().setAttribute("type", "guest");
 					resp.sendRedirect(req.getContextPath() + "/Home");
 					return;
 				}
@@ -102,6 +103,8 @@ public class LoginServlet extends HttpServlet {
 					System.out.println("made it here");
 					email = f.get_email();
 					req.getSession().setAttribute("type", "faculty");
+					System.out.println(f.get_fac_code());
+					req.getSession().setAttribute("fac_code", f.get_fac_code());
 				}
 			} catch (NullPointerException e) {
 					errorMessage = "Well, I don't think either your username or password could be more wrong than they were so";

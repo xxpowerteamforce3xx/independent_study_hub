@@ -19,15 +19,6 @@
         <h1>Upload</h1>
     </header>
     
-    <!-- Log out box for this web page -->
-    <div class="fixed">
-		Logged in as "${user}"
-		<br>
-		<form action="${pageContext.servletContext.contextPath}/Upload" method="post">
-        <input type='submit' name ='leave' value = 'Log out'>
-    </form>
-	</div>
-    
     <nav class="navbar">
 		<!-- Our side bar button that uses JavaScript to show the side bar menu -->
     	<span class="open-slide">
@@ -55,7 +46,9 @@
 	
 	<!-- The side bar menu that is activated when the "open-slide" <a> is clicked -->
     <div id="side-menu" class="side-nav">
-    	<h2 class="uName">${user}</h2>
+    	<div class="uName-div">
+    		<h2 class="uName">${user}</h2>
+    	</div>
     	
     	<!-- <a> that closes the side-bar menu. The &times; is what gives the "X" image for this anchor tag-->
     	<a href="#" class="btn-close" onclick="closeSideMenu()">&times;</a>
@@ -65,9 +58,73 @@
         <a href="http://localhost:8081/independent_study_hub/Inventory">Inventory</a>
         <a href="#">Upload</a>
         <a href="http://localhost:8081/independent_study_hub/Faculty">Faculty</a>
+        
+        <form class="side-bar-form" action="${pageContext.servletContext.contextPath}/Home" method="post">
+			<br>
+			<button class="side-bar-form-btn" type='submit' name ='account' value = 'myAccount'>My Account</button>
+        	<button class="side-bar-form-btn" type='submit' name ='leave' value = 'Log out'>Log Out</button>
+    	</form>
     </div>
     
+    <div class="upload-container">
+    	<div class="upload-box1">
+    		Upload your independent study! When picking a<br><br> 
+			description, don't worry about writing like <br><br>
+			it is your research paper. Be descriptive and<br><br> 
+			general so future students can have an idea of<br><br>
+			where to start! 
+    	</div>
     
+    	<div class="upload-box2 upload-form">
+    		<form  action="${pageContext.servletContext.contextPath}/Upload" method="post">
+    		  <fieldset>
+    		    <legend>Upload a Project!</legend>
+    		    Title:<br>
+    		    <input type="text" name="tile" placeholder="title" value="${title}">
+    		    <br><br>
+    		    Description:<br>
+    		    <textarea name="desc" placeholder="Write something.." rows="4", cols="50" style="font-style:arial;" >${desc}</textarea>
+    		    <br><br>
+    		    Date Completed: <br>
+    		    <input type="text" name="date" placeholder="month/day/year" value="${date}">
+    		    <br><br><br>
+    		    <input type="submit" name="button" value="Login" id="log"/>
+    		  </fieldset>
+			  </form>
+    	</div>
+    </div>
+    <!--  
+    <div class="upload-container">
+    	<div class="upload-box1">
+    		Upload your independent study! When picking a<br><br> 
+			description, don't worry about writing like <br><br>
+			it is your research paper. Be descriptive and<br><br> 
+			general so future students can have an idea of<br><br>
+			where to start! 
+    	</div>
+    
+    	<div class="upload-box2 upload-form">
+    		<form action="${pageContext.servletContext.contextPath}/Upload" method="post">
+		  <fieldset>
+		    <legend>Upload a Project!</legend>
+		    Title:<br>
+		    <input type="text" name="tile" placeholder="title" value="${title}">
+		    <br><br>
+		    Description:<br>
+		    <textarea name="desc" placeholder="Write something.." style="height:150px; width:350px;, font-style:arial;" >${desc}</textarea>
+		    <br><br>
+		    Date Completed: <br>
+		    <input type="text" name="date" placeholder="month/day/year" value="${date}">
+		    <br><br><br>
+		    <input type="submit" name="button" value="Login" id="log"/>
+		  </fieldset>
+			</form>
+    	</div>
+    </div>
+    
+    -->
+    
+    <!-- 
 	    <div class="upload_bg"></div>
 	    
 	    <form class="upload" action="${pageContext.servletContext.contextPath}/Upload" method="post">
@@ -92,5 +149,7 @@
 			general so future students can have an idea of<br><br>
 			where to start! 
 		 </div>
+		 
+		  -->
 </body>
 </html>

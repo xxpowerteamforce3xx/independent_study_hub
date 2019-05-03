@@ -32,7 +32,7 @@ public class HomeServlet extends HttpServlet {
 		// now we have the user's User object,
 		// proceed to handle request...
 		System.out.println("   User: <" + user + "> logged in");
-		
+		req.setAttribute("user", req.getAttribute("user"));
 		System.out.println("Home Servlet: doGet");
 		System.out.println("Request: " + req + " Response: " + resp);
 		

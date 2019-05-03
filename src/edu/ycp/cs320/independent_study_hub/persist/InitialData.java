@@ -34,6 +34,7 @@ public class InitialData {
 				students.setName(i.next());
 				students.setPassword(i.next());
 				students.setEmail(i.next());
+				students.set_faculty_code(i.next());
 				students.setType(Integer.parseInt(i.next()));
 				studentList.add(students);
 			}
@@ -63,7 +64,8 @@ public class InitialData {
 				faculty.setTitle(i.next());
 				faculty.setInterest(i.next());
 				faculty.setDescription(i.next());
-				faculty.setFacultyCode(i.next());
+				String code = i.next();
+				faculty.setFacultyCode(code);
 				faculty.setImg(i.next());
 				facultyList.add(faculty);
 			}
