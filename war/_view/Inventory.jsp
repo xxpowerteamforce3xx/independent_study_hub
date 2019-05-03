@@ -68,15 +68,15 @@
         	<button class="side-bar-form-btn" type='submit' name ='leave' value = 'Log out'>Log Out</button>
     	</form>
     </div>
-
-	    <form class="upload-box">
+	<c:if test="${type.equals('faculty')}">
+	    <form action="${pageContext.servletContext.contextPath}/Inventory" method="post">
 	        <input type="text" name="chemical" placeholder="Chemical" id="chemical" value="${chemical}"/>
        	    <input type="text" name="use" placeholder="Research of Class" id="use" value="${use}"/>
        		<input type="text" name="year_purchased" placeholder="Purchased" id="year_purchased" value="${year_purchased}"/>
 	        <button type="reset">Reset</button>
 	        <input type="submit" name="button" value="Create!" id="create"/>
 	    </form>
-		
+	</c:if>
 		<c:if test="${! empty errorMessage}">
 			<div class="alert">
  		 		<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
