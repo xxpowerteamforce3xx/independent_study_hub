@@ -72,6 +72,7 @@ public class LoginServlet extends HttpServlet {
 			if (button.equals("Login")) { // tried to login as an existing user
 				if (check1 != null && check1.equals("1")) {
 					req.getSession().setAttribute("user", "guest");
+					req.getSession().setAttribute("type", "guest");
 					resp.sendRedirect(req.getContextPath() + "/Home");
 					return;
 				}

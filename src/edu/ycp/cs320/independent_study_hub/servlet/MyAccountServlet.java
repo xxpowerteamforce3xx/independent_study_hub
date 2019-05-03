@@ -44,15 +44,16 @@ public class MyAccountServlet extends HttpServlet {
 		code = (String) req.getSession().getAttribute("fac_code");
 		System.out.println(code + " fac code");
 		type = (String) req.getSession().getAttribute("type");
-		
-		if (type.equals("student")) {
-			p_list = controller_projects.SelectProjectsByStudent(name);
-			req.setAttribute("projects", p_list);
-		} else if (type.equals("faculty")) {
-			Faculty f = controller_one_fac.get_faculty(name);
-			s_list = controller_students.SelectStudentByFacCode(f.get_fac_code());
-			req.setAttribute("students", s_list);
-		}
+		try {
+			if (type.equals("student")) {
+				p_list = controller_projects.SelectProjectsByStudent(name);
+				req.setAttribute("projects", p_list);
+			} else if (type.equals("faculty")) {
+				Faculty f = controller_one_fac.get_faculty(name);
+				s_list = controller_students.SelectStudentByFacCode(f.get_fac_code());
+				req.setAttribute("students", s_list);
+			}
+		} catch(NullPointerException e) {}
 		req.setAttribute("errorMessage", errorMessage);
 		req.setAttribute("name", name);
 		req.setAttribute("pass", pw);
