@@ -642,6 +642,27 @@ z-index: 1;
 
 
 
+/* ********** Upload CSS ********** */
+
+/* Main <div> on Upload.JSP that houses the two sections on the page */
+.upload-container{
+	margin-top: 2rem;
+	display: flex; /* Signifies we are using flexbox to layout HTML elements */
+}
+
+.upload-box1{
+	flex: 1; /* Specifies that HTML element with upload-box1 class has a size of 1 */
+} 
+
+.upload-box2{
+	flex: 2; /* Specifies that HTML element with upload-box2 class has a size of 2 (double what upload-box1 is) */
+}
+
+.upload-form{
+	border: none;
+}
+
+
 /* ********** Log Out Box CSS ********** */
 .fixed {
 	 position: fixed;

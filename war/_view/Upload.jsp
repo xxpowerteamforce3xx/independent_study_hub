@@ -66,7 +66,65 @@
     	</form>
     </div>
     
+    <div class="upload-container">
+    	<div class="upload-box1">
+    		Upload your independent study! When picking a<br><br> 
+			description, don't worry about writing like <br><br>
+			it is your research paper. Be descriptive and<br><br> 
+			general so future students can have an idea of<br><br>
+			where to start! 
+    	</div>
     
+    	<div class="upload-box2 upload-form">
+    		<form  action="${pageContext.servletContext.contextPath}/Upload" method="post">
+    		  <fieldset>
+    		    <legend>Upload a Project!</legend>
+    		    Title:<br>
+    		    <input type="text" name="tile" placeholder="title" value="${title}">
+    		    <br><br>
+    		    Description:<br>
+    		    <textarea name="desc" placeholder="Write something.." rows="4", cols="50" style="font-style:arial;" >${desc}</textarea>
+    		    <br><br>
+    		    Date Completed: <br>
+    		    <input type="text" name="date" placeholder="month/day/year" value="${date}">
+    		    <br><br><br>
+    		    <input type="submit" name="button" value="Login" id="log"/>
+    		  </fieldset>
+			  </form>
+    	</div>
+    </div>
+    <!--  
+    <div class="upload-container">
+    	<div class="upload-box1">
+    		Upload your independent study! When picking a<br><br> 
+			description, don't worry about writing like <br><br>
+			it is your research paper. Be descriptive and<br><br> 
+			general so future students can have an idea of<br><br>
+			where to start! 
+    	</div>
+    
+    	<div class="upload-box2 upload-form">
+    		<form action="${pageContext.servletContext.contextPath}/Upload" method="post">
+		  <fieldset>
+		    <legend>Upload a Project!</legend>
+		    Title:<br>
+		    <input type="text" name="tile" placeholder="title" value="${title}">
+		    <br><br>
+		    Description:<br>
+		    <textarea name="desc" placeholder="Write something.." style="height:150px; width:350px;, font-style:arial;" >${desc}</textarea>
+		    <br><br>
+		    Date Completed: <br>
+		    <input type="text" name="date" placeholder="month/day/year" value="${date}">
+		    <br><br><br>
+		    <input type="submit" name="button" value="Login" id="log"/>
+		  </fieldset>
+			</form>
+    	</div>
+    </div>
+    
+    -->
+    
+    <!-- 
 	    <div class="upload_bg"></div>
 	    
 	    <form class="upload" action="${pageContext.servletContext.contextPath}/Upload" method="post">
@@ -91,5 +149,7 @@
 			general so future students can have an idea of<br><br>
 			where to start! 
 		 </div>
+		 
+		  -->
 </body>
 </html>
