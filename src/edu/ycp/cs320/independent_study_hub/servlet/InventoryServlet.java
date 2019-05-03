@@ -8,12 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.ycp.cs320.independent_study_hub.controller.InsertChemicalController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectAllChemicalsController;
 import edu.ycp.cs320.independent_study_hub.model.ChemicalInventory;
 
 public class InventoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+	private InsertChemicalController controller = null;	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -65,7 +66,6 @@ public class InventoryServlet extends HttpServlet {
 			throws ServletException, IOException {
 		System.out.println("Inventory servlet doPost");
 		System.out.println(req.getSession().getAttribute("user"));
-		
 		String user = (String) req.getSession().getAttribute("user");
 		req.setAttribute("user", user);
 		if (user == null) {
@@ -82,6 +82,37 @@ public class InventoryServlet extends HttpServlet {
 			req.getSession().invalidate();
 			resp.sendRedirect(req.getContextPath() + "/Login");
 		}
+		
+		///
+		String errorMessage   = null;
+		String successMessage = null;
+		String chemical = null;
+		String use         = null;
+		String year_purchased           = null;
+		Integer bought = 0;
+		chemical = req.getParameter("chemical");
+		use = req.getParameter("use");
+		year_purchased = req.getParameter("year_purchased");
+		if (chemical    == null || chemical.equals("") ||
+				use     == null || use.equals("")  ||
+				year_purchased        == null || year_purchased.equals("")) {
+				
+				errorMessage = "Please fill in all of the required fields";
+			} else {
+				controller = new InsertChemicalController();
+
+				// convert published to integer now that it is valid
+				bought = Integer.parseInt(year_purchased);
+				
+				// get list of books returned from query			
+				if (controller.insertChemical(chemical, use, bought)) {
+					successMessage = chemical;
+				}
+				else {
+					errorMessage = "Failed to insert chemical: " + chemical;					
+				}
+			}
+		req.getRequestDispatcher("/_view/Inventory.jsp").forward(req, resp);
 	}
 	
 	

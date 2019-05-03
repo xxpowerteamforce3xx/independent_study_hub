@@ -70,11 +70,11 @@
     </div>
 
 	    <form class="upload-box">
-	        <input type="text" name="" placeholder="Chemical Name" />
-	        <input type="text" name="" placeholder="For Research or Class" />
-	        <input type="text" name="" placeholder="Year Purchased" />
+	        <input type="text" name="chemical" placeholder="Chemical" id="chemical" value="${chemical}"/>
+       	    <input type="text" name="use" placeholder="Research of Class" id="use" value="${use}"/>
+       		<input type="text" name="year_purchased" placeholder="Purchased" id="year_purchased" value="${year_purchased}"/>
 	        <button type="reset">Reset</button>
-	        <button type="submit">Submit</button>
+	        <input type="submit" name="button" value="Create!" id="create"/>
 	    </form>
 		
 		
