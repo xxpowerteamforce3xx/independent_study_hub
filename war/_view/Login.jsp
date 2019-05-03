@@ -20,6 +20,8 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 	<script type="text/javascript">
 		<%@ include file="./../Javascript/main.js" %>
 	</script>
+	
+	
 
 </head>
 
@@ -56,5 +58,8 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 	  		</div>
 	  </c:if>
       
+      <!-- For future reference when I
+      <script src="url"></script>
+       -->
 </body>
 </html>
