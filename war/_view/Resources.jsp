@@ -51,8 +51,8 @@
 		    	</div>
 		    	<!-- <a> that closes the side-bar menu. The &times; is what gives the "X" image for this anchor tag-->
 		    	<a href="#" class="btn-close" onclick="closeSideMenu()">&times;</a>
-		    	<a href="#">Home</a>
-		        <a href="http://localhost:8081/independent_study_hub/Resources">Resources</a>
+		    	<a href="http://localhost:8081/independent_study_hub/Home">Home</a>
+		        <a href="#">Resources</a>
 		        <a href="http://localhost:8081/independent_study_hub/Research">Previous Work</a>
 		        <a href="http://localhost:8081/independent_study_hub/Faculty">Faculty</a>
 		        
@@ -81,8 +81,8 @@
 		    	</span>
 		    	
 		    	<ul class="navbar-nav">
-		    		<li><a href="#">Home</a></li>
-		    		<li><a href="http://localhost:8081/independent_study_hub/Resources">Resources</a></li>
+		    		<li><a href="http://localhost:8081/independent_study_hub/Home">Home</a></li>
+		    		<li><a href="#">Resources</a></li>
 		    		<li><a href="http://localhost:8081/independent_study_hub/Research">Previous Work</a></li>
 		    		<li><a href="http://localhost:8081/independent_study_hub/Inventory">Inventory</a></li>
 		    		<li><a href="http://localhost:8081/independent_study_hub/Upload">Upload</a></li>
@@ -97,8 +97,8 @@
 		    	</div>
 		    	<!-- <a> that closes the side-bar menu. The &times; is what gives the "X" image for this anchor tag-->
 		    	<a href="#" class="btn-close" onclick="closeSideMenu()">&times;</a>
-		    	<a href="#">Home</a>
-		        <a href="http://localhost:8081/independent_study_hub/Resources">Resources</a>
+		    	<a href="http://localhost:8081/independent_study_hub/Home">Home</a>
+		        <a href="#">Resources</a>
 		        <a href="http://localhost:8081/independent_study_hub/Research">Previous Work</a>
 		        <a href="http://localhost:8081/independent_study_hub/Inventory">Inventory</a>
 		        <a href="http://localhost:8081/independent_study_hub/Upload">Upload</a>
