@@ -99,7 +99,7 @@ public class InventoryServlet extends HttpServlet {
 		String chemical = null;
 		String use         = null;
 		String year_purchased           = null;
-		Integer bought = 0;
+		//Integer bought = 0;
 		chemical = req.getParameter("chemical");
 		use = req.getParameter("use");
 		year_purchased = req.getParameter("year_purchased");
@@ -113,10 +113,10 @@ public class InventoryServlet extends HttpServlet {
 			controller = new InsertChemicalController();
 
 			// convert published to integer now that it is valid
-			bought = Integer.parseInt(year_purchased);
+			//bought = Integer.parseInt(year_purchased);
 
 			// get list of books returned from query			
-			if (controller.insertChemical(chemical, use, bought)) {
+			if (controller.insertChemical(chemical, use, year_purchased)) {
 				successMessage = chemical;
 			}
 			else {
