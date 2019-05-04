@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.ycp.cs320.independent_study_hub.controller.DeleteChemicalController;
 import edu.ycp.cs320.independent_study_hub.controller.InsertChemicalController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectAllChemicalsController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectOneFacultyController;
@@ -22,6 +23,7 @@ import edu.ycp.cs320.independent_study_hub.model.Student;
 public class InventoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private InsertChemicalController controller = null;	
+	private DeleteChemicalController deleteController = null;	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -96,17 +98,25 @@ public class InventoryServlet extends HttpServlet {
 		///
 		String errorMessage   = null;
 		String successMessage = null;
+		String deleteErrorMessage   = null;
+		String deleteSuccessMessage = null;
 		String chemical = null;
 		String use         = null;
 		String year_purchased           = null;
+		String deleteChemical = null;
+		String deleteUse         = null;
+		String delete_year_purchased           = null;
 		//Integer bought = 0;
 		chemical = req.getParameter("chemical");
 		use = req.getParameter("use");
 		year_purchased = req.getParameter("year_purchased");
+		deleteChemical = req.getParameter("deleteChemical");
+		deleteUse = req.getParameter("deleteUse");
+		delete_year_purchased = req.getParameter("delete_year_purchased");
 		
 		if (chemical    == null || chemical.equals("") ||
 				use     == null || use.equals("")  ||
-				year_purchased        == null || year_purchased.equals("")) {
+				year_purchased == null || year_purchased.equals("")) {
 
 			errorMessage = "Please fill in all of the required fields";
 		} else {
@@ -126,6 +136,29 @@ public class InventoryServlet extends HttpServlet {
 		req.setAttribute("chemical", chemical);
 		req.setAttribute("use", use);
 		req.setAttribute("year_purchased", year_purchased);
+		req.setAttribute("errorMessage",   errorMessage);
+		req.setAttribute("successMessage", successMessage);
+		if (deleteChemical    == null || deleteChemical.equals("") ||
+				deleteUse     == null || deleteUse.equals("")  ||
+				delete_year_purchased   == null || delete_year_purchased.equals("")) {
+
+			errorMessage = "Please fill in all of the required fields";
+		} else {
+			deleteController = new DeleteChemicalController();
+
+			// convert published to integer now that it is valid
+			//bought = Integer.parseInt(year_purchased);
+
+			// get list of books returned from query			
+			if (deleteController.deleteChemical(deleteChemical, deleteUse, delete_year_purchased)) {
+				successMessage = deleteChemical;
+			}
+			else {
+				errorMessage = "Failed to delete chemical: " + deleteChemical;					
+			}
+		}
+		req.setAttribute("deleteErrorMessage",   deleteErrorMessage);
+		req.setAttribute("deleteSuccessMessage", deleteSuccessMessage);
 		doGet(req, resp);
 	}
 }

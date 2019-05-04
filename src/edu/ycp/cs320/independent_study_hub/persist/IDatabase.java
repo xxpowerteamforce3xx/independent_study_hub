@@ -29,4 +29,5 @@ public interface IDatabase {
 	public ArrayList<ChemicalInventory> get_all_chemicals();
 	Faculty get_faculty_id(String acc_name);
 	boolean update_faculty_email(String email, String name);
+	public boolean deleteChemical(String chemical, String use, String dom);
 }
