@@ -663,6 +663,8 @@ z-index: 1;
 }
 
 
+
+
 /* ********** Log Out Box CSS ********** */
 .fixed {
 	 position: fixed;
@@ -696,8 +698,12 @@ z-index: 1;
 
 .closebtn:hover {
   color: black;
-}-- Id selectors ---------- */
+}
 
+
+.add_sub{
+  display: none;
+}
 
 
 

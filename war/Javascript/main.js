@@ -3,6 +3,12 @@
 let search_by = 0;
 
 
+function show_button(num){
+  let table = document.getElementById("inventory_table");
+  let row = table.rows[num];
+  row.cells[4].style.display="inline";
+}
+
 function openSideMenu(){
 	//Changes the side-menu's width to 250px.  Note, the side-menu's width is initially set to 0px in its CSS
 	document.getElementById("side-menu").style.width = "250px";

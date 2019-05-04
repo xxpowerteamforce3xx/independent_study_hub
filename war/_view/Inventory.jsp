@@ -118,6 +118,8 @@
 		                		<td>${inventory.getChemical()}</td>
 		                		<td>${inventory.getUseOfChemical()}</td>
 		                		<td>${inventory.getDom()}</td>
+		                		<td><button type="button">Add/Remove</button></td>
+          						<td class="add_sub"><input type="text"> <button type="button">OK</button></td>
 		                	</tr>
 		                </c:forEach>
 	                
