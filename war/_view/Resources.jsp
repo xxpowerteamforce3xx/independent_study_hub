@@ -116,8 +116,9 @@
     
 	    <!-- Main section of web page's body -->   
 	    <div>
-	    	<!--  <a href="/style/roughdraft_CR_Graded.pdf">Example of a Research Proposal</a> -->
-	    	<embed src="style/roughdraft_CR_Graded.pdf" type="application/pdf" width="100%" height ="600px" />
+	    	<!-- Creates link to pdf within style folder of project.  target="_blank" signifies that the browser opens up
+	    		the pdf in a separate tab, rather than the same tab (which is default setting).  -->
+	    	<a href="style/roughdraft_CR_Graded.pdf" target="_blank">Example of a Research Proposal</a>
 	    </div>
 </body>
 </html>
