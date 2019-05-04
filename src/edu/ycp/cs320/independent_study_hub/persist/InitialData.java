@@ -124,6 +124,8 @@ public class InitialData {
 				chemical.setChemical(i.next());
 				chemical.setUseOfChemcial(i.next());
 				chemical.setDom(i.next());
+				chemical.setAmount(Integer.parseInt(i.next()));
+				chemical.setMedia(i.next());
 				chemicalList.add(chemical);
 			}
 			return chemicalList;

@@ -822,6 +822,8 @@ public class DerbyDatabase implements IDatabase {
 		c.setChemical(r.getString(i++));
 		c.setUseOfChemcial(r.getString(i++));
 		c.setDom(r.getString(i++));
+		c.setAmount(r.getInt(i++));
+		c.setMedia(r.getString(i++));
 	}
 	
 	public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
@@ -941,7 +943,9 @@ public class DerbyDatabase implements IDatabase {
 									"		generated always as identity (start with 1, increment by 1), " +
 									" 	name varchar(40)," + //Stores chemical name
 									"   use  varchar(40)," + //Stores chemical use (class or research use)
-									"   dom  varchar(10) " + //Stores date chemical was purchased (in format of MM/DD/YY)
+									"   dom  varchar(10), " + //Stores date chemical was purchased (in format of MM/DD/YY)
+									"   amount  integer, " +
+									"   media  varchar(20) " +
 									//" 	quantity integer" +
 									")"
 							);
@@ -1021,11 +1025,13 @@ public class DerbyDatabase implements IDatabase {
 					insertFaculty.executeBatch();
 					
 					// populate the chemical table
-					insertChemicals = conn.prepareStatement("insert into chemicals (name, use, dom) values (?, ?, ?)");
+					insertChemicals = conn.prepareStatement("insert into chemicals (name, use, dom, amount, media) values (?, ?, ?, ?, ?)");
 					for (ChemicalInventory chemical : chemicalList) {
 						insertChemicals.setString(1, chemical.getChemical());
 						insertChemicals.setString(2, chemical.getUseOfChemical());
 						insertChemicals.setString(3, chemical.getDom());
+						insertChemicals.setInt(4, chemical.getAmount());
+						insertChemicals.setString(5, chemical.getMedia());
 						insertChemicals.addBatch();
 					}
 					insertChemicals.executeBatch();
@@ -1052,11 +1058,6 @@ public class DerbyDatabase implements IDatabase {
 		System.out.println("Success!");
 	}
 
-	@Override
-	public boolean insertChemical(String chemical, String use, Integer amount) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	
 

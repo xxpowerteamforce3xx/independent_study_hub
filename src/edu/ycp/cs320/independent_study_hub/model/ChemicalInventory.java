@@ -6,6 +6,8 @@ public class ChemicalInventory {
 	private String chemical;
 	private String use;
 	private String dom;
+	private int amount;
+	private String media;
 	/**
 	 * getter for the chemical
 	 * @return a string chemical
@@ -38,7 +40,18 @@ public class ChemicalInventory {
 	public void setDom(String dom) {
 		this.dom = dom;
 	}
-	
+	public int getAmount() {
+		return amount;
+	}
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+	public String getMedia() {
+		return media;
+	}
+	public void setMedia(String media) {
+		this.media = media;
+	}
 	
 	
 }
