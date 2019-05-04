@@ -397,7 +397,30 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});	
 	}
-	
+	@Override
+	public boolean deleteChemical(final String chemical, final String use, final String dom) {
+		return executeTransaction(new Transaction<Boolean>()  {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				try {
+					stmt = conn.prepareStatement(
+							"DELETE FROM chemicals where chemicals.name = ? and chemicals.use = ? and chemicals.dom = ?"
+						
+					);
+					stmt.setString(1, chemical);
+					stmt.setString(2, use);
+					stmt.setString(3, dom);
+					// execute the update
+					int del = stmt.executeUpdate();
+				    System.out.println("Number of deleted records: " + del);
+					return true;
+				} finally {
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});	
+	}
 	@Override
 	public boolean insertStudent(final String name, final String password, final String email) {
 		return executeTransaction(new Transaction<Boolean>()  {

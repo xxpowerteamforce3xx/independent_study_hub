@@ -71,10 +71,19 @@
 	<c:if test="${type.equals('faculty')}">
 	    <form action="${pageContext.servletContext.contextPath}/Inventory" method="post">
 	        <input type="text" name="chemical" placeholder="Chemical" id="chemical" value="${chemical}"/>
-       	    <input type="text" name="use" placeholder="Research of Class" id="use" value="${use}"/>
+       	    <input type="text" name="use" placeholder="Research or Class" id="use" value="${use}"/>
        		<input type="text" name="year_purchased" placeholder="Purchased" id="year_purchased" value="${year_purchased}"/>
 	        <button type="reset">Reset</button>
-	        <input type="submit" name="button" value="Create!" id="create"/>
+	        <input type="submit" name="button" value="Insert!" id="create"/>
+	    </form>
+	</c:if>
+	<c:if test="${type.equals('faculty')}">
+	    <form action="${pageContext.servletContext.contextPath}/Inventory" method="post">
+	        <input type="text" name="deleteChemical" placeholder="Chemical" id="deleteChemical" value="${deleteChemical}"/>
+	        <input type="text" name="deleteUse" placeholder="Research or Class" id="deleteUse" value="${deleteUse}"/>
+	        <input type="text" name="delete_year_purchased" placeholder="Purchased" id="delete_year_purchased" value="${delete_year_purchased}"/>
+	        <button type="reset">Reset</button>
+	        <input type="submit" name="button" value="Delete!" id="create"/>
 	    </form>
 	</c:if>
 		<c:if test="${! empty errorMessage}">
