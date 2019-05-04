@@ -5,7 +5,7 @@ let search_by = 0;
 
 function show_button(num){
   let table = document.getElementById("inventory_table");
-  let row = table.rows[num];
+  let row = table.rows[1];
   row.cells[4].style.display="inline";
 }
 
