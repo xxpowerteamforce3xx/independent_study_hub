@@ -132,8 +132,8 @@
 		                		<td>${inventory.getChemical()}</td>
 		                		<td>${inventory.getUseOfChemical()}</td>
 		                		<td>${inventory.getDom()}</td>
-		                		<td>10</td>
-		                		<td>mL</td>
+		                		<td>${inventory.getAmount()}</td>
+		                		<td>${inventory.getMedia()}</td>
           						<td>Amount:<input type="text"><button type="button">OK</button></td>
 		                	</tr>
 		                	
