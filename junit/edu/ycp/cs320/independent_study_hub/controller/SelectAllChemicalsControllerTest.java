@@ -25,7 +25,7 @@ public class SelectAllChemicalsControllerTest {
 		System.out.println("Printing....\n ");
 		System.out.println("Chemicals:");
 		for (ChemicalInventory c : chem_list) {
-			System.out.println(c.getChemicalID() + "| " + c.getChemical() + ", " + c.getUseOfChemical() + ", " + c.getDom());
+			System.out.println(c.getChemicalID() + "| " + c.getChemical() + ", " + c.getUseOfChemical() + ", " + c.getDom() + ", " + c.getAmount() + "," + c.getMedia());
 		}
 		System.out.println("\nPrint Complete");
 	}
