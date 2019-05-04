@@ -74,7 +74,7 @@
        	    <input type="text" name="use" placeholder="Research or Class" id="use" value="${use}"/>
        		<input type="text" name="year_purchased" placeholder="Purchased" id="year_purchased" value="${year_purchased}"/>
 	        <button type="reset">Reset</button>
-	        <input type="submit" name="button" value="Insert!" id="create"/>
+	        <button type="submit" name="button" value="Insert!" id="create"/>Insert</button>
 	    </form>
 	</c:if>
 	<c:if test="${type.equals('faculty')}">
@@ -83,7 +83,7 @@
 	        <input type="text" name="deleteUse" placeholder="Research or Class" id="deleteUse" value="${deleteUse}"/>
 	        <input type="text" name="delete_year_purchased" placeholder="Purchased" id="delete_year_purchased" value="${delete_year_purchased}"/>
 	        <button type="reset">Reset</button>
-	        <input type="submit" name="button" value="Delete!" id="create"/>
+	        <button type="submit" name="button" value="Delete!" id="create"/>Delete</button>
 	    </form>
 	</c:if>
 		<c:if test="${! empty errorMessage}">
@@ -115,10 +115,15 @@
 	                        <th scope="col">Chemical</th>
 	                        <th scope="col">Chemical Use</th>
 	                        <th scope="col">Date Purchased</th>
+	                        <th scope="col">Amount</th>
+	                        <th scope="col">Media</th>
+	                        <th scope="col">Remove Amount</th>
+	                        
 	                    </tr>
 	                </thead>
 	                
-	                <tbody id="inventory_body">	
+	                <tbody id="inventory_body">
+	    			
 	                	<!-- For each loop will have an array list of ChemicalInventory objects in inventory page
 	                		It will iterate across each item in the array and insert the appropriate information as seen below -->
 		                <c:forEach items="${inventory}" var="inventory">
@@ -127,9 +132,11 @@
 		                		<td>${inventory.getChemical()}</td>
 		                		<td>${inventory.getUseOfChemical()}</td>
 		                		<td>${inventory.getDom()}</td>
-		                		<td><button type="button">Add/Remove</button></td>
-          						<td class="add_sub"><input type="text"> <button type="button">OK</button></td>
+		                		<td>10</td>
+		                		<td>mL</td>
+          						<td>Amount:<input type="text"><button type="button">OK</button></td>
 		                	</tr>
+		                	
 		                </c:forEach>
 	                
 	                </tbody>

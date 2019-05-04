@@ -1,13 +1,21 @@
 /* ***** Global variables ***** */
 
 let search_by = 0;
+//let count = 0;
 
-
+/*
 function show_button(num){
   let table = document.getElementById("inventory_table");
-  let row = table.rows[1];
-  row.cells[4].style.display="inline";
+  let row = table.rows[num];
+  
+  if (count % 2 == 0){
+	  row.cells[4].style.visibility= "visible";
+  } else {
+	  row.cells[4].style.visibility="hidden";
+  }
+  count += 1;
 }
+*/
 
 function openSideMenu(){
 	//Changes the side-menu's width to 250px.  Note, the side-menu's width is initially set to 0px in its CSS

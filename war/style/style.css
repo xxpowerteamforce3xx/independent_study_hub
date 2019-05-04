@@ -702,7 +702,7 @@ z-index: 1;
 
 
 .add_sub{
-  display: none;
+  visibility: hidden;
 }
 
 
