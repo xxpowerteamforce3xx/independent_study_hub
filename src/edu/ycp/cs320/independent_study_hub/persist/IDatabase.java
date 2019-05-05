@@ -11,7 +11,7 @@ import edu.ycp.cs320.independent_study_hub.model.Project;
 import edu.ycp.cs320.independent_study_hub.model.Student;
 
 public interface IDatabase {
-	public boolean insertChemical(String chemical, String use, String dom);
+	public boolean insertChemical(String chemical, String use, String dom, int amount, String media);
 	public ChemicalInventory get_chemical(String chemcial);
 	public ArrayList<Project> getWorkFromYear(int year);
 	public ArrayList<Project> selectProjectsByStudent(String name);

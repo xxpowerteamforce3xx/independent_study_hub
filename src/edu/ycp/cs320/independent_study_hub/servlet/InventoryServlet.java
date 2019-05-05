@@ -103,6 +103,12 @@ public class InventoryServlet extends HttpServlet {
 		String chemical = null;
 		String use         = null;
 		String year_purchased           = null;
+		String initialAmount = null;
+		int amount = 0;
+		String initMediaType = null;
+		String subtractAmount = null;
+		int remove = 0;
+		String endMediaType = null;
 		String deleteChemical = null;
 		String deleteUse         = null;
 		String delete_year_purchased           = null;
@@ -110,13 +116,19 @@ public class InventoryServlet extends HttpServlet {
 		chemical = req.getParameter("chemical");
 		use = req.getParameter("use");
 		year_purchased = req.getParameter("year_purchased");
+		initialAmount = req.getParameter("initialAmount");
+		initMediaType = req.getParameter("initMediaType");
+		subtractAmount = req.getParameter("subtractAmount");
+		endMediaType = req.getParameter("endMediaType");
 		deleteChemical = req.getParameter("deleteChemical");
 		deleteUse = req.getParameter("deleteUse");
 		delete_year_purchased = req.getParameter("delete_year_purchased");
 		
 		if (chemical    == null || chemical.equals("") ||
 				use     == null || use.equals("")  ||
-				year_purchased == null || year_purchased.equals("")) {
+				year_purchased == null || year_purchased.equals("") ||
+				initialAmount == null || initialAmount.equals("") ||
+				initMediaType == null || initMediaType.equals("")) {
 
 			errorMessage = "Please fill in all of the required fields";
 		} else {
@@ -124,9 +136,9 @@ public class InventoryServlet extends HttpServlet {
 
 			// convert published to integer now that it is valid
 			//bought = Integer.parseInt(year_purchased);
-
+			amount = Integer.parseInt(initialAmount);
 			// get list of books returned from query			
-			if (controller.insertChemical(chemical, use, year_purchased)) {
+			if (controller.insertChemical(chemical, use, year_purchased,amount, initMediaType)) {
 				successMessage = chemical;
 			}
 			else {
@@ -136,11 +148,14 @@ public class InventoryServlet extends HttpServlet {
 		req.setAttribute("chemical", chemical);
 		req.setAttribute("use", use);
 		req.setAttribute("year_purchased", year_purchased);
-		req.setAttribute("errorMessage",   errorMessage);
+		req.setAttribute("initialAmount", amount);
+		req.setAttribute("initMediaType",   initMediaType);
 		req.setAttribute("successMessage", successMessage);
 		if (deleteChemical    == null || deleteChemical.equals("") ||
 				deleteUse     == null || deleteUse.equals("")  ||
-				delete_year_purchased   == null || delete_year_purchased.equals("")) {
+				delete_year_purchased   == null || delete_year_purchased.equals("") ||
+				subtractAmount == null || subtractAmount.equals("") ||
+				endMediaType == null || endMediaType.equals("")) {
 
 			errorMessage = "Please fill in all of the required fields";
 		} else {

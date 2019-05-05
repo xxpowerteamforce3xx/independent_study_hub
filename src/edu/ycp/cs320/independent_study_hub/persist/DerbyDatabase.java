@@ -374,20 +374,21 @@ public class DerbyDatabase implements IDatabase {
 	}
 
 	@Override
-	public boolean insertChemical(final String chemical, final String use, final String dom) {
+	public boolean insertChemical(final String chemical, final String use, final String dom, final int amount, final String media) {
 		return executeTransaction(new Transaction<Boolean>()  {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
 				PreparedStatement stmt = null;
 				try {
 					stmt = conn.prepareStatement(
-							"insert into chemicals (name, use, dom) " +
-							"  values(?, ?, ?) "
+							"insert into chemicals (name, use, dom, amount, media) " +
+							"  values(?, ?, ?, ?, ?) "
 					);
 					stmt.setString(1, chemical);
 					stmt.setString(2, use);
 					stmt.setString(3, dom);
-					
+					stmt.setInt(4, amount);
+					stmt.setString(5, media);
 					// execute the update
 					stmt.executeUpdate();
 					return true;

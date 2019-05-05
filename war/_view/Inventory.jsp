@@ -73,6 +73,8 @@
 	        <input type="text" name="chemical" placeholder="Chemical" id="chemical" value="${chemical}"/>
        	    <input type="text" name="use" placeholder="Research or Class" id="use" value="${use}"/>
        		<input type="text" name="year_purchased" placeholder="Purchased" id="year_purchased" value="${year_purchased}"/>
+       		<input type="text" name="initialAmount" placeholder="Amount Bought" id="initialAmount" value="${initialAmount}"/>
+       		<input type="text" name="initMediaType" placeholder="Media Type" id="initMediaType" value="${initMediaType}"/>
 	        <button type="reset">Reset</button>
 	        <button type="submit" name="button" value="Insert!" id="create"/>Insert</button>
 	    </form>
@@ -132,8 +134,8 @@
 		                		<td>${inventory.getChemical()}</td>
 		                		<td>${inventory.getUseOfChemical()}</td>
 		                		<td>${inventory.getDom()}</td>
-		                		<td>10</td>
-		                		<td>mL</td>
+		                		<td>${inventory.getAmount()}</td>
+		                		<td>${inventory.getMedia()}</td>
           						<td>Amount:<input type="text"><button type="button">OK</button></td>
 		                	</tr>
 		                	
