@@ -96,6 +96,7 @@ public class InventoryServlet extends HttpServlet {
 			
 		}
 		///
+<<<<<<< HEAD
 		String errorMessage   = null;
 		String successMessage = null;
 		String deleteErrorMessage   = null;
@@ -112,6 +113,18 @@ public class InventoryServlet extends HttpServlet {
 		String deleteChemical = null;
 		String deleteUse         = null;
 		String delete_year_purchased           = null;
+=======
+		String errorMessage   		 = null;
+		String successMessage 		 = null;
+		String deleteErrorMessage    = null;
+		String deleteSuccessMessage  = null;
+		String chemical 			 = null;
+		String use         			 = null;
+		String year_purchased        = null;
+		String deleteChemical 		 = null;
+		String deleteUse         	 = null;
+		String delete_year_purchased = null;
+>>>>>>> 4f833e3b811c7c4a897ce040c12cb77c58f542fb
 		//Integer bought = 0;
 		chemical = req.getParameter("chemical");
 		use = req.getParameter("use");
