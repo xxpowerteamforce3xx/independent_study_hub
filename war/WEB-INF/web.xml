@@ -11,6 +11,10 @@
     <servlet-class>edu.ycp.cs320.independent_study_hub.servlet.LoginServlet</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>ProjectServlet</servlet-name>
+    <servlet-class>edu.ycp.cs320.independent_study_hub.servlet.ProjectServlet</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>UpdateAccountServlet</servlet-name>
     <servlet-class>edu.ycp.cs320.independent_study_hub.servlet.UpdateAccountServlet</servlet-class>
   </servlet>
@@ -52,6 +56,10 @@
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/Login</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ProjectServlet</servlet-name>
+    <url-pattern>/Project</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>UpdateAccountServlet</servlet-name>

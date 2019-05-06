@@ -473,8 +473,7 @@ public class DerbyDatabase implements IDatabase {
 	}
 			
 	@Override
-	public boolean insertProject(final String title, final Student student, final int year, final String description, final JPEG image,
-			final int workID) {
+	public boolean insertProject(final String title, final Student student, final String date, final String description) {
 		return executeTransaction(new Transaction<Boolean>() {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
@@ -563,7 +562,7 @@ public class DerbyDatabase implements IDatabase {
 					stmt4.setInt(1, student_id);
 					stmt4.setString(2, student.get_name());
 					stmt4.setString(3, title);
-					stmt4.setInt(4, year);
+					stmt4.setString(4, date);
 					stmt4.setString(5, description);
 					
 					// execute the update
@@ -571,16 +570,14 @@ public class DerbyDatabase implements IDatabase {
 					
 					System.out.println("New project <" + title + "> inserted into projects table");					
 
-					// now retrieve book_id for new Book, so that we can set up BookAuthor entry
-					// and return the book_id, which the DB auto-generates
-					// prepare SQL statement to retrieve book_id for new Book
+
 					stmt5 = conn.prepareStatement(
 							"select projects_id from projects " +
 							"  where title = ? and date = ? and student_name = ? "
 									
 					);
 					stmt5.setString(1, title);
-					stmt5.setInt(2, year);
+					stmt5.setString(2, date);
 					stmt5.setString(3, student.get_name());
 
 					// execute the query
@@ -661,6 +658,51 @@ public class DerbyDatabase implements IDatabase {
 				} finally {
 					DBUtil.closeQuietly(resultSet_1_student);
 					DBUtil.closeQuietly(stmt_1_student);
+				}
+			}
+		});
+	}
+	
+	@Override
+	public Project get_project(final String title) {
+		return executeTransaction(new Transaction<Project>() {
+			@Override
+			public Project execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+
+				try {
+					// retreive all attributes from both Books and Authors tables
+					stmt = conn.prepareStatement(
+							"select projects.* " +
+									"  from projects " +
+									" where projects.title = ?"
+							);
+					stmt.setString(1, title);
+
+					Project project = new Project();
+
+					resultSet = stmt.executeQuery();
+
+					// for testing that a result was returned
+					Boolean found = false;
+
+					while (resultSet.next()) {
+						found = true;
+						// loads our student object with what was found in the table
+						loadProject(project, resultSet, 1);
+					}
+
+					// check if anything was found
+					if (!found) {
+						System.out.println("No Project was found");
+						return null;
+					}
+
+					return project;
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
 				}
 			}
 		});
@@ -870,7 +912,9 @@ public class DerbyDatabase implements IDatabase {
 		System.out.println(s);
 		p.set_student(get_student(s));
 		p.set_title(r.getString(i++));
-		p.set_year(r.getInt(i++));
+		String date = r.getString(i++);
+		System.out.println("date in derby: " + date);
+		p.set_date(date);
 		p.set_description(r.getString(i++));
 	}
 	
@@ -967,8 +1011,8 @@ public class DerbyDatabase implements IDatabase {
 									"	students_id integer constraint students_id references students, " +
 									"	student_name varchar(40), " +
 									"	title varchar(40), " +
-									"   date integer, " +
-									"   description varchar(40), " +
+									"   date varchar(40), " +
+									"   description varchar(1400), " +
 									"   image_url varchar(40)" +
 									")"
 							);
@@ -1060,7 +1104,7 @@ public class DerbyDatabase implements IDatabase {
 						insertProjects.setInt(1, project.get_s_id());
 						insertProjects.setString(2, project.get_student().get_name());
 						insertProjects.setString(3, project.get_title());
-						insertProjects.setInt(4, project.get_year());
+						insertProjects.setString(4, project.get_date());
 						insertProjects.setString(5, project.get_description());
 						insertProjects.addBatch();
 					}

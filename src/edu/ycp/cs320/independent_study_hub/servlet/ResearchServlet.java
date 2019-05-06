@@ -1,14 +1,20 @@
 package edu.ycp.cs320.independent_study_hub.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.ycp.cs320.independent_study_hub.controller.SelectAllProjectsController;
+import edu.ycp.cs320.independent_study_hub.model.Project;
+
 public class ResearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private SelectAllProjectsController controller = new SelectAllProjectsController();
+	private ArrayList<Project> p_list = new ArrayList<Project>();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -35,6 +41,10 @@ public class ResearchServlet extends HttpServlet {
 		System.out.println("Research Servlet: doGet");
 		System.out.println("Request: " + req + " Response: " + resp);
 		
+		// now we do the p_list yo
+		p_list = controller.get_all_projects();
+		req.setAttribute("p_list", p_list);
+		
 		req.getRequestDispatcher("/_view/Research.jsp").forward(req, resp);
 	}
 	
@@ -53,14 +63,25 @@ public class ResearchServlet extends HttpServlet {
 			resp.sendRedirect(req.getContextPath() + "/Login");
 			return;
 		}
-		
-		String logout = null;
-		logout = req.getParameter("leave");
-		if (logout.equals("Log out")) {
-			req.getSession().invalidate();
-			resp.sendRedirect(req.getContextPath() + "/Login");
+		try {
+			String logout = null;
+			logout = req.getParameter("leave");
+			if (logout.equals("Log out")) {
+				req.getSession().invalidate();
+				resp.sendRedirect(req.getContextPath() + "/Login");
+			}
+		} catch (NullPointerException e) {}
+		String title = null;
+		try {
+			title = req.getParameter("title");
+			if (title != null) {
+				System.out.println(title);
+				req.getSession().setAttribute("project_name", title);
+				}
+			} catch (NullPointerException e) {}
+			
 		}
+		
 	}
 	
 	
-}

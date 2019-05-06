@@ -22,6 +22,7 @@ public class Project {
 	private JPEG image;			
 	private int p_id;
 	private int s_id;
+	private String date;
 
 	public Project() {
 		
@@ -85,6 +86,14 @@ public class Project {
 	
 	public void set_s_id(int id) {
 		s_id = id;
+	}
+
+	public void set_date(String date) {
+		this.date = date;
+	}
+
+	public String get_date() {
+		return date;
 	}
 	
 }

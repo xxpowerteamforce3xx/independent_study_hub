@@ -35,16 +35,16 @@ public class InsertProjectController {
 	 * inserts a project into the db
 	 * @param username --> username of student acc we are looking for
 	 * @param title --> title of new project
-	 * @param year --> year of new project
+	 * @param date --> year of new project
 	 * @param description --> desc of new project
 	 * @param image --> image (if available) of poster/project
-	 * @param workID --> id associated
+	 * @param invalid --> id associated
 	 * @return true if succesfull, false if not
 	 */
-	public boolean insertProject (String username, String title, int year, String description, JPEG image, int workID) {
+	public boolean insertProject (String username, String title, String date, String description) {
 		Student student = db.get_student(username);
 		if (student != null) {
-			Boolean b = db.insertProject(title, student, year, description, null, 1);
+			Boolean b = db.insertProject(title, student, date, description);
 			
 			if (b) {
 				return b;

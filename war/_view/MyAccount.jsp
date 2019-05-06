@@ -278,7 +278,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 	        <tr>
 	            <td>${project.get_title()}</td>
 	            <td>${project.get_description()}</td>
-	            <td>${project.get_year()}</td>		            
+	            <td>${project.get_date()}</td>		            
 	        </tr>
 	    </c:forEach>
 			

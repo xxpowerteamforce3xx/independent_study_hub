@@ -64,7 +64,12 @@
         	<button class="side-bar-form-btn" type='submit' name ='leave' value = 'Log out'>Log Out</button>
     	</form>
     </div>
-    
+    <c:if test="${! empty errorMessage}">
+			<div class="alert">
+ 		 		<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  		 		<strong>Error!</strong> ${errorMessage}
+	  		</div>
+	  </c:if>
     <div class="upload-container">
     	<div class="upload-box1">
     		Upload your independent study! When picking a<br><br> 
@@ -79,13 +84,13 @@
     		  <fieldset>
     		    <legend>Upload a Project!</legend>
     		    Title:<br>
-    		    <input type="text" name="tile" placeholder="title" value="${title}">
+    		    <input type="text" name="t" placeholder="title" value="${t}"/>
     		    <br><br>
     		    Description:<br>
-    		    <textarea name="desc" placeholder="Write something.." rows="4", cols="50" style="font-style:arial;" >${desc}</textarea>
+    		    <textarea name="desc" placeholder="Write something.." rows="4" cols="50" style="font-style:arial;" >${desc}</textarea>
     		    <br><br>
     		    Date Completed: <br>
-    		    <input type="text" name="date" placeholder="month/day/year" value="${date}">
+    		    <input type="date" name="date" placeholder="month/day/year" value="${date}"/>
     		    <br><br><br>
     		    <input type="submit" name="button" value="Login" id="log"/>
     		  </fieldset>

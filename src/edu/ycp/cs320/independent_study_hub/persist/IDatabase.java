@@ -16,13 +16,14 @@ public interface IDatabase {
 	public ArrayList<Project> getWorkFromYear(int year);
 	public ArrayList<Project> selectProjectsByStudent(String name);
 	public ArrayList<Student> selectStudentsByFacCode(String code);
-	public boolean insertProject(String title, Student student, int year, String description, JPEG image, int workID);
+	public boolean insertProject(String title, Student student, String date, String description);
 	public boolean insertStudent(String name, String password, String email);
 	public boolean insertChemical(String chemical, String use, Integer amount);
 	public boolean insertFaculty(String name, String password, String email);
 	public Guest get_guest(String acc_name);
 	public Student get_student(String acc_name);
 	public Faculty get_faculty(String acc_name);
+	public Project get_project(String title);
 	public ArrayList<Student> get_all_students();
 	public ArrayList<Faculty> get_all_faculty();
 	public ArrayList<Project> get_all_projects();

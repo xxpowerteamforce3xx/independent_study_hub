@@ -5,7 +5,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title>Previous Work</title>
+    <title>Project</title>
 	<style type="text/css">
 		<%@ include file="./../style/style.css" %>
 				
@@ -16,7 +16,7 @@
 </head>
 <body>
     <header>
-        <h1>Previous Work</h1>
+        <h1>${title}</h1>
     </header>
 
 	<c:choose>
@@ -39,7 +39,7 @@
 		    	<ul class="navbar-nav">
 		    		<li><a href="http://localhost:8081/independent_study_hub/Home">Home</a></li>
 		    		<li><a href="http://localhost:8081/independent_study_hub/Resources">Resources</a></li>
-		    		<li><a href="#">Previous Work</a></li>
+		    		<li><a href="http://localhost:8081/independent_study_hub/PreviousWork">Previous Work</a></li>
 		    		<li><a href="http://localhost:8081/independent_study_hub/Faculty">Faculty</a></li>
 		    	</ul>
 			</nav>
@@ -53,7 +53,7 @@
 		    	<a href="#" class="btn-close" onclick="closeSideMenu()">&times;</a>
 		    	<a href="http://localhost:8081/independent_study_hub/Home">Home</a>
 		        <a href="http://localhost:8081/independent_study_hub/Resources">Resources</a>
-		        <a href="#">Previous Work</a>
+		        <a href="http://localhost:8081/independent_study_hub/Research">Previous Work</a>
 		        <a href="http://localhost:8081/independent_study_hub/Faculty">Faculty</a>
 		        
 		        
@@ -83,7 +83,7 @@
 		    	<ul class="navbar-nav">
 		    		<li><a href="http://localhost:8081/independent_study_hub/Home">Home</a></li>
 		    		<li><a href="http://localhost:8081/independent_study_hub/Resources">Resources</a></li>
-		    		<li><a href="#">Previous Work</a></li>
+		    		<li><a href="http://localhost:8081/independent_study_hub/Research">Previous Work</a></li>
 		    		<li><a href="http://localhost:8081/independent_study_hub/Inventory">Inventory</a></li>
 		    		<li><a href="http://localhost:8081/independent_study_hub/Upload">Upload</a></li>
 		    		<li><a href="http://localhost:8081/independent_study_hub/Faculty">Faculty</a></li>
@@ -99,7 +99,7 @@
 		    	<a href="#" class="btn-close" onclick="closeSideMenu()">&times;</a>
 		    	<a href="http://localhost:8081/independent_study_hub/Home">Home</a>
 		        <a href="http://localhost:8081/independent_study_hub/Resources">Resources</a>
-		        <a href="#">Previous Work</a>
+		        <a href="http://localhost:8081/independent_study_hub/Research">Previous Work</a>
 		        <a href="http://localhost:8081/independent_study_hub/Inventory">Inventory</a>
 		        <a href="http://localhost:8081/independent_study_hub/Upload">Upload</a>
 		        <a href="http://localhost:8081/independent_study_hub/Faculty">Faculty</a>
@@ -115,25 +115,7 @@
 			</c:choose>
 	
 		<!-- Main section of web page's body -->
-	    <div class="table">
-		        <table>
-		            <thead>
-		                <tr>
-		                    <th scope="col">Username</th>
-		                    <th scope="col">Title</th>
-		                    <th scope="col">Description</th>
-		                    <th scope="col">Date</th>
-		                </tr>
-		            </thead>
-		            <c:forEach  var="project" items="${p_list}">
-				        <tr>
-				       		<td style=width:10%;>${project.get_student().get_name()}</td>
-				            <td style=width:35%;><a href="http://localhost:8081/independent_study_hub/Project?title=${project.get_title()}" style="display:block;">${project.get_title()}</a></td>
-				            <td style=width:35%;>${project.get_description()}</td>
-				            <td style=width:20%;>${project.get_date()}</td>		
-				        </tr>
-		    		</c:forEach>
-		        </table>
-	    </div>
+	   <h2>Decription: ${desc}</h2>
+	   <h2>date: ${date}</h2>
 </body>
 </html>

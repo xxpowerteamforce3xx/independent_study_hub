@@ -1,20 +1,20 @@
 package edu.ycp.cs320.independent_study_hub.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import edu.ycp.cs320.independent_study_hub.controller.InsertProjectController;
-import edu.ycp.cs320.independent_study_hub.controller.SelectOneStudentController;
-import edu.ycp.cs320.independent_study_hub.model.Student;
+import edu.ycp.cs320.independent_study_hub.controller.GetProjectController;
+import edu.ycp.cs320.independent_study_hub.controller.SelectAllProjectsController;
+import edu.ycp.cs320.independent_study_hub.model.Project;
 
-public class UploadServlet extends HttpServlet {
+public class ProjectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private SelectOneStudentController controller_one_student = new SelectOneStudentController();
-	private InsertProjectController controller_insert_project = new InsertProjectController();
+	private GetProjectController controller = new GetProjectController();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -31,9 +31,6 @@ public class UploadServlet extends HttpServlet {
 			// user is not logged in, or the session expired
 			resp.sendRedirect(req.getContextPath() + "/Login");
 			return;
-		} else if (user == "guest") {
-			System.out.println("guest user, not allowed to see this");
-			resp.sendRedirect(req.getContextPath() + "/Home");
 		}
 
 		// now we have the user's User object,
@@ -41,16 +38,29 @@ public class UploadServlet extends HttpServlet {
 		System.out.println("   User: <" + user + "> logged in");
 		
 		
-		System.out.println("Upload Servlet: doGet");
+		System.out.println("Research Servlet: doGet");
 		System.out.println("Request: " + req + " Response: " + resp);
+		// getting the url parameter and passing it into our db to get our project
+		String title = null;
+		title = req.getParameter("title");
+		System.out.println(title);
+		if (title != null) {
+			Project p = controller.get_project(title);
+			System.out.println("title: " + p.get_title() + ", desc: " + p.get_description() + ", date: " + p.get_date());
+			req.setAttribute("title", p.get_title());
+			req.setAttribute("desc", p.get_description());
+			req.setAttribute("date", p.get_date());
+		} else {
+			System.out.println("param did not pass through url, title was null");
+		}
 		
-		req.getRequestDispatcher("/_view/Upload.jsp").forward(req, resp);
+		req.getRequestDispatcher("/_view/Project.jsp").forward(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException {
-		System.out.println("Upload servlet doPost");
+		System.out.println("Research servlet doPost");
 		System.out.println(req.getSession().getAttribute("user"));
 		
 		String user = (String) req.getSession().getAttribute("user");
@@ -62,7 +72,6 @@ public class UploadServlet extends HttpServlet {
 			resp.sendRedirect(req.getContextPath() + "/Login");
 			return;
 		}
-		
 		try {
 			String logout = null;
 			logout = req.getParameter("leave");
@@ -70,33 +79,9 @@ public class UploadServlet extends HttpServlet {
 				req.getSession().invalidate();
 				resp.sendRedirect(req.getContextPath() + "/Login");
 			}
-		} catch(NullPointerException e) {}
+		} catch (NullPointerException e) {}
 		
-		String errorMessage = null;
-		String t = null;
-		String desc = null;
-		String date = null;
-		Boolean valid = true;
-		Student s = controller_one_student.get_student(user);
-		t = req.getParameter("t");
-		desc = req.getParameter("desc");
-		date = req.getParameter("date");
-		System.out.println("student: " + s.get_name() + ", title: " + t + ", desc: " + desc + ", date: " + date);
 		
-		if (t == null || t.equals("") || desc == null || desc.equals(null) || date == null || date.equals("") || s.get_name() == null) {
-			errorMessage = "Please fill out all fields";
-			valid = false;
-		}
-		if (valid) {
-			System.out.println("date in servlet " + date);
-			controller_insert_project.insertProject(s.get_name(), t, date, desc);
-			resp.sendRedirect(req.getContextPath() + "/MyAccount");
-		}
-		req.setAttribute("title", t);
-		req.setAttribute("desc", desc);
-		req.setAttribute("date", date);
-		req.setAttribute("errorMessage", errorMessage);
-		req.getRequestDispatcher("/_view/Upload.jsp").forward(req, resp);
 	}
 	
 	
