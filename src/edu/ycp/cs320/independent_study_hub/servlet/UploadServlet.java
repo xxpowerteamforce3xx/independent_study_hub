@@ -1,11 +1,13 @@
 package edu.ycp.cs320.independent_study_hub.servlet;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import edu.ycp.cs320.independent_study_hub.controller.InsertProjectController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectOneStudentController;
@@ -87,9 +89,23 @@ public class UploadServlet extends HttpServlet {
 			errorMessage = "Please fill out all fields";
 			valid = false;
 		}
+		InputStream inputStream = null; // input stream of the upload file
+        
+        // obtains the upload file part in this multipart request
+        Part filePart = req.getPart("photo");
+        if (filePart != null) {
+            // prints out some information for debugging
+            System.out.println(filePart.getName());
+            System.out.println(filePart.getSize());
+            System.out.println(filePart.getContentType());
+             
+            // obtains input stream of the upload file
+            inputStream = filePart.getInputStream();
+        } else { System.out.println("part was null <-- this means there was an error w/ the pic"); }
+        
 		if (valid) {
 			System.out.println("date in servlet " + date);
-			controller_insert_project.insertProject(s.get_name(), t, date, desc);
+			controller_insert_project.insertProject(s.get_name(), t, date, desc, inputStream);
 			resp.sendRedirect(req.getContextPath() + "/MyAccount");
 		}
 		req.setAttribute("title", t);

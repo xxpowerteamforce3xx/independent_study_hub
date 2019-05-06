@@ -1,5 +1,6 @@
 package edu.ycp.cs320.independent_study_hub.persist;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import com.sun.imageio.plugins.jpeg.JPEG;
@@ -16,7 +17,7 @@ public interface IDatabase {
 	public ArrayList<Project> getWorkFromYear(int year);
 	public ArrayList<Project> selectProjectsByStudent(String name);
 	public ArrayList<Student> selectStudentsByFacCode(String code);
-	public boolean insertProject(String title, Student student, String date, String description);
+	public boolean insertProject(String title, Student student, String date, String description, InputStream inputStream);
 	public boolean insertStudent(String name, String password, String email);
 	public boolean insertChemical(String chemical, String use, Integer amount);
 	public boolean insertFaculty(String name, String password, String email);

@@ -1,6 +1,7 @@
 package edu.ycp.cs320.independent_study_hub.persist;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -521,7 +522,7 @@ public class DerbyDatabase implements IDatabase {
 	}
 			
 	@Override
-	public boolean insertProject(final String title, final Student student, final String date, final String description) {
+	public boolean insertProject(final String title, final Student student, final String date, final String description, final InputStream inputStream) {
 		return executeTransaction(new Transaction<Boolean>() {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
@@ -604,7 +605,7 @@ public class DerbyDatabase implements IDatabase {
 					// now insert new Book into Books table
 					// prepare SQL insert statement to add new Book to Books table
 					stmt4 = conn.prepareStatement(
-							"insert into projects (students_id, student_name, title, date, description) " +
+							"insert into projects (students_id, student_name, title, date, description, image) " +
 							"  values(?, ?, ?, ?, ?) "
 					);
 					stmt4.setInt(1, student_id);
@@ -612,6 +613,7 @@ public class DerbyDatabase implements IDatabase {
 					stmt4.setString(3, title);
 					stmt4.setString(4, date);
 					stmt4.setString(5, description);
+					stmt4.setBlob(6,  inputStream);
 					
 					// execute the update
 					stmt4.executeUpdate();
