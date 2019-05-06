@@ -8,7 +8,6 @@
     <title>Upload</title>
 	<style type="text/css">
 		<%@ include file="./../style/style.css" %>
-				
 	</style>
 	<script type="text/javascript">
 		<%@ include file="./../Javascript/main.js" %>

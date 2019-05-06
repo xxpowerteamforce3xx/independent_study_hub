@@ -236,11 +236,10 @@ public class DerbyDatabase implements IDatabase {
 				ResultSet resultSet_prj = null;
 
 				try {
-					// retreive all attributes from both Books and Authors tables
+			
 					stmt_prj = conn.prepareStatement(
 							"select projects.* " +
-									"  from projects " +
-									" order by projects.student_name asc"
+									"  from projects " 
 							);
 
 
@@ -258,7 +257,7 @@ public class DerbyDatabase implements IDatabase {
 						//jpeg is not in table creation as of now
 						Project project = new Project();
 						loadProject(project, resultSet_prj, 1);
-
+						System.out.println(project.get_student().get_name());
 
 						result.add(project);
 					}
@@ -759,24 +758,81 @@ public class DerbyDatabase implements IDatabase {
 	}
 	
 	@Override
-	public boolean update_faculty_email(final String email, final String name) {
+	public boolean update_faculty(final String email, final String old_name, final String pw, final String new_name, final String fac_code) {
 		return executeTransaction(new Transaction<Boolean>() {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
 				PreparedStatement stmt = null;
-				Faculty f = get_faculty(name);
+				System.out.println(old_name + "<- old name");
+				Faculty f = get_faculty(old_name);
+				System.out.println("old fac: " + f.get_name() + ", " + f.getID());
 				try {
 					// retreive all attributes from both Books and Authors tables
 					stmt = conn.prepareStatement(
 							"update faculty " +
-									"  set faculty.email = ? " +
-									" where faculty.fac_id = ?"
+									"  set email = ?, " +
+									"  name = ?, " +
+									"  password = ?, " +
+									"  faculty_code = ? " +
+									" where faculty.faculty_id = ?"
 							);
 					stmt.setString(1, email);
-					stmt.setInt(2, f.getID());
+					System.out.println(new_name + " name from derby");
+					stmt.setString(2, new_name);
+					System.out.println(pw + " password from derby");
+					stmt.setString(3,  pw);
+					stmt.setString(4,  fac_code);
+					stmt.setInt(5, f.getID());
 
 					stmt.executeUpdate();
 
+					return true;
+				} finally {
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+	}
+	
+	@Override
+	public boolean update_student(final String email, final String old_name, final String pw, final String new_name) {
+		return executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				PreparedStatement stmt2 = null;
+				System.out.println(old_name + "<- old name");
+				Student s = get_student(old_name);
+				System.out.println("old student: " + s.get_name() + ", " + s.getID());
+				try {
+					// retreive all attributes from both Books and Authors tables
+					stmt = conn.prepareStatement(
+							"update students " +
+									"  set email = ?, " +
+									"  name = ?, " +
+									"  password = ? " +
+									" where students_id = ?"
+							);
+					
+					stmt.setString(1, email);
+					System.out.println(new_name + " name from derby");
+					stmt.setString(2, new_name);
+					System.out.println(pw + " password from derby");
+					stmt.setString(3,  pw);
+					stmt.setInt(4, s.getID());
+
+					stmt.executeUpdate();
+					
+					stmt2 = conn.prepareStatement( 
+							"update projects " +
+							"  set student_name = ? " +
+							" where students_id = ?"
+							);
+					
+					stmt2.setString(1,  new_name);
+					stmt2.setInt(2,  s.getID());
+					
+					stmt2.executeUpdate();
 					return true;
 				} finally {
 					DBUtil.closeQuietly(stmt);
@@ -811,7 +867,7 @@ public class DerbyDatabase implements IDatabase {
 		p.set_p_id(r.getInt(i++));
 		p.set_s_id(r.getInt(i++));
 		String s = r.getString(i++);
-		System.out.println(s + " loadproject");
+		System.out.println(s);
 		p.set_student(get_student(s));
 		p.set_title(r.getString(i++));
 		p.set_year(r.getInt(i++));

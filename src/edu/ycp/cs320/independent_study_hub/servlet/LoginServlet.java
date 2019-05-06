@@ -81,7 +81,7 @@ public class LoginServlet extends HttpServlet {
 		
 		System.out.println("   Name: <" + name + "> PW: <" + pw + ">");			
 
-		if ((name == null && pw == null) || (name.equals("") && pw.equals(""))) {
+		if ((name == null || pw == null) || (name.equals("") || pw.equals(""))) {
 			if (errorMessage == null)
 				errorMessage = "You gotta enter something buddy come on now";
 		} else {

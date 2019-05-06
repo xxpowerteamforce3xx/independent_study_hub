@@ -33,6 +33,12 @@ public class SelectAllProjectsController {
 	public ArrayList<Project> get_all_projects() {
 		ArrayList<Project> prj_list = new ArrayList<Project>();
 		prj_list = db.get_all_projects();
+		System.out.println("Printing....\n ");
+		System.out.println("Projects:");
+		for (Project p : prj_list) {
+			System.out.println(p.get_p_id() + "| " + p.get_s_id() + "| "+ p.get_student().get_name() + ", " + p.get_title() + ", " + p.get_year() + ", " + p.get_description());
+		}
+		System.out.println("\nPrint Complete");
 		return prj_list;	
 	}
 }
