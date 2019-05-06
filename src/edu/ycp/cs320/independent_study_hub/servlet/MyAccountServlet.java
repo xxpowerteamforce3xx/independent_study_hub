@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import edu.ycp.cs320.independent_study_hub.model.*;
 import edu.ycp.cs320.independent_study_hub.controller.DeletePendingFacultyController;
+import edu.ycp.cs320.independent_study_hub.controller.InsertFacultyController;
 import edu.ycp.cs320.independent_study_hub.controller.InsertStudentController;
+import edu.ycp.cs320.independent_study_hub.controller.SelectAllFacultyController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectAllPendingFacultyController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectAllStudentsController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectOneFacultyController;
@@ -25,11 +27,14 @@ public class MyAccountServlet extends HttpServlet {
 	private SelectAllPendingFacultyController controller_pending_get = new SelectAllPendingFacultyController();
 	private DeletePendingFacultyController controller_delete = new DeletePendingFacultyController();
 	private SelectAllStudentsController controller_all_students = new SelectAllStudentsController();
+	private SelectAllFacultyController controller_all_faculty = new SelectAllFacultyController();
 	private SelectOneFacultyController controller_one_fac = new SelectOneFacultyController();
+	private InsertFacultyController controller_insert = new InsertFacultyController();
 	private List<Project> p_list = new ArrayList<Project>();
 	private ArrayList<Student> s_list = new ArrayList<Student>();
 	private ArrayList<Student> all_students = new ArrayList<Student>();
 	private ArrayList<Faculty> pending_list = new ArrayList<Faculty>();
+	private ArrayList<Faculty> all_fac = new ArrayList<Faculty>();
 	
 	
 	@Override
@@ -61,9 +66,11 @@ public class MyAccountServlet extends HttpServlet {
 				s_list = controller_students.SelectStudentByFacCode(f.get_fac_code());
 				all_students = controller_all_students.get_all_students();
 				pending_list = controller_pending_get.get_all_pending_faculty();
+				all_fac = controller_all_faculty.get_all_faculty();
 				req.setAttribute("pending", pending_list);
 				req.setAttribute("students", s_list);
 				req.setAttribute("all_students", all_students);
+				req.setAttribute("all_fac", all_fac);
 			}
 		} catch(NullPointerException e) {}
 		req.setAttribute("errorMessage", errorMessage);
@@ -121,30 +128,42 @@ public class MyAccountServlet extends HttpServlet {
 		String delete = null;
 		String add = null;
 		String[] to_add = req.getParameterValues("nerds");
-		ArrayList<String> names_delete = new ArrayList<String>();
+		ArrayList<String> pending_names = new ArrayList<String>();
 		delete = req.getParameter("delete");
-		add = req.getParameter("update");
+		add = req.getParameter("add");
 		back = req.getParameter("account");
 		logout = req.getParameter("logout");
 		update = req.getParameter("update");
 		System.out.println("length " + to_add[0]);
 		for (int k = 0; k < to_add.length; k++) {
-			names_delete.add(to_add[k]);
+			pending_names.add(to_add[k]);
 		}
 		try {
 			if (delete.equals("delete")) {
 				System.out.println("delete button was pressed");
-				System.out.println(pending_list.size() + " size of pending list");
 			for (int i = 0; i < pending_list.size(); i++) {
-				System.out.println(names_delete.get(i) + "<-- check value");
-					if (names_delete.get(i).equals(pending_list.get(i).get_name())) {
+				System.out.println(pending_names.get(i) + "<-- check value");
+					if (pending_names.get(i).equals(pending_list.get(i).get_name())) {
 						System.out.println("deleting: " + pending_list.get(i).get_name());
 						controller_delete.deletePendingFaculty(pending_list.get(i).get_name());
 						resp.sendRedirect(req.getContextPath() + "/MyAccount");
 					}
-				}
-				
-
+				}				
+			}
+		} catch (NullPointerException e) { System.out.println("something was null");} 
+		
+		try {
+			if (add.equals("add")) {
+				System.out.println("add button was pressed");
+			for (int i = 0; i < pending_list.size(); i++) {
+				System.out.println(pending_names.get(i) + "<-- check value");
+					if (pending_names.get(i).equals(pending_list.get(i).get_name())) {
+						System.out.println("inserting: " + pending_list.get(i).get_name());
+						controller_insert.insertFaculty(pending_list.get(i).get_name(), pending_list.get(i).get_password(), pending_list.get(i).get_email());
+						controller_delete.deletePendingFaculty(pending_list.get(i).get_name());
+						resp.sendRedirect(req.getContextPath() + "/MyAccount");
+					}
+				}				
 			}
 		} catch (NullPointerException e) { System.out.println("something was null");} 
 		

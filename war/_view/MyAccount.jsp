@@ -134,6 +134,22 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
         </tr>
     </c:forEach> 
 </table>
+<h2 class='h2'>All Faculty With An Account:</h2>
+<table class='table'>
+	<tr>
+		<th>Faculty Username</th>
+		<th>Faculty Email</th>
+		<th>Faculty Code</th>
+	</tr>
+	
+	<c:forEach  var="faculty" items="${all_fac}">
+        <tr>
+            <td>${faculty.get_name()}</td>
+            <td>${faculty.get_email()}</td>	   
+            <td>${faculty.get_fac_code()}</td>         
+        </tr>
+    </c:forEach> 
+</table>
     <br>
     <form class="buttons" action="${pageContext.servletContext.contextPath}/MyAccount" method="post">
 	<h2 class='h2'>Pending Faculty:</h2>

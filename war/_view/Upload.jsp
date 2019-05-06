@@ -91,7 +91,10 @@
     		    <br><br>
     		    Date Completed: <br>
     		    <input type="date" name="date" placeholder="month/day/year" value="${date}"/>
-    		    <br><br><br>
+    		    <br><br>
+    		    Picutre of Your Abstract<br>
+    		    <input type="file" name="image"/>
+    		    <br><br>
     		    <input type="submit" name="button" value="Login" id="log"/>
     		  </fieldset>
 			  </form>

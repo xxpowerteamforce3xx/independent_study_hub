@@ -1010,7 +1010,6 @@ public class DerbyDatabase implements IDatabase {
 		p.set_student(get_student(s));
 		p.set_title(r.getString(i++));
 		String date = r.getString(i++);
-		System.out.println("date in derby: " + date);
 		p.set_date(date);
 		p.set_description(r.getString(i++));
 	}
@@ -1111,7 +1110,7 @@ public class DerbyDatabase implements IDatabase {
 									"	title varchar(40), " +
 									"   date varchar(40), " +
 									"   description varchar(1400), " +
-									"   image_url varchar(40)" +
+									"   image varbinary(max)" +
 									")"
 							);
 					stmt2.executeUpdate();
@@ -1130,7 +1129,7 @@ public class DerbyDatabase implements IDatabase {
 									"   interest varchar(1400)," +
 									"   description varchar(1400)," +
 									"   faculty_code varchar(40), " +
-									"   img varchar(40)" +
+									"   img image" +
 									")"
 							);
 					stmt3.executeUpdate();
