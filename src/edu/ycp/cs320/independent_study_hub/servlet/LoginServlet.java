@@ -44,6 +44,7 @@ public class LoginServlet extends HttpServlet {
 		String email 		= null;
 		String check1       = null;
 		String check2       = null;
+		String check3		= null;
 		String button       = null;
 		boolean valid  = false;
 
@@ -52,14 +53,18 @@ public class LoginServlet extends HttpServlet {
 		name = req.getParameter("name");
 		pw   = req.getParameter("pass");
 		check1 = req.getParameter("check");
-		check2 = req.getParameter("check_new");
+		check2 = req.getParameter("check_stdnt");
+		check3 = req.getParameter("check_fac");
 		
 		try {
 			if (button.equals("Create")) {
-				if (check2 != null) { // tried to create a new account
+				if (check2 != null) { // tried to create a stdnt account
 					System.out.println("tried to create a new account");
 					resp.sendRedirect(req.getContextPath() + "/NewStudent");
 					return;
+				} else if (check3 != null) { // tried to create a fac acc
+					System.out.println("tried to create a fac acc");
+					resp.sendRedirect(req.getContextPath() + "/NewFaculty");
 				} else {
 					System.out.println("tried to create an account but didnt check the box");
 					errorMessage = "If you want to create an account, check the box! How hard can it be?";

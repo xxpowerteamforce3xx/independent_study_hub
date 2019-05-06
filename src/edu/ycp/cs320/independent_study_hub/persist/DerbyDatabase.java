@@ -471,6 +471,54 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});	
 	}
+	
+	@Override
+	public boolean insertPendingFaculty(final String name, final String password, final String email) {
+		return executeTransaction(new Transaction<Boolean>()  {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				try {
+					stmt = conn.prepareStatement(
+							"insert into pending_faculty (name, password, email) " +
+							"  values(?, ?, ?) "
+					);
+					stmt.setString(1, name);
+					stmt.setString(2, password);
+					stmt.setString(3, email);
+					
+					// execute the update
+					stmt.executeUpdate();
+					return true;
+				} finally {
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});	
+	}
+	
+	@Override
+	public boolean deletePendingFaculty(final String name) {
+		return executeTransaction(new Transaction<Boolean>()  {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				try {
+					stmt = conn.prepareStatement(
+							"delete from pending_faculty " +
+							"  where name = ? "
+					);
+					stmt.setString(1, name);
+					
+					// execute the update
+					stmt.executeUpdate();
+					return true;
+				} finally {
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});	
+	}
 			
 	@Override
 	public boolean insertProject(final String title, final Student student, final String date, final String description) {
@@ -753,7 +801,47 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 	
-	
+	@Override
+	public ArrayList<Faculty> get_all_pending_faculty() {
+		return executeTransaction(new Transaction<ArrayList<Faculty>>() {
+			@Override
+			public ArrayList<Faculty> execute(Connection conn) throws SQLException {
+				PreparedStatement stmt_1_fac = null;
+				ResultSet resultSet_1_fac = null;
+
+				try {
+					// retreive all attributes from both Books and Authors tables
+					stmt_1_fac = conn.prepareStatement(
+							"select pending_faculty.* " +
+									"  from pending_faculty " 
+							);
+
+					ArrayList<Faculty> f_list = new ArrayList<Faculty>();
+
+					resultSet_1_fac = stmt_1_fac.executeQuery();
+
+					// for testing that a result was returned
+					Boolean found = false;
+
+					while (resultSet_1_fac.next()) {
+						found = true;
+						Faculty f = new Faculty();
+						loadPendingFaculty(f, resultSet_1_fac, 1);
+						f_list.add(f);
+					}
+
+					// check if anything was found
+					if (!found) {
+						System.out.println("No Faculty was found");
+					}
+					return f_list;
+				} finally {
+					DBUtil.closeQuietly(resultSet_1_fac);
+					DBUtil.closeQuietly(stmt_1_fac);
+				}
+			}
+		});
+	}
 	
 	@Override
 	public ChemicalInventory get_chemical(final String chemical) {
@@ -836,6 +924,8 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 	
+	
+	
 	@Override
 	public boolean update_student(final String email, final String old_name, final String pw, final String new_name) {
 		return executeTransaction(new Transaction<Boolean>() {
@@ -903,6 +993,13 @@ public class DerbyDatabase implements IDatabase {
 		System.out.println(code + "from db");
 		faculty.setFacultyCode(code);
 		faculty.setImg(resultSet.getString(i++));
+	}
+	
+	private void loadPendingFaculty(Faculty faculty, ResultSet resultSet, int i) throws SQLException {
+		faculty.setID(resultSet.getInt(i++));
+		faculty.setName(resultSet.getString(i++));
+		faculty.setPassword(resultSet.getString(i++));
+		faculty.setEmail(resultSet.getString(i++));
 	}
 	
 	private void loadProject(Project p, ResultSet r, int i) throws SQLException {
@@ -989,6 +1086,7 @@ public class DerbyDatabase implements IDatabase {
 				PreparedStatement stmt2 = null;
 				PreparedStatement stmt3 = null;
 				PreparedStatement stmt4 = null;
+				PreparedStatement stmt5 = null;
 	
 				try {
 					stmt1 = conn.prepareStatement(
@@ -1037,6 +1135,19 @@ public class DerbyDatabase implements IDatabase {
 							);
 					stmt3.executeUpdate();
 					System.out.println("faculty table completed");
+					
+					stmt5 = conn.prepareStatement(
+							"create table pending_faculty (" +
+									"	faculty_id integer primary key " +
+									"		generated always as identity (start with 1, increment by 1), " +
+									" 	name varchar(40)," +
+									" 	password varchar(40)," +
+									" 	email varchar(40)" +
+									")"
+								);
+					
+					stmt5.executeUpdate();
+					System.out.println("pending faculty table completed");
 					
 					stmt4 = conn.prepareStatement(
 							"create table chemicals (" +

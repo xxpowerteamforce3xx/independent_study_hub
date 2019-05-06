@@ -25,19 +25,18 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 
 <body class="login">
 	<header>
-        <h1>Create a New Student Account</h1>
+        <h1>Create a New Faculty Account</h1>
 
         <p class="quote">YCP 2019 - <span class="italic">Account Creation Page</span></p>
     </header>
 
 
-    <form class="box" action="${pageContext.servletContext.contextPath}/NewStudent" method="post">
+    <form class="box" action="${pageContext.servletContext.contextPath}/NewFaculty" method="post">
         <h1 class="log_header">Your information below</h1>
         <input type="text" name="name" placeholder="Username" id="name" value="${name}"/>
         <input type="password" name="pass" placeholder="Password" id="password" value="${pass}"/>
         <input type="password" name="pass2" placeholder="Password2" id="password2" value="${pass2}"/>
         <input type="text" name="email" placeholder="Email" id="email" value="${email}"/>
-        <input type="text" name="fac_code" placeholder="Faculty Code" id="fac_code" value="${fac_code}"/>
         <input type="submit" name="button" value="Create!" id="create"/>
     </form>
     

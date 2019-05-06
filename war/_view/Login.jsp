@@ -47,7 +47,8 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
     
       <form class="box_checkbox_new_student" action="${pageContext.servletContext.contextPath}/Login" method="post">
         <h1 class="log_header">Create a New Account</h1>
-    	<input id =Mycheckbox type="checkbox" name ="check_new" value="1"><span id="cb_span"> Create a New Account</span>
+    	<input id =Mycheckbox type="checkbox" name ="check_stdnt" value="1"><span id="cb_span">Create a New Student Account </span> 
+    	<input id =Mycheckbox type="checkbox" name ="check_fac" value="1"><span id="cb_span"> Create a New Faculty Account</span>
         <input type="submit" name="button" value="Create" id="log"/>
       </form>
       

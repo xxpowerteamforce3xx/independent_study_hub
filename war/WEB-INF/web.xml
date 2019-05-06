@@ -10,6 +10,14 @@
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>edu.ycp.cs320.independent_study_hub.servlet.LoginServlet</servlet-class>
   </servlet>
+    <servlet>
+    <servlet-name>ThankYouServlet</servlet-name>
+    <servlet-class>edu.ycp.cs320.independent_study_hub.servlet.ThankYouServlet</servlet-class>
+  </servlet>
+    <servlet>
+    <servlet-name>NewFacultyServlet</servlet-name>
+    <servlet-class>edu.ycp.cs320.independent_study_hub.servlet.NewFacultyServlet</servlet-class>
+  </servlet>
   <servlet>
     <servlet-name>ProjectServlet</servlet-name>
     <servlet-class>edu.ycp.cs320.independent_study_hub.servlet.ProjectServlet</servlet-class>
@@ -56,6 +64,14 @@
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/Login</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>ThankYouServlet</servlet-name>
+    <url-pattern>/ThankYou</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>NewFacultyServlet</servlet-name>
+    <url-pattern>/NewFaculty</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>ProjectServlet</servlet-name>

@@ -3,40 +3,36 @@ package edu.ycp.cs320.independent_study_hub.controller;
 import edu.ycp.cs320.independent_study_hub.persist.IDatabase;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import edu.ycp.cs320.independent_study_hub.model.Project;
+import edu.ycp.cs320.independent_study_hub.model.ChemicalInventory;
+import edu.ycp.cs320.independent_study_hub.model.Faculty;
 import edu.ycp.cs320.independent_study_hub.model.Student;
-
 import edu.ycp.cs320.independent_study_hub.persist.DatabaseProvider;
 import edu.ycp.cs320.independent_study_hub.persist.DerbyDatabase;
-public class SelectStudentsByFacCodeController {
+
+public class SelectAllPendingFacultyController {
 	private IDatabase db = null;
 	
 	/**
 	 * creates the db instance, for now setting it to only the fake db
 	 * since we dont hvae a real one
 	 * i spelled have wrong but im leaving it
-	 * sue me, im going to for 10,000,000
+	 * sue me
 	 */
-	public SelectStudentsByFacCodeController() {
+	public SelectAllPendingFacultyController() {
 		// this will change to new DerbyDatabase when we get that goin
 		DatabaseProvider.setInstance(new DerbyDatabase()); 
 		db = DatabaseProvider.getInstance();
 	}
 	
-
-	public ArrayList<Student> SelectStudentByFacCode(String code) {
-		
-		ArrayList<Student> s_list = db.selectStudentsByFacCode(code);
-		System.out.println(s_list.size());
-		// check if anything was returned and output the list
-		if (s_list.isEmpty()) {
-			System.out.println("No students signed up with code " + code);
-			return null;
-		} else {
-			
-			return s_list;
-		}
+	/** 										* yeet *
+	 * gets the list of chemicals from the year wanted
+	 * @param dom --> the year looking for
+	 * @return true if found, false for not found
+	 */
+	public ArrayList<Faculty> get_all_pending_faculty() {
+		ArrayList<Faculty> fac_list = new ArrayList<Faculty>();
+		fac_list = db.get_all_pending_faculty();
+		return fac_list;	
 	}
 }

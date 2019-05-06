@@ -1,6 +1,7 @@
 package edu.ycp.cs320.independent_study_hub.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.ycp.cs320.independent_study_hub.controller.InsertStudentController;
+import edu.ycp.cs320.independent_study_hub.controller.SelectAllFacultyController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectOneFacultyController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectOneStudentController;
 import edu.ycp.cs320.independent_study_hub.model.Faculty;
@@ -17,7 +19,9 @@ public class NewStudentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private SelectOneStudentController controller_student = new SelectOneStudentController();
 	private InsertStudentController controller_insert_student = new InsertStudentController();
+	private SelectAllFacultyController controller_all_fac = new SelectAllFacultyController();
 	private Student s = new Student();
+	private ArrayList<Faculty> f_list = new ArrayList<Faculty>();
 	
 	
 	@Override
@@ -39,16 +43,24 @@ public class NewStudentServlet extends HttpServlet {
 		String errorMessage = null;
 		String name         = null;
 		String pw           = null;
+		String pw2			= null;
 		String fac_code     = null;
 		String email        = null;
+		Boolean bool 		= false;
 		
 		name = req.getParameter("name");
 		pw = req.getParameter("pass");
+		pw2 = req.getParameter("pass2");
 		email = req.getParameter("email");
 		fac_code = req.getParameter("fac_code");
-		
+		// first we see if the code they enter matches any fac codes on db
+		f_list = controller_all_fac.get_all_faculty();
+		for (Faculty f : f_list) {
+			if (f.get_fac_code() == fac_code)
+				bool = true;
+		}
 		// first check fac_code
-		if (fac_code.equals("BestProject2019")) {
+		if (bool) {
 			// then we can keep checking
 			// now we are checking to see if they are too big for our db to handle
 			int name_length = name.length();
@@ -60,6 +72,8 @@ public class NewStudentServlet extends HttpServlet {
 				errorMessage = "password is too long, try again buddy";
 			} else if (email_length > 20) {
 				errorMessage = "What even is that? It's definitely not an email, that's for sure";
+			} else if (!pw.equals(pw2)) {
+				errorMessage = "Your passwords don't match, try again my guy";
 			} else { // we can keep going
 				// now we check to see if it is a valid email
 				if (!email.contains("@ycp.edu")) { // not valid email

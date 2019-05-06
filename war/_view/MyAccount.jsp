@@ -125,8 +125,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 		<th>Student Email</th>
 		<th>Faculty Code</th>
 	</tr>
-	<br><br>
-
+	
 	<c:forEach  var="student" items="${all_students}">
         <tr>
             <td>${student.get_name()}</td>
@@ -134,8 +133,31 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
             <td>${student.get_faculty_code()}</td>         
         </tr>
     </c:forEach> 
-		
 </table>
+    <br>
+	<h2 class='h2'>Pending Faculty:</h2>
+	<table class='table'>
+	<tr>
+		<th>Pending Faculty Username</th>
+		<th>Pending Faculty Email</th>
+	</tr>
+	
+	<c:set var="count" value="0" scope="page" />
+
+	<c:forEach  var="faculty" items="${pending}">
+        <tr>
+            <td>${faculty.get_name()}<input type="checkbox" name="${count}]" value="1"></td>
+            <td>${faculty.get_email()}</td>
+            <c:set var="count" value="${count + 1}" scope="page"/>	           
+        </tr>
+    </c:forEach> 
+</table>
+<br>
+ <form class="buttons" action="${pageContext.servletContext.contextPath}/MyAccount" method="post">
+			<br>
+			<button class="side-bar-form-btn" type='submit' name ='delete' value = 'delete'>Delete Checked Applicants</button>
+        	<button class="side-bar-form-btn" type='submit' name ='add' value = 'add'>Add Checked Applicants to Faculty</button>
+    	</form>
 </c:if>
 <c:if test="${type.equals('guest')}">
 	<header>
