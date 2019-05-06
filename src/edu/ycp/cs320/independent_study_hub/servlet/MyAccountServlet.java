@@ -120,25 +120,33 @@ public class MyAccountServlet extends HttpServlet {
 		String update = null;
 		String delete = null;
 		String add = null;
-		String check = null;
+		String[] to_add = req.getParameterValues("nerds");
+		ArrayList<String> names_delete = new ArrayList<String>();
 		delete = req.getParameter("delete");
 		add = req.getParameter("update");
 		back = req.getParameter("account");
 		logout = req.getParameter("logout");
 		update = req.getParameter("update");
+		System.out.println("length " + to_add[0]);
+		for (int k = 0; k < to_add.length; k++) {
+			names_delete.add(to_add[k]);
+		}
 		try {
 			if (delete.equals("delete")) {
 				System.out.println("delete button was pressed");
-				for (int i = 0; i < pending_list.size(); i++) {
-					System.out.println("count = " + req.getParameter("" + i));
-					check = req.getParameter("count");
-					if (check != null) {
+				System.out.println(pending_list.size() + " size of pending list");
+			for (int i = 0; i < pending_list.size(); i++) {
+				System.out.println(names_delete.get(i) + "<-- check value");
+					if (names_delete.get(i).equals(pending_list.get(i).get_name())) {
 						System.out.println("deleting: " + pending_list.get(i).get_name());
 						controller_delete.deletePendingFaculty(pending_list.get(i).get_name());
+						resp.sendRedirect(req.getContextPath() + "/MyAccount");
 					}
 				}
+				
+
 			}
-		} catch (NullPointerException e) {}
+		} catch (NullPointerException e) { System.out.println("something was null");} 
 		
 		try {
 			if (logout.equals("Log out")) {

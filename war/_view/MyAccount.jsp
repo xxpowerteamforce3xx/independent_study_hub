@@ -135,25 +135,23 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
     </c:forEach> 
 </table>
     <br>
+    <form class="buttons" action="${pageContext.servletContext.contextPath}/MyAccount" method="post">
 	<h2 class='h2'>Pending Faculty:</h2>
 	<table class='table'>
 	<tr>
 		<th>Pending Faculty Username</th>
 		<th>Pending Faculty Email</th>
 	</tr>
-	
-	<c:set var="count" value="0" scope="page" />
 
 	<c:forEach  var="faculty" items="${pending}">
         <tr>
-            <td>${faculty.get_name()}<input type="checkbox" name="${count}]" value="1"></td>
-            <td>${faculty.get_email()}</td>
-            <c:set var="count" value="${count + 1}" scope="page"/>	           
+            <td>${faculty.get_name()} <input type="checkbox" name='nerds' value="${faculty.get_name()}"></td>
+            <td>${faculty.get_email()}</td>           
         </tr>
     </c:forEach> 
 </table>
 <br>
- <form class="buttons" action="${pageContext.servletContext.contextPath}/MyAccount" method="post">
+ 
 			<br>
 			<button class="side-bar-form-btn" type='submit' name ='delete' value = 'delete'>Delete Checked Applicants</button>
         	<button class="side-bar-form-btn" type='submit' name ='add' value = 'add'>Add Checked Applicants to Faculty</button>
