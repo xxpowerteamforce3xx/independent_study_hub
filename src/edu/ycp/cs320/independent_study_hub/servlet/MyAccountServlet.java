@@ -134,11 +134,11 @@ public class MyAccountServlet extends HttpServlet {
 		back = req.getParameter("account");
 		logout = req.getParameter("logout");
 		update = req.getParameter("update");
-		System.out.println("length " + to_add[0]);
-		for (int k = 0; k < to_add.length; k++) {
-			pending_names.add(to_add[k]);
-		}
+
 		try {
+			for (int k = 0; k < to_add.length; k++) {
+				pending_names.add(to_add[k]);
+			}
 			if (delete.equals("delete")) {
 				System.out.println("delete button was pressed");
 			for (int i = 0; i < pending_list.size(); i++) {
