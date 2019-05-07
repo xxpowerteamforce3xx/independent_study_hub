@@ -37,8 +37,8 @@ public class DeleteChemicalController {
 	 * @param email -> email provided
 	 * @returns true if succesful deletion
 	 */
-	public boolean deleteChemical (String chemical, String use, String dom) {
-		boolean b = db.deleteChemical(chemical, use, dom);
+	public boolean deleteChemical (String chemical, String use, String dom, int amount, String media) {
+		boolean b = db.deleteChemical(chemical, use, dom, amount, media);
 		if (b) {
 			System.out.println("chemical deleted successfully!");
 			return true;

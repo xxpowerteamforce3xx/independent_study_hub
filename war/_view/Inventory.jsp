@@ -84,6 +84,8 @@
 	        <input type="text" name="deleteChemical" placeholder="Chemical" id="deleteChemical" value="${deleteChemical}"/>
 	        <input type="text" name="deleteUse" placeholder="Research or Class" id="deleteUse" value="${deleteUse}"/>
 	        <input type="text" name="delete_year_purchased" placeholder="Purchased" id="delete_year_purchased" value="${delete_year_purchased}"/>
+	        <input type="text" name="deleteAmount" placeholder="Amount Used" id="deleteAmount" value="${deleteAmount}"/>
+       		<input type="text" name="endMedia" placeholder="Media Type" id="endMedia" value="${endMedia}"/>
 	        <button type="reset">Reset</button>
 	        <button type="submit" name="button" value="Delete!" id="create"/>Delete</button>
 	    </form>

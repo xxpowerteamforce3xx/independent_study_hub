@@ -107,6 +107,9 @@ public class InventoryServlet extends HttpServlet {
 		String initialAmount = null;
 		int amount = 0;
 		String initMediaType = null;
+		String deleteAmount = null;
+		int deleteA = 0;
+		String endMedia = null;
 		String subtractAmount = null;
 		int remove = 0;
 		String endMediaType = null;
@@ -120,6 +123,8 @@ public class InventoryServlet extends HttpServlet {
 		year_purchased = req.getParameter("year_purchased");
 		initialAmount = req.getParameter("initialAmount");
 		initMediaType = req.getParameter("initMediaType");
+		deleteAmount = req.getParameter("deleteAmount");
+		endMedia = req.getParameter("endMedia");
 		subtractAmount = req.getParameter("subtractAmount");
 		endMediaType = req.getParameter("endMediaType");
 		deleteChemical = req.getParameter("deleteChemical");
@@ -156,18 +161,19 @@ public class InventoryServlet extends HttpServlet {
 		if (deleteChemical    == null || deleteChemical.equals("") ||
 				deleteUse     == null || deleteUse.equals("")  ||
 				delete_year_purchased   == null || delete_year_purchased.equals("") ||
-				subtractAmount == null || subtractAmount.equals("") ||
-				endMediaType == null || endMediaType.equals("")) {
+					deleteAmount == null || deleteAmount.equals("") ||
+					endMedia == null || endMedia.equals("")) {
 
 			errorMessage = "Please fill in all of the required fields";
 		} else {
+			
 			deleteController = new DeleteChemicalController();
-
+			deleteA = Integer.parseInt(deleteAmount);
 			// convert published to integer now that it is valid
 			//bought = Integer.parseInt(year_purchased);
 
 			// get list of books returned from query			
-			if (deleteController.deleteChemical(deleteChemical, deleteUse, delete_year_purchased)) {
+			if (deleteController.deleteChemical(deleteChemical, deleteUse, delete_year_purchased, deleteA, endMedia)) {
 				successMessage = deleteChemical;
 			}
 			else {

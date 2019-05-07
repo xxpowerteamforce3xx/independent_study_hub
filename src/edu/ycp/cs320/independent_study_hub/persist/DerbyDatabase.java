@@ -399,19 +399,21 @@ public class DerbyDatabase implements IDatabase {
 		});	
 	}
 	@Override
-	public boolean deleteChemical(final String chemical, final String use, final String dom) {
+	public boolean deleteChemical(final String chemical, final String use, final String dom, final int amount, final String media) {
 		return executeTransaction(new Transaction<Boolean>()  {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
 				PreparedStatement stmt = null;
 				try {
 					stmt = conn.prepareStatement(
-							"DELETE FROM chemicals where chemicals.name = ? and chemicals.use = ? and chemicals.dom = ?"
+							"DELETE FROM chemicals where chemicals.name = ? and chemicals.use = ? and chemicals.dom = ? and chemicals.amount = ? and chemicals.media = ?"
 						
 					);
 					stmt.setString(1, chemical);
 					stmt.setString(2, use);
 					stmt.setString(3, dom);
+					stmt.setInt(4, amount);
+					stmt.setString(5, media);
 					// execute the update
 					int del = stmt.executeUpdate();
 				    System.out.println("Number of deleted records: " + del);
@@ -1111,8 +1113,8 @@ public class DerbyDatabase implements IDatabase {
 									"	student_name varchar(40), " +
 									"	title varchar(40), " +
 									"   date varchar(40), " +
-									"   description varchar(1400), " +
-									"   image varbinary(max)" +
+									"   description varchar(1400) " +
+							//		"   image varbinary(max)" +
 									")"
 							);
 					stmt2.executeUpdate();
@@ -1131,7 +1133,7 @@ public class DerbyDatabase implements IDatabase {
 									"   interest varchar(1400)," +
 									"   description varchar(1400)," +
 									"   faculty_code varchar(40), " +
-									"   img image" +
+									"   img varchar(40)" +
 									")"
 							);
 					stmt3.executeUpdate();

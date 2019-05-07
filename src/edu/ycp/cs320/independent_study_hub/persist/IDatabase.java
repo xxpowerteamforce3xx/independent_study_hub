@@ -35,5 +35,5 @@ public interface IDatabase {
 	Faculty get_faculty_id(String acc_name);
 	boolean update_faculty(String email, String old_name, String pass, String new_name, String fac_code);
 	boolean update_student(String email, String old_name, String pass, String new_name);
-	public boolean deleteChemical(String chemical, String use, String dom);
+	public boolean deleteChemical(String chemical, String use, String dom, int amount, String media);
 }
