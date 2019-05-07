@@ -50,6 +50,7 @@ public class ProjectServlet extends HttpServlet {
 			req.setAttribute("title", p.get_title());
 			req.setAttribute("desc", p.get_description());
 			req.setAttribute("date", p.get_date());
+			req.setAttribute("file_name", p.get_file_name());
 		} else {
 			System.out.println("param did not pass through url, title was null");
 		}

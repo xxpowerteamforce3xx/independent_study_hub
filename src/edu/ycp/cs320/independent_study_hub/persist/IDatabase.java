@@ -17,7 +17,7 @@ public interface IDatabase {
 	public ArrayList<Project> getWorkFromYear(int year);
 	public ArrayList<Project> selectProjectsByStudent(String name);
 	public ArrayList<Student> selectStudentsByFacCode(String code);
-	public boolean insertProject(String title, Student student, String date, String description, InputStream inputStream);
+	public boolean insertProject(String title, Student student, String date, String description, InputStream inputStream, String file_name);
 	public boolean insertStudent(String name, String password, String email);
 	public boolean insertChemical(String chemical, String use, Integer amount);
 	public boolean insertFaculty(String name, String password, String email);

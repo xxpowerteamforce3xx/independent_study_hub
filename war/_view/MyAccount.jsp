@@ -308,13 +308,15 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 			<th>Project Title</th>
 			<th>Project Description</th>
 			<th>Date Uploaded</th>
+			<th>File Name of Image Associated</th>
 		</tr>
 	
 		<c:forEach  var="project" items="${projects}">
 	        <tr>
 	            <td>${project.get_title()}</td>
 	            <td>${project.get_description()}</td>
-	            <td>${project.get_date()}</td>		            
+	            <td>${project.get_date()}</td>	
+	            <td>${project.get_file_name()}</td>	            
 	        </tr>
 	    </c:forEach>
 			

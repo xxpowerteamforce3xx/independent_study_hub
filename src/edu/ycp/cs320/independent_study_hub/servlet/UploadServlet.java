@@ -83,6 +83,7 @@ public class UploadServlet extends HttpServlet {
 		String t = null;
 		String desc = null;
 		String date = null;
+		String file_name = null;
 		Boolean valid = true;
 		Student s = controller_one_student.get_student(user);
 		t = req.getParameter("t");
@@ -112,11 +113,15 @@ public class UploadServlet extends HttpServlet {
              
             // obtains input stream of the upload file
             inputStream = filePart.getInputStream();
-        } else { System.out.println("part was null <-- this means there was an error w/ the pic"); }
+            file_name = filePart.getSubmittedFileName();
+        } else { 
+        	System.out.println("part was null <-- this means there was an error w/ the pic"); 
+        	errorMessage = "Picture format is invalid, please try again";
+        }
         
 		if (valid) {
 			System.out.println("date in servlet " + date);
-			controller_insert_project.insertProject(s.get_name(), t, date, desc, inputStream);
+			controller_insert_project.insertProject(s.get_name(), t, date, desc, inputStream, file_name);
 			resp.sendRedirect(req.getContextPath() + "/MyAccount");
 		}
 		req.setAttribute("title", t);

@@ -522,7 +522,7 @@ public class DerbyDatabase implements IDatabase {
 	}
 			
 	@Override
-	public boolean insertProject(final String title, final Student student, final String date, final String description, final InputStream inputStream) {
+	public boolean insertProject(final String title, final Student student, final String date, final String description, final InputStream inputStream, final String file_name) {
 		return executeTransaction(new Transaction<Boolean>() {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
@@ -605,16 +605,16 @@ public class DerbyDatabase implements IDatabase {
 					// now insert new Book into Books table
 					// prepare SQL insert statement to add new Book to Books table
 					stmt4 = conn.prepareStatement(
-							"insert into projects (students_id, student_name, title, date, description, image) " +
-							"  values(?, ?, ?, ?, ?) "
+							"insert into projects (students_id, student_name, title, date, description, image, file_name) " +
+							"  values(?, ?, ?, ?, ?, ?, ?) "
 					);
 					stmt4.setInt(1, student_id);
 					stmt4.setString(2, student.get_name());
 					stmt4.setString(3, title);
 					stmt4.setString(4, date);
 					stmt4.setString(5, description);
-					if (inputStream != null)
-						stmt4.setBlob(6,  inputStream);
+					stmt4.setBlob(6,  inputStream);
+					stmt4.setString(7,  file_name);
 					
 					// execute the update
 					stmt4.executeUpdate();
@@ -1015,6 +1015,8 @@ public class DerbyDatabase implements IDatabase {
 		String date = r.getString(i++);
 		p.set_date(date);
 		p.set_description(r.getString(i++));
+		p.set_image(r.getBytes(i++));
+		p.set_file_name(r.getString(i++));
 	}
 	
 	private void loadChemical(ChemicalInventory c, ResultSet r, int i) throws SQLException {
@@ -1113,7 +1115,8 @@ public class DerbyDatabase implements IDatabase {
 									"	title varchar(40), " +
 									"   date varchar(40), " +
 									"   description varchar(1400), " +
-									"   image blob" +  
+									"   image blob, " +  
+									"   file_name varchar(1400) " +
 									")"
 							);
 					stmt2.executeUpdate();

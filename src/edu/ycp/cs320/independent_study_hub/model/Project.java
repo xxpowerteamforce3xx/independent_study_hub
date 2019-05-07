@@ -1,9 +1,6 @@
 package edu.ycp.cs320.independent_study_hub.model;
 
 
-
-import com.sun.imageio.plugins.jpeg.JPEG;
-
 /**
  * general class to be the model for students projects
  * previous work lists will consist of type project
@@ -17,12 +14,12 @@ import com.sun.imageio.plugins.jpeg.JPEG;
 public class Project {
 	private String title;		 
 	private Student student;	
-	private int year;		
 	private String description;	
-	private JPEG image;			
+	private byte[] image;			
 	private int p_id;
 	private int s_id;
 	private String date;
+	private String file_name;
 
 	public Project() {
 		
@@ -37,17 +34,18 @@ public class Project {
 	public Student get_student() {
 		return student;
 	}
-	
-	public int get_year() {
-		return year;
-	}
+
 	
 	public String get_description() {
 		return description;
 	}
 	
-	public JPEG get_jpeg() {
+	public byte[] get_image() {
 		return image;
+	}
+	
+	public void set_image(byte[] image) {
+		this.image = image;
 	}
 	
 	public int get_p_id() {
@@ -68,16 +66,9 @@ public class Project {
 		student = s;
 	}
 	
-	public void set_year(int year) {
-		this.year = year;
-	}
 	
 	public void set_description(String desc) {
 		description = desc;
-	}
-	
-	public void set_jpeg(JPEG image) {
-		this.image = image;
 	}
 	
 	public void set_p_id(int id) {
@@ -94,6 +85,15 @@ public class Project {
 
 	public String get_date() {
 		return date;
+	}
+
+	public void set_file_name(String file_name) {
+		this.file_name = file_name;
+		
+	}
+	
+	public String get_file_name() {
+		return file_name;
 	}
 	
 }

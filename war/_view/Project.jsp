@@ -117,5 +117,7 @@
 		<!-- Main section of web page's body -->
 	   <h2>Decription: ${desc}</h2>
 	   <h2>date: ${date}</h2>
+	   <img src="http://localhost:8081/independent_study_hub/Image?id=${title}" />
+	   <h2>file name: ${file_name}</h2>
 </body>
 </html>
