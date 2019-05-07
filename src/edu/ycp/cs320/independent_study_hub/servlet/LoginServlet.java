@@ -15,7 +15,7 @@ import edu.ycp.cs320.independent_study_hub.model.Faculty;
 import edu.ycp.cs320.independent_study_hub.model.Student;
 import edu.ycp.cs320.independent_study_hub.persist.DatabaseProvider;
 import edu.ycp.cs320.independent_study_hub.persist.DerbyDatabase;
-import java.util.Random;
+import edu.ycp.cs320.independent_study_hub.model.*;
 
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -94,6 +94,7 @@ public class LoginServlet extends HttpServlet {
 			f = controller_fac.get_faculty(name);
 			System.out.println("faculty name: " + f.get_name() + "faculty pw: " + f.get_password() );
 			try {
+				pw = MD5.getMd5(pw);	// hashing our password to matched the stored one in the db
 				if (s.get_name().equals(name) && s.get_password().equals(pw)) { 
 					valid = true;
 					email = s.get_email();
@@ -103,6 +104,7 @@ public class LoginServlet extends HttpServlet {
 				errorMessage = "Well, I don't think either your username or password could be more wrong than they were so";
 			}
 			try {
+				pw = MD5.getMd5(pw);	// hashing our password to matched the stored one in the db
 				if (f.get_name().equals(name) && f.get_password().equals(pw)) {
 					valid = true;
 					System.out.println("made it here");

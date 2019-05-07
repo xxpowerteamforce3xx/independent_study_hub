@@ -1116,14 +1116,9 @@ public class DerbyDatabase implements IDatabase {
 									"	student_name varchar(40), " +
 									"	title varchar(40), " +
 									"   date varchar(40), " +
-<<<<<<< HEAD
 									"   description varchar(1400), " +
 									"   image blob, " +  
 									"   file_name varchar(1400) " +
-=======
-									"   description varchar(1400) " +
-							//		"   image varbinary(max)" +
->>>>>>> work
 									")"
 							);
 					stmt2.executeUpdate();
@@ -1142,11 +1137,7 @@ public class DerbyDatabase implements IDatabase {
 									"   interest varchar(1400)," +
 									"   description varchar(1400)," +
 									"   faculty_code varchar(40), " +
-<<<<<<< HEAD
 									"   img varchar(100)" +
-=======
-									"   img varchar(40)" +
->>>>>>> work
 									")"
 							);
 					stmt3.executeUpdate();

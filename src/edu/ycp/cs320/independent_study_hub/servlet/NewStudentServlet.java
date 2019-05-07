@@ -13,6 +13,7 @@ import edu.ycp.cs320.independent_study_hub.controller.SelectAllFacultyController
 import edu.ycp.cs320.independent_study_hub.controller.SelectOneFacultyController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectOneStudentController;
 import edu.ycp.cs320.independent_study_hub.model.Faculty;
+import edu.ycp.cs320.independent_study_hub.model.MD5;
 import edu.ycp.cs320.independent_study_hub.model.Student;
 
 public class NewStudentServlet extends HttpServlet {
@@ -88,6 +89,7 @@ public class NewStudentServlet extends HttpServlet {
 					} catch (NullPointerException e) { // a null pointer means the student didnt already exists!
 						// now we can create the student!
 						System.out.println("new Student : " + name + ", " + pw + ", "+ email);
+						pw = MD5.getMd5(pw);
 						controller_insert_student.insertStudent(name, pw, email);
 						// now we log them in!
 						req.getSession().setAttribute("user", name);

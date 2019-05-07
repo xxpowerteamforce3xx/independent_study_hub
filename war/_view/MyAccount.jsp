@@ -303,6 +303,9 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 	</table>
 	
 	<h2 class='h2'>Projects:</h2>
+	<form class="side-bar-form" action="${pageContext.servletContext.contextPath}/MyAccount" method="post">
+			<button class="side-bar-form-btn" type='submit' name ='update' value = 'update'>Update Information</button>
+    	</form>
 	<table class='table'>
 		<tr>
 			<th>Project Title</th>

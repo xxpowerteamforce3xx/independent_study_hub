@@ -7,6 +7,7 @@ import java.util.List;
 
 import edu.ycp.cs320.independent_study_hub.model.ChemicalInventory;
 import edu.ycp.cs320.independent_study_hub.model.Faculty;
+import edu.ycp.cs320.independent_study_hub.model.MD5;
 import edu.ycp.cs320.independent_study_hub.model.Project;
 import edu.ycp.cs320.independent_study_hub.model.Student;
 
@@ -32,7 +33,8 @@ public class InitialData {
 				Iterator<String> i = tuple.iterator();
 				Student students = new Student();
 				students.setName(i.next());
-				students.setPassword(i.next());
+				String password = MD5.getMd5(i.next());
+				students.setPassword(password);
 				students.setEmail(i.next());
 				students.set_faculty_code(i.next());
 				students.setType(Integer.parseInt(i.next()));
@@ -59,7 +61,8 @@ public class InitialData {
 				Iterator<String> i = tuple.iterator();
 				Faculty faculty = new Faculty();
 				faculty.setName(i.next());
-				faculty.setPassword(i.next());
+				String password = MD5.getMd5(i.next());
+				faculty.setPassword(password);
 				faculty.setEmail(i.next());
 				faculty.setTitle(i.next());
 				faculty.setInterest(i.next());
