@@ -1,9 +1,11 @@
 package edu.ycp.cs320.independent_study_hub.servlet;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +15,9 @@ import edu.ycp.cs320.independent_study_hub.controller.InsertProjectController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectOneStudentController;
 import edu.ycp.cs320.independent_study_hub.model.Student;
 
+@MultipartConfig(fileSizeThreshold = 1024 * 1024,
+	maxFileSize = 1024 * 1024 * 5, 
+	maxRequestSize = 1024 * 1024 * 5 * 5)
 public class UploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private SelectOneStudentController controller_one_student = new SelectOneStudentController();
@@ -89,10 +94,16 @@ public class UploadServlet extends HttpServlet {
 			errorMessage = "Please fill out all fields";
 			valid = false;
 		}
+		// upload directory
+		/*System.out.println(getServletContext().getRealPath("") + File.separator + "_view" + File.separator +"style");
+		String uploadPath = getServletContext().getRealPath("") + File.separator + "_view" + File.separator +"style";
+		File uploadDir = new File(uploadPath);
+		if (!uploadDir.exists()) uploadDir.mkdir();*/
+		
 		InputStream inputStream = null; // input stream of the upload file
         
         // obtains the upload file part in this multipart request
-        Part filePart = req.getPart("photo");
+        Part filePart = req.getPart("image");
         if (filePart != null) {
             // prints out some information for debugging
             System.out.println(filePart.getName());

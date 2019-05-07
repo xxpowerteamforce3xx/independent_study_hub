@@ -80,7 +80,7 @@
     	</div>
     
     	<div class="upload-box2 upload-form">
-    		<form  action="${pageContext.servletContext.contextPath}/Upload" method="post">
+    		<form  action="${pageContext.servletContext.contextPath}/Upload" method="post" enctype="multipart/form-data">>
     		  <fieldset>
     		    <legend>Upload a Project!</legend>
     		    Title:<br>

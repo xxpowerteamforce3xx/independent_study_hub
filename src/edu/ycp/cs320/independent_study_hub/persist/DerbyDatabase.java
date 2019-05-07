@@ -613,7 +613,8 @@ public class DerbyDatabase implements IDatabase {
 					stmt4.setString(3, title);
 					stmt4.setString(4, date);
 					stmt4.setString(5, description);
-					stmt4.setBlob(6,  inputStream);
+					if (inputStream != null)
+						stmt4.setBlob(6,  inputStream);
 					
 					// execute the update
 					stmt4.executeUpdate();
@@ -1112,7 +1113,7 @@ public class DerbyDatabase implements IDatabase {
 									"	title varchar(40), " +
 									"   date varchar(40), " +
 									"   description varchar(1400), " +
-									"   image varbinary(max)" +
+									"   image blob" +  
 									")"
 							);
 					stmt2.executeUpdate();
@@ -1131,7 +1132,7 @@ public class DerbyDatabase implements IDatabase {
 									"   interest varchar(1400)," +
 									"   description varchar(1400)," +
 									"   faculty_code varchar(40), " +
-									"   img image" +
+									"   img varchar(100)" +
 									")"
 							);
 					stmt3.executeUpdate();
