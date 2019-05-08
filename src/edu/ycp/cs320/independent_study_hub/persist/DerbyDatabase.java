@@ -939,6 +939,41 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 	
+	@Override
+	public boolean update_faculty_password_recovery(final String email, final String old_name, final String pw, final String new_name, final String fac_code) {
+		return executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				System.out.println(old_name + "<- old name");
+				Faculty f = get_faculty(old_name);
+				System.out.println("old fac: " + f.get_name() + ", " + f.getID());
+				try {
+					// retreive all attributes from both Books and Authors tables
+					stmt = conn.prepareStatement(
+							"update faculty " +
+									"  set email = ?, " +
+									"  name = ?, " +
+									"  password = ?, " +
+									"  faculty_code = ? " + 
+									" where faculty.faculty_id = ?"
+							);
+					stmt.setString(1, email);
+					System.out.println(new_name + " name from derby");
+					stmt.setString(2, new_name);
+					System.out.println(pw + " password from derby");
+					stmt.setString(3,  pw);
+					stmt.setString(4,  fac_code);
+					stmt.setInt(5, f.getID());
+					stmt.executeUpdate();
+
+					return true;
+				} finally {
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+	}
 	
 	
 	@Override
