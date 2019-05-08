@@ -10,6 +10,14 @@
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>edu.ycp.cs320.independent_study_hub.servlet.LoginServlet</servlet-class>
   </servlet>
+    <servlet>
+    <servlet-name>EmailSentServlet</servlet-name>
+    <servlet-class>edu.ycp.cs320.independent_study_hub.servlet.EmailSentServlet</servlet-class>
+  </servlet>
+    <servlet>
+    <servlet-name>ResetPasswordServlet</servlet-name>
+    <servlet-class>edu.ycp.cs320.independent_study_hub.servlet.ResetPasswordServlet</servlet-class>
+  </servlet>
   <servlet>
     <servlet-name>ImageServlet</servlet-name>
     <servlet-class>edu.ycp.cs320.independent_study_hub.servlet.ImageServlet</servlet-class>
@@ -68,6 +76,14 @@
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/Login</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>EmailSentServlet</servlet-name>
+    <url-pattern>/EmailSent</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ResetPasswordServlet</servlet-name>
+    <url-pattern>/ResetPassword</url-pattern>
   </servlet-mapping>
     <servlet-mapping>
     <servlet-name>ImageServlet</servlet-name>

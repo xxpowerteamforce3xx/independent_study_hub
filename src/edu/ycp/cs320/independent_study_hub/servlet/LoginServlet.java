@@ -15,7 +15,7 @@ import edu.ycp.cs320.independent_study_hub.model.Faculty;
 import edu.ycp.cs320.independent_study_hub.model.Student;
 import edu.ycp.cs320.independent_study_hub.persist.DatabaseProvider;
 import edu.ycp.cs320.independent_study_hub.persist.DerbyDatabase;
-import java.util.Random;
+import edu.ycp.cs320.independent_study_hub.model.*;
 
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -90,9 +90,11 @@ public class LoginServlet extends HttpServlet {
 			if (errorMessage == null)
 				errorMessage = "You gotta enter something buddy come on now";
 		} else {
+			pw = MD5.getMd5(pw);	// hashing our password to matched the stored one in the db
 			s = controller_student.get_student(name);
 			f = controller_fac.get_faculty(name);
-			System.out.println("faculty name: " + f.get_name() + "faculty pw: " + f.get_password() );
+			System.out.println("faculty name: " + f.get_name() + " faculty pw: " + f.get_password() );
+			System.out.println("student name: " + s.get_name() + " student pw: " +s.get_password());
 			try {
 				if (s.get_name().equals(name) && s.get_password().equals(pw)) { 
 					valid = true;
@@ -103,6 +105,7 @@ public class LoginServlet extends HttpServlet {
 				errorMessage = "Well, I don't think either your username or password could be more wrong than they were so";
 			}
 			try {
+				System.out.println("password given: " + pw);
 				if (f.get_name().equals(name) && f.get_password().equals(pw)) {
 					valid = true;
 					System.out.println("made it here");

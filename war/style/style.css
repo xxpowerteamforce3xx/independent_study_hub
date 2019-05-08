@@ -5,6 +5,23 @@ body
     text-align: center;
 }
 
+a:link {
+  color: white;
+}
+
+/* visited link */
+
+/* mouse over link */
+a:hover {
+  color: blue;
+}
+
+/* selected link */
+a:active {
+  color: blue;
+}
+
+
 .form-update input[type=text], input[type=password], select {
   width: 100%;
   text-align:left;
@@ -123,7 +140,65 @@ header{
     background-color: forestgreen;
 }
 
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 16px;
+}
 
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 12px;
+  width: 12px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #008040;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(13px);
+  -ms-transform: translateX(13px);
+  transform: translateX(13px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
 
 
 
@@ -236,13 +311,79 @@ body.login { /*Sets background color of login screen and general text font*/
     text-align: center;
 }
 
+.reset_pass { /*Creates smaller box that contains actual login fields/buttons*/
+    width: 40%;
+    padding: 20px;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: forestgreen;
+    text-align: center;
+}
+
+.reset_pass h1 {
+	color:white;
+	border-bottom: solid 3px white;
+	font-size: 32px;
+	text-align: center;
+}
+
+.reset_pass h2 {
+	color:#f1f1f1;
+	font-size: 20px;
+	text-align: center;
+}
+
+.reset_pass input[type="text"] { /*Sets style of input feilds when nothing is being done*/
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid white;
+    padding: 10px 10px;
+    width: 200px;
+    outline: none; /*Stops input fields from "lighting up" when clicked on (slightly ruins look of login screen)*/
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+}
+
+.reset_pass input[type="text"]:focus { /* When input field is selected width and border color change (to signify selection)*/
+    width: 280px;
+    border-color: white;
+}
+
+.reset_pass input[type="submit"]{ /*Sets style of login button when nothing is being done*/
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid white;
+    padding: 10px 10px;
+    outline: none; /*Stops input fields from "lighting up" when clicked on (slightly ruins look of login screen)*/
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s; /* Rate at which input bars expand */
+    cursor: pointer; /*Changes mouse cursor to pointer style when hovering over login button*/
+}
+.reset_pass ::placeholder {
+	color: white;
+	opacity: 1;
+}
+
+.reset_pass input[type="submit"]:hover{ /*When login button is hovered over, button background fills in*/
+    background: #2ecc71;
+}
 
 .box_ycp_only {
-	width: 500px;
+	width: 600px;
     padding: 25px;
     position: absolute;
     top: 47%;
-    left: 35%;
+    left: 30%;
     transform: translate(-50%, -50%);
     background: forestgreen;
     text-align: left;
@@ -278,11 +419,11 @@ body.login { /*Sets background color of login screen and general text font*/
     background: forestgreen;
 }
 .box_checkbox_new_student {
-	width: 500px;
+	width: 600px;
     padding: 25px;
     position: absolute;
     top: 69%;
-    left: 35%;
+    left: 30%;
     transform: translate(-50%, -50%);
     background: forestgreen;
     text-align: center;

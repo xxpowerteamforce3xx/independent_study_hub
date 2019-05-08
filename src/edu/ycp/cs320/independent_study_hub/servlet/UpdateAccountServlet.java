@@ -118,6 +118,7 @@ public class UpdateAccountServlet extends HttpServlet {
 			} catch (NullPointerException e) {}
 			
 			if (valid) {
+				new_pass = MD5.getMd5(new_pass);
 				controller.UpdateFaculty(new_email, old_name, new_pass, new_name, new_fac_code);
 				req.getSession().setAttribute("user", new_name);
 				req.getSession().setAttribute("pw", new_pass);
@@ -170,6 +171,7 @@ public class UpdateAccountServlet extends HttpServlet {
 			} catch (NullPointerException e) {}
 			
 			if (valid) {
+				new_pass = MD5.getMd5(new_pass);
 				controller_s.UpdateStudent(new_email, old_name, new_pass, new_name);
 				req.getSession().setAttribute("user", new_name);
 				req.getSession().setAttribute("pw", new_pass);
