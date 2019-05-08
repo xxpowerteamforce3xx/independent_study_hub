@@ -93,8 +93,6 @@ public class LoginServlet extends HttpServlet {
 			pw = MD5.getMd5(pw);	// hashing our password to matched the stored one in the db
 			s = controller_student.get_student(name);
 			f = controller_fac.get_faculty(name);
-			System.out.println("faculty name: " + f.get_name() + " faculty pw: " + f.get_password() );
-			System.out.println("student name: " + s.get_name() + " student pw: " +s.get_password());
 			try {
 				if (s.get_name().equals(name) && s.get_password().equals(pw)) { 
 					valid = true;
