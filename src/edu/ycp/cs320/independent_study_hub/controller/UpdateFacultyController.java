@@ -2,6 +2,7 @@ package edu.ycp.cs320.independent_study_hub.controller;
 
 import edu.ycp.cs320.independent_study_hub.persist.IDatabase;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,8 +25,8 @@ public class UpdateFacultyController {
 		db = DatabaseProvider.getInstance();
 	}
 	
-	public boolean UpdateFaculty (String email, String old_name, String pass, String new_name, String fac_code) {
-		boolean b = db.update_faculty(email, old_name, pass, new_name, fac_code);
+	public boolean UpdateFaculty (final String email, final String old_name, final String pw, final String new_name, final String fac_code, final String description, final String interest, final String title, final InputStream inputStream, final String file_name) {
+		boolean b = db.update_faculty(email, old_name, pw, new_name, fac_code, description, interest, title, inputStream, file_name);
 		if (b) {
 			System.out.println("Updated Faculty!");
 			return true;

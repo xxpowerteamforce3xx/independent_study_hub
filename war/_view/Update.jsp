@@ -53,7 +53,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
     		<li><a href="http://localhost:8081/independent_study_hub/Research">Previous Work</a></li>
     		<li><a href="http://localhost:8081/independent_study_hub/Inventory">Inventory</a></li>
     		<li><a href="http://localhost:8081/independent_study_hub/Upload">Upload</a></li>
-    		<li><a href="#">Faculty</a></li>
+    		<li><a href="http://localhost:8081/independent_study_hub/Faculty">Faculty</a></li>
     	</ul>
 	</nav>
 	
@@ -106,7 +106,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
  		</div>
 	</c:if>
 
-	 <form class='form-update'action="${pageContext.servletContext.contextPath}/Update" method="post">
+	 <form class='form-update'action="${pageContext.servletContext.contextPath}/Update" method="post" enctype="multipart/form-data">
 	   <label for="username">New Username</label>
 	   <input type="text" id="new_username" name="new_name" placeholder="..." value="${new_name}">
 	
@@ -121,6 +121,18 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 	 	
 	   <label for="fac_code">New Faculty Code</label>
 	   <input type="text" id="new_fac_code" name="new_fac_code" placeholder="..." value="${new_fac_code}">
+	   
+	   <label for="fac_code">New Faculty Description</label>
+	   <input type="text" id="desce" name="new_fac_description" placeholder="..." value="${new_fac_desc}">
+	   
+	   <label for="fac_code">New Faculty Interest</label>
+	   <input type="text" id="new_fac_code" name="new_fac_interest" placeholder="..." value="${new_fac_interest}">
+	   
+	   <label for="fac_code">New Faculty Proffesional Title ;)</label>
+	   <input type="text" id="new_fac_code" name="new_fac_title" placeholder="..." value="${new_fac_title}">
+	   
+	   <label>New Faculty Picture:</label>
+	   <input type="file" name="image"/>
 	   
 	   <input type="submit" name='update' value="Update!">
 	 </form>

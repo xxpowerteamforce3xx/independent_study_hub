@@ -2,7 +2,8 @@ package edu.ycp.cs320.independent_study_hub.model;
 
 public class Faculty extends User {
 	private int facultyID;
-	private String password, username, email, img_url, title, interest, description, faculty_code;
+	private String password, username, email, title, interest, description, faculty_code, file_name;
+    private byte[] image;	
 	// type is set to 2 because this is a faculty account
 	private int type = 2;
 	
@@ -14,6 +15,15 @@ public class Faculty extends User {
 	
 	public int getID() {
 		return facultyID;
+	}
+	
+	public void set_file_name(String file_name) {
+		this.file_name = file_name;
+		
+	}
+	
+	public String get_file_name() {
+		return file_name;
 	}
 	
 	@Override 
@@ -66,12 +76,12 @@ public class Faculty extends User {
 		this.type = type;
 	}
 	
-	public String get_img() {
-		return img_url;
+	public byte[] get_image() {
+		return image;
 	}
 	
-	public void setImg(String url) {
-		this.img_url = url;
+	public void set_image(byte[] image) {
+		this.image = image;
 	}
 	
 	public String get_title() {

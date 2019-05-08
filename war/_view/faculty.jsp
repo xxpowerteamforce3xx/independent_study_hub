@@ -127,7 +127,7 @@
 		        </c:if>
 		        	<!-- In each "column", we insert the faculty member's information by calling methods associated with faculty objects -->
 		        	<div class="column">
-		        		<img class="faculty" src="${faculty.get_img()}">
+		        		<img class="faculty" src="http://localhost:8081/independent_study_hub/Image?id=${faculty.get_name()}&type=f">
 		        		<h2 class="title">${faculty.get_title()}</h2>
 		        		<p class="description"><strong>Interests: </strong>${faculty.get_interest()} <br><br>
 		        		${faculty.get_description()}</p>

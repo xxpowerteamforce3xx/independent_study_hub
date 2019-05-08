@@ -1,13 +1,17 @@
 package edu.ycp.cs320.independent_study_hub.servlet;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
 import edu.ycp.cs320.independent_study_hub.model.*;
 import edu.ycp.cs320.independent_study_hub.controller.InsertStudentController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectOneFacultyController;
@@ -17,6 +21,9 @@ import edu.ycp.cs320.independent_study_hub.controller.SelectStudentsByFacCodeCon
 import edu.ycp.cs320.independent_study_hub.controller.UpdateStudentController;
 import edu.ycp.cs320.independent_study_hub.controller.UpdateFacultyController;
 
+@MultipartConfig(fileSizeThreshold = 1024 * 1024,
+maxFileSize = 1024 * 1024 * 5, 
+maxRequestSize = 1024 * 1024 * 5 * 5)
 public class UpdateAccountServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UpdateStudentController controller_s = new UpdateStudentController();
@@ -88,6 +95,10 @@ public class UpdateAccountServlet extends HttpServlet {
 			String new_pass2 = null;
 			String new_email = null;
 			String new_fac_code = null;
+			String new_desc = null;
+			String new_interest = null;
+			String new_title = null;
+			String file_name = null;
 			Boolean valid = true;
 			
 			new_name = (String) req.getParameter("new_name");
@@ -95,8 +106,27 @@ public class UpdateAccountServlet extends HttpServlet {
 			new_pass2 = (String) req.getParameter("new_password2");
 			new_email = (String) req.getParameter("new_email");
 			new_fac_code = (String) req.getParameter("new_fac_code");
+			new_desc = (String) req.getParameter("new_fac_description");
+			new_title = (String) req.getParameter("new_fac_title");
+			new_interest = (String) req.getParameter("new_fac_interest");
 			System.out.println("new_name: " + new_name + ", new pass: " + new_pass + ", new email: " + new_email + ", new code: " + new_fac_code);
-			
+			InputStream inputStream = null; // input stream of the upload file
+	        
+	        // obtains the upload file part in this multipart request
+	        Part filePart = req.getPart("image");
+	        if (filePart != null) {
+	            // prints out some information for debugging
+	            System.out.println(filePart.getName());
+	            System.out.println(filePart.getSize());
+	            System.out.println(filePart.getContentType());
+	             
+	            // obtains input stream of the upload file
+	            inputStream = filePart.getInputStream();
+	            file_name = filePart.getSubmittedFileName();
+	        } else { 
+	        	System.out.println("part was null <-- this means there was an error w/ the pic"); 
+	        	errorMessage = "Picture format is invalid, please try again";
+	        }
 			try {
 				if (new_name == null || new_name.equals("") || new_pass == null || new_pass.equals("") || new_pass2 == null || new_pass2.equals("") || new_email == null || new_email.equals("") || new_fac_code == null || new_fac_code.equals("")) {
 					errorMessage = "Please enter all fields";
@@ -119,7 +149,7 @@ public class UpdateAccountServlet extends HttpServlet {
 			
 			if (valid) {
 				new_pass = MD5.getMd5(new_pass);
-				controller.UpdateFaculty(new_email, old_name, new_pass, new_name, new_fac_code);
+				controller.UpdateFaculty(new_email, old_name, new_pass, new_name, new_fac_code, new_desc, new_interest, new_title, inputStream, file_name);
 				req.getSession().setAttribute("user", new_name);
 				req.getSession().setAttribute("pw", new_pass);
 				req.getSession().setAttribute("email", new_email);

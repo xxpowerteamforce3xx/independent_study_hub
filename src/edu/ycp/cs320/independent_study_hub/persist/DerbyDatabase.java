@@ -893,7 +893,7 @@ public class DerbyDatabase implements IDatabase {
 	}
 	
 	@Override
-	public boolean update_faculty(final String email, final String old_name, final String pw, final String new_name, final String fac_code) {
+	public boolean update_faculty(final String email, final String old_name, final String pw, final String new_name, final String fac_code, final String description, final String interest, final String title, final InputStream inputStream, final String file_name) {
 		return executeTransaction(new Transaction<Boolean>() {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
@@ -908,7 +908,12 @@ public class DerbyDatabase implements IDatabase {
 									"  set email = ?, " +
 									"  name = ?, " +
 									"  password = ?, " +
-									"  faculty_code = ? " +
+									"  description = ?, " +
+									"  interest = ?, " +
+									"  title = ?, " +
+									"  faculty_code = ?, " + 
+									"  image = ?, " + 
+									"  file_name = ? " +
 									" where faculty.faculty_id = ?"
 							);
 					stmt.setString(1, email);
@@ -916,8 +921,13 @@ public class DerbyDatabase implements IDatabase {
 					stmt.setString(2, new_name);
 					System.out.println(pw + " password from derby");
 					stmt.setString(3,  pw);
-					stmt.setString(4,  fac_code);
-					stmt.setInt(5, f.getID());
+					stmt.setString(6,  title);
+					stmt.setString(4,  description);
+					stmt.setString(5,  interest);
+					stmt.setString(7,  fac_code);
+					stmt.setInt(10, f.getID());
+					stmt.setBlob(8,  inputStream);
+					stmt.setString(9,  file_name);
 
 					stmt.executeUpdate();
 
@@ -997,7 +1007,8 @@ public class DerbyDatabase implements IDatabase {
 		String code = resultSet.getString(i++);
 		System.out.println(code + "from db");
 		faculty.setFacultyCode(code);
-		faculty.setImg(resultSet.getString(i++));
+		faculty.set_image(resultSet.getBytes((i++)));
+		faculty.set_file_name(resultSet.getString(i++));
 	}
 	
 	private void loadPendingFaculty(Faculty faculty, ResultSet resultSet, int i) throws SQLException {
@@ -1116,7 +1127,7 @@ public class DerbyDatabase implements IDatabase {
 									"	student_name varchar(40), " +
 									"	title varchar(40), " +
 									"   date varchar(40), " +
-									"   description varchar(1400), " +
+									"   description varchar(14000), " +
 									"   image blob, " +  
 									"   file_name varchar(1400) " +
 									")"
@@ -1137,7 +1148,8 @@ public class DerbyDatabase implements IDatabase {
 									"   interest varchar(1400)," +
 									"   description varchar(1400)," +
 									"   faculty_code varchar(40), " +
-									"   img varchar(100)" +
+									"   image blob, "+
+									"   file_name varchar(1400)" +
 									")"
 							);
 					stmt3.executeUpdate();
@@ -1229,7 +1241,7 @@ public class DerbyDatabase implements IDatabase {
 					insertProjects.executeBatch();
 					
 					// populate faculty table
-					insertFaculty = conn.prepareStatement("insert into faculty (name, password, email, title, interest, description, faculty_code, img) values (?, ?, ?, ?, ?, ?, ?, ?)");
+					insertFaculty = conn.prepareStatement("insert into faculty (name, password, email, title, interest, description, faculty_code) values (?, ?, ?, ?, ?, ?, ?)");
 					for (Faculty faculty : facultyList) {
 						insertFaculty.setString(1, faculty.get_name());
 						insertFaculty.setString(2, faculty.get_password());
@@ -1238,7 +1250,6 @@ public class DerbyDatabase implements IDatabase {
 						insertFaculty.setString(5, faculty.get_interest());
 						insertFaculty.setString(6, faculty.get_description());
 						insertFaculty.setString(7, faculty.get_fac_code());
-						insertFaculty.setString(8, faculty.get_img());
 						insertFaculty.addBatch();
 					}
 					insertFaculty.executeBatch();
@@ -1275,6 +1286,18 @@ public class DerbyDatabase implements IDatabase {
 		db.loadInitialData();
 	
 		System.out.println("Success!");
+	}
+
+	@Override
+	public boolean insertChemical(String chemical, String use, Integer amount) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Faculty get_faculty_id(String acc_name) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
