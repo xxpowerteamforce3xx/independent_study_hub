@@ -33,7 +33,8 @@ public interface IDatabase {
 	public ArrayList<Project> get_all_projects();
 	public ArrayList<ChemicalInventory> get_all_chemicals();
 	Faculty get_faculty_id(String acc_name);
-	boolean update_faculty(String email, String old_name, String pass, String new_name, String fac_code);
+	boolean update_faculty(final String email, final String old_name, final String pw, final String new_name, final String fac_code, final String description, final String interest, final String title, final InputStream inputStream, final String file_name);
 	boolean update_student(String email, String old_name, String pass, String new_name);
 	public boolean deleteChemical(String chemical, String use, String dom, int amount, String media);
+	boolean update_faculty_password_recovery(String email, String old_name, String pw, String new_name, String fac_code);
 }

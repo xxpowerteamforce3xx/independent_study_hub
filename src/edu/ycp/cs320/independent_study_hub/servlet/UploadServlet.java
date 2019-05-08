@@ -88,9 +88,7 @@ public class UploadServlet extends HttpServlet {
 		Student s = controller_one_student.get_student(user);
 		t = req.getParameter("t");
 		desc = req.getParameter("desc");
-		date = req.getParameter("date");
-		System.out.println("student: " + s.get_name() + ", title: " + t + ", desc: " + desc + ", date: " + date);
-		
+		date = req.getParameter("date");		
 		if (t == null || t.equals("") || desc == null || desc.equals(null) || date == null || date.equals("") || s.get_name() == null) {
 			errorMessage = "Please fill out all fields";
 			valid = false;

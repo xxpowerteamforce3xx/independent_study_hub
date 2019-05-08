@@ -1,9 +1,12 @@
 package edu.ycp.cs320.independent_study_hub.persist;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import javax.servlet.http.Part;
 
 import edu.ycp.cs320.independent_study_hub.model.ChemicalInventory;
 import edu.ycp.cs320.independent_study_hub.model.Faculty;
@@ -69,7 +72,7 @@ public class InitialData {
 				faculty.setDescription(i.next());
 				String code = i.next();
 				faculty.setFacultyCode(code);
-				faculty.setImg(i.next());
+
 				facultyList.add(faculty);
 			}
 			return facultyList;

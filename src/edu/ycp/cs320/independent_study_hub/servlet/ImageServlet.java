@@ -15,11 +15,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import edu.ycp.cs320.independent_study_hub.controller.GetProjectController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectAllProjectsController;
+import edu.ycp.cs320.independent_study_hub.controller.SelectOneFacultyController;
+import edu.ycp.cs320.independent_study_hub.model.Faculty;
 import edu.ycp.cs320.independent_study_hub.model.Project;
 
 public class ImageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private GetProjectController controller = new GetProjectController();
+	private SelectOneFacultyController controller_fac = new SelectOneFacultyController();	
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -44,8 +47,14 @@ public class ImageServlet extends HttpServlet {
 		resp.setContentType("image/png");							// set our return type
 		
 		System.out.println("Image Servlet: doGet");
-		String prj_title = req.getParameter("id");
-		Project p = controller.get_project(prj_title);		
-		resp.getOutputStream().write(p.get_image()); // write it all together
+		String name_OR_title = req.getParameter("id");
+		String type = req.getParameter("type");
+		if (type.equals("p")) {
+			Project p = controller.get_project(name_OR_title);		
+			resp.getOutputStream().write(p.get_image()); // write it all together
+		} else if (type.equals("f")) {
+			Faculty f = controller_fac.get_faculty(name_OR_title);
+			resp.getOutputStream().write(f.get_image());
+		}
 	}	
 }
