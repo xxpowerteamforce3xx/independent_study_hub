@@ -254,10 +254,10 @@ body.login { /*Sets background color of login screen and general text font*/
 }
 
 .reset_pass { /*Creates smaller box that contains actual login fields/buttons*/
-    width: 400px;
+    width: 40%;
     padding: 20px;
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
     background: forestgreen;
@@ -267,10 +267,58 @@ body.login { /*Sets background color of login screen and general text font*/
 .reset_pass h1 {
 	color:white;
 	border-bottom: solid 3px white;
-	
+	font-size: 32px;
+	text-align: center;
 }
 
+.reset_pass h2 {
+	color:#f1f1f1;
+	font-size: 20px;
+	text-align: center;
+}
 
+.reset_pass input[type="text"] { /*Sets style of input feilds when nothing is being done*/
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid white;
+    padding: 10px 10px;
+    width: 200px;
+    outline: none; /*Stops input fields from "lighting up" when clicked on (slightly ruins look of login screen)*/
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+}
+
+.reset_pass input[type="text"]:focus { /* When input field is selected width and border color change (to signify selection)*/
+    width: 280px;
+    border-color: white;
+}
+
+.reset_pass input[type="submit"]{ /*Sets style of login button when nothing is being done*/
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid white;
+    padding: 10px 10px;
+    outline: none; /*Stops input fields from "lighting up" when clicked on (slightly ruins look of login screen)*/
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s; /* Rate at which input bars expand */
+    cursor: pointer; /*Changes mouse cursor to pointer style when hovering over login button*/
+}
+.reset_pass ::placeholder {
+	color: white;
+	opacity: 1;
+}
+
+.reset_pass input[type="submit"]:hover{ /*When login button is hovered over, button background fills in*/
+    background: #2ecc71;
+}
 
 .box_ycp_only {
 	width: 500px;

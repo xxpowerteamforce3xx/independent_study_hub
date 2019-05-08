@@ -34,11 +34,10 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 
 
     <form class="reset_pass" action="${pageContext.servletContext.contextPath}/ResetPassword" method="post">
-        <h1>York College of Pennsylvania</h1>
-        <h2>Please enter your YCP email associated with<br>
-        	your IndependentStudyHub account below</h2>
-        <input type="text" name="name" placeholder="user@ycp.edu" id="name" value="${email}"/>
-
+        <h1>Reset Your Password</h1>
+        <h2>Please enter your YCP email associated with your IndependentStudyHub account below<br></h2>
+        <input type="text" name="email" placeholder="user@ycp.edu" value="${email}"/>
+        <h2>Once submitted, you will recieve an email with further instructions<br></h2>
         <input type="submit" name="button" value="Reset Password" id="log"/>
     </form>
 

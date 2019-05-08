@@ -16,13 +16,13 @@ public class JavaEmail {
 	Session mailSession;
 	MimeMessage emailMessage;
 
-	public void run(String recip) throws AddressException,
+	public static void run(String recip, Boolean found) throws AddressException,
 			MessagingException {
 
 		JavaEmail javaEmail = new JavaEmail();
 
 		javaEmail.setMailServerProperties();
-		javaEmail.createEmailMessage(recip);
+		javaEmail.createEmailMessage(recip, found);
 		javaEmail.sendEmail();
 	}
 
@@ -37,12 +37,16 @@ public class JavaEmail {
 
 	}
 
-	public void createEmailMessage(String recip) throws AddressException,
+	public void createEmailMessage(String recip, Boolean found) throws AddressException,
 			MessagingException {
 		String[] toEmails = { recip };
 		String emailSubject = "Java Email";
-		String emailBody = "This is an email sent by JavaMail api.";
-
+		String emailBody = null;
+		if (found) {
+			emailBody = "This is an email sent by JavaMail api.";
+		} else {
+			emailBody = "User was not found in the db";
+		}
 		mailSession = Session.getDefaultInstance(emailProperties, null);
 		emailMessage = new MimeMessage(mailSession);
 
@@ -59,7 +63,7 @@ public class JavaEmail {
 	public void sendEmail() throws AddressException, MessagingException {
 
 		String emailHost = "smtp.gmail.com";
-		String fromUser = "IndependentStudyHub";//just the id alone without @gmail.com
+		String fromUser = "independentstudyhub";//just the id alone without @gmail.com
 		String fromUserEmailPassword = "6QXrXJWJJNYD9LX";
 
 		Transport transport = mailSession.getTransport("smtp");
