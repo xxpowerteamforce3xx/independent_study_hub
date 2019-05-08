@@ -70,6 +70,97 @@
   		 		<strong>Error!</strong> ${errorMessage}
 	  		</div>
 	  </c:if>
+	 <div class="upload-container">
+        	<p>Upload your independent study! When picking a 
+    		description, don't worry about writing like 
+    		it is your research paper. Be descriptive and 
+    		general so future students can have an idea of
+    		where to start!</p>
+    
+    
+    
+    <div class="upload-box2">
+        	<form class="upload-form" action="${pageContext.servletContext.contextPath}/Upload" method="post" enctype="multipart/form-data">
+      		  
+      		    <div class="form-row">
+      		    	<div class="form-field">
+      		    		<label>Title:</label> 
+      		    		<input class="input-field input-upload" type="text" name="t" placeholder="title" value="${t}"/>
+      		    	</div>
+      		    	<div class="form-field">
+		              	<label>Name:</label>  
+		              	<input class="input-field input-upload" type="text" name="n" placeholder="name" value="${t}"/>
+		      		</div>
+      		    </div>
+              
+              
+              <div class="form-row">
+        	    <div class="form-field">
+        	    	<label>Advisor:</label>
+        	    	<input class="input-field input-upload" type="text" name="a" placeholder="Advisor" value="${t}"/>
+        	    </div>
+        	    <div class="form-field">
+                  <label>Date Completed:</label> 
+                  <input class="date"type="date" name="date" placeholder="month/day/year" value="${date}"/>
+                </div>
+              </div>
+        	    
+      		    <div class="form-row">
+                <div class="form-field">
+            		    <label>Description:</label>
+            		    <textarea class="input-field input-upload" name="desc" placeholder="Write something.." rows="4" cols="50" style="font-style:arial;" >${desc}</textarea>
+   
+                  </div>
+      		    </div>
+      		    
+      		    <div class="form-row">
+	      		    <div class="form-field">
+		      		    <label>Abstract:</label>
+		      		    <input id="spacing" type="file" name="image"/>
+	      		    </div>
+      		    </div>
+      		    
+      		    <div class="form-row">
+      		    	<div class="form-field">
+      		    		<button type="submit" name="button" id="log">Submit</button>
+      		    	</div>
+      		    </div>
+      		    
+    		  </form>
+    		  <br>
+      	</div>
+      </div>
+    <!-- 
+      	<div class="upload-box2">
+      		<form class="upload-form" action="${pageContext.servletContext.contextPath}/Upload" method="post" enctype="multipart/form-data">
+      		  
+      		    <div class="inline"><strong>Title: &nbsp;&nbsp;&nbsp;&emsp;</strong> <input class="input-field input-upload" type="text" name="t" placeholder="title" value="${t}"/>
+      		    </div>
+              
+              <div class="inline">
+              <strong>Name:</strong>  
+              	<input class="input-field input-upload" type="text" name="n" placeholder="name" value="${t}"/>
+      		    </div>
+              <br>
+              <div class="inline"><strong>Date Completed:</strong> <input type="date" name="date" placeholder="month/day/year" value="${date}"/></div>
+        	    
+      		    
+      		    <p>Description:</p>
+      		    <textarea class="input-field input-upload" name="desc" placeholder="Write something.." rows="4" cols="50" style="font-style:arial;" >${desc}</textarea>
+      		    <br><br>
+      		    
+      		    
+      		    <p>Picutre of Your Abstract</p>
+      		    <input type="file" name="image"/>
+      		    
+      		    <input type="submit" name="button" value="Login" id="log"/>
+    		  </form>
+    		  <br>
+      	</div>
+      </div>
+      -->
+	
+	<!-- 
     <div class="upload-container">
     	<div class="upload-box1">
     		Upload your independent study! When picking a<br><br> 
@@ -79,8 +170,8 @@
 			where to start! 
     	</div>
     
-    	<div class="upload-box2 upload-form">
-    		<form  action="${pageContext.servletContext.contextPath}/Upload" method="post" enctype="multipart/form-data">>
+    	<div class="upload-box2">
+    		<form class="upload-form" action="${pageContext.servletContext.contextPath}/Upload" method="post" enctype="multipart/form-data">>
     		  <fieldset>
     		    <legend>Upload a Project!</legend>
     		    Title:<br>
@@ -100,6 +191,7 @@
 			  </form>
     	</div>
     </div>
+    -->
     <!--  
     <div class="upload-container">
     	<div class="upload-box1">

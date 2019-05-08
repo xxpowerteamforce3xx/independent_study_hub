@@ -681,14 +681,32 @@ z-index: 1;
 
 /* ********** Upload CSS ********** */
 
-/* Main <div> on Upload.JSP that houses the two sections on the page */
+
+.input-upload{
+  padding: 10px;
+  font-size: 16px;
+}
+
+.input-upload:focus{
+  background: #E0FFFF;
+  color: black;
+  transition: 350ms;
+}
+
+ /* Main <div> on Upload.JSP that houses the two sections on the page */
 .upload-container{
-	margin-top: 2rem;
-	display: flex; /* Signifies we are using flexbox to layout HTML elements */
+  margin-top: 2rem;
+  display: flex; /* Signifies we are using flexbox to layout HTML elements */
+  flex-direction:column;
+  border: 1px solid;
+  align-items:center;
+  /*background: linear-gradient(to bottom right,  forestgreen, white);*/
+  /*background: linear-gradient(white, forestgreen);*/
+  /*background: radial-gradient(whitesmoke, forestgreen);*/
 }
 
 .upload-box1{
-	flex: 1; /* Specifies that HTML element with upload-box1 class has a size of 1 */
+  flex: 1; /* Specifies that HTML element with upload-box1 class has a size of 1 */
 } 
 
 .upload-box2{
@@ -697,6 +715,51 @@ z-index: 1;
 
 .upload-form{
 	border: none;
+}
+
+.input-field{
+ margin-top: 1rem;
+ width: 75%
+}
+
+label {
+    font-weight: bold;
+    text-align: left;
+}
+
+.form-row {
+    display: flex;
+    margin-bottom: 2.14rem;
+}
+
+.form-row.vertical {
+    flex-direction: column;
+}
+
+.form-row > * {
+    flex: 1;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.date{
+    margin-top: 1rem;
+    width: 65%;
+    padding: 7px;
+    font-size: 16px;
+}
+
+#spacing{
+	margin-top: 1rem;
+}
+
+@media(min-width:468px){
+  form-row{
+    display: block;
+  }
 }
 
 
