@@ -2,6 +2,7 @@ package edu.ycp.cs320.independent_study_hub.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import edu.ycp.cs320.independent_study_hub.controller.SelectAllFacultyController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectAllProjectsController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectAllStudentsController;
+import edu.ycp.cs320.independent_study_hub.controller.UpdateFacultyController;
+import edu.ycp.cs320.independent_study_hub.controller.UpdateStudentController;
 import edu.ycp.cs320.independent_study_hub.model.Project;
 import edu.ycp.cs320.independent_study_hub.model.*;
 
@@ -20,6 +23,8 @@ public class ResetPasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private SelectAllStudentsController controller_students = new SelectAllStudentsController();
 	private SelectAllFacultyController controller_faculty = new SelectAllFacultyController();
+	private UpdateFacultyController controller_update_fac = new UpdateFacultyController();
+	private UpdateStudentController controller_update_stud = new UpdateStudentController();
 	private ArrayList<Student> all_students = new ArrayList<Student>();
 	private ArrayList<Faculty> all_faculty = new ArrayList<Faculty>();
 	
@@ -42,6 +47,9 @@ public class ResetPasswordServlet extends HttpServlet {
 			throws ServletException, IOException {
 		System.out.println("Research servlet doPost");
 		String email = null;
+		String name = null;
+		String type = null;
+		String fac_code = null;
 		String errorMessage = null;
 		Boolean found = false;
 		Boolean valid = true;
@@ -61,6 +69,8 @@ public class ResetPasswordServlet extends HttpServlet {
 				for (Student s: all_students) {
 					if (s.get_email().equals(email)) {
 						found = true;
+						name = s.get_name();
+						type = "s";
 						break;
 					}
 				}
@@ -68,11 +78,44 @@ public class ResetPasswordServlet extends HttpServlet {
 				for (Faculty f: all_faculty) {
 					if (f.get_email().equals(email)) {
 						found = true; 
+						name = f.get_name();
+						fac_code = f.get_fac_code();
+						type = "f";
 						break;
 					}
 				}
 				if (valid) {
-					JavaEmail.run(email, found);
+					if (type.equals("s") || type == null) {
+					
+						String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+				        StringBuilder salt = new StringBuilder();
+				        Random rnd = new Random();
+				        while (salt.length() < 18) { // length of the random string.
+				            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+				            salt.append(SALTCHARS.charAt(index));
+				        }
+				        String temp_pass = salt.toString();
+				      
+						System.out.println(temp_pass + "<-- temppass");
+						JavaEmail.run(email, found, name, temp_pass);
+						temp_pass = MD5.getMd5(temp_pass);
+						controller_update_stud.UpdateStudent(email, name, temp_pass, name);
+						req.getRequestDispatcher("/_view/EmailSent.jsp").forward(req, resp);
+					}
+				} else if (type.equals("f")) {
+					String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+			        StringBuilder salt = new StringBuilder();
+			        Random rnd = new Random();
+			        while (salt.length() < 18) { // length of the random string.
+			            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+			            salt.append(SALTCHARS.charAt(index));
+			        }
+			        String temp_pass = salt.toString();
+			      
+					System.out.println(temp_pass + "<-- temppass");
+					JavaEmail.run(email, found, name, temp_pass);
+					temp_pass = MD5.getMd5(temp_pass);
+					controller_update_fac.UpdateFaculty(email, name, temp_pass, name, fac_code);
 					req.getRequestDispatcher("/_view/EmailSent.jsp").forward(req, resp);
 				}
 			}

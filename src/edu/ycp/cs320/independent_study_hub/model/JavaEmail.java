@@ -1,14 +1,19 @@
 package edu.ycp.cs320.independent_study_hub.model;
 
+import java.io.File;
 import java.util.Properties;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeBodyPart;
+import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeMultipart;
 
 public class JavaEmail {
 
@@ -16,13 +21,13 @@ public class JavaEmail {
 	Session mailSession;
 	MimeMessage emailMessage;
 
-	public static void run(String recip, Boolean found) throws AddressException,
+	public static void run(String recip, Boolean found, String name, String temp_pass) throws AddressException,
 			MessagingException {
 
 		JavaEmail javaEmail = new JavaEmail();
 
 		javaEmail.setMailServerProperties();
-		javaEmail.createEmailMessage(recip, found);
+		javaEmail.createEmailMessage(recip, found, name, temp_pass);
 		javaEmail.sendEmail();
 	}
 
@@ -37,25 +42,58 @@ public class JavaEmail {
 
 	}
 
-	public void createEmailMessage(String recip, Boolean found) throws AddressException,
+	public void createEmailMessage(String recip, Boolean found, String name, String temp_pass) throws AddressException,
 			MessagingException {
 		String[] toEmails = { recip };
-		String emailSubject = "Java Email";
+		String emailSubject = "Password Reset - IndependentStudyHub";
 		String emailBody = null;
 		if (found) {
-			emailBody = "This is an email sent by JavaMail api.";
+			emailBody =	"<html>" +
+						  "<head>" +
+						    "<style>" +
+						      ".colored {" +
+						        "color: white;" +
+						        "background:forestgreen;" +
+						      "}" +
+						      ".red {" +
+						      "color: red;" +
+						      "}"+ 
+						      "#p {" +
+						      "background:#A3DEDA;" +
+						      "font-size: 14px;" +
+						      "}" +
+						      "#body {" +
+						        "font-size: 14px;" +
+						      "}" +
+						    "</style>" +
+						  "</head>" +
+						  "<body>" +
+						    "<div id='body'>" +
+						      "<h1 class='colored'>Independent Study Hub - YCP - 2019</h1>" +
+						      "<p> <br>Hello, "+ name + "</p>"+
+						      "<p> We've recieved a request to reset the password to the account tied to this email. Below is </p>" +
+						      "<p> A temporary password. Please use it to login to your account and update your information  </p>" +
+						      "<p> under MyAccount.</p>" +
+						      "<p class='red'><br>TEMPORARY PASSOWRD: "  + temp_pass +"</p>" +
+						      "<p><br>Thank you, </p>" +
+						      "<p>-The IndependentStudyHubTeam</p>" +
+						    "</div>" +
+						  "</body>" +
+						 "</html>";
+		
 		} else {
 			emailBody = "User was not found in the db";
 		}
+		
 		mailSession = Session.getDefaultInstance(emailProperties, null);
 		emailMessage = new MimeMessage(mailSession);
-
-		for (int i = 0; i < toEmails.length; i++) {
+		
+		for (int i = 0; i < toEmails.length; i++) {		// this bit lets us scale it to more people, if wanted
 			emailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmails[i]));
 		}
 
 		emailMessage.setSubject(emailSubject);
-		emailMessage.setContent(emailBody, "text/html");//for a html email
+		emailMessage.setContent(emailBody, "text/html; charset=utf-8");//for a html email
 		//emailMessage.setText(emailBody);// for a text email
 
 	}
