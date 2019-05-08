@@ -6,18 +6,26 @@
 <head>
     <meta charset="utf-8" />
     <title>Project</title>
+
+
 	<style type="text/css">
 		<%@ include file="./../style/style.css" %>
 				
 	</style>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" defer></script>
 	<script type="text/javascript">
 		<%@ include file="./../Javascript/main.js" %>
+		
+		
 	</script>
 </head>
 <body>
-    <header>
-        <h1>${title}</h1>
-    </header>
+	
+	   <header>
+	       <h1>${title}</h1>
+	   </header>
+	
 
 	<c:choose>
     	<c:when test="${user.equals('guest')}">
@@ -113,11 +121,24 @@
 		    </div>
 		    		</c:otherwise>
 			</c:choose>
-	
+			
 		<!-- Main section of web page's body -->
-	   <h2>Decription: ${desc}</h2>
+		
+		<div>
+			<div>
+				<h1 id="project-h1-title" class="project-title">${title}</h1>
+			</div>
+			<div class="project-subtitle">
+				<h2 class="project-h2-title">${user}</h2>
+				<h2 class="project-h2-title">Date: ${date}</h2>
+			</div>
+		</div>
+		
+		
+	   <strong>Decription:</strong> <p>${desc}</p>
 	   <h2>date: ${date}</h2>
 	   <img src="http://localhost:8081/independent_study_hub/Image?id=${title}" />
 	   <h2>file name: ${file_name}</h2>
+	    -->
 </body>
 </html>

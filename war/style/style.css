@@ -289,6 +289,32 @@ input:checked + .slider:before {
 }
 
 
+
+
+/* ***** Student Project Page CSS ***** */
+
+.project-title{
+	text-decoration: underline solid forestGreen;
+}
+
+.project-subtitle{
+	
+}
+
+#project-h1-title{
+	background: white;
+    color: black;
+    text-align: Left;
+    font-size: 40px;
+    margin: .25rem;
+}
+
+.project-h2-title{
+	font-size: 24px;
+	margin: .25rem;
+}
+
+
 /* ***** Login Page CSS ***** */
 
 body.login { /*Sets background color of login screen and general text font*/

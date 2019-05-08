@@ -1,6 +1,12 @@
 /* ***** Global variables ***** */
 
 let search_by = 0;
+
+$(document).ready(function(){
+	  $("p").click(function(){
+	    $(this).hide();
+	  });
+	});
 //let count = 0;
 
 /*
