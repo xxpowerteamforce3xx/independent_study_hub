@@ -5,19 +5,18 @@ body
     text-align: center;
 }
 
-a:link {
-  color: white;
+.log-link{
+	color: white;
 }
-
 /* visited link */
 
 /* mouse over link */
-a:hover {
+.log-link:hover {
   color: blue;
 }
 
 /* selected link */
-a:active {
+.log-link:active {
   color: blue;
 }
 

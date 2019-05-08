@@ -43,7 +43,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 		</label>
 		<span>Login as a Guest</span>
         <input type="submit" name="button" value="Login" id="log"/>
-        <a href="http://localhost:8081/independent_study_hub/ResetPassword">Forgot Password?</a>
+        <a class="log-link" href="http://localhost:8081/independent_study_hub/ResetPassword">Forgot Password?</a>
     </form>
     
      <form class="box_ycp_only" action="${pageContext.servletContext.contextPath}/Login" method="post">
