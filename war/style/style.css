@@ -5,6 +5,23 @@ body
     text-align: center;
 }
 
+a:link {
+  color: white;
+}
+
+/* visited link */
+
+/* mouse over link */
+a:hover {
+  color: blue;
+}
+
+/* selected link */
+a:active {
+  color: blue;
+}
+
+
 .form-update input[type=text], input[type=password], select {
   width: 100%;
   text-align:left;
@@ -235,6 +252,24 @@ body.login { /*Sets background color of login screen and general text font*/
     background: forestgreen;
     text-align: center;
 }
+
+.reset_pass { /*Creates smaller box that contains actual login fields/buttons*/
+    width: 400px;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: forestgreen;
+    text-align: center;
+}
+
+.reset_pass h1 {
+	color:white;
+	border-bottom: solid 3px white;
+	
+}
+
 
 
 .box_ycp_only {

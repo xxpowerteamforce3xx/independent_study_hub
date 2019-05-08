@@ -61,8 +61,8 @@ public class InitialData {
 				Iterator<String> i = tuple.iterator();
 				Faculty faculty = new Faculty();
 				faculty.setName(i.next());
-				String password = MD5.getMd5(i.next());
-				faculty.setPassword(password);
+				String password2 = MD5.getMd5(i.next());
+				faculty.setPassword(password2);
 				faculty.setEmail(i.next());
 				faculty.setTitle(i.next());
 				faculty.setInterest(i.next());

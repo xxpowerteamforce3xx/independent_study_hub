@@ -1100,7 +1100,7 @@ public class DerbyDatabase implements IDatabase {
 									"	students_id integer primary key " +
 									"		generated always as identity (start with 1, increment by 1), " +									
 									"	name varchar(40), " +
-									"	password varchar(40), " +
+									"	password varchar(400), " +
 									"   email varchar(40), " +
 									"   faculty_code varchar(40)" +
 									")"
@@ -1131,7 +1131,7 @@ public class DerbyDatabase implements IDatabase {
 									"	faculty_id integer primary key " +
 									"		generated always as identity (start with 1, increment by 1), " +
 									" 	name varchar(40)," +
-									" 	password varchar(40)," +
+									" 	password varchar(400)," +
 									" 	email varchar(40)," +
 									"   title varchar(40)," +
 									"   interest varchar(1400)," +

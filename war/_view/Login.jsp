@@ -39,6 +39,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
         <input type="password" name="pass" placeholder="Password" id="password" value="${pass}"/>
         <input id =Mycheckbox type="checkbox" name ="check" value="1"><span id="cb_span"> Login as a Guest</span>
         <input type="submit" name="button" value="Login" id="log"/>
+        <a href="http://localhost:8081/independent_study_hub/ResetPassword">Forgot Password?</a>
     </form>
     
      <form class="box_ycp_only" action="${pageContext.servletContext.contextPath}/Login" method="post">
@@ -51,7 +52,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
     	<input id =Mycheckbox type="checkbox" name ="check_fac" value="1"><span id="cb_span"> Create a New Faculty Account</span>
         <input type="submit" name="button" value="Create" id="log"/>
       </form>
-      
+     
       <c:if test="${! empty errorMessage}">
 			<div class="alert">
  		 		<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
