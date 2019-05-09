@@ -399,21 +399,21 @@ public class DerbyDatabase implements IDatabase {
 		});	
 	}
 	@Override
-	public boolean deleteChemical(final String chemical, final String use, final String dom, final int amount, final String media) {
+	public boolean deleteChemical(final String chemical) {
 		return executeTransaction(new Transaction<Boolean>()  {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
 				PreparedStatement stmt = null;
 				try {
 					stmt = conn.prepareStatement(
-							"DELETE FROM chemicals where chemicals.name = ? and chemicals.use = ? and chemicals.dom = ? and chemicals.amount = ? and chemicals.media = ?"
+							"DELETE FROM chemicals where chemicals.name = ?"
 						
 					);
 					stmt.setString(1, chemical);
-					stmt.setString(2, use);
+					/*stmt.setString(2, use);
 					stmt.setString(3, dom);
 					stmt.setInt(4, amount);
-					stmt.setString(5, media);
+					stmt.setString(5, media);*/
 					// execute the update
 					int del = stmt.executeUpdate();
 				    System.out.println("Number of deleted records: " + del);
