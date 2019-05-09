@@ -70,11 +70,11 @@ public class JavaEmail {
 						  "<body>" +
 						    "<div id='body'>" +
 						      "<h1 class='colored'>Independent Study Hub - YCP - 2019</h1>" +
-						      "<p> <br>Hello, "+ name + "</p>"+
+						      "<p> <br>Hello, <b>"+ name + "</b></p>"+
 						      "<p> We've recieved a request to reset the password to the account tied to this email. Below is </p>" +
 						      "<p> A temporary password. Please use it to login to your account and update your information  </p>" +
 						      "<p> under MyAccount.</p>" +
-						      "<p class='red'><br>TEMPORARY PASSOWRD: "  + temp_pass +"</p>" +
+						      "<p class='red'><br>TEMPORARY PASSOWRD: <b>"  + temp_pass +"</b></p>" +
 						      "<p><br>Thank you, </p>" +
 						      "<p>-The IndependentStudyHubTeam</p>" +
 						    "</div>" +
@@ -82,7 +82,39 @@ public class JavaEmail {
 						 "</html>";
 		
 		} else {
-			emailBody = "User was not found in the db";
+			emailBody = "<html>" +
+					  "<head>" +
+					    "<style>" +
+					      ".colored {" +
+					        "color: white;" +
+					        "background:forestgreen;" +
+					      "}" +
+					      ".red {" +
+					      "color: red;" +
+					      "}"+ 
+					      "#p {" +
+					      "background:#A3DEDA;" +
+					      "font-size: 14px;" +
+					      "}" +
+					      "#body {" +
+					        "font-size: 14px;" +
+					      "}" +
+					    "</style>" +
+					  "</head>" +
+					  "<body>" +
+					    "<div id='body'>" +
+					      "<h1 class='colored'>Independent Study Hub - YCP - 2019</h1>" +
+					      "<p> <br>Hello, <b>"+ name + "</b></p>"+
+					      "<p> We've recieved a request to reset the password to the account tied to this email, but this email is not in our database! </p>" +
+					      "<p> This is a common technique to try and get information from the server about whether or not a certain email is tied to an account. </p>" +
+					      "<p> If you do have an account with the Independent Study Hub, the email you gave to our email client is not tied to an account.</p>" +
+					      "<p> Please contact an administrator and they can see the email you used to sign up. If that email is incorrect, they can fix it for you. </p>" +
+					      "<p><br><br> If you do not have an account with us, please be on the look out for fraudulent activity, and have a nice day!</p>" +
+					      "<p><br>Thank you, </p>" +
+					      "<p>-The IndependentStudyHubTeam</p>" +
+					    "</div>" +
+					  "</body>" +
+					 "</html>";
 		}
 		
 		mailSession = Session.getDefaultInstance(emailProperties, null);

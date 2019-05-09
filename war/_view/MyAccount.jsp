@@ -286,7 +286,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 	
 	    <h2 class='h2'>Welcome, ${name}!</h2>
 		<form class="side-bar-form" action="${pageContext.servletContext.contextPath}/MyAccount" method="post">
-			<button class="side-bar-form-btn" type='submit' name ='update' value = 'update'>Update Information</button>
+			
     	</form>
 	<br>
 	<table class='table'>
@@ -294,24 +294,27 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 	    <th>Username</th>
 	    <th>Password</th>
 	    <th>Email</th>
+	    <th></th>
 	  </tr>
 	  <tr>
 	    <td>${name}</td>
 	    <td>${pw}</td>
 	    <td>${email}</td>
+	    <td><button class="side-bar-form-btn" type='submit' name ='update_student' value = 'update'>Update Information</button></td>
 	  </tr>
 	</table>
 	
 	<h2 class='h2'>Projects:</h2>
 	<form class="side-bar-form" action="${pageContext.servletContext.contextPath}/MyAccount" method="post">
-			<button class="side-bar-form-btn" type='submit' name ='update' value = 'update'>Update Information</button>
-    	</form>
+
+
 	<table class='table'>
 		<tr>
 			<th>Project Title</th>
 			<th>Project Description</th>
 			<th>Date Uploaded</th>
 			<th>File Name of Image Associated</th>
+			<th></th>
 		</tr>
 	
 		<c:forEach  var="project" items="${projects}">
@@ -319,11 +322,12 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 	            <td>${project.get_title()}</td>
 	            <td>${project.get_description()}</td>
 	            <td>${project.get_date()}</td>	
-	            <td>${project.get_file_name()}</td>	            
+	            <td>${project.get_file_name()}</td>	
+	            <td><button class="side-bar-form-btn" type='submit' name ='update_project' value = "${project.get_title()}">Update Project Information</button></td>            
 	        </tr>
 	    </c:forEach>
-			
 	</table>
+	</form>
 </c:if>
       
 </body>

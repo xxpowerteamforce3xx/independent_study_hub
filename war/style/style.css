@@ -316,6 +316,16 @@ input:checked + .slider:before {
 
 
 /* ***** Login Page CSS ***** */
+@media screen and (max-width: 1000px) {
+  .box_ycp_only, .box_checkbox_new_student  {
+    display: none;
+  }
+  
+  .box {
+    top: 50%;
+    left: 50%;
+  }
+}
 
 body.login { /*Sets background color of login screen and general text font*/
     margin: 0;

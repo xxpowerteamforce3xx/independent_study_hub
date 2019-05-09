@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import edu.ycp.cs320.independent_study_hub.model.*;
+import edu.ycp.cs320.independent_study_hub.controller.GetProjectController;
 import edu.ycp.cs320.independent_study_hub.controller.InsertStudentController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectOneFacultyController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectOneStudentController;
@@ -28,6 +29,7 @@ public class UpdateAccountServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UpdateStudentController controller_s = new UpdateStudentController();
 	private UpdateFacultyController controller = new UpdateFacultyController();
+	private GetProjectController controller_prj = new GetProjectController();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -37,24 +39,39 @@ public class UpdateAccountServlet extends HttpServlet {
 		resp.setHeader("Pragma", "no-cache"); // HTTP 1.0.
 		resp.setHeader("Expires", "0"); // Proxies.
 		String errorMessage = null;
+		// student stuff
 		String name         = null;
 		String pw           = null;
 		String email        = null;
 		String code 		= null;
 		String type			= null;
+		// project stuff
+		String title		= null;
+		String desc 		= null;
+		
 		
 		name = (String) req.getSession().getAttribute("user");
 		pw = (String) req.getSession().getAttribute("pw");
 		email = (String) req.getSession().getAttribute("email");
 		code = (String) req.getSession().getAttribute("fac_code");
-		System.out.println(code + " fac code");
 		type = (String) req.getSession().getAttribute("type");
-	
+		if (req.getParameter("id").equals("student")) {
+			req.setAttribute("which", "student");
+			req.setAttribute("name", name);
+			req.setAttribute("pass", pw);
+			req.setAttribute("email", email);
+			req.setAttribute("code", code);
+		} else if (req.getParameter("id").equals("project")) {
+			req.setAttribute("which", "project");
+			req.setAttribute("name", name);
+			Project p = controller_prj.get_project((String)req.getSession().getAttribute("project_title"));
+			req.setAttribute("title", p.get_title());
+			req.setAttribute("desc", p.get_description());
+			req.setAttribute("file_name", p.get_file_name());
+			req.setAttribute("date", p.get_date());
+		}
 		req.setAttribute("errorMessage", errorMessage);
-		req.setAttribute("name", name);
-		req.setAttribute("pass", pw);
-		req.setAttribute("email", email);
-		req.setAttribute("code", code);
+
 		req.setAttribute("type", type);
 		
 		req.getRequestDispatcher("/_view/Update.jsp").forward(req, resp);
@@ -67,10 +84,11 @@ public class UpdateAccountServlet extends HttpServlet {
 		String old_name         = null;
 		String old_pw           = null;
 		String old_email        = null;
-
+		String old_title		= null;
 		old_name = (String) req.getSession().getAttribute("user");
 		old_pw = (String) req.getSession().getAttribute("pw");
 		old_email = (String) req.getSession().getAttribute("email");
+		old_title = (String) req.getSession().getAttribute("project_title");
 		
 		String back = null;
 		String logout = null;
@@ -164,6 +182,8 @@ public class UpdateAccountServlet extends HttpServlet {
 			req.setAttribute("new_email", new_email);
 			req.setAttribute("new_fac_code", new_fac_code);
 			req.getRequestDispatcher("/_view/Update.jsp").forward(req, resp);
+			
+		} else if (req.getSession().getAttribute("type").equals("student") && req.getSession().getAttribute("project_title") != null) {
 			
 		} else if (req.getSession().getAttribute("type").equals("student")) {
 			String errorMessage = null;

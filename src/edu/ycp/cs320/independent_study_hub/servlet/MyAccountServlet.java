@@ -124,7 +124,8 @@ public class MyAccountServlet extends HttpServlet {
 		// everyting below is new post stuff
 		String back = null;
 		String logout = null;
-		String update = null;
+		String update_student = null;
+		String update_project = null;
 		String delete = null;
 		String add = null;
 		String[] to_add = req.getParameterValues("nerds");
@@ -133,7 +134,8 @@ public class MyAccountServlet extends HttpServlet {
 		add = req.getParameter("add");
 		back = req.getParameter("account");
 		logout = req.getParameter("logout");
-		update = req.getParameter("update");
+		update_student = req.getParameter("update_student");
+		update_project = req.getParameter("update_project");
 
 		try {
 			for (int k = 0; k < to_add.length; k++) {
@@ -180,9 +182,16 @@ public class MyAccountServlet extends HttpServlet {
 			}
 		} catch (NullPointerException e) {}
 		try {
-			if (update.equals("update")) {
-				System.out.println("redirecting to update");
-				resp.sendRedirect(req.getContextPath() + "/Update");
+			if (update_student.equals("update")) {
+				System.out.println("redirecting to update student");
+				resp.sendRedirect(req.getContextPath() + "/Update?id=student");
+			}
+		} catch (NullPointerException e) {}
+		try {
+			if (update_project != null) {
+				System.out.println("redirecting to update project");
+				req.getSession().setAttribute("project_title", update_project);
+				resp.sendRedirect(req.getContextPath() + "/Update?id=project");
 			}
 		} catch (NullPointerException e) {}
 		req.getRequestDispatcher("/_view/MyAccount.jsp").forward(req, resp);
