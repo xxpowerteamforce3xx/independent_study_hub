@@ -1,16 +1,13 @@
-<<<<<<< HEAD
-=======
 ----------------------------------------------------------------
-Wed May 08 13:50:39 EDT 2019:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-016a-9891-804e-000005576120 
-on database directory C:\Users\lucas\git\independent_study_hub\test.db with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
-Loaded from file:/C:/Users/lucas/eclipse-workspace-old-eclipse/CS320_Derby/lib/derby.jar
+Thu May 09 17:53:00 EDT 2019:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-016a-9e95-adbd-00000b6a8140 
+on database directory C:\CS320\independent_study_hub\test.db with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
+Loaded from file:/C:/Users/Ben/eclipse-workspace/CS320_Derby/lib/derby.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_201-b09
-user.dir=C:\Users\lucas\git\independent_study_hub
-os.name=Windows 10
+java.runtime.version=1.8.0_131-b11
+user.dir=C:\CS320\independent_study_hub
+os.name=Windows 8.1
 os.arch=amd64
-os.version=10.0
+os.version=6.3
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
->>>>>>> c903f1700524b243b1a783132e188607c0125c10

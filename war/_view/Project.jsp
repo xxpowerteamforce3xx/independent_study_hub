@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <title>Project</title>
 
-
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<style type="text/css">
 		<%@ include file="./../style/style.css" %>
 				
@@ -123,22 +123,27 @@
 			</c:choose>
 			
 		<!-- Main section of web page's body -->
-		
-		<div>
-			<div>
-				<h1 id="project-h1-title" class="project-title">${title}</h1>
+		<section class="project-body">
+			<div class="w3-card-4 project-card">
+	    		<div class="project-title-div">
+	  				<h1 id="project-h1-title">Synthesis of Cadmium-Free Quantum Dots</h1>
+	  			</div>
+	  			<div class="project-subtitle">
+	  				<h2 class="project-h2-title">Ben Yanick</h2>
+	  				<h2 class="project-h2-title">05/09/19</h2>
+	  			</div>
+	  		</div>
+			
+			<div class="w3-card-4 project-card">
+				<h2 class="description-title">Description</h2><br>
+				<p>${desc}</p>
 			</div>
-			<div class="project-subtitle">
-				<h2 class="project-h2-title">${user}</h2>
-				<h2 class="project-h2-title">Date: ${date}</h2>
-			</div>
-		</div>
-		
-		
+			
+			<img src="./style/ring.png">
+		</section>
 	   <strong>Decription:</strong> <p>${desc}</p>
 	   <h2>date: ${date}</h2>
 	   <img src="http://localhost:8081/independent_study_hub/Image?id=${title}&type=p" />
 	   <h2>file name: ${file_name}</h2>
-	    -->
 </body>
 </html>
