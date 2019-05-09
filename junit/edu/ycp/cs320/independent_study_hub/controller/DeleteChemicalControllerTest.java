@@ -18,10 +18,10 @@ public class DeleteChemicalControllerTest {
 
 	@Test
 	public void test_delete_controller() {
-		assertTrue(controller2.insertChemical("meth", "creative thinking", "01/12/19"));
-		assertTrue(controller2.insertChemical("coffee", "recreation", "02/15/19"));
-		assertTrue(controller.deleteChemical("meth", "creative thinking", "01/12/19"));
-		assertTrue(controller.deleteChemical("coffee", "recreation", "02/15/19"));
+		assertTrue(controller2.insertChemical("meth", "creative thinking", "01/12/19", 50, "Liquid(mL)"));
+		assertTrue(controller2.insertChemical("coffee", "recreation", "02/15/19", 50, "Solid(g)"));
+		assertTrue(controller.deleteChemical("meth"));
+		assertTrue(controller.deleteChemical("coffee"));
 	}
 	
 }
