@@ -79,17 +79,6 @@
 	        <button type="submit" name="button" value="Insert!" id="create"/>Insert</button>
 	    </form>
 	</c:if>
-	<c:if test="${type.equals('faculty')}">
-	    <form action="${pageContext.servletContext.contextPath}/Inventory" method="post">
-	        <input type="text" name="deleteChemical" placeholder="Chemical" id="deleteChemical" value="${deleteChemical}"/>
-	        <input type="text" name="deleteUse" placeholder="Research or Class" id="deleteUse" value="${deleteUse}"/>
-	        <input type="text" name="delete_year_purchased" placeholder="Purchased" id="delete_year_purchased" value="${delete_year_purchased}"/>
-	        <input type="text" name="deleteAmount" placeholder="Amount Used" id="deleteAmount" value="${deleteAmount}"/>
-       		<input type="text" name="endMedia" placeholder="Media Type" id="endMedia" value="${endMedia}"/>
-	        <button type="reset">Reset</button>
-	        <button type="submit" name="button" value="Delete!" id="create"/>Delete</button>
-	    </form>
-	</c:if>
 		<c:if test="${! empty errorMessage}">
 			<div class="alert">
  		 		<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
@@ -130,10 +119,12 @@
 	    			
 	                	<!-- For each loop will have an array list of ChemicalInventory objects in inventory page
 	                		It will iterate across each item in the array and insert the appropriate information as seen below -->
-		                <c:forEach items="${inventory}" var="inventory">
+		                <form class="buttons" action="${pageContext.servletContext.contextPath}/Inventory" method="post">
+		                <c:forEach items="${pending}" var="inventory">
 		                	<tr>
 		                		<!-- Directly calling methods associated with ChemicalInventory class -->
-		                		<td>${inventory.getChemical()}</td>
+		            
+		                		<td>${inventory.getChemical()} <input type="checkbox" name='drugs' value="${inventory.getChemical()}"></td>
 		                		<td>${inventory.getUseOfChemical()}</td>
 		                		<td>${inventory.getDom()}</td>
 		                		<td>${inventory.getAmount()}</td>
@@ -142,7 +133,11 @@
 		                	</tr>
 		                	
 		                </c:forEach>
-	                
+	                <br>
+ 
+					<br>
+					<button class="side-bar-form-btn" type='submit' name ='delete' value = 'delete'>Delete Chemical</button>
+    				</form>
 	                </tbody>
 	            </table>
 	        </div>

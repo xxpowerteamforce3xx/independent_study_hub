@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import edu.ycp.cs320.independent_study_hub.controller.DeleteChemicalController;
 import edu.ycp.cs320.independent_study_hub.controller.InsertChemicalController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectAllChemicalsController;
+import edu.ycp.cs320.independent_study_hub.controller.SelectAllPendingFacultyController;
+import edu.ycp.cs320.independent_study_hub.controller.SelectOneChemicalController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectOneFacultyController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectProjectsByStudentController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectStudentsByFacCodeController;
@@ -24,6 +26,9 @@ public class InventoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private InsertChemicalController controller = null;	
 	private DeleteChemicalController deleteController = null;	
+	private ArrayList<ChemicalInventory> pending_list = new ArrayList<ChemicalInventory>();
+	private SelectAllChemicalsController controller_pending_get = new SelectAllChemicalsController();
+	private SelectOneChemicalController controller_one_chem = new SelectOneChemicalController();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -32,7 +37,16 @@ public class InventoryServlet extends HttpServlet {
 		resp.setHeader("Pragma", "no-cache"); // HTTP 1.0.
 		resp.setHeader("Expires", "0"); // Proxies.
 
+		String typer			= null;
+		typer = (String) req.getSession().getAttribute("type");
+		//The list that will store all chemicals from the database that our controller returns
+		try {
 
+			if (typer.equals("faculty") || typer.equals("student")) {
+				pending_list = controller_pending_get.get_all_chemicals();
+				req.setAttribute("pending", pending_list);
+			}
+		} catch(NullPointerException e) {}
 		//The list that will store all chemicals from the database that our controller returns
 		ArrayList<ChemicalInventory> inventory = null;
 
@@ -93,10 +107,14 @@ public class InventoryServlet extends HttpServlet {
 			}
 		}
 		catch(NullPointerException e) {
-			
+
 		}
 		///
 
+		String[] to_delete = req.getParameterValues("drugs");
+		ArrayList<String> pending_chem = new ArrayList<String>();
+		String delete = null;
+		delete = req.getParameter("delete");
 		String errorMessage   = null;
 		String successMessage = null;
 		String deleteErrorMessage   = null;
@@ -130,7 +148,16 @@ public class InventoryServlet extends HttpServlet {
 		deleteChemical = req.getParameter("deleteChemical");
 		deleteUse = req.getParameter("deleteUse");
 		delete_year_purchased = req.getParameter("delete_year_purchased");
-		
+		type = (String) req.getSession().getAttribute("type");
+		//The list that will store all chemicals from the database that our controller returns
+		try {
+			//if (type.equals("faculty")) {
+				ChemicalInventory c = controller_one_chem.get_chemical(deleteChemical);
+				pending_list = controller_pending_get.get_all_chemicals();
+				System.out.println(pending_list.size());
+				req.setAttribute("pending", pending_list);
+			//}
+		} catch(NullPointerException e) {}
 		if (chemical    == null || chemical.equals("") ||
 				use     == null || use.equals("")  ||
 				year_purchased == null || year_purchased.equals("") ||
@@ -158,7 +185,29 @@ public class InventoryServlet extends HttpServlet {
 		req.setAttribute("initialAmount", amount);
 		req.setAttribute("initMediaType",   initMediaType);
 		req.setAttribute("successMessage", successMessage);
-		if (deleteChemical    == null || deleteChemical.equals("") ||
+		try {
+			if (type.equals("faculty")) {
+				for (int k = 0; k < to_delete.length; k++) {
+					pending_chem.add(to_delete[k]);
+					System.out.println(pending_chem.size());
+				}
+				if (delete.equals("delete")) {
+					System.out.println("delete button was pressed");
+					for (int i = 0; i < pending_list.size(); i++) {
+						System.out.println(pending_chem.get(i) + "<-- check value");
+						if (pending_chem.get(i).equals(pending_list.get(i).getChemical())) {
+							System.out.println("deleting: " + pending_list.get(i).getChemical());
+							deleteController = new DeleteChemicalController();
+							deleteController.deleteChemical(pending_list.get(i).getChemical());
+							resp.sendRedirect(req.getContextPath() + "/Inventory");
+						}
+					}				
+				}
+			}
+			else {}
+		} catch (NullPointerException e) { System.out.println("something was null");} 
+
+		/*if (deleteChemical    == null || deleteChemical.equals("") ||
 				deleteUse     == null || deleteUse.equals("")  ||
 				delete_year_purchased   == null || delete_year_purchased.equals("") ||
 					deleteAmount == null || deleteAmount.equals("") ||
@@ -166,7 +215,7 @@ public class InventoryServlet extends HttpServlet {
 
 			errorMessage = "Please fill in all of the required fields";
 		} else {
-			
+
 			deleteController = new DeleteChemicalController();
 			deleteA = Integer.parseInt(deleteAmount);
 			// convert published to integer now that it is valid
@@ -179,7 +228,7 @@ public class InventoryServlet extends HttpServlet {
 			else {
 				errorMessage = "Failed to delete chemical: " + deleteChemical;					
 			}
-		}
+		}*/
 		req.setAttribute("deleteErrorMessage",   deleteErrorMessage);
 		req.setAttribute("deleteSuccessMessage", deleteSuccessMessage);
 		doGet(req, resp);
