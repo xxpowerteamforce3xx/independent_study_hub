@@ -1,15 +1,6 @@
-<<<<<<< HEAD
 ----------------------------------------------------------------
-Wed May 08 21:09:54 EDT 2019:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-016a-9a23-a70c-000005677520 
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-----------------------------------------------------------------
-Wed May 08 13:50:39 EDT 2019:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-016a-9891-804e-000005576120 
->>>>>>> cf46b5aabd0efa26517f3c8f35f4f66600efee47
+Wed May 08 21:33:00 EDT 2019:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-016a-9a38-c170-000005609278 
 on database directory C:\Users\lucas\git\independent_study_hub\test.db with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
 Loaded from file:/C:/Users/lucas/eclipse-workspace-old-eclipse/CS320_Derby/lib/derby.jar
 java.vendor=Oracle Corporation
@@ -17,28 +8,6 @@ java.runtime.version=1.8.0_201-b09
 user.dir=C:\Users\lucas\git\independent_study_hub
 os.name=Windows 10
 os.arch=amd64
-<<<<<<< HEAD
 os.version=10.0
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
-=======
-os.version=10.0
-derby.system.home=null
-Database Class Loader started - derby.database.classpath=''
->>>>>>> c903f1700524b243b1a783132e188607c0125c10
-=======
-----------------------------------------------------------------
-Wed May 08 21:00:38 EDT 2019:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-016a-9a1b-2e2f-0000059644c0 
-on database directory /Users/Cole/Documents/workspace/independent_study_hub/test.db with class loader sun.misc.Launcher$AppClassLoader@2a139a55 
-Loaded from file:/Users/Cole/Documents/workspace/CS320_Derby/lib/derby.jar
-java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_121-b13
-user.dir=/Users/Cole/Documents/workspace/independent_study_hub
-os.name=Mac OS X
-os.arch=x86_64
-os.version=10.14
-derby.system.home=null
-Database Class Loader started - derby.database.classpath=''
->>>>>>> work
->>>>>>> cf46b5aabd0efa26517f3c8f35f4f66600efee47
