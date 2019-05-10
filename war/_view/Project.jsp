@@ -139,13 +139,15 @@
 	  				<h2 class="project-h2-title">${date}</h2>
 	  			</div>
 	  		</div>
+	  		
+	  		<img src="http://localhost:8081/independent_study_hub/Image?id=${title}&type=p">
 			
 			<div class="w3-card-4 project-card">
 				<h2 class="description-title">Description</h2>
 				<p>${desc}</p>
 			</div>
 			
-			<img src="${image}">
+
 			
 			<br>
 		</section>

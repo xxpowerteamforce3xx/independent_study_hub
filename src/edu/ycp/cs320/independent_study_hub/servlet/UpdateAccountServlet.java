@@ -21,6 +21,7 @@ import edu.ycp.cs320.independent_study_hub.controller.SelectProjectsByStudentCon
 import edu.ycp.cs320.independent_study_hub.controller.SelectStudentsByFacCodeController;
 import edu.ycp.cs320.independent_study_hub.controller.UpdateStudentController;
 import edu.ycp.cs320.independent_study_hub.controller.UpdateFacultyController;
+import edu.ycp.cs320.independent_study_hub.controller.UpdateProjectController;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024,
 maxFileSize = 1024 * 1024 * 5, 
@@ -30,6 +31,8 @@ public class UpdateAccountServlet extends HttpServlet {
 	private UpdateStudentController controller_s = new UpdateStudentController();
 	private UpdateFacultyController controller = new UpdateFacultyController();
 	private GetProjectController controller_prj = new GetProjectController();
+	private UpdateProjectController controller_upd_prj = new UpdateProjectController();
+	private SelectOneFacultyController controller_one_f = new SelectOneFacultyController();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -39,7 +42,7 @@ public class UpdateAccountServlet extends HttpServlet {
 		resp.setHeader("Pragma", "no-cache"); // HTTP 1.0.
 		resp.setHeader("Expires", "0"); // Proxies.
 		String errorMessage = null;
-		// student stuff
+		// student stuff / a little fac stuff
 		String name         = null;
 		String pw           = null;
 		String email        = null;
@@ -48,6 +51,11 @@ public class UpdateAccountServlet extends HttpServlet {
 		// project stuff
 		String title		= null;
 		String desc 		= null;
+		// faculty stuff
+		String fac_title 	= null;
+		String fac_desc			= null;
+		String interest 	= null;
+		String file_name	= null;
 		
 		
 		name = (String) req.getSession().getAttribute("user");
@@ -55,6 +63,7 @@ public class UpdateAccountServlet extends HttpServlet {
 		email = (String) req.getSession().getAttribute("email");
 		code = (String) req.getSession().getAttribute("fac_code");
 		type = (String) req.getSession().getAttribute("type");
+		
 		if (req.getParameter("id").equals("student")) {
 			req.setAttribute("which", "student");
 			req.setAttribute("name", name);
@@ -69,6 +78,24 @@ public class UpdateAccountServlet extends HttpServlet {
 			req.setAttribute("desc", p.get_description());
 			req.setAttribute("file_name", p.get_file_name());
 			req.setAttribute("date", p.get_date());
+		} else if (req.getParameter("id").equals("faculty")) {
+			Faculty f = controller_one_f.get_faculty(name);
+			fac_title = f.get_title();
+			System.out.println("title :" + fac_title);
+			fac_desc = f.get_description();
+			System.out.println("desc: " + fac_desc);
+			interest = f.get_interest();
+			System.out.println("interest: " + interest);
+			file_name = f.get_file_name();
+			
+			req.setAttribute("name", name);
+			req.setAttribute("pass", pw);
+			req.setAttribute("email", email);
+			req.setAttribute("title", fac_title);
+			req.setAttribute("desc", desc);
+			req.setAttribute("interest", interest);
+			req.setAttribute("fac_code", code);
+			req.setAttribute("file_name", file_name);
 		}
 		req.setAttribute("errorMessage", errorMessage);
 
@@ -184,7 +211,54 @@ public class UpdateAccountServlet extends HttpServlet {
 			req.getRequestDispatcher("/_view/Update.jsp").forward(req, resp);
 			
 		} else if (req.getSession().getAttribute("type").equals("student") && req.getSession().getAttribute("project_title") != null) {
-			
+			String title = null;
+			String desc = null;
+			String date = null;
+			String file_name = null;
+			String errorMessage = null;
+			Boolean valid = true;
+			InputStream inputStream = null; // input stream of the upload file
+			Part filePart = req.getPart("new_image");
+	        if (filePart != null) {
+	            // prints out some information for debugging
+	            System.out.println(filePart.getName());
+	            System.out.println(filePart.getSize());
+	            System.out.println(filePart.getContentType());
+	             
+	            // obtains input stream of the upload file
+	            inputStream = filePart.getInputStream();
+	            file_name = filePart.getSubmittedFileName();
+	        } else { 
+	        	System.out.println("part was null <-- this means there was an error w/ the pic"); 
+	        	errorMessage = "Please select a file for your abstract";
+	        }
+	        
+	        // now we set the parameters from our jsp into the ones we declared null (input stream and filename are already set)
+	        title = req.getParameter("new_title");
+	        desc = req.getParameter("new_desc");
+	        date = req.getParameter("new_date");
+	        
+	        System.out.println("new_title: " + title + ", new desc: " + desc + ", new date: " + date);
+	        
+			try {
+				if (title == null || title.equals("") || desc== null || desc.equals("") || date == null || date.equals("")) {
+					errorMessage = "Please enter all fields";
+					System.out.println("something was null or empty");
+					valid = false;
+				}
+			} catch (NullPointerException e) {}
+			if (valid) {
+				System.out.println("Updating project...");
+				controller_upd_prj.UpdateProject(old_title, title, desc, date, inputStream, file_name);
+				resp.sendRedirect(req.getContextPath() + "/MyAccount");
+			} else {
+				req.setAttribute("errorMessage", errorMessage);
+				req.setAttribute("new_title", title);
+				req.setAttribute("new_desc", desc);
+				req.setAttribute("new_date", date);
+				req.getRequestDispatcher("/_view/Update.jsp").forward(req, resp);
+			}
+	
 		} else if (req.getSession().getAttribute("type").equals("student")) {
 			String errorMessage = null;
 			String new_name = null;
@@ -199,6 +273,8 @@ public class UpdateAccountServlet extends HttpServlet {
 			new_email = (String) req.getParameter("new_email");
 
 			System.out.println("new_name: " + new_name + ", new pass: " + new_pass + ", new email: " + new_email);
+			// now check for valid input (nothing is empty)
+
 			
 			try {
 				if (new_name == null || new_name.equals("") || new_pass == null || new_pass.equals("") || new_pass2 == null || new_pass2.equals("") || new_email == null || new_email.equals("")) {

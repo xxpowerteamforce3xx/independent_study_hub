@@ -10,10 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import edu.ycp.cs320.independent_study_hub.model.*;
 import edu.ycp.cs320.independent_study_hub.controller.DeletePendingFacultyController;
+import edu.ycp.cs320.independent_study_hub.controller.DeleteProjectController;
 import edu.ycp.cs320.independent_study_hub.controller.InsertFacultyController;
 import edu.ycp.cs320.independent_study_hub.controller.InsertStudentController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectAllFacultyController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectAllPendingFacultyController;
+import edu.ycp.cs320.independent_study_hub.controller.SelectAllProjectsController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectAllStudentsController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectOneFacultyController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectOneStudentController;
@@ -23,14 +25,17 @@ import edu.ycp.cs320.independent_study_hub.controller.SelectStudentsByFacCodeCon
 public class MyAccountServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private SelectProjectsByStudentController controller_projects = new SelectProjectsByStudentController();
+	private SelectAllProjectsController controller_all_p = new SelectAllProjectsController();
 	private SelectStudentsByFacCodeController controller_students = new SelectStudentsByFacCodeController();
 	private SelectAllPendingFacultyController controller_pending_get = new SelectAllPendingFacultyController();
 	private DeletePendingFacultyController controller_delete = new DeletePendingFacultyController();
+	private DeleteProjectController controller_delete_prj = new DeleteProjectController();
 	private SelectAllStudentsController controller_all_students = new SelectAllStudentsController();
 	private SelectAllFacultyController controller_all_faculty = new SelectAllFacultyController();
 	private SelectOneFacultyController controller_one_fac = new SelectOneFacultyController();
 	private InsertFacultyController controller_insert = new InsertFacultyController();
 	private List<Project> p_list = new ArrayList<Project>();
+	private ArrayList<Project> all_projects = new ArrayList<Project>();
 	private ArrayList<Student> s_list = new ArrayList<Student>();
 	private ArrayList<Student> all_students = new ArrayList<Student>();
 	private ArrayList<Faculty> pending_list = new ArrayList<Faculty>();
@@ -64,6 +69,7 @@ public class MyAccountServlet extends HttpServlet {
 			} else if (type.equals("faculty")) {
 				Faculty f = controller_one_fac.get_faculty(name);
 				s_list = controller_students.SelectStudentByFacCode(f.get_fac_code());
+				all_projects = controller_all_p.get_all_projects();
 				all_students = controller_all_students.get_all_students();
 				pending_list = controller_pending_get.get_all_pending_faculty();
 				all_fac = controller_all_faculty.get_all_faculty();
@@ -71,6 +77,12 @@ public class MyAccountServlet extends HttpServlet {
 				req.setAttribute("students", s_list);
 				req.setAttribute("all_students", all_students);
 				req.setAttribute("all_fac", all_fac);
+				req.setAttribute("all_projects", all_projects);
+				req.setAttribute("fac_title", f.get_title());
+				req.setAttribute("desc", f.get_description());
+				req.setAttribute("interest", f.get_interest());
+				req.setAttribute("file_name", f.get_file_name());
+				
 			}
 		} catch(NullPointerException e) {}
 		req.setAttribute("errorMessage", errorMessage);
@@ -79,6 +91,7 @@ public class MyAccountServlet extends HttpServlet {
 		req.setAttribute("email", email);
 		req.setAttribute("code", code);
 		req.setAttribute("type", type);
+		
 		
 		req.getRequestDispatcher("/_view/MyAccount.jsp").forward(req, resp);
 	}
@@ -109,9 +122,11 @@ public class MyAccountServlet extends HttpServlet {
 				s_list = controller_students.SelectStudentByFacCode(f.get_fac_code());
 				all_students = controller_all_students.get_all_students();
 				pending_list = controller_pending_get.get_all_pending_faculty();
+				all_projects = controller_all_p.get_all_projects();
 				req.setAttribute("pending", pending_list);
 				req.setAttribute("students", s_list);
 				req.setAttribute("all_students", all_students);
+				req.setAttribute("all_projects", all_projects);
 			}
 		} catch(NullPointerException e) {}
 		req.setAttribute("errorMessage", errorMessage);
@@ -126,16 +141,23 @@ public class MyAccountServlet extends HttpServlet {
 		String logout = null;
 		String update_student = null;
 		String update_project = null;
+		String update_faculty = null;
 		String delete = null;
+		String delete_prj = null;
 		String add = null;
 		String[] to_add = req.getParameterValues("nerds");
+		String[] prj_delete = req.getParameterValues("projects_to_delete");
 		ArrayList<String> pending_names = new ArrayList<String>();
+		ArrayList<String> projects_to_delete = new ArrayList<String>();
 		delete = req.getParameter("delete");
+		delete_prj = req.getParameter("delete_prj");
+		System.out.println(delete_prj);
 		add = req.getParameter("add");
 		back = req.getParameter("account");
 		logout = req.getParameter("logout");
 		update_student = req.getParameter("update_student");
 		update_project = req.getParameter("update_project");
+		update_faculty = req.getParameter("update_faculty");
 
 		try {
 			for (int k = 0; k < to_add.length; k++) {
@@ -143,8 +165,9 @@ public class MyAccountServlet extends HttpServlet {
 			}
 			if (delete.equals("delete")) {
 				System.out.println("delete button was pressed");
-			for (int i = 0; i < pending_list.size(); i++) {
-				System.out.println(pending_names.get(i) + "<-- check value");
+				
+				for (int i = 0; i < pending_list.size(); i++) {
+					System.out.println(pending_names.get(i) + "<-- check value");
 					if (pending_names.get(i).equals(pending_list.get(i).get_name())) {
 						System.out.println("deleting: " + pending_list.get(i).get_name());
 						controller_delete.deletePendingFaculty(pending_list.get(i).get_name());
@@ -152,7 +175,28 @@ public class MyAccountServlet extends HttpServlet {
 					}
 				}				
 			}
-		} catch (NullPointerException e) { System.out.println("something was null");} 
+		} catch (NullPointerException e) { System.out.println("delete pending was null");} 
+		
+		try {
+			for (int k = 0; k < prj_delete.length; k++) {
+				projects_to_delete.add(prj_delete[k]);
+			}
+			
+			if (delete_prj.equals("delete")) {
+				System.out.println("delete project button was pressed");
+	
+				for (int i = 0; i < all_projects.size(); i++) {
+					System.out.println(all_projects.get(i).get_title());
+					for (int x = 0; x < projects_to_delete.size(); x++) {
+						if (projects_to_delete.get(x).equals(all_projects.get(i).get_title())) {
+							System.out.println("deleting: " + all_projects.get(i).get_title());
+							controller_delete_prj.deleteProject(all_projects.get(i).get_title());
+							resp.sendRedirect(req.getContextPath() + "/MyAccount");
+						}
+					}	
+				}				
+			}
+		} catch (NullPointerException e) {System.out.println("delete projects was null"); }
 		
 		try {
 			if (add.equals("add")) {
@@ -167,7 +211,7 @@ public class MyAccountServlet extends HttpServlet {
 					}
 				}				
 			}
-		} catch (NullPointerException e) { System.out.println("something was null");} 
+		} catch (NullPointerException e) { System.out.println("add pending was null");} 
 		
 		try {
 			if (logout.equals("Log out")) {
@@ -192,6 +236,12 @@ public class MyAccountServlet extends HttpServlet {
 				System.out.println("redirecting to update project");
 				req.getSession().setAttribute("project_title", update_project);
 				resp.sendRedirect(req.getContextPath() + "/Update?id=project");
+			}
+		} catch (NullPointerException e) {}
+		try {
+			if (update_faculty.equals("update")) {
+				System.out.println("redirecting to update faculty");
+				resp.sendRedirect(req.getContextPath() + "/Update?id=faculty");
 			}
 		} catch (NullPointerException e) {}
 		req.getRequestDispatcher("/_view/MyAccount.jsp").forward(req, resp);
