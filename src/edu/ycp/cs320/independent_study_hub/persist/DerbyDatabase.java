@@ -1160,7 +1160,7 @@ public class DerbyDatabase implements IDatabase {
 									"		generated always as identity (start with 1, increment by 1), " +
 									"	students_id integer constraint students_id references students, " +
 									"	student_name varchar(40), " +
-									"	title varchar(40), " +
+									"	title varchar(500), " +
 									"   date varchar(40), " +
 									"   description varchar(14000), " +
 									"   image blob, " +  

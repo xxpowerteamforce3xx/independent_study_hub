@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <title>Project</title>
 
-
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<style type="text/css">
 		<%@ include file="./../style/style.css" %>
 				
@@ -23,7 +23,7 @@
 <body>
 	
 	   <header>
-	       <h1>${title}</h1>
+	       <h1>Independent Study Hub</h1>
 	   </header>
 	
 
@@ -124,21 +124,30 @@
 			
 		<!-- Main section of web page's body -->
 		
-		<div>
-			<div>
-				<h1 id="project-h1-title" class="project-title">${title}</h1>
+		<!-- Displays CSS card <div>'s below and centers them  -->
+		<section class="project-body">
+			<!-- W3 schools has their own class to make <div> (or other sections) look like cards
+				 project-card is styling for spacing, background color, and font color  -->
+			<div class="w3-card-4 project-card">
+				<!-- project-title-div gives underline, which is just a bottom border -->
+	    		<div class="project-title-div">
+	    			<!-- project-h1-title gives a few minor spacing adjustments and changes font size -->
+	  				<h1 id="project-h1-title">${title}</h1>
+	  			</div>
+	  			<div class="project-subtitle">
+	  				<h2 class="project-h2-title">${name}</h2>
+	  				<h2 class="project-h2-title">${date}</h2>
+	  			</div>
+	  		</div>
+			
+			<div class="w3-card-4 project-card">
+				<h2 class="description-title">Description</h2>
+				<p>${desc}</p>
 			</div>
-			<div class="project-subtitle">
-				<h2 class="project-h2-title">${user}</h2>
-				<h2 class="project-h2-title">Date: ${date}</h2>
-			</div>
-		</div>
-		
-		
-	   <strong>Decription:</strong> <p>${desc}</p>
-	   <h2>date: ${date}</h2>
-	   <img src="http://localhost:8081/independent_study_hub/Image?id=${title}&type=p" />
-	   <h2>file name: ${file_name}</h2>
-	    -->
+			
+			<img src="${image}">
+			
+			<br>
+		</section>
 </body>
 </html>

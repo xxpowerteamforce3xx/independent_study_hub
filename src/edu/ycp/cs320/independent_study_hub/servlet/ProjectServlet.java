@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import edu.ycp.cs320.independent_study_hub.controller.GetProjectController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectAllProjectsController;
+
 import edu.ycp.cs320.independent_study_hub.model.Project;
 
 public class ProjectServlet extends HttpServlet {
@@ -47,10 +48,11 @@ public class ProjectServlet extends HttpServlet {
 		if (title != null) {
 			Project p = controller.get_project(title);
 			System.out.println("title: " + p.get_title() + ", desc: " + p.get_description() + ", date: " + p.get_date());
-			req.setAttribute("title", p.get_title());
-			req.setAttribute("desc", p.get_description());
-			req.setAttribute("date", p.get_date());
+			req.setAttribute("title", p.get_title()); //Project title
+			req.setAttribute("desc", p.get_description()); //Project abstract
+			req.setAttribute("date", p.get_date()); 
 			req.setAttribute("file_name", p.get_file_name());
+			req.setAttribute("name", p.get_student().get_name());
 		} else {
 			System.out.println("param did not pass through url, title was null");
 		}
