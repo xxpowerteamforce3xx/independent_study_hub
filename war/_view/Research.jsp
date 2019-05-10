@@ -121,16 +121,14 @@
 		                <tr>
 		                    <th scope="col">Username</th>
 		                    <th scope="col">Title</th>
-		                    <th scope="col">Description</th>
 		                    <th scope="col">Date</th>
 		                </tr>
 		            </thead>
 		            <c:forEach  var="project" items="${p_list}">
 				        <tr>
-				       		<td style=width:10%;>${project.get_student().get_name()}</td>
-				            <td style=width:35%;><a href="http://localhost:8081/independent_study_hub/Project?title=${project.get_title()}" style="display:block;">${project.get_title()}</a></td>
-				            <td style=width:35%;>${project.get_description()}</td>
-				            <td style=width:20%;>${project.get_date()}</td>		
+				       		<td style=width:20%;>${project.get_student().get_name()}</td>
+				            <td style=width:50%;><a href="http://localhost:8081/independent_study_hub/Project?title=${project.get_title()}" style="display:block;">${project.get_title()}</a></td>
+				            <td style=width:30%;>${project.get_date()}</td>		
 				        </tr>
 		    		</c:forEach>
 		        </table>

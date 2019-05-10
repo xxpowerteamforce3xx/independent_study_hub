@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import edu.ycp.cs320.independent_study_hub.controller.GetProjectController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectAllProjectsController;
+
 import edu.ycp.cs320.independent_study_hub.model.Project;
 
 public class ProjectServlet extends HttpServlet {

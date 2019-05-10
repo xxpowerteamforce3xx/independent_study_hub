@@ -23,7 +23,7 @@
 <body>
 	
 	   <header>
-	       <h1>${title}</h1>
+	       <h1>Independent Study Hub</h1>
 	   </header>
 	
 
@@ -141,11 +141,11 @@
 	  		</div>
 			
 			<div class="w3-card-4 project-card">
-				<h2 class="description-title">Description</h2><br>
+				<h2 class="description-title">Description</h2>
 				<p>${desc}</p>
 			</div>
 			
-			<img src="./style/ring.png">
+			<img src="${image}">
 			
 			<br>
 		</section>
