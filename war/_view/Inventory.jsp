@@ -72,7 +72,7 @@
 	    <form action="${pageContext.servletContext.contextPath}/Inventory" method="post">
 	        <input type="text" name="chemical" placeholder="Chemical" id="chemical" value="${chemical}"/>
        	    <input type="text" name="use" placeholder="Research or Class" id="use" value="${use}"/>
-       		<input type="text" name="year_purchased" placeholder="Purchased" id="year_purchased" value="${year_purchased}"/>
+       		<input type="text" name="year_purchased" placeholder="MM/DD/YY" id="year_purchased" value="${year_purchased}"/>
        		<input type="text" name="initialAmount" placeholder="Amount Bought" id="initialAmount" value="${initialAmount}"/>
        		<input type="text" name="initMediaType" placeholder="Media Type" id="initMediaType" value="${initMediaType}"/>
 	        <button type="reset">Reset</button>
@@ -123,8 +123,12 @@
 		                <c:forEach items="${pending}" var="inventory">
 		                	<tr>
 		                		<!-- Directly calling methods associated with ChemicalInventory class -->
-		            
+		            			<c:if test="${type.equals('faculty')}">
 		                		<td>${inventory.getChemical()} <input type="checkbox" name='drugs' value="${inventory.getChemical()}"></td>
+		                		</c:if>
+		                		<c:if test="${type.equals('student')}">
+		                		<td>${inventory.getChemical()}</td>
+		                		</c:if>
 		                		<td>${inventory.getUseOfChemical()}</td>
 		                		<td>${inventory.getDom()}</td>
 		                		<td>${inventory.getAmount()}</td>
@@ -136,7 +140,9 @@
 	                <br>
  
 					<br>
-					<button class="side-bar-form-btn" type='submit' name ='delete' value = 'delete'>Delete Chemical</button>
+					<c:if test="${type.equals('faculty')}">
+					<button class="side-bar-form-btn" type='submit' name ='delete' value = 'delete'>Delete Chemical(s)</button>
+					</c:if>
     				</form>
 	                </tbody>
 	            </table>
