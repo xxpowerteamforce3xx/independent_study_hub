@@ -8,6 +8,7 @@ public class ChemicalInventory {
 	private String dom;
 	private int amount;
 	private String media;
+	private String cas, room, loc, sup, cat;
 	/**
 	 * getter for the chemical
 	 * @return a string chemical
@@ -51,6 +52,38 @@ public class ChemicalInventory {
 	}
 	public void setMedia(String media) {
 		this.media = media;
+	}
+	
+	
+	public String getCAS() {
+		return cas;
+	}
+	public void setCAS(String cas) {
+		this.cas = cas;
+	}
+	public String getRoom() {
+		return room;
+	}
+	public void setRoom(String room) {
+		this.room = room;
+	}
+	public String getLoc() {
+		return loc;
+	}
+	public void setLoc(String loc) {
+		this.loc = loc;
+	}
+	public String getSup() {
+		return sup;
+	}
+	public void setSup(String sup) {
+		this.sup = sup;
+	}
+	public String getCat() {
+		return cat;
+	}
+	public void setCat(String cat) {
+		this.cat = cat;
 	}
 	
 	

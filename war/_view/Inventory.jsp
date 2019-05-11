@@ -110,7 +110,11 @@
 	                        <th scope="col">Date Purchased</th>
 	                        <th scope="col">Amount</th>
 	                        <th scope="col">Media</th>
-	                        <th scope="col">Remove Amount</th>
+	                        <th scope="col">CAS #</th>
+	                        <th scope="col">Room Number</th>
+	                        <th scope="col">Location</th>
+	                        <th scope="col">Supplier</th>
+	                        <th scope="col">Catalogue #</th> 
 	                        
 	                    </tr>
 	                </thead>
@@ -133,7 +137,12 @@
 		                		<td>${inventory.getDom()}</td>
 		                		<td>${inventory.getAmount()}</td>
 		                		<td>${inventory.getMedia()}</td>
-          						<td>Amount:<input type="text"><button type="button">OK</button></td>
+		                		
+		                		<td>${inventory.getCAS()}</td>
+		                		<td>${inventory.getRoom()}</td>
+		                		<td>${inventory.getLoc()}</td>
+		                		<td>${inventory.getSup()}</td>
+		                		<td>${inventory.getCat()}</td>
 		                	</tr>
 		                	
 		                </c:forEach>

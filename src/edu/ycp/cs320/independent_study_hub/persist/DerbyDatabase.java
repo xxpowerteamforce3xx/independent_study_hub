@@ -1138,6 +1138,12 @@ public class DerbyDatabase implements IDatabase {
 		c.setDom(r.getString(i++));
 		c.setAmount(r.getInt(i++));
 		c.setMedia(r.getString(i++));
+		
+		c.setCAS(r.getString(i++));
+		c.setRoom(r.getString(i++));
+		c.setLoc(r.getString(i++));
+		c.setSup(r.getString(i++));
+		c.setCat(r.getString(i++));
 	}
 	
 	public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
@@ -1275,7 +1281,12 @@ public class DerbyDatabase implements IDatabase {
 									"   use  varchar(40)," + //Stores chemical use (class or research use)
 									"   dom  varchar(10), " + //Stores date chemical was purchased (in format of MM/DD/YY)
 									"   amount  integer, " +
-									"   media  varchar(20) " +
+									"   media  varchar(20), " +
+									"   cas varchar(20), " +
+									"   room varchar(20)," +
+									"   loc varchar(20)," +
+									"   supplier varchar(20)," +
+									"   catalogue varchar(20)" +
 									//" 	quantity integer" +
 									")"
 							);
@@ -1338,7 +1349,7 @@ public class DerbyDatabase implements IDatabase {
 						insertProjects.addBatch();
 					}
 					insertProjects.executeBatch();
-					
+					System.out.println("Fact");
 					// populate faculty table
 					insertFaculty = conn.prepareStatement("insert into faculty (name, password, email, title, interest, description, faculty_code) values (?, ?, ?, ?, ?, ?, ?)");
 					for (Faculty faculty : facultyList) {
@@ -1354,15 +1365,24 @@ public class DerbyDatabase implements IDatabase {
 					insertFaculty.executeBatch();
 					
 					// populate the chemical table
-					insertChemicals = conn.prepareStatement("insert into chemicals (name, use, dom, amount, media) values (?, ?, ?, ?, ?)");
+					insertChemicals = conn.prepareStatement("insert into chemicals (name, use, dom, amount, media, cas, room, loc, supplier, catalogue) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+					
 					for (ChemicalInventory chemical : chemicalList) {
+						
 						insertChemicals.setString(1, chemical.getChemical());
 						insertChemicals.setString(2, chemical.getUseOfChemical());
 						insertChemicals.setString(3, chemical.getDom());
 						insertChemicals.setInt(4, chemical.getAmount());
 						insertChemicals.setString(5, chemical.getMedia());
+						
+						insertChemicals.setString(6, chemical.getCAS());
+						insertChemicals.setString(7, chemical.getRoom());
+						insertChemicals.setString(8, chemical.getLoc());
+						insertChemicals.setString(9, chemical.getSup());
+						insertChemicals.setString(10, chemical.getCat());
 						insertChemicals.addBatch();
 					}
+					System.out.println("Chems");
 					insertChemicals.executeBatch();
 					return true;
 				} finally {
