@@ -522,6 +522,29 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});	
 	}
+	
+	@Override
+	public boolean deleteProject(final String title) {
+		return executeTransaction(new Transaction<Boolean>()  {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				try {
+					stmt = conn.prepareStatement(
+							"delete from projects " +
+							"  where title = ? "
+					);
+					stmt.setString(1, title);
+					
+					// execute the update
+					stmt.executeUpdate();
+					return true;
+				} finally {
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});	
+	}
 			
 	@Override
 	public boolean insertProject(final String title, final Student student, final String date, final String description, final InputStream inputStream, final String file_name) {
@@ -1023,6 +1046,47 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 	
+	@Override
+	public boolean update_project(final String old_title, final String title, final String desc, final String date, final InputStream inputStream, final String file_name) {
+		return executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				System.out.println(old_title + "<- old name");
+				Project p = get_project(old_title);
+
+				try {
+					// retreive all attributes from both Books and Authors tables
+					stmt = conn.prepareStatement(
+							"update projects " +
+									"  set title = ?, " +
+									"  description = ?, " +
+									"  date = ?, " +
+									"  image = ?, " +
+									"  file_name = ? " +
+									" where projects_id = ?"
+							);
+					
+					stmt.setString(1, title);
+					System.out.println(title + " name from derby");
+					stmt.setString(2, desc);
+					System.out.println(desc + " password from derby");
+					stmt.setString(3,  date);
+					stmt.setBlob(4,  inputStream);
+					stmt.setString(5,  file_name);
+					stmt.setInt(6, p.get_p_id());
+
+					stmt.executeUpdate();
+					
+
+					return true;
+				} finally {
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+	}
+	
 	private void loadStudent(Student student, ResultSet resultSet, int i) throws SQLException {
 		student.setID(resultSet.getInt(i++));
 		student.setName(resultSet.getString(i++));
@@ -1333,6 +1397,12 @@ public class DerbyDatabase implements IDatabase {
 	public Faculty get_faculty_id(String acc_name) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean deleteChemical(String chemical, String use, String dom, int amount, String media) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 

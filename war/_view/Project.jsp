@@ -139,13 +139,20 @@
 	  				<h2 class="project-h2-title">${date}</h2>
 	  			</div>
 	  		</div>
+	  		
+	  		<img src="http://localhost:8081/independent_study_hub/Image?id=${title}&type=p">
 			
 			<div class="w3-card-4 project-card">
 				<h2 class="description-title">Description</h2>
 				<p>${desc}</p>
 			</div>
 			
+<<<<<<< HEAD
 			<img src="style/ring.png">
+=======
+
+			
+>>>>>>> ae270a63f643ae551247cce3baaa54f34fccc07c
 			<br>
 		</section>
 		

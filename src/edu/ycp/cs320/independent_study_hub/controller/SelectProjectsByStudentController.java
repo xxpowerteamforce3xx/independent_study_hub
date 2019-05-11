@@ -35,9 +35,7 @@ public class SelectProjectsByStudentController {
 			System.out.println("No project was found by " + name);
 			return null;
 		} else {
-			for (Project previous: previousList) {
-				System.out.println(previous.get_s_id() + " , " + previous.get_student().get_name() + ", " + previous.get_title() + ", " + previous.get_description() + ", " + previous.get_date());
-			}
+			
 			return previousList;
 		}
 	}

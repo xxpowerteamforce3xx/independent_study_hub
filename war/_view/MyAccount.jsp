@@ -81,10 +81,10 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 
 	<br>
     <h2 class='h2'>Welcome, ${name}!</h2>
-    <form class="side-bar-form" action="${pageContext.servletContext.contextPath}/MyAccount" method="post">
-			<button class="side-bar-form-btn" type='submit' name ='update' value = 'update'>Update Information</button>
-    	</form>
-	<br>
+<form class="side-bar-form" action="${pageContext.servletContext.contextPath}/MyAccount" method="post">  
+	<button class="side-bar-form-btn" type='submit' name ='update_faculty' value = 'update'>Update Information</button>	
+</form>
+<br>
 <table class='table'>
   <tr>
     <th>Username</th>
@@ -99,6 +99,23 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
     <td>${code}</td>
   </tr>
 </table>
+
+<form class="side-bar-form" action="${pageContext.servletContext.contextPath}/MyAccount" method="post"> 
+<table class='table'>
+	  <tr>
+	    <th>Proffesional Title</th>
+	    <th>Description on Faculty Page</th>
+	    <th>Interest on Faculty Page</th>
+	    <th>File name of Photo</th>
+	  </tr>
+	  <tr>
+	    <td>${fac_title}</td>
+	    <td>${desc}</td>
+	    <td>${interest}</td>
+	    <td>${file_name}</td>
+	  </tr>
+	</table>
+	</form>
 <br>
 <h2 class='h2'>Students Who Made Accounts with Your Code:</h2>
 <table class='table'>
@@ -134,6 +151,30 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
         </tr>
     </c:forEach> 
 </table>
+
+<br>
+	<h2 class='h2'>All Projects:</h2>
+	    <form class="buttons" action="${pageContext.servletContext.contextPath}/MyAccount" method="post">
+	<table class='table'>
+	<tr>
+		<th>Project Title</th>
+		<th>Project Description</th>
+		<th>Project File Name</th>
+	</tr>
+
+	<c:forEach  var="project" items="${all_projects}">
+        <tr>
+            <td>${project.get_title()} <input type="checkbox" name='projects_to_delete' value="${project.get_title()}"></td>
+            <td>${project.get_description()}</td>           
+            <td>${project.get_file_name()}</td>
+        </tr>
+    </c:forEach> 
+</table>
+<br>
+	<br>
+<button class="side-bar-form-btn" type='submit' name ='delete_prj' value = 'delete'>Delete Checked Projects</button>
+</form>
+    	
 <h2 class='h2'>All Faculty With An Account:</h2>
 <table class='table'>
 	<tr>
@@ -287,7 +328,6 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 	    <h2 class='h2'>Welcome, ${name}!</h2>
 		<form class="side-bar-form" action="${pageContext.servletContext.contextPath}/MyAccount" method="post">
 			
-    	</form>
 	<br>
 	<table class='table'>
 	  <tr>
@@ -303,6 +343,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 	    <td><button class="side-bar-form-btn" type='submit' name ='update_student' value = 'update'>Update Information</button></td>
 	  </tr>
 	</table>
+	</form>
 	
 	<h2 class='h2'>Projects:</h2>
 	<form class="side-bar-form" action="${pageContext.servletContext.contextPath}/MyAccount" method="post">

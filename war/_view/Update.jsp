@@ -96,6 +96,21 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 	    <td>${code}</td>
 	  </tr>
 	</table>
+	<br>
+	<table class='table'>
+	  <tr>
+	    <th>Proffesional Title</th>
+	    <th>Description on Faculty Page</th>
+	    <th>Interest on Faculty Page</th>
+	    <th>File name of Photo</th>
+	  </tr>
+	  <tr>
+	    <td>${fac_title}</td>
+	    <td>${desc}</td>
+	    <td>${interest}</td>
+	    <td>${file_name}</td>
+	  </tr>
+	</table>
 	<br><br>
 	<h2 class='h2'>Enter your new information below!</h2>
 	<br><br>
@@ -128,7 +143,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 	   <label for="fac_code">New Faculty Interest</label>
 	   <input type="text" id="new_fac_code" name="new_fac_interest" placeholder="..." value="${new_fac_interest}">
 	   
-	   <label for="fac_code">New Faculty Proffesional Title ;)</label>
+	   <label for="fac_code">New Faculty Proffesional Title </label>
 	   <input type="text" id="new_fac_code" name="new_fac_title" placeholder="..." value="${new_fac_title}">
 	   
 	   <label>New Faculty Picture:</label>
@@ -318,17 +333,18 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
  		</div>
 	</c:if>
 
-	 <form class='form-update'action="${pageContext.servletContext.contextPath}/Update" method="post">
+	 <form class='form-update'action="${pageContext.servletContext.contextPath}/Update" method="post" enctype="multipart/form-data">
 	   <label for="username">New Title</label>
 	   <input type="text" id="new_title" name="new_title" placeholder="..." value="${new_title}">
 	
-	   <label for="title">New Description</label>
+	   <label for="new_desc">New Description</label>
 	   <input type="text" id="new_desc" name="new_desc" placeholder="..." value="${new_desc}">
 	   <br>
 	   <label for="date">New Date</label>
 	   <input type="date" id="new_date" name="new_date" placeholder="..." value="${new_date}">
 		<br>
 	   <label for="email">New Abstract Image</label>
+	   <br>
 	   <input type="file" id="new_image" name="new_image" placeholder="..." value="${new_image}">
 	   
 	   <input type="submit" name='update_project' value="Update!">
