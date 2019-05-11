@@ -145,9 +145,10 @@
 				<p>${desc}</p>
 			</div>
 			
-			<img src="${image}">
-			
+			<img src="style/ring.png">
 			<br>
 		</section>
+		
+		
 </body>
 </html>
