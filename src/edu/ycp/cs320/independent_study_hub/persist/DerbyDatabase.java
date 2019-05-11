@@ -1312,10 +1312,12 @@ public class DerbyDatabase implements IDatabase {
 				List<ChemicalInventory> chemicalList;
 	
 				try {
+					System.out.println("Try block");
 					facultyList = InitialData.get_faculty_users();
 					studentList = InitialData.get_student_users();
 					projectList = InitialData.getProjects();
 					chemicalList = InitialData.getChemicals();
+					System.out.println("Pass getting data");
 				} catch (IOException e) {
 					throw new SQLException("Couldn't read initial data", e);
 				}
@@ -1329,6 +1331,7 @@ public class DerbyDatabase implements IDatabase {
 					// populate student table first since it is foreign key in projects table
 					insertStudents = conn.prepareStatement("insert into students (name, password, email, faculty_code) values (?, ?, ?, ?)");
 					for (Student student : studentList) {
+						System.out.println("Students");
 						//						insertAuthor.setInt(1, author.getAuthorId());	// auto-generated primary key, don't insert this
 						insertStudents.setString(1, student.get_name());
 						insertStudents.setString(2, student.get_password());
@@ -1341,6 +1344,7 @@ public class DerbyDatabase implements IDatabase {
 					// populate projects table
 					insertProjects = conn.prepareStatement("insert into projects (students_id, student_name, title, date, description) values (?, ?, ?, ?, ?)");
 					for (Project project : projectList) {
+						System.out.println("Projects");
 						insertProjects.setInt(1, project.get_s_id());
 						insertProjects.setString(2, project.get_student().get_name());
 						insertProjects.setString(3, project.get_title());
@@ -1368,7 +1372,7 @@ public class DerbyDatabase implements IDatabase {
 					insertChemicals = conn.prepareStatement("insert into chemicals (name, use, dom, amount, media, cas, room, loc, supplier, catalogue) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 					
 					for (ChemicalInventory chemical : chemicalList) {
-						
+						System.out.println("Inventory");
 						insertChemicals.setString(1, chemical.getChemical());
 						insertChemicals.setString(2, chemical.getUseOfChemical());
 						insertChemicals.setString(3, chemical.getDom());

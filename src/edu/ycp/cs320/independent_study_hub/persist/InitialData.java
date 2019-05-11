@@ -117,10 +117,12 @@ public class InitialData {
 		try {
 			// auto-generated primary key for authors table
 			Integer chemicalID = 1;
-			
+			int count = 0;
 			while (true) {
+				System.out.println(count);
 				List<String> tuple = readChemcials.next();
 				if (tuple == null) {
+					System.out.println("We breaked");
 					break;
 				}
 				Iterator<String> i = tuple.iterator();
@@ -131,13 +133,16 @@ public class InitialData {
 				chemical.setDom(i.next());
 				chemical.setAmount(Integer.parseInt(i.next()));
 				chemical.setMedia(i.next());
-				
+				System.out.println("Half way");
 				chemical.setCAS(i.next());
 				chemical.setRoom(i.next());
 				chemical.setLoc(i.next());
 				chemical.setSup(i.next());
+				System.out.println("Almost");
 				chemical.setCat(i.next());
+				System.out.println("Full way");
 				chemicalList.add(chemical);
+				count++;
 			}
 			return chemicalList;
 		} finally {
