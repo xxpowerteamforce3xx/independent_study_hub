@@ -1,5 +1,7 @@
 package edu.ycp.cs320.independent_study_hub.persist;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -32,7 +34,7 @@ public class DerbyDatabase implements IDatabase {
 	}
 
 	private interface Transaction<ResultType> {
-		public ResultType execute(Connection conn) throws SQLException;
+		public ResultType execute(Connection conn) throws SQLException, FileNotFoundException;
 	}
 
 	private static final int MAX_ATTEMPTS = 10;
@@ -842,7 +844,6 @@ public class DerbyDatabase implements IDatabase {
 					if (!found) {
 						System.out.println("No Faculty was found with name: <" + acc_name + ">");
 					}
-					System.out.println(faculty.get_name() + "<-- from derby");
 					return faculty;
 				} finally {
 					DBUtil.closeQuietly(resultSet_1_fac);
@@ -1127,7 +1128,6 @@ public class DerbyDatabase implements IDatabase {
 		faculty.setInterest(resultSet.getString(i++));
 		faculty.setDescription(resultSet.getString(i++));
 		String code = resultSet.getString(i++);
-		System.out.println(code + "from db");
 		faculty.setFacultyCode(code);
 		faculty.set_image(resultSet.getBytes((i++)));
 		faculty.set_file_name(resultSet.getString(i++));
@@ -1177,7 +1177,7 @@ public class DerbyDatabase implements IDatabase {
 		}
 	}
 	
-	public<ResultType> ResultType doExecuteTransaction(Transaction<ResultType> txn) throws SQLException {
+	public<ResultType> ResultType doExecuteTransaction(Transaction<ResultType> txn) throws SQLException{
 		Connection conn = connect();
 	
 		try {
@@ -1198,6 +1198,10 @@ public class DerbyDatabase implements IDatabase {
 						// Some other kind of SQLException
 						throw e;
 					}
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					success = false;
 				}
 			}
 	
@@ -1223,7 +1227,7 @@ public class DerbyDatabase implements IDatabase {
 	}
 	
 	
-	public void createTables() {
+	public void createTables() throws FileNotFoundException {
 		executeTransaction(new Transaction<Boolean>() {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
@@ -1335,12 +1339,10 @@ public class DerbyDatabase implements IDatabase {
 				List<ChemicalInventory> chemicalList;
 	
 				try {
-					System.out.println("Try block");
 					facultyList = InitialData.get_faculty_users();
 					studentList = InitialData.get_student_users();
 					projectList = InitialData.getProjects();
 					chemicalList = InitialData.getChemicals();
-					System.out.println("Pass getting data");
 				} catch (IOException e) {
 					throw new SQLException("Couldn't read initial data", e);
 				}
@@ -1378,7 +1380,7 @@ public class DerbyDatabase implements IDatabase {
 					insertProjects.executeBatch();
 					System.out.println("Fact");
 					// populate faculty table
-					insertFaculty = conn.prepareStatement("insert into faculty (name, password, email, title, interest, description, faculty_code) values (?, ?, ?, ?, ?, ?, ?)");
+					insertFaculty = conn.prepareStatement("insert into faculty (name, password, email, title, interest, description, faculty_code, image, file_name) values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 					for (Faculty faculty : facultyList) {
 						insertFaculty.setString(1, faculty.get_name());
 						insertFaculty.setString(2, faculty.get_password());
@@ -1387,6 +1389,9 @@ public class DerbyDatabase implements IDatabase {
 						insertFaculty.setString(5, faculty.get_interest());
 						insertFaculty.setString(6, faculty.get_description());
 						insertFaculty.setString(7, faculty.get_fac_code());
+						InputStream input = new FileInputStream("./war/style/" + faculty.get_file_name());
+						insertFaculty.setBlob(8, input);
+						insertFaculty.setString(9,  faculty.get_file_name());
 						insertFaculty.addBatch();
 					}
 					insertFaculty.executeBatch();
@@ -1395,7 +1400,7 @@ public class DerbyDatabase implements IDatabase {
 					insertChemicals = conn.prepareStatement("insert into chemicals (name, use, dom, amount, media, cas, room, loc, supplier, catalogue) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 					
 					for (ChemicalInventory chemical : chemicalList) {
-						System.out.println("Inventory");
+						//System.out.println("Inventory");
 						insertChemicals.setString(1, chemical.getChemical());
 						insertChemicals.setString(2, chemical.getUseOfChemical());
 						insertChemicals.setString(3, chemical.getDom());
@@ -1409,9 +1414,11 @@ public class DerbyDatabase implements IDatabase {
 						insertChemicals.setString(10, chemical.getCat());
 						insertChemicals.addBatch();
 					}
-					System.out.println("Chems");
 					insertChemicals.executeBatch();
 					return true;
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+					return false;
 				} finally {
 					DBUtil.closeQuietly(insertProjects);
 					DBUtil.closeQuietly(insertStudents);

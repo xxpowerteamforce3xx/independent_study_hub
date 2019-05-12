@@ -72,6 +72,10 @@ public class InitialData {
 				faculty.setDescription(i.next());
 				String code = i.next();
 				faculty.setFacultyCode(code);
+				String file_name = i.next();
+				System.out.println("file_name from init data; " + file_name);
+				faculty.set_file_name(file_name);
+				System.out.println("file_name: "+ file_name );
 
 				facultyList.add(faculty);
 			}
@@ -119,7 +123,7 @@ public class InitialData {
 			Integer chemicalID = 1;
 			int count = 1;
 			while (true) {
-				System.out.println("Error on line: " + count);
+				//System.out.println("Error on line: " + count);
 				List<String> tuple = readChemcials.next();
 				if (tuple == null) {
 					System.out.println("We breaked");
