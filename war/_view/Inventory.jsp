@@ -97,6 +97,8 @@
 	                <button type="button" onclick="setSearch(0)">Name</button>
 	                <button type="button" onclick="setSearch(1)">Use</button>
 	                <button type="button" onclick="setSearch(2)">Date</button>
+	                <button type="button" onclick="setSearch(5)">CAS #</button>
+	                <button type="button" onclick="setSearch(9)">Cat #</button>
 	            </div>
 	        </div>
 	
