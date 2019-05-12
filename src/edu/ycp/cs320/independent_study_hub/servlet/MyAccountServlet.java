@@ -21,6 +21,7 @@ import edu.ycp.cs320.independent_study_hub.controller.SelectOneFacultyController
 import edu.ycp.cs320.independent_study_hub.controller.SelectOneStudentController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectProjectsByStudentController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectStudentsByFacCodeController;
+import edu.ycp.cs320.independent_study_hub.controller.DeleteStudentController;
 
 public class MyAccountServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -34,6 +35,7 @@ public class MyAccountServlet extends HttpServlet {
 	private SelectAllFacultyController controller_all_faculty = new SelectAllFacultyController();
 	private SelectOneFacultyController controller_one_fac = new SelectOneFacultyController();
 	private InsertFacultyController controller_insert = new InsertFacultyController();
+	private DeleteStudentController controller_delete_s = new DeleteStudentController();
 	private List<Project> p_list = new ArrayList<Project>();
 	private ArrayList<Project> all_projects = new ArrayList<Project>();
 	private ArrayList<Student> s_list = new ArrayList<Student>();
@@ -144,14 +146,17 @@ public class MyAccountServlet extends HttpServlet {
 		String update_faculty = null;
 		String delete = null;
 		String delete_prj = null;
+		String delete_students = null;
 		String add = null;
 		String[] to_add = req.getParameterValues("nerds");
 		String[] prj_delete = req.getParameterValues("projects_to_delete");
+		String[] students_to_delete = req.getParameterValues("bad_kids");
 		ArrayList<String> pending_names = new ArrayList<String>();
 		ArrayList<String> projects_to_delete = new ArrayList<String>();
+		ArrayList<String> bad_kids_names	 = new ArrayList<String>();
 		delete = req.getParameter("delete");
 		delete_prj = req.getParameter("delete_prj");
-		System.out.println(delete_prj);
+		delete_students = req.getParameter("delete_students");
 		add = req.getParameter("add");
 		back = req.getParameter("account");
 		logout = req.getParameter("logout");
@@ -197,6 +202,27 @@ public class MyAccountServlet extends HttpServlet {
 				}				
 			}
 		} catch (NullPointerException e) {System.out.println("delete projects was null"); }
+		
+		try {
+			for (int k = 0; k < students_to_delete.length; k++) {
+				bad_kids_names.add(students_to_delete[k]);
+			}
+			
+			if (delete_students.equals("delete")) {
+				System.out.println("delete students button was pressed");
+	
+				for (int i = 0; i < all_students.size(); i++) {
+					System.out.println(all_students.get(i).get_name());
+					for (int x = 0; x < bad_kids_names.size(); x++) {
+						if (bad_kids_names.get(x).equals(all_students.get(i).get_name())) {
+							System.out.println("deleting: " + all_students.get(i).get_name());
+							controller_delete_s.deleteStudent(all_students.get(i).get_name());
+							resp.sendRedirect(req.getContextPath() + "/MyAccount");
+						}
+					}	
+				}				
+			}
+		} catch (NullPointerException e) {System.out.println("delete students was null"); }
 		
 		try {
 			if (add.equals("add")) {

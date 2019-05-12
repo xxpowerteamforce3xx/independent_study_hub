@@ -545,6 +545,29 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});	
 	}
+	
+	@Override
+	public boolean deleteStudent(final String name) {
+		return executeTransaction(new Transaction<Boolean>()  {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				try {
+					stmt = conn.prepareStatement(
+							"delete from students " +
+							"  where name = ? "
+					);
+					stmt.setString(1, name);
+					
+					// execute the update
+					stmt.executeUpdate();
+					return true;
+				} finally {
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});	
+	}
 			
 	@Override
 	public boolean insertProject(final String title, final Student student, final String date, final String description, final InputStream inputStream, final String file_name) {

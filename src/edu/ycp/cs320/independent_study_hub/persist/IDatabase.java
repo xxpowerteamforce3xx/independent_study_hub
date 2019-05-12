@@ -40,4 +40,5 @@ public interface IDatabase {
 	public boolean deleteChemical(String chemical);
 	boolean update_project(String old_title, String title, String desc, String date, InputStream inputStream, String file_name);
 	boolean deleteProject(String title);
+	boolean deleteStudent(String name);
 }

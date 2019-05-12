@@ -136,6 +136,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 </table>
 <br><br>
 <h2 class='h2'>All Students With An Account:</h2>
+<form class="buttons" action="${pageContext.servletContext.contextPath}/MyAccount" method="post">
 <table class='table'>
 	<tr>
 		<th>Student Username</th>
@@ -145,13 +146,15 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 	
 	<c:forEach  var="student" items="${all_students}">
         <tr>
-            <td>${student.get_name()}</td>
+            <td>${student.get_name()} <input type="checkbox" name='bad_kids' value="${student.get_name()}"></td>
             <td>${student.get_email()}</td>	   
             <td>${student.get_faculty_code()}</td>         
         </tr>
     </c:forEach> 
 </table>
-
+<br>
+<button class="side-bar-form-btn" type='submit' name ='delete_students' value = 'delete'>Delete Checked Students</button>
+</form>
 <br>
 	<h2 class='h2'>All Projects:</h2>
 	    <form class="buttons" action="${pageContext.servletContext.contextPath}/MyAccount" method="post">
