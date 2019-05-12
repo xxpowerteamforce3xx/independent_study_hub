@@ -1277,16 +1277,16 @@ public class DerbyDatabase implements IDatabase {
 							"create table chemicals (" +
 									" 	chemicals_id integer primary key " +
 									"		generated always as identity (start with 1, increment by 1), " +
-									" 	name varchar(40)," + //Stores chemical name
-									"   use  varchar(40)," + //Stores chemical use (class or research use)
+									" 	name varchar(100)," + //Stores chemical name
+									"   use  varchar(100)," + //Stores chemical use (class or research use)
 									"   dom  varchar(10), " + //Stores date chemical was purchased (in format of MM/DD/YY)
 									"   amount  integer, " +
-									"   media  varchar(20), " +
-									"   cas varchar(20), " +
-									"   room varchar(20)," +
-									"   loc varchar(20)," +
-									"   supplier varchar(20)," +
-									"   catalogue varchar(20)" +
+									"   media  varchar(100), " +
+									"   cas varchar(100), " +
+									"   room varchar(100)," +
+									"   loc varchar(100)," +
+									"   supplier varchar(100)," +
+									"   catalogue varchar(100)" +
 									//" 	quantity integer" +
 									")"
 							);
