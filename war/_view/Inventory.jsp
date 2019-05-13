@@ -137,11 +137,11 @@
 		                	<tr>
 		                		<!-- Directly calling methods associated with ChemicalInventory class -->
 		            			<c:if test="${type.equals('faculty')}">
-<<<<<<< HEAD
+
 		                			<td>${inventory.getChemical()} <input type="checkbox" name='drugs' value='${inventory.getChemical()}'></td>
-=======
+
 		                		<td>${inventory.getChemical()} <input type="checkbox" name='drugs' value='${inventory.getChemical()}'></td>
->>>>>>> a6b7f74c3ab2fc5242b26a607b64d266979c4d55
+
 		                		</c:if>
 		                		<c:if test="${type.equals('student')}">
 		                			<td>${inventory.getChemical()}</td>
