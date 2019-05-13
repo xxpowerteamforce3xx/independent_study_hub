@@ -1118,7 +1118,7 @@ public class DerbyDatabase implements IDatabase {
 	}
 	
 	@Override
-	public boolean insert_resource(final String link, final String description, final String by) {
+	public boolean insert_resource(final String link, final String description, final String dude) {
 		return executeTransaction(new Transaction<Boolean>() {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
@@ -1132,7 +1132,7 @@ public class DerbyDatabase implements IDatabase {
 					
 					stmt.setString(1,  link);
 					stmt.setString(2,  description);
-					stmt.setString(3,  by);
+					stmt.setString(3,  dude);
 					stmt.executeUpdate();
 					
 
@@ -1218,9 +1218,15 @@ public class DerbyDatabase implements IDatabase {
 	}
 	
 	private void loadResourceBlock(ResourceBlock block, ResultSet r, int i) throws SQLException {
-		block.set_link(r.getString(i++));
-		block.set_description(r.getString(i++));
-		block.set_by(r.getString(i++));
+		String link = r.getString(i++);
+		System.out.println("link : " + link);
+		block.set_link(link);
+		String desc = r.getString(i++);
+		System.out.println("desc: " + desc);
+		block.set_description(desc);
+		String by = r.getString(i++);
+		System.out.println("by: " + by);
+		block.set_by(by);
 	}
 	
 	private void loadFaculty(Faculty faculty, ResultSet resultSet, int i) throws SQLException {

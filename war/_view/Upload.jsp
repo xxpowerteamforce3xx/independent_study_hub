@@ -87,18 +87,10 @@
       		    		<label>Title:</label> 
       		    		<input class="input-field input-upload" type="text" name="t" placeholder="title" value="${t}"/>
       		    	</div>
-      		    	<div class="form-field">
-		              	<label>Name:</label>  
-		              	<input class="input-field input-upload" type="text" name="n" placeholder="name" value="${t}"/>
-		      		</div>
       		    </div>
               
               
               <div class="form-row">
-        	    <div class="form-field">
-        	    	<label>Advisor:</label>
-        	    	<input class="input-field input-upload" type="text" name="a" placeholder="Advisor" value="${t}"/>
-        	    </div>
         	    <div class="form-field">
                   <label>Date Completed:</label> 
                   <input class="date"type="date" name="date" placeholder="month/day/year" value="${date}"/>

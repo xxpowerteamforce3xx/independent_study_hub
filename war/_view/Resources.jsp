@@ -115,7 +115,11 @@
 		    		</c:otherwise>
 			</c:choose>
     <br>
-    
+    <c:if test="${!type.equals('guest')}">
+    	<form action="${pageContext.servletContext.contextPath}/Resources" method="post">
+    		<button class="w3-bar-item w3-button" type='submit' name ='upload' value = '1'>Upload a Help Card</button>
+    	</form>
+    </c:if>
     <div class="protector">
          <h2 class="ribbon">
              <strong class="ribbon-content">What it is All About</strong>
@@ -130,59 +134,54 @@
 	    <!-- Main section of web page's body -->   
 	  <div class ="resources">
 	      <div class="w3-bar w3-green">
-	      	  <button class="w3-bar-item w3-button" onclick="displayContent('all')">All</button>
 			  <button class="w3-bar-item w3-button" onclick="displayContent('faculty')">Faculty</button>
 			  <button class="w3-bar-item w3-button" onclick="displayContent('student')">Student</button>
 			</div>
 	
-				<div id="faculty" class="w3-container city resource-fac">
+				<div id="faculty" class="w3-container city resource-fac" style="display:block">
 				  <h2>Faculty Provided Help!</h2>
-	
-	
-	
-	
-				  <div class="w3-card-4 w3-green resource-cont">
-				    <header class="w3-container w3-green resource-head">
-				      <h3>From: lgartrell</h3>
-				    </header>
-				
-				    <div class="w3-container w3-white">
-				      <br>
-				      <p>This is where the description would go</p>
-				      <br>
-				    </div>
-				
-				    <div class="w3-container w3-green resource-head">
-				      <h5>Link: </h5>
-				    </div>
-				  </div>
-	        
-	        <div class="w3-card-4 w3-green resource-cont">
-	  		    <header class="w3-container w3-green resource-head">
-				      <h3>From: lgartrell</h3>
-				    </header>
-				
-				    <div class="w3-container w3-white">
-				      <br>
-				      <p>This is where the description would go</p>
-				      <br>
-				    </div>
-				
-				    <footer class="w3-container w3-green resource-head">
-				      <h5>Link: </h5>
-				    </footer>
-				  </div>
 				  
-				</div>
+					  <c:forEach  var="block" items="${f_blocks}">
+		      			 <div class="w3-card-4 w3-green resource-cont">
+						    <header class="w3-container w3-green resource-head">
+						      <h3>From: lgartrell ${dude}</h3>
+						    </header>
+						
+						    <div class="w3-container w3-white">
+						      <br>
+						      <p>This is where the description would go ${description}</p>
+						      <br>
+						    </div>
+						
+						    <div class="w3-container w3-green resource-head">
+						      <h2>Link: <a href="${link}">${link}</a></h2>
+						    </div>
+						 </div>
+					</c:forEach> 
+				</div>					
+    			  
+
+				 
 				
-	      
-	      
-	      
-				<div id="student" class="w3-container city resource-stu">
-				  <h2>Student Provided Help!</h2>
-				  <p>Paris is the capital of France.</p> 
+				<div id="student" class="w3-container city resource-stu" style="display:none">
+					<h2>Student Provided Help!</h2>
+					<c:forEach  var="block" items="${s_blocks}">	
+					   <header class="w3-container w3-green resource-head">
+					      <h3>From:this is the form section ${block.get_by()}</h3>
+					    </header>
+					
+					    <div class="w3-container w3-white">
+					      <br>
+					      <p>this is where the desc should go${block.get_description()}</p>
+					      <br>
+					    </div>
+					
+					    <div class="w3-container w3-green resource-head">
+					      <h5>Link: <a href="${link}">${link}</a></h5>
+					    </div>
+						<br>
+					</c:forEach> 
 				</div>
-				<br>
 	</div>
 </body>
 </html>

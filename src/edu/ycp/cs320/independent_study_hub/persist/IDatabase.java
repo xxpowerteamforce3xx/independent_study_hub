@@ -41,7 +41,7 @@ public interface IDatabase {
 	public boolean update_project(String old_title, String title, String desc, String date, InputStream inputStream, String file_name);
 	public boolean deleteProject(String title);
 	public boolean deleteStudent(String name);
-	public boolean insert_resource(String link, String description, String by);
+	public boolean insert_resource(String link, String description, String dude);
 	public boolean delete_resource(String description);
 	public ArrayList<ResourceBlock> get_all_resources();
 }

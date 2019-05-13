@@ -35,8 +35,8 @@ public class ResourceController {
 		return false;
 	}
 	
-	public boolean insertResource(String link, String description, String by) {
-		boolean b = db.insert_resource(link, description, by);
+	public boolean insertResource(String link, String description, String dude) {
+		boolean b = db.insert_resource(link, description, dude);
 		if (b) {
 			System.out.println("inserted resource into db");
 			return true;

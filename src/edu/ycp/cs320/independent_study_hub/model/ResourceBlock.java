@@ -22,7 +22,7 @@ public class ResourceBlock {
 	}
 	
 	public String get_description() {
-		return description
+		return description;
 	}
 	
 	public String get_link() {
