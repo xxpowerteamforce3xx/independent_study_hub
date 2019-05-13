@@ -109,4 +109,18 @@ function setSearch(num) {
     }
 }
 
+function displayContent(content) {
+    var i;
+    var x = document.getElementsByClassName("city");
+    for (i = 0; i < x.length; i++) {
+  		x[i].style.display = "none";  
+    }
+	if (content == "all"){
+		document.getElementById("faculty").style.display = "flex";
+		document.getElementById("student").style.display = "flex";
+	} else{
+  		document.getElementById(content).style.display = "flex";
+	}
+}
+
 

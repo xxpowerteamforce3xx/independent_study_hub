@@ -128,48 +128,61 @@
         </p>
         <br>
 	    <!-- Main section of web page's body -->   
-	    <div class ="resources">
-	    	<div class="w3-bar w3-green">
-			  <button class="w3-bar-item w3-button" onclick="openCity('faculty')">Faculty</button>
-			  <button class="w3-bar-item w3-button" onclick="openCity('student')">Student</button>
+	  <div class ="resources">
+	      <div class="w3-bar w3-green">
+	      	  <button class="w3-bar-item w3-button" onclick="displayContent('all')">All</button>
+			  <button class="w3-bar-item w3-button" onclick="displayContent('faculty')">Faculty</button>
+			  <button class="w3-bar-item w3-button" onclick="displayContent('student')">Student</button>
 			</div>
-
-			<div id="faculty" class="w3-container city">
-			  <h2>Faculty Provided Help!</h2>
-
-			  <div class="w3-card-4 w3-green" style="width:50%;">
-			    <header class="w3-container w3-green">
-			      <h3>From: lgartrell</h3>
-			    </header>
-			
-			    <div class="w3-container w3-white">
-			      <br>
-			      <p>This is where the description would go</p>
-			      <br>
-			    </div>
-			
-			    <footer class="w3-container w3-green">
-			      <h5>Link: </h5>
-			    </footer>
-			  </div>
-			  
-			</div>
-			
-			<div id="student" class="w3-container city" style="display:none">
-			  <h2>Student Provided Help!</h2>
-			  <p>Paris is the capital of France.</p> 
-			</div>
-
-			<script>
-				function openCity(cityName) {
-				  var i;
-				  var x = document.getElementsByClassName("city");
-				  for (i = 0; i < x.length; i++) {
-				    x[i].style.display = "none";  
-				  }
-			  	document.getElementById(cityName).style.display = "block";  
-				}
-			</script>
-	    </div>
+	
+				<div id="faculty" class="w3-container city resource-fac">
+				  <h2>Faculty Provided Help!</h2>
+	
+	
+	
+	
+				  <div class="w3-card-4 w3-green resource-cont">
+				    <header class="w3-container w3-green resource-head">
+				      <h3>From: lgartrell</h3>
+				    </header>
+				
+				    <div class="w3-container w3-white">
+				      <br>
+				      <p>This is where the description would go</p>
+				      <br>
+				    </div>
+				
+				    <div class="w3-container w3-green resource-head">
+				      <h5>Link: </h5>
+				    </div>
+				  </div>
+	        
+	        <div class="w3-card-4 w3-green resource-cont">
+	  		    <header class="w3-container w3-green resource-head">
+				      <h3>From: lgartrell</h3>
+				    </header>
+				
+				    <div class="w3-container w3-white">
+				      <br>
+				      <p>This is where the description would go</p>
+				      <br>
+				    </div>
+				
+				    <footer class="w3-container w3-green resource-head">
+				      <h5>Link: </h5>
+				    </footer>
+				  </div>
+				  
+				</div>
+				
+	      
+	      
+	      
+				<div id="student" class="w3-container city resource-stu">
+				  <h2>Student Provided Help!</h2>
+				  <p>Paris is the capital of France.</p> 
+				</div>
+				<br>
+	</div>
 </body>
 </html>
