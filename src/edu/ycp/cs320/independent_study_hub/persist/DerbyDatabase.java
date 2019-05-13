@@ -376,21 +376,26 @@ public class DerbyDatabase implements IDatabase {
 	}
 
 	@Override
-	public boolean insertChemical(final String chemical, final String use, final String dom, final int amount, final String media) {
+	public boolean insertChemical(final String chemical, final String use, final String dom, final int amount, final String media, final String cas, final String room, final String loc, final String supplier, final String catalogue) {
 		return executeTransaction(new Transaction<Boolean>()  {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
 				PreparedStatement stmt = null;
 				try {
 					stmt = conn.prepareStatement(
-							"insert into chemicals (name, use, dom, amount, media) " +
-							"  values(?, ?, ?, ?, ?) "
+							"insert into chemicals (name, use, dom, amount, media, cas, room, loc, supplier, catalogue) " +
+							"  values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?) "
 					);
 					stmt.setString(1, chemical);
 					stmt.setString(2, use);
 					stmt.setString(3, dom);
 					stmt.setInt(4, amount);
 					stmt.setString(5, media);
+					stmt.setString(6, cas);
+					stmt.setString(7, room);
+					stmt.setString(8, loc);
+					stmt.setString(9, supplier);
+					stmt.setString(10, catalogue);
 					// execute the update
 					stmt.executeUpdate();
 					return true;
@@ -1441,11 +1446,6 @@ public class DerbyDatabase implements IDatabase {
 		System.out.println("Success!");
 	}
 
-	@Override
-	public boolean insertChemical(String chemical, String use, Integer amount) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public Faculty get_faculty_id(String acc_name) {
@@ -1453,11 +1453,6 @@ public class DerbyDatabase implements IDatabase {
 		return null;
 	}
 
-	@Override
-	public boolean deleteChemical(String chemical, String use, String dom, int amount, String media) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 
 	

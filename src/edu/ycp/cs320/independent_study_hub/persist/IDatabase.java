@@ -12,14 +12,13 @@ import edu.ycp.cs320.independent_study_hub.model.Project;
 import edu.ycp.cs320.independent_study_hub.model.Student;
 
 public interface IDatabase {
-	public boolean insertChemical(String chemical, String use, String dom, int amount, String media);
+	public boolean insertChemical(String chemical, String use, String dom, int amount, String media, String cas, String room, String loc, String supplier, String catalogue);
 	public ChemicalInventory get_chemical(String chemcial);
 	public ArrayList<Project> getWorkFromYear(int year);
 	public ArrayList<Project> selectProjectsByStudent(String name);
 	public ArrayList<Student> selectStudentsByFacCode(String code);
 	public boolean insertProject(String title, Student student, String date, String description, InputStream inputStream, String file_name);
 	public boolean insertStudent(String name, String password, String email);
-	public boolean insertChemical(String chemical, String use, Integer amount);
 	public boolean insertFaculty(String name, String password, String email);
 	public boolean insertPendingFaculty(String name, String password, String email);
 	public boolean deletePendingFaculty(String name);

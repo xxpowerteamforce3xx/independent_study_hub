@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import edu.ycp.cs320.independent_study_hub.model.ChemicalInventory;
 import edu.ycp.cs320.independent_study_hub.persist.DatabaseProvider;
-import edu.ycp.cs320.independent_study_hub.persist.FakeDatabase;
+import edu.ycp.cs320.independent_study_hub.persist.DerbyDatabase;
 public class GetChemicalController {
 	private IDatabase db = null;
 	
@@ -18,7 +18,7 @@ public class GetChemicalController {
 	 */
 	public GetChemicalController() {
 		// this will change to new DerbyDatabase when we get that goin
-		DatabaseProvider.setInstance(new FakeDatabase()); 
+		DatabaseProvider.setInstance(new DerbyDatabase()); 
 		db = DatabaseProvider.getInstance();
 	}
 	

@@ -75,6 +75,12 @@
        		<input type="text" name="year_purchased" placeholder="MM/DD/YY" id="year_purchased" value="${year_purchased}"/>
        		<input type="text" name="initialAmount" placeholder="Amount Bought" id="initialAmount" value="${initialAmount}"/>
        		<input type="text" name="initMediaType" placeholder="Media Type" id="initMediaType" value="${initMediaType}"/>
+       		<input type="text" name="cas" placeholder="Cas Number" id="cas" value="${cas}"/>
+       		<input type="text" name="room" placeholder="Room ID" id="room" value="${room}"/>
+       		<input type="text" name="loc" placeholder="Location ID" id="loc" value="${loc}"/>
+       		<input type="text" name="supplier" placeholder="Supplier" id="supplier" value="${supplier}"/>
+       		<input type="text" name="catalogue" placeholder="Catalogue Number" id="catalogue" value="${catalogue}"/>
+       		
 	        <button type="reset">Reset</button>
 	        <button type="submit" name="button" value="Insert!" id="create"/>Insert</button>
 	    </form>
@@ -130,7 +136,7 @@
 		                	<tr>
 		                		<!-- Directly calling methods associated with ChemicalInventory class -->
 		            			<c:if test="${type.equals('faculty')}">
-		                		<td>${inventory.getChemical()} <input type="checkbox" name='drugs' value="${inventory.getChemical()}"></td>
+		                		<td>${inventory.getChemical()} <input type="checkbox" name='drugs' value='${inventory.getChemical()}'></td>
 		                		</c:if>
 		                		<c:if test="${type.equals('student')}">
 		                		<td>${inventory.getChemical()}</td>
@@ -139,7 +145,6 @@
 		                		<td>${inventory.getDom()}</td>
 		                		<td>${inventory.getAmount()}</td>
 		                		<td>${inventory.getMedia()}</td>
-		                		
 		                		<td>${inventory.getCAS()}</td>
 		                		<td>${inventory.getRoom()}</td>
 		                		<td>${inventory.getLoc()}</td>
