@@ -207,56 +207,22 @@ public class InventoryServlet extends HttpServlet {
 				if (delete.equals("delete")) {
 					System.out.println("delete button was pressed");
 					for (int i = 0; i < pending_list.size(); i++) {
-<<<<<<< HEAD
-						for (int x = 0; x < pending_chem.size(); x++) {
-							//System.out.println(pending_chem.get(x) + "<-- check value");
-=======
+
 						for (int x = 0; i < pending_chem.size(); i++) {
 							System.out.println(pending_chem.get(x) + "<-- check value");
->>>>>>> a6b7f74c3ab2fc5242b26a607b64d266979c4d55
+
 							if (pending_chem.get(x).equals(pending_list.get(i).getChemical())) {
 								System.out.println("deleting: " + pending_list.get(i).getChemical());
 								deleteController = new DeleteChemicalController();
 								deleteController.deleteChemical(pending_list.get(i).getChemical());
 								resp.sendRedirect(req.getContextPath() + "/Inventory");
 							}
-<<<<<<< HEAD
-						}
-					}				
-=======
-							else {
 
-							}
-						}	
+						}
 					}
->>>>>>> a6b7f74c3ab2fc5242b26a607b64d266979c4d55
 				}
 			}
-			else {}
-		} catch (NullPointerException e) { System.out.println("something was null");} 
-
-		/*if (deleteChemical    == null || deleteChemical.equals("") ||
-				deleteUse     == null || deleteUse.equals("")  ||
-				delete_year_purchased   == null || delete_year_purchased.equals("") ||
-					deleteAmount == null || deleteAmount.equals("") ||
-					endMedia == null || endMedia.equals("")) {
-
-			errorMessage = "Please fill in all of the required fields";
-		} else {
-
-			deleteController = new DeleteChemicalController();
-			deleteA = Integer.parseInt(deleteAmount);
-			// convert published to integer now that it is valid
-			//bought = Integer.parseInt(year_purchased);
-
-			// get list of books returned from query			
-			if (deleteController.deleteChemical(deleteChemical, deleteUse, delete_year_purchased, deleteA, endMedia)) {
-				successMessage = deleteChemical;
-			}
-			else {
-				errorMessage = "Failed to delete chemical: " + deleteChemical;					
-			}
-		}*/
+			} catch (NullPointerException e) {}
 		req.setAttribute("deleteErrorMessage",   deleteErrorMessage);
 		req.setAttribute("deleteSuccessMessage", deleteSuccessMessage);
 		req.getRequestDispatcher("/_view/Inventory.jsp").forward(req, resp);
