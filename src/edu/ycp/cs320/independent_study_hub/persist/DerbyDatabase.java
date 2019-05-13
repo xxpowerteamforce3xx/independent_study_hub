@@ -20,6 +20,7 @@ import edu.ycp.cs320.independent_study_hub.model.ChemicalInventory;
 import edu.ycp.cs320.independent_study_hub.model.Faculty;
 import edu.ycp.cs320.independent_study_hub.model.Guest;
 import edu.ycp.cs320.independent_study_hub.model.Project;
+import edu.ycp.cs320.independent_study_hub.model.ResourceBlock;
 import edu.ycp.cs320.independent_study_hub.model.Student;
 import edu.ycp.cs320.independent_study_hub.persist.IDatabase;
 
@@ -1111,12 +1112,110 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 	
+	@Override
+	public boolean insert_resource(final String link, final String description, final String by) {
+		return executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				try {
+					// retreive all attributes from both Books and Authors tables
+					stmt = conn.prepareStatement(
+							"insert into resources (link, description, dude)" +
+									"  values (?, ?, ?) " 
+							);
+					
+					stmt.setString(1,  link);
+					stmt.setString(2,  description);
+					stmt.setString(3,  by);
+					stmt.executeUpdate();
+					
+
+					return true;
+				} finally {
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+	}
+	
+	@Override
+	public boolean delete_resource(final String description) {
+		return executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				try {
+					// retreive all attributes from both Books and Authors tables
+					stmt = conn.prepareStatement(
+							"delete from resources" +
+									"  where description = ? " 
+							);
+					
+					stmt.setString(1,  description);
+					stmt.executeUpdate();
+					
+
+					return true;
+				} finally {
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+	}
+	
+	@Override
+	public ArrayList<ResourceBlock> get_all_resources() {
+		return executeTransaction(new Transaction<ArrayList<ResourceBlock>>() {
+			@Override
+			public ArrayList<ResourceBlock> execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				try {
+					stmt = conn.prepareStatement(
+							"select resources.* " +
+									"  from resources " 
+							);
+
+					ArrayList<ResourceBlock> r_list = new ArrayList<ResourceBlock>();
+
+					resultSet = stmt.executeQuery();
+
+					// for testing that a result was returned
+					Boolean found = false;
+
+					while (resultSet.next()) {
+						found = true;
+						ResourceBlock block = new ResourceBlock();
+						loadResourceBlock(block, resultSet, 1);
+						r_list.add(block);
+					}
+
+					// check if anything was found
+					if (!found) {
+						System.out.println("No resources were found");
+					}
+					return r_list;
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+	}
+	
 	private void loadStudent(Student student, ResultSet resultSet, int i) throws SQLException {
 		student.setID(resultSet.getInt(i++));
 		student.setName(resultSet.getString(i++));
 		student.setPassword(resultSet.getString(i++));
 		student.setEmail(resultSet.getString(i++));
 		student.set_faculty_code(resultSet.getString(i++));
+	}
+	
+	private void loadResourceBlock(ResourceBlock block, ResultSet r, int i) throws SQLException {
+		block.set_link(r.getString(i++));
+		block.set_description(r.getString(i++));
+		block.set_by(r.getString(i++));
 	}
 	
 	private void loadFaculty(Faculty faculty, ResultSet resultSet, int i) throws SQLException {
@@ -1236,6 +1335,7 @@ public class DerbyDatabase implements IDatabase {
 				PreparedStatement stmt3 = null;
 				PreparedStatement stmt4 = null;
 				PreparedStatement stmt5 = null;
+				PreparedStatement stmt6 = null;
 	
 				try {
 					stmt1 = conn.prepareStatement(
@@ -1320,10 +1420,26 @@ public class DerbyDatabase implements IDatabase {
 					stmt4.executeUpdate();
 					System.out.println("chemicals table completed");
 					
+					stmt6 = conn.prepareStatement(
+							"create table resources (" +
+									" 	resources_id integer primary key " +
+									"		generated always as identity (start with 1, increment by 1), " +
+									" 	link varchar(100)," + 
+									"   description  varchar(1400)," + 
+									"   dude varchar(100) " + 
+									")"
+							);
+					stmt6.executeUpdate();
+					System.out.println("resources table completed");
+					
 					return true;
 				} finally {
 					DBUtil.closeQuietly(stmt1);
 					DBUtil.closeQuietly(stmt2);
+					DBUtil.closeQuietly(stmt3);
+					DBUtil.closeQuietly(stmt4);
+					DBUtil.closeQuietly(stmt5);
+					DBUtil.closeQuietly(stmt6);
 				}
 			}
 		});

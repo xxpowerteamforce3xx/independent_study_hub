@@ -9,6 +9,7 @@ import edu.ycp.cs320.independent_study_hub.model.ChemicalInventory;
 import edu.ycp.cs320.independent_study_hub.model.Faculty;
 import edu.ycp.cs320.independent_study_hub.model.Guest;
 import edu.ycp.cs320.independent_study_hub.model.Project;
+import edu.ycp.cs320.independent_study_hub.model.ResourceBlock;
 import edu.ycp.cs320.independent_study_hub.model.Student;
 
 public interface IDatabase {
@@ -32,13 +33,16 @@ public interface IDatabase {
 	public ArrayList<Faculty> get_all_pending_faculty();
 	public ArrayList<Project> get_all_projects();
 	public ArrayList<ChemicalInventory> get_all_chemicals();
-	Faculty get_faculty_id(String acc_name);
-	boolean update_faculty(final String email, final String old_name, final String pw, final String new_name, final String fac_code, final String description, final String interest, final String title, final InputStream inputStream, final String file_name);
-	boolean update_student(String email, String old_name, String pass, String new_name);
+	public Faculty get_faculty_id(String acc_name);
+	public boolean update_faculty(final String email, final String old_name, final String pw, final String new_name, final String fac_code, final String description, final String interest, final String title, final InputStream inputStream, final String file_name);
+	public boolean update_student(String email, String old_name, String pass, String new_name);
 	public boolean deleteChemical(String chemical, String use, String dom, int amount, String media);
-	boolean update_faculty_password_recovery(String email, String old_name, String pw, String new_name, String fac_code);
+	public boolean update_faculty_password_recovery(String email, String old_name, String pw, String new_name, String fac_code);
 	public boolean deleteChemical(String chemical);
-	boolean update_project(String old_title, String title, String desc, String date, InputStream inputStream, String file_name);
-	boolean deleteProject(String title);
-	boolean deleteStudent(String name);
+	public boolean update_project(String old_title, String title, String desc, String date, InputStream inputStream, String file_name);
+	public boolean deleteProject(String title);
+	public boolean deleteStudent(String name);
+	public boolean insert_resource(String link, String description, String by);
+	public boolean delete_resource(String description);
+	public ArrayList<ResourceBlock> get_all_resources();
 }

@@ -112,6 +112,9 @@ public class InventoryServlet extends HttpServlet {
 		///
 
 		String[] to_delete = req.getParameterValues("drugs");
+		for (int j = 0; j < to_delete.length; j++) {
+			System.out.println("chem checked: " +to_delete[j]);
+		}
 		ArrayList<String> pending_chem = new ArrayList<String>();
 		String delete = null;
 		delete = req.getParameter("delete");
@@ -194,12 +197,14 @@ public class InventoryServlet extends HttpServlet {
 				if (delete.equals("delete")) {
 					System.out.println("delete button was pressed");
 					for (int i = 0; i < pending_list.size(); i++) {
-						System.out.println(pending_chem.get(i) + "<-- check value");
-						if (pending_chem.get(i).equals(pending_list.get(i).getChemical())) {
-							System.out.println("deleting: " + pending_list.get(i).getChemical());
-							deleteController = new DeleteChemicalController();
-							deleteController.deleteChemical(pending_list.get(i).getChemical());
-							resp.sendRedirect(req.getContextPath() + "/Inventory");
+						for (int x = 0; x < pending_chem.size(); x++) {
+							//System.out.println(pending_chem.get(x) + "<-- check value");
+							if (pending_chem.get(x).equals(pending_list.get(i).getChemical())) {
+								System.out.println("deleting: " + pending_list.get(i).getChemical());
+								deleteController = new DeleteChemicalController();
+								deleteController.deleteChemical(pending_list.get(i).getChemical());
+								resp.sendRedirect(req.getContextPath() + "/Inventory");
+							}
 						}
 					}				
 				}
@@ -231,6 +236,6 @@ public class InventoryServlet extends HttpServlet {
 		}*/
 		req.setAttribute("deleteErrorMessage",   deleteErrorMessage);
 		req.setAttribute("deleteSuccessMessage", deleteSuccessMessage);
-		doGet(req, resp);
+		req.getRequestDispatcher("/_view/Inventory.jsp").forward(req, resp);
 	}
 }

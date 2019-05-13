@@ -172,11 +172,13 @@ public class MyAccountServlet extends HttpServlet {
 				System.out.println("delete button was pressed");
 				
 				for (int i = 0; i < pending_list.size(); i++) {
-					System.out.println(pending_names.get(i) + "<-- check value");
-					if (pending_names.get(i).equals(pending_list.get(i).get_name())) {
-						System.out.println("deleting: " + pending_list.get(i).get_name());
-						controller_delete.deletePendingFaculty(pending_list.get(i).get_name());
-						resp.sendRedirect(req.getContextPath() + "/MyAccount");
+					
+					for (int x = 0; x < pending_names.size(); x++) {
+						if (pending_names.get(x).equals(pending_list.get(i).get_name())) {
+							System.out.println("deleting: " + pending_list.get(i).get_name());
+							controller_delete.deletePendingFaculty(pending_list.get(i).get_name());
+							resp.sendRedirect(req.getContextPath() + "/MyAccount");
+						}
 					}
 				}				
 			}

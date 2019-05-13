@@ -5,6 +5,23 @@ body
     text-align: center;
 }
 
+.resources {
+	background-color:#e8f7f9;
+	float: center;
+	position: relative;
+  	left: 10%;
+	width: 85%;
+}
+
+.block {
+	color: white;
+	width: 55%;
+	text-align: left;
+
+}
+
+
+
 .log-link{
 	color: white;
 }

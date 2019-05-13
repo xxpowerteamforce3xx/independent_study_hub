@@ -104,6 +104,7 @@
 	
 	        <!-- Dynamic HTML table to display chemicals -->
 	        <div class="table">
+		 <form class="buttons" action="${pageContext.servletContext.contextPath}/Inventory" method="post">
 	            <table id="inventory_table">
 	                <thead>
 	                    <tr>
@@ -125,15 +126,15 @@
 	    			
 	                	<!-- For each loop will have an array list of ChemicalInventory objects in inventory page
 	                		It will iterate across each item in the array and insert the appropriate information as seen below -->
-		                <form class="buttons" action="${pageContext.servletContext.contextPath}/Inventory" method="post">
+
 		                <c:forEach items="${pending}" var="inventory">
 		                	<tr>
 		                		<!-- Directly calling methods associated with ChemicalInventory class -->
 		            			<c:if test="${type.equals('faculty')}">
-		                		<td>${inventory.getChemical()} <input type="checkbox" name='drugs' value="${inventory.getChemical()}"></td>
+		                			<td>${inventory.getChemical()} <input type="checkbox" name='drugs' value='${inventory.getChemical()}'></td>
 		                		</c:if>
 		                		<c:if test="${type.equals('student')}">
-		                		<td>${inventory.getChemical()}</td>
+		                			<td>${inventory.getChemical()}</td>
 		                		</c:if>
 		                		<td>${inventory.getUseOfChemical()}</td>
 		                		<td>${inventory.getDom()}</td>
@@ -152,11 +153,12 @@
  
 					<br>
 					<c:if test="${type.equals('faculty')}">
-					<button class="side-bar-form-btn" type='submit' name ='delete' value = 'delete'>Delete Chemical(s)</button>
+						<button class="side-bar-form-btn" type='submit' name ='delete' value = 'delete'>Delete Chemical(s)</button>
 					</c:if>
-    				</form>
+    				
 	                </tbody>
 	            </table>
+	            </form>
 	        </div>
 	    </section>
 </body>
