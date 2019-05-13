@@ -128,6 +128,11 @@ public class InventoryServlet extends HttpServlet {
 		String initialAmount = null;
 		int amount = 0;
 		String initMediaType = null;
+		String cas = null;
+		String room = null;
+		String loc = null;
+		String supplier = null;
+		String catalogue = null;
 		String deleteAmount = null;
 		int deleteA = 0;
 		String endMedia = null;
@@ -144,6 +149,11 @@ public class InventoryServlet extends HttpServlet {
 		year_purchased = req.getParameter("year_purchased");
 		initialAmount = req.getParameter("initialAmount");
 		initMediaType = req.getParameter("initMediaType");
+		cas = req.getParameter("cas");
+		room = req.getParameter("room");
+		loc = req.getParameter("loc");
+		supplier = req.getParameter("supplier");
+		catalogue = req.getParameter("catalogue");
 		deleteAmount = req.getParameter("deleteAmount");
 		endMedia = req.getParameter("endMedia");
 		subtractAmount = req.getParameter("subtractAmount");
@@ -155,17 +165,22 @@ public class InventoryServlet extends HttpServlet {
 		//The list that will store all chemicals from the database that our controller returns
 		try {
 			//if (type.equals("faculty")) {
-				ChemicalInventory c = controller_one_chem.get_chemical(deleteChemical);
-				pending_list = controller_pending_get.get_all_chemicals();
-				System.out.println(pending_list.size());
-				req.setAttribute("pending", pending_list);
+			ChemicalInventory c = controller_one_chem.get_chemical(deleteChemical);
+			pending_list = controller_pending_get.get_all_chemicals();
+			System.out.println(pending_list.size());
+			req.setAttribute("pending", pending_list);
 			//}
 		} catch(NullPointerException e) {}
 		if (chemical    == null || chemical.equals("") ||
 				use     == null || use.equals("")  ||
 				year_purchased == null || year_purchased.equals("") ||
 				initialAmount == null || initialAmount.equals("") ||
-				initMediaType == null || initMediaType.equals("")) {
+				initMediaType == null || initMediaType.equals("") ||
+				cas == null || cas.equals("") ||
+				room == null || room.equals("") ||
+				loc == null || loc.equals("") ||
+				supplier == null || supplier.equals("") ||
+				catalogue == null || catalogue.equals("")) {
 
 			errorMessage = "Please fill in all of the required fields";
 		} else {
@@ -175,18 +190,13 @@ public class InventoryServlet extends HttpServlet {
 			//bought = Integer.parseInt(year_purchased);
 			amount = Integer.parseInt(initialAmount);
 			// get list of books returned from query			
-			if (controller.insertChemical(chemical, use, year_purchased,amount, initMediaType)) {
+			if (controller.insertChemical(chemical, use, year_purchased,amount, initMediaType, cas, room, loc, supplier, catalogue)) {
 				successMessage = chemical;
 			}
 			else {
 				errorMessage = "Failed to insert chemical: " + chemical;					
 			}
 		}
-		req.setAttribute("chemical", chemical);
-		req.setAttribute("use", use);
-		req.setAttribute("year_purchased", year_purchased);
-		req.setAttribute("initialAmount", amount);
-		req.setAttribute("initMediaType",   initMediaType);
 		req.setAttribute("successMessage", successMessage);
 		try {
 			if (type.equals("faculty")) {
@@ -197,16 +207,29 @@ public class InventoryServlet extends HttpServlet {
 				if (delete.equals("delete")) {
 					System.out.println("delete button was pressed");
 					for (int i = 0; i < pending_list.size(); i++) {
+<<<<<<< HEAD
 						for (int x = 0; x < pending_chem.size(); x++) {
 							//System.out.println(pending_chem.get(x) + "<-- check value");
+=======
+						for (int x = 0; i < pending_chem.size(); i++) {
+							System.out.println(pending_chem.get(x) + "<-- check value");
+>>>>>>> a6b7f74c3ab2fc5242b26a607b64d266979c4d55
 							if (pending_chem.get(x).equals(pending_list.get(i).getChemical())) {
 								System.out.println("deleting: " + pending_list.get(i).getChemical());
 								deleteController = new DeleteChemicalController();
 								deleteController.deleteChemical(pending_list.get(i).getChemical());
 								resp.sendRedirect(req.getContextPath() + "/Inventory");
 							}
+<<<<<<< HEAD
 						}
 					}				
+=======
+							else {
+
+							}
+						}	
+					}
+>>>>>>> a6b7f74c3ab2fc5242b26a607b64d266979c4d55
 				}
 			}
 			else {}
