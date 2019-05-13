@@ -94,7 +94,7 @@ public class UploadCardServlet extends HttpServlet {
 		}
 
 		if (valid) {
-			System.out.println("uploading card...  name: " + user + " link: " + link);
+			System.out.println("uploading card... \n link: "+link+" desc: " + desc+" by: " + user);
 			controller.insertResource(link, desc, user);
 			resp.sendRedirect(req.getContextPath() + "/Resources");
 		}

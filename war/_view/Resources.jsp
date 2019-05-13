@@ -138,7 +138,7 @@
 			  <button class="w3-bar-item w3-button" onclick="displayContent('student')">Student</button>
 			</div>
 	
-				<div id="faculty" class="w3-container city resource-fac" style="display:block">
+				<div id="faculty" class="w3-container city resource-fac w3-card-2" style="display:block">
 				  <h2>Faculty Provided Help!</h2>
 				  
 					  <c:forEach  var="block" items="${f_blocks}">
@@ -163,23 +163,25 @@
 
 				 
 				
-				<div id="student" class="w3-container city resource-stu" style="display:none">
+				<div id="student" class="w3-container city resource-stu w3-card-2" style="display:none">
 					<h2>Student Provided Help!</h2>
-					<c:forEach  var="block" items="${s_blocks}">	
+					<c:forEach  var="block" items="${s_blocks}">
+					<div class="w3-card-4 w3-green resource-cont">	
 					   <header class="w3-container w3-green resource-head">
-					      <h3>From:this is the form section ${block.get_by()}</h3>
+					      <h3>From: ${block.get_by()}</h3>
 					    </header>
 					
 					    <div class="w3-container w3-white">
 					      <br>
-					      <p>this is where the desc should go${block.get_description()}</p>
+					      <p>${block.get_description()}</p>
 					      <br>
 					    </div>
 					
 					    <div class="w3-container w3-green resource-head">
-					      <h5>Link: <a href="${link}">${link}</a></h5>
+					      <h5>Link: <a href="${block.get_link()}">${block.get_link()}</a></h5>
 					    </div>
 						<br>
+					 </div>
 					</c:forEach> 
 				</div>
 	</div>

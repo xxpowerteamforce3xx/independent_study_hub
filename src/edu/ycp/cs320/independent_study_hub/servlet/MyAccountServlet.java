@@ -13,6 +13,7 @@ import edu.ycp.cs320.independent_study_hub.controller.DeletePendingFacultyContro
 import edu.ycp.cs320.independent_study_hub.controller.DeleteProjectController;
 import edu.ycp.cs320.independent_study_hub.controller.InsertFacultyController;
 import edu.ycp.cs320.independent_study_hub.controller.InsertStudentController;
+import edu.ycp.cs320.independent_study_hub.controller.ResourceController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectAllFacultyController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectAllPendingFacultyController;
 import edu.ycp.cs320.independent_study_hub.controller.SelectAllProjectsController;
@@ -36,13 +37,13 @@ public class MyAccountServlet extends HttpServlet {
 	private SelectOneFacultyController controller_one_fac = new SelectOneFacultyController();
 	private InsertFacultyController controller_insert = new InsertFacultyController();
 	private DeleteStudentController controller_delete_s = new DeleteStudentController();
+	private ResourceController controller_r = new ResourceController();
 	private List<Project> p_list = new ArrayList<Project>();
 	private ArrayList<Project> all_projects = new ArrayList<Project>();
 	private ArrayList<Student> s_list = new ArrayList<Student>();
 	private ArrayList<Student> all_students = new ArrayList<Student>();
 	private ArrayList<Faculty> pending_list = new ArrayList<Faculty>();
-	private ArrayList<Faculty> all_fac = new ArrayList<Faculty>();
-	
+	private ArrayList<Faculty> all_fac = new ArrayList<Faculty>();	
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -65,16 +66,37 @@ public class MyAccountServlet extends HttpServlet {
 		System.out.println(code + " fac code");
 		type = (String) req.getSession().getAttribute("type");
 		try {
+			boolean found = false;
+			all_fac = controller_all_faculty.get_all_faculty();
+			all_students = controller_all_students.get_all_students();
+			ArrayList<ResourceBlock> list_temp = controller_r.get_all_resources();
+			ArrayList<ResourceBlock> list_f= new ArrayList<ResourceBlock>();
+			ArrayList<ResourceBlock> list_s = new ArrayList<ResourceBlock>();
+			for (int x = 0; x < list_temp.size(); x ++) {
+				for (int j = 0; j < all_fac.size(); j++) {
+					found = false;
+					if (list_temp.get(x).get_by() == all_fac.get(j).get_name()) {
+						list_f.add(list_temp.get(x));
+						found = true;
+					}
+				}
+				if (found != true) {
+					list_s.add(list_temp.get(x));
+				}
+			}
+			
 			if (type.equals("student")) {
 				p_list = controller_projects.SelectProjectsByStudent(name);
 				req.setAttribute("projects", p_list);
+				req.setAttribute("block_list", list_s);
 			} else if (type.equals("faculty")) {
 				Faculty f = controller_one_fac.get_faculty(name);
 				s_list = controller_students.SelectStudentByFacCode(f.get_fac_code());
 				all_projects = controller_all_p.get_all_projects();
-				all_students = controller_all_students.get_all_students();
+				
 				pending_list = controller_pending_get.get_all_pending_faculty();
-				all_fac = controller_all_faculty.get_all_faculty();
+				
+				req.setAttribute("block_list", list_f);
 				req.setAttribute("pending", pending_list);
 				req.setAttribute("students", s_list);
 				req.setAttribute("all_students", all_students);

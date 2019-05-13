@@ -946,6 +946,50 @@ public class DerbyDatabase implements IDatabase {
 	}
 	
 	@Override
+	public ResourceBlock get_block(final String name) {
+		return executeTransaction(new Transaction<ResourceBlock>() {
+			@Override
+			public ResourceBlock execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+
+				try {
+					// retreive all attributes from both Books and Authors tables
+					stmt = conn.prepareStatement(
+							"select resources.* " +
+									"  from resources " +
+									" where resources.dude = ?"
+							);
+					stmt.setString(1, name);
+
+					ResourceBlock block = new ResourceBlock();
+
+					resultSet = stmt.executeQuery();
+
+					// for testing that a result was returned
+					Boolean found = false;
+
+					while (resultSet.next()) {
+						found = true;
+						// loads our student object with what was found in the table
+						loadResourceBlock(block, resultSet, 1);
+					}
+
+					// check if anything was found
+					if (!found) {
+						System.out.println("no block was found");
+					}
+
+					return block;
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+	}
+	
+	@Override
 	public boolean update_faculty(final String email, final String old_name, final String pw, final String new_name, final String fac_code, final String description, final String interest, final String title, final InputStream inputStream, final String file_name) {
 		return executeTransaction(new Transaction<Boolean>() {
 			@Override
@@ -1036,6 +1080,7 @@ public class DerbyDatabase implements IDatabase {
 			public Boolean execute(Connection conn) throws SQLException {
 				PreparedStatement stmt = null;
 				PreparedStatement stmt2 = null;
+				PreparedStatement stmt3 = null;
 				System.out.println(old_name + "<- old name");
 				Student s = get_student(old_name);
 				System.out.println("old student: " + s.get_name() + ", " + s.getID());
@@ -1068,6 +1113,20 @@ public class DerbyDatabase implements IDatabase {
 					stmt2.setInt(2,  s.getID());
 					
 					stmt2.executeUpdate();
+					
+					stmt3 = conn.prepareStatement( 
+							"update resources " +
+							"  set dude = ? " +
+							" where resources_id = ?"
+							);
+					
+					ResourceBlock block = new ResourceBlock();
+					block = get_block(old_name);
+					stmt3.setString(1,  new_name);
+					stmt3.setInt(2,  block.get_id());
+					
+					stmt3.executeUpdate();
+					
 					return true;
 				} finally {
 					DBUtil.closeQuietly(stmt);
@@ -1218,6 +1277,7 @@ public class DerbyDatabase implements IDatabase {
 	}
 	
 	private void loadResourceBlock(ResourceBlock block, ResultSet r, int i) throws SQLException {
+		block.set_id(r.getInt(i++)); // this is the main key
 		String link = r.getString(i++);
 		System.out.println("link : " + link);
 		block.set_link(link);

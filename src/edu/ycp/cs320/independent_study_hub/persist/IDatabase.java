@@ -44,4 +44,5 @@ public interface IDatabase {
 	public boolean insert_resource(String link, String description, String dude);
 	public boolean delete_resource(String description);
 	public ArrayList<ResourceBlock> get_all_resources();
+	public ResourceBlock get_block(String name);
 }

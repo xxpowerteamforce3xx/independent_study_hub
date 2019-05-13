@@ -117,6 +117,26 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 	</table>
 	</form>
 <br>
+
+<h2 class='h2'>Your Help Cards:</h2>
+<form class="side-bar-form" action="${pageContext.servletContext.contextPath}/MyAccount" method="post">  
+<table class='table'>
+	<tr>
+		<th>Description</th>
+		<th>Link</th>
+		<th></th>
+	</tr>
+
+	<c:forEach  var="block" items="${block_list}">
+        <tr>
+            <td>${block.get_description()}</td>
+            <td>${block.get_link()}</td>
+            <td><button class="side-bar-form-btn" type='submit' name ='update_faculty' value = 'update'>Delete Card</button></td>	            
+        </tr>
+    </c:forEach> 
+		
+</table>
+</form>
 <h2 class='h2'>Students Who Made Accounts with Your Code:</h2>
 <table class='table'>
 	<tr>
@@ -347,6 +367,26 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 	  </tr>
 	</table>
 	</form>
+	
+	<h2 class='h2'>Your Help Cards:</h2>
+<form class="side-bar-form" action="${pageContext.servletContext.contextPath}/MyAccount" method="post">  
+<table class='table'>
+	<tr>
+		<th>Description</th>
+		<th>Link</th>
+		<th></th>
+	</tr>
+
+	<c:forEach  var="block" items="${block_list}">
+        <tr>
+            <td>${block.get_description()}</td>
+            <td>${block.get_link()}</td>
+            <td><button class="side-bar-form-btn" type='submit' name ='update_faculty' value = 'update'>Delete Card</button></td>	            
+        </tr>
+    </c:forEach> 
+		
+</table>
+</form>
 	
 	<h2 class='h2'>Projects:</h2>
 	<form class="side-bar-form" action="${pageContext.servletContext.contextPath}/MyAccount" method="post">

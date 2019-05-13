@@ -92,10 +92,10 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 	</c:if>
 
 	 <form class='form-update'action="${pageContext.servletContext.contextPath}/UploadCard" method="post">
-	   <label for="desc">Description:</label>
+	   <label for="desc">Description:</label><br>
 	   <textarea class="text" name="desc" placeholder="Write something.." rows="4" cols="100" style="font-style:arial;" >${desc}</textarea>
 	   <br><br>
-	   <label for="password">Link:</label>
+	   <label for="password">Link: (It must be the exact link, try copypasting from the URL bar)</label><br>
 	   <input type="text" id="link" name="link" placeholder="..." value="${link}">
 	   
 	   <input type="submit" name='Upload' value="Upload">
