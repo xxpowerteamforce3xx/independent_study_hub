@@ -207,17 +207,14 @@ public class InventoryServlet extends HttpServlet {
 				if (delete.equals("delete")) {
 					System.out.println("delete button was pressed");
 					for (int i = 0; i < pending_list.size(); i++) {
-
-						for (int x = 0; i < pending_chem.size(); i++) {
-							System.out.println(pending_chem.get(x) + "<-- check value");
-
-							if (pending_chem.get(x).equals(pending_list.get(i).getChemical())) {
-								System.out.println("deleting: " + pending_list.get(i).getChemical());
+						for (int x = 0; i < pending_chem.size(); x++) {
+							if (pending_chem.get(i).equals(pending_list.get(x).getChemical())) {
+								System.out.println("deleting: " + pending_list.get(x).getChemical());
 								deleteController = new DeleteChemicalController();
-								deleteController.deleteChemical(pending_list.get(i).getChemical());
+								deleteController.deleteChemical(pending_list.get(x).getChemical());
+								i++;
 								resp.sendRedirect(req.getContextPath() + "/Inventory");
 							}
-
 						}
 					}
 				}
