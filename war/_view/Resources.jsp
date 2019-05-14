@@ -144,17 +144,17 @@
 					  <c:forEach  var="block" items="${f_blocks}">
 		      			 <div class="w3-card-4 w3-green resource-cont">
 						    <header class="w3-container w3-green resource-head">
-						      <h3>From: lgartrell ${dude}</h3>
+						      <h3>From: ${block.get_by()}</h3>
 						    </header>
 						
 						    <div class="w3-container w3-white">
 						      <br>
-						      <p>This is where the description would go ${description}</p>
+						      <p> ${block.get_description()}</p>
 						      <br>
 						    </div>
 						
 						    <div class="w3-container w3-green resource-head">
-						      <h2>Link: <a href="${link}">${link}</a></h2>
+						      <h5>Link: <a href="${block.get_link()}">${block.get_link()}</a></h5>
 						    </div>
 						 </div>
 					</c:forEach> 

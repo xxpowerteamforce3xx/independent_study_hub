@@ -51,9 +51,11 @@ public class ResourcesServlet extends HttpServlet {
 		list_temp = controller.get_all_resources();
 		
 		for (int x = 0; x < list_temp.size(); x ++) {
+			found = false;
 			for (int j = 0; j < fac.size(); j++) {
-				found = false;
-				if (list_temp.get(x).get_by() == fac.get(j).get_name()) {
+				System.out.println("name: " + list_temp.get(x).get_by() + " = " + fac.get(j).get_name());
+				if (list_temp.get(x).get_by().equals(fac.get(j).get_name())) {
+					System.out.println("faculty hit");
 					list_f.add(list_temp.get(x));
 					found = true;
 				}
