@@ -36,7 +36,7 @@ public class HomeServlet extends HttpServlet {
 		System.out.println("Home Servlet: doGet");
 		System.out.println("Request: " + req + " Response: " + resp);
 		
-		req.getRequestDispatcher("/_view/Home.jsp").forward(req, resp);
+		req.getRequestDispatcher("/_view/Index.jsp").forward(req, resp);
 	}
 	
 	@Override
