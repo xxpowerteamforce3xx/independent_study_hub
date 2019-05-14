@@ -73,9 +73,9 @@ public class MyAccountServlet extends HttpServlet {
 			ArrayList<ResourceBlock> list_f= new ArrayList<ResourceBlock>();
 			ArrayList<ResourceBlock> list_s = new ArrayList<ResourceBlock>();
 			for (int x = 0; x < list_temp.size(); x ++) {
+				found = false;
 				for (int j = 0; j < all_fac.size(); j++) {
-					found = false;
-					if (list_temp.get(x).get_by() == all_fac.get(j).get_name()) {
+					if (list_temp.get(x).get_by().equals(all_fac.get(j).get_name())) {
 						list_f.add(list_temp.get(x));
 						found = true;
 					}
@@ -102,6 +102,7 @@ public class MyAccountServlet extends HttpServlet {
 				req.setAttribute("all_students", all_students);
 				req.setAttribute("all_fac", all_fac);
 				req.setAttribute("all_projects", all_projects);
+				req.setAttribute("block_list", list_f);
 				req.setAttribute("fac_title", f.get_title());
 				req.setAttribute("desc", f.get_description());
 				req.setAttribute("interest", f.get_interest());
