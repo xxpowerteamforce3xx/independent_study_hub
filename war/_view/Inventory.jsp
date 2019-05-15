@@ -68,22 +68,31 @@
         	<button class="side-bar-form-btn" type='submit' name ='leave' value = 'Log out'>Log Out</button>
     	</form>
     </div>
+    <br>
 	<c:if test="${type.equals('faculty')}">
-	    <form action="${pageContext.servletContext.contextPath}/Inventory" method="post">
-	        <input type="text" name="chemical" placeholder="Chemical" id="chemical" value="${chemical}"/>
-       	    <input type="text" name="use" placeholder="Research or Class" id="use" value="${use}"/>
-       		<input type="text" name="year_purchased" placeholder="MM/DD/YY" id="year_purchased" value="${year_purchased}"/>
-       		<input type="text" name="initialAmount" placeholder="Amount Bought" id="initialAmount" value="${initialAmount}"/>
-       		<input type="text" name="initMediaType" placeholder="Media Type" id="initMediaType" value="${initMediaType}"/>
-       		<input type="text" name="cas" placeholder="Cas Number" id="cas" value="${cas}"/>
-       		<input type="text" name="room" placeholder="Room ID" id="room" value="${room}"/>
-       		<input type="text" name="loc" placeholder="Location ID" id="loc" value="${loc}"/>
-       		<input type="text" name="supplier" placeholder="Supplier" id="supplier" value="${supplier}"/>
-       		<input type="text" name="catalogue" placeholder="Catalogue Number" id="catalogue" value="${catalogue}"/>
-       		
-	        <button type="reset">Reset</button>
-	        <button type="submit" name="button" value="Insert!" id="create"/>Insert</button>
-	    </form>
+	    
+	    <form>
+	        <div class="inventory-form">
+	        <div class="divider">  
+	          <input type="text" name="chemical" placeholder="Chemical" id="chemical" value="${chemical}"/>
+	          <input type="text" name="use" placeholder="Research or Class" id="use" value="${use}"/>
+	       		<input type="text" name="year_purchased" placeholder="MM/DD/YY" id="year_purchased" value="${year_purchased}"/>
+	       		<input type="text" name="initialAmount" placeholder="Amount Bought" id="initialAmount" value="${initialAmount}"/>
+	       		<input type="text" name="initMediaType" placeholder="Media Type" id="initMediaType" value="${initMediaType}"/>
+	        </div>
+	        <div class="divider">
+	           <input type="text" name="cas" placeholder="Cas Number" id="cas" value="${cas}"/>
+	       		<input type="text" name="room" placeholder="Room ID" id="room" value="${room}"/>
+	       		<input type="text" name="loc" placeholder="Location ID" id="loc" value="${loc}"/>
+	       		<input type="text" name="supplier" placeholder="Supplier" id="supplier" value="${supplier}"/>
+	       		<input type="text" name="catalogue" placeholder="Catalogue Number" id="catalogue" value="${catalogue}"/>
+	       </div>
+	       </div>
+		   
+		   <button type="reset">Reset</button>
+		   <button type="submit" name="button" value="Insert!" id="create"/>Insert</button>
+    	</form>
+    	<br>
 	</c:if>
 		<c:if test="${! empty errorMessage}">
 			<div class="alert">
@@ -99,6 +108,8 @@
 	        <!-- Dropdown menu to select which column from table search is done by -->
 	        <div class="dropdown">
 	            <button onclick="searchBy()" class="dropbtn">Search by..</button>
+	            <!-- These buttons will change a global variable in the JS file, which modifies which column 
+	            the search bar sorts table info by -->
 	            <div id="dropList" class="dropdown-content">
 	                <button type="button" onclick="setSearch(0)">Name</button>
 	                <button type="button" onclick="setSearch(1)">Use</button>

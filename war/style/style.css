@@ -834,14 +834,35 @@ z-index: 1;
 
 
 
+/* ********** The CSS for our insert fields on inventory page ********** */
+
+.divider{
+  display:flex;
+  flex-direction:column;
+}
+
+
+.inventory-form{
+  margin: auto;
+  width:500px;
+  display:flex;
+  justify-content:space-around;
+}
+
+.inventory-form input{
+  font-size: 18px;
+}
+
+.inventory-form input:focus{
+	background: #E0FFFF;
+  	color: black;
+  	transition: 350ms; 
+}
+
 /* ********** The CSS for our search bar ********** */
 
-.user_input {
-    margin: auto;
-    width: 50%;
+#user_input {
     font-size: 18px;
-    padding: 24px 40px 24px 80px;
-    border: 1px solid #ddd;
 }
 
 .inventory_table td {

@@ -115,12 +115,15 @@
 		    		</c:otherwise>
 			</c:choose>
     <br>
+<<<<<<< HEAD
     <c:if test="${!type.equals('guest')}">
     	<form action="${pageContext.servletContext.contextPath}/Resources" method="post">
     		<button class="w3-bar-item w3-button" type='submit' name ='upload' value = '1'>Upload a Help Card</button>
     	</form>
     </c:if>
     
+=======
+>>>>>>> final
     <div class="protector">
          <h2 class="ribbon">
              <strong class="ribbon-content">What it is All About</strong>
@@ -131,7 +134,16 @@
            when completing their research! This page will always be a work in progress, and if you <br>
            found something helpful when you were completing your research, upload it here!
         </p>
-        <br>
+     
+     <!-- Upload a card button for students or faculty to add a resource to the web page -->   
+     <c:if test="${!type.equals('guest')}">
+    	<form action="${pageContext.servletContext.contextPath}/Resources" method="post">
+    		<button class="w3-bar-item" type='submit' name ='upload' value = '1'>Upload a Help Card</button>
+    	</form>
+     </c:if>
+       
+       <br> 
+        
 	    <!-- Main section of web page's body -->   
 	  <div class ="resources">
 	      <div class="w3-bar w3-green">
@@ -139,7 +151,7 @@
 			  <button class="w3-bar-item w3-button" onclick="displayContent('student')">Student</button>
 			</div>
 	
-				<div id="faculty" class="w3-container city resource-fac w3-card-2" style="display:block">
+				<div id="faculty" class="w3-container city resource-fac w3-card-2" style="display:flex">
 				  <h2>Faculty Provided Help!</h2>
 				  
 					  <c:forEach  var="block" items="${f_blocks}">
