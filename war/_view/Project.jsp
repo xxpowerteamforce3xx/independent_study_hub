@@ -47,7 +47,7 @@
 		    	<ul class="navbar-nav">
 		    		<li><a href="http://localhost:8081/independent_study_hub/Home">Home</a></li>
 		    		<li><a href="http://localhost:8081/independent_study_hub/Resources">Resources</a></li>
-		    		<li><a href="http://localhost:8081/independent_study_hub/PreviousWork">Previous Work</a></li>
+		    		<li><a href="http://localhost:8081/independent_study_hub/Research">Previous Work</a></li>
 		    		<li><a href="http://localhost:8081/independent_study_hub/Faculty">Faculty</a></li>
 		    	</ul>
 			</nav>
