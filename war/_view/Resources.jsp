@@ -148,17 +148,19 @@
 					  <c:forEach  var="block" items="${f_blocks}">
 		      			 <div class="w3-card-4 w3-green resource-cont">
 						    <header class="w3-container w3-green resource-head">
-						    <form action="${pageContext.servletContext.contextPath}/Resources" method="post">
-						    	<td><button class="side-bar-form-btn" type='submit' name ='delete' value = '${block.get_description()}'>Delete Card</button></td>
-						    </form>
 						      <h3>From: ${block.get_by()}</h3>
+						      <c:if test="${type.equals('faculty')}">
+						      	<form action="${pageContext.servletContext.contextPath}/Resources" method="post">
+						    		<button class="side-bar-form-btn" type='submit' name ='delete' value = '${block.get_description()}'>Delete Card</button>
+						    	</form>
+						      </c:if>
 						    </header>
 						
 						    <div class="w3-container w3-white">
 						      <br>
 						      
 						      <p> ${block.get_description()}</p>
-						      <<button class="side-bar-form-btn" type='submit' name ='delete' value = 'delete'>Delete Card</button></td>
+						    
 						      <br>
 						    </div>
 						
@@ -177,10 +179,12 @@
 					<c:forEach  var="block" items="${s_blocks}">
 					<div class="w3-card-4 w3-green resource-cont">	
 					   <header class="w3-container w3-green resource-head">
-					   <form action="${pageContext.servletContext.contextPath}/Resources" method="post">
-						    <td><button class="side-bar-form-btn" type='submit' name ='delete' value = '${block.get_description()}'>Delete Card</button></td>
-					   </form>
 					      <h3>From: ${block.get_by()}</h3>
+					      <c:if test="${type.equals('faculty')}"> 
+						      <form action="${pageContext.servletContext.contextPath}/Resources" method="post">    
+								    <button class="" type='submit' name ='delete' value = '${block.get_description()}'>Delete Card</button>
+							  </form>
+						   </c:if>
 					    </header>
 					
 					    <div class="w3-container w3-white">
@@ -192,7 +196,6 @@
 					    <div class="w3-container w3-green resource-head">
 					      <h5>Link: <a href="${block.get_link()}">${block.get_link()}</a></h5>
 					    </div>
-						<br>
 					 </div>
 					</c:forEach> 
 				</div>

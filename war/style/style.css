@@ -31,7 +31,7 @@ body
 
 
 .form-update input[type=text], input[type=password], select {
-  width: 100%;
+  width: 50%;
   text-align:left;
   padding: 12px 20px;
   margin: 8px 0;
@@ -60,7 +60,11 @@ body
 }
 
 .form-update {
-  width: 100%;
+  margin: auto;
+  width: 50%;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
   border-radius: 5px;
   texit-align: left;
   background-color: forestgreen;
@@ -98,7 +102,7 @@ h1 {
 
 h2 {
 	color: black;
-	text-align: left;
+	text-align: center;
 	font-size: 32px;
 	margin: 20px;
 }
@@ -1022,8 +1026,23 @@ label {
 }
 
 .resource-head{
-  display: flex;
-  justify-content:flex-start;
+
+}
+
+.resource-head button{
+	margin-top: 7px;
+	float: right;
+}
+
+.resource-head button:hover{
+	background: #E0FFFF;
+	color: black;
+}
+
+.resource-head h3, h5{
+	flex: 2;
+	float:left;
+	text-algin: left;
 }
 
 
