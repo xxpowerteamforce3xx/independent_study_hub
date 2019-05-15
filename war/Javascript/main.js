@@ -104,7 +104,11 @@ function setSearch(num) {
         place_hold.placeholder = "Search by use";
     } else if (search_by == 2) { //user wants to search by date
         place_hold.placeholder = "Search by date";
-    } else { //user wants to search by name (default search)
+    } else if (search_by == 5){ 
+    	place_hold.placeholder = "Search by CAS #";
+	} else if (search_by == 9){
+		place_hold.placeholder = "Search by Cat #";
+	} else { //user wants to search by name (default search)
         place_hold.placeholder = "Search by name";
     }
 }
