@@ -115,15 +115,6 @@
 		    		</c:otherwise>
 			</c:choose>
     <br>
-<<<<<<< HEAD
-    <c:if test="${!type.equals('guest')}">
-    	<form action="${pageContext.servletContext.contextPath}/Resources" method="post">
-    		<button class="w3-bar-item w3-button" type='submit' name ='upload' value = '1'>Upload a Help Card</button>
-    	</form>
-    </c:if>
-    
-=======
->>>>>>> final
     <div class="protector">
          <h2 class="ribbon">
              <strong class="ribbon-content">What it is All About</strong>
