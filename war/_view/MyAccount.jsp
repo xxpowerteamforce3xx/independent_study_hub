@@ -376,13 +376,15 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 		<th>Card Link</th>
 		<th></th>
 	</tr>
-
+	
 	<c:forEach  var="block" items="${block_list}">
+	<form action="${pageContext.servletContext.contextPath}/MyAccount" method="post">
         <tr>
             <td>${block.get_description()}</td>
             <td>${block.get_link()}</td>
-            <td><button class="side-bar-form-btn" type='submit' name ='update_faculty' value = '${block.get_description()}'>Delete Card</button></td>	            
+            <td><button class="side-bar-form-btn" type='submit' name ='deleteCard' value = '${block.get_description()}'>Delete Card</button></td>	            
         </tr>
+    </form>
     </c:forEach> 
 		
 </table>

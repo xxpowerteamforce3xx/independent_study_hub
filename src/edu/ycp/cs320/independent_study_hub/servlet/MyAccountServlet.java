@@ -263,7 +263,18 @@ public class MyAccountServlet extends HttpServlet {
 				}				
 			}
 		} catch (NullPointerException e) { System.out.println("add pending was null");} 
-		
+		String deleteCard = null;
+		deleteCard = req.getParameter("deleteCard");
+		try {
+			if (deleteCard != null) {
+				System.out.println("delete button was pressed");
+				System.out.println("redirecting to delete");
+				controller_r = new ResourceController();
+				controller_r.deleteResource(deleteCard);
+				req.getRequestDispatcher("/_view/MyAccount.jsp").forward(req, resp);
+			}
+		}
+		catch (NullPointerException e) {}
 		try {
 			if (logout.equals("Log out")) {
 				req.getSession().invalidate();
