@@ -28,9 +28,8 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 <c:if test="${!type.equals('guest')}">
 	
 	<header>
-        <h1>Update Account</h1>
+        <h1>Upload Resource Card</h1>
 			
-        <p class="quote">YCP 2019 - <span class="italic">Update Account Page - Faculty</span></p>
     </header>
     <nav class="navbar">
 		<!-- Our side bar button that uses JavaScript to show the side bar menu -->
@@ -81,25 +80,27 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 
 	<br>
     <h2 class='h2'>Welcome, ${name}! Please enter the fields below and add a card to our database!</h2>
+  <br>
 	<br>
 	<br>
-	<br>
+	
 	<c:if test="${! empty errorMessage}">
 		<div class="alert">
 	 		<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
 		 		<strong>Error!</strong> ${errorMessage}
  		</div>
 	</c:if>
-
-	 <form class='form-update'action="${pageContext.servletContext.contextPath}/UploadCard" method="post">
+	
+	 <form class='form-update w3-card-4'action="${pageContext.servletContext.contextPath}/UploadCard" method="post">
 	   <label for="desc">Description:</label><br>
-	   <textarea class="text" name="desc" placeholder="Write something.." rows="4" cols="100" style="font-style:arial;" >${desc}</textarea>
+	   <textarea class="text" name="desc" placeholder="Write something.." rows="4" cols="70" style="font-style:arial;" >${desc}</textarea>
 	   <br><br>
 	   <label for="password">Link: (It must be the exact link, try copypasting from the URL bar)</label><br>
 	   <input type="text" id="link" name="link" placeholder="..." value="${link}">
 	   
 	   <input type="submit" name='Upload' value="Upload">
 	 </form>
+	
 
 </c:if>	
 </body>
