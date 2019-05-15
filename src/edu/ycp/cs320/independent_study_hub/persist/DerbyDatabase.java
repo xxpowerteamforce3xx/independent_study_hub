@@ -1554,7 +1554,7 @@ public class DerbyDatabase implements IDatabase {
 					insertStudents.executeBatch();
 	
 					// populate projects table
-					insertProjects = conn.prepareStatement("insert into projects (students_id, student_name, title, date, description) values (?, ?, ?, ?, ?)");
+					insertProjects = conn.prepareStatement("insert into projects (students_id, student_name, title, date, description, image, file_name) values (?, ?, ?, ?, ?, ?, ?)");
 					for (Project project : projectList) {
 						System.out.println("Projects");
 						insertProjects.setInt(1, project.get_s_id());
@@ -1562,6 +1562,9 @@ public class DerbyDatabase implements IDatabase {
 						insertProjects.setString(3, project.get_title());
 						insertProjects.setString(4, project.get_date());
 						insertProjects.setString(5, project.get_description());
+						InputStream input1 = new FileInputStream("./war/style/" + project.get_file_name());
+						insertProjects.setBlob(6, input1);
+						insertProjects.setString(7,  project.get_file_name());
 						insertProjects.addBatch();
 					}
 					insertProjects.executeBatch();
@@ -1633,6 +1636,12 @@ public class DerbyDatabase implements IDatabase {
 	public Faculty get_faculty_id(String acc_name) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean deleteChemical(String chemical, String use, String dom, int amount, String media) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 

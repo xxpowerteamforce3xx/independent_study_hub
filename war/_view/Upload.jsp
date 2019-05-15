@@ -100,7 +100,7 @@
       		    <div class="form-row">
                 <div class="form-field">
             		    <label>Description:</label>
-            		    <textarea class="input-field input-upload" name="desc" placeholder="Write something.." rows="4" cols="50" style="font-style:arial;" >${desc}</textarea>
+            		    <textarea class="input-field input-upload" name="desc" placeholder="Give a brief description of your research!" rows="4" cols="50" style="font-style:arial;" >${desc}</textarea>
    
                   </div>
       		    </div>

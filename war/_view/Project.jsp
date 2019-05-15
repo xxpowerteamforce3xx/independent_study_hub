@@ -147,12 +147,6 @@
 				<p>${desc}</p>
 			</div>
 			
-<<<<<<< HEAD
-			<img src="style/ring.png">
-=======
-
-			
->>>>>>> ae270a63f643ae551247cce3baaa54f34fccc07c
 			<br>
 		</section>
 		

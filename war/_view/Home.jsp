@@ -14,7 +14,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
     <title>Independent Study Hub</title>
 	<style type="text/css">
 		<%@ include file="./../style/style.css" %>
-				
+
 		#cb_span{color:Gray;}
 	</style>
 	
@@ -112,6 +112,7 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 		        <a href="http://localhost:8081/independent_study_hub/Inventory">Inventory</a>
 		        <a href="http://localhost:8081/independent_study_hub/Upload">Upload</a>
 		        <a href="http://localhost:8081/independent_study_hub/Faculty">Faculty</a>
+		        <a href="http://localhost:8081/independent_study_hub/Faculty">Faculty</a>
 		        
 		        
 		        <form class="side-bar-form" action="${pageContext.servletContext.contextPath}/Home" method="post">
@@ -157,12 +158,17 @@ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
         </form>
         	<div class="pictures">
 	            <!-- This creates the 4-square of images that will link to the Previous work page is you click on any of the pictures (due to wraping in <a>) -->
-	            <a href="http://localhost:8081/independent_study_hub/Research" id="img1">
-	                <img src="style/FurBall.jpg" />
-	                <img src="style/FurBall.jpg" />
-	                <img src="style/FurBall.jpg" />
-	                <img src="style/FurBall.jpg" />
-	            </a>
+
+	                <c:forEach  var="p" items="${p_list}">
+	                	<a href="http://localhost:8081/independent_study_hub/Project?title=${p.get_title()}" id="img1">
+ 							<img src="http://localhost:8081/independent_study_hub/Image?id=${p.get_title()}&type=p">
+ 						</a>
+ 						<div class="center">
+ 						 <p>${p.get_title()}</p>
+ 						 </div>
+ 						 <br><br>
+    				</c:forEach> 
+	            
          
         	</div>
     </section>

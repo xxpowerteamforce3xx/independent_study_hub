@@ -1,15 +1,20 @@
 package edu.ycp.cs320.independent_study_hub.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.ycp.cs320.independent_study_hub.controller.SelectAllProjectsController;
+import edu.ycp.cs320.independent_study_hub.model.Project;
+
 public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+	private SelectAllProjectsController controller = new SelectAllProjectsController();
+	private ArrayList<Project> p_list = new ArrayList<Project>();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -35,8 +40,10 @@ public class HomeServlet extends HttpServlet {
 		req.setAttribute("user", req.getAttribute("user"));
 		System.out.println("Home Servlet: doGet");
 		System.out.println("Request: " + req + " Response: " + resp);
+		p_list = controller.get_all_projects();
+		req.setAttribute("p_list", p_list);
 		
-		req.getRequestDispatcher("/_view/Index.jsp").forward(req, resp);
+		req.getRequestDispatcher("/_view/Home.jsp").forward(req, resp);
 	}
 	
 	@Override

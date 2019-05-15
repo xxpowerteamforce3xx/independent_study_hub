@@ -12,7 +12,12 @@ body
 
 }
 
-
+.center {
+  display: inline-block;
+  text-align:center;
+  border-bottom: 3px solid forestgreen;
+  width:75%;
+}
 
 .log-link{
 	color: white;
